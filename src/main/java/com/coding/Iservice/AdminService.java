@@ -42,34 +42,34 @@ public interface AdminService {
 /*------------------------------------------分组表------------------------------------------------------------------*/
     /**
      * 通过分组 ID 删除分组信息
-     * @param groupId
+     * @param groupId 分组唯一ID
      */
-    public void deleteGroupByPrimaryKey(Integer groupId);
+    public void deleteGroupsByPrimaryKey(Integer groupId);
 
     /**
      * 插入分组信息
-     * @param groups
+     * @param groups 封装了分组信息的 Groups 对象
      */
-    public void insertGroup(Groups groups);
+    public void insertGroups(Groups groups);
 
     /**
      * 根据分组 ID 查询分组信息
-     * @param groupId
-     * @return
+     * @param groupId 分组唯一ID
+     * @return  封装了分组信息的 Groups 对象
      */
-    public Groups selectGroupByPrimaryKey(Integer groupId);
+    public Groups selectGroupsByPrimaryKey(Integer groupId);
 
     /**
      * 根据分组 ID 更新分组信息
-     * @param groups
+     * @param groups 封装了分组信息的 Groups 对象
      */
-    public void updateGroupByPrimaryKey(Groups groups);
+    public void updateGroupsByPrimaryKey(Groups groups);
 
     /**
      * 查询所有分组信息
-     * @return
+     * @return 封装了分组信息的 Groups 对象 集合
      */
-    public List<Groups> selectGroupAll();
+    public List<Groups> selectGroupsAll();
 
     /*------------------------------------------管理员表------------------------------------------------------------------*/
     /**

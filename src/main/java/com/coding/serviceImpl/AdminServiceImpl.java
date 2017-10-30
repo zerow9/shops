@@ -3,11 +3,11 @@ package com.coding.serviceImpl;
 import com.coding.Iservice.AdminService;
 import com.coding.mapper.AddressMapper;
 import com.coding.mapper.AdminMapper;
-import com.coding.mapper.GroupMapper;
+import com.coding.mapper.GroupsMapper;
 import com.coding.mapper.UserMapper;
 import com.coding.pojo.Address;
 import com.coding.pojo.Admin;
-import com.coding.pojo.Group;
+import com.coding.pojo.Groups;
 import com.coding.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private AddressMapper addressMapper;
     @Autowired
-    private GroupMapper groupMapper;
+    private GroupsMapper groupsMapper;
     @Autowired
     private AdminMapper adminMapper;
 
@@ -60,31 +60,31 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Transactional
-    public void deleteGroupByPrimaryKey(Integer groupId) {
+    public void deleteGroupsByPrimaryKey(Integer groupId) {
         if (groupId != 0) {
-            groupMapper.deleteGroupByPrimaryKey(groupId);
+            groupsMapper.deleteGroupsByPrimaryKey(groupId);
         }
     }
 
     @Transactional
-    public void insertGroup(Group group) {
-        groupMapper.insertGroup(group);
+    public void insertGroups(Groups groups) {
+        groupsMapper.insertGroups(groups);
     }
 
-    public Group selectGroupByPrimaryKey(Integer groupId) {
+    public Groups selectGroupsByPrimaryKey(Integer groupId) {
         if (groupId != 0) {
-            return groupMapper.selectGroupByPrimaryKey(groupId);
+            return groupsMapper.selectGroupsByPrimaryKey(groupId);
         }
         return null;
     }
 
     @Transactional
-    public void updateGroupByPrimaryKey(Group group) {
-        groupMapper.updateGroupByPrimaryKey(group);
+    public void updateGroupsByPrimaryKey(Groups groups) {
+        groupsMapper.updateGroupsByPrimaryKey(groups);
     }
 
-    public List<Group> selectGroupAll() {
-        return groupMapper.selectGroupAll();
+    public List<Groups> selectGroupsAll() {
+        return groupsMapper.selectGroupsAll();
     }
 
     @Transactional
