@@ -1,6 +1,6 @@
 package com.coding.pojo;
 
-public class Group {
+public class Groups {
     private Integer groupId;
 
     private String groupName;
@@ -34,7 +34,7 @@ public class Group {
 
     @Override
     public String toString() {
-        return "Group{" +
+        return "Groups{" +
                 "groupId=" + groupId +
                 ", groupName='" + groupName + '\'' +
                 ", groupJurisdiction='" + groupJurisdiction + '\'' +
