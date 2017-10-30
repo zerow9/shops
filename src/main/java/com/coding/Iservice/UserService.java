@@ -51,7 +51,7 @@ public interface UserService {
      * @param address
      * @param addressId
      */
-    public void updateAddressByPrimaryKey(Address address, Integer addressId);
+    public void updateAddressByPrimaryKey(Address address);
 
     /**
      * 返回所有地址信息

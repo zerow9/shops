@@ -36,30 +36,36 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public void updateUserByPrimaryKey(User user) {
-
+        userMapper.updateUserByPrimaryKey(user);
     }
 
     @Transactional
     public void deleteAddressByPrimaryKey(Integer addressId) {
-
-
+        if (addressId!=0&&addressId!=null){
+            addressMapper.deleteAddressByPrimaryKey(addressId);
+        }
     }
 
     @Transactional
     public void insertAddress(Address address) {
-
+            addressMapper.insertAddress(address);
     }
 
     public Address selectAddressByPrimaryKey(Integer addressId) {
+        if (addressId!=0&&addressId!=null){
+          Address address =  addressMapper.selectAddressByPrimaryKey(addressId);
+          return  address;
+        }
         return null;
     }
 
     @Transactional
-    public void updateAddressByPrimaryKey(Address address, Integer addressId) {
-
+    public void updateAddressByPrimaryKey(Address address) {
+            addressMapper.updateAddressByPrimaryKey(address);
     }
 
     public List<Address> selectAddressAll() {
-        return null;
+        List<Address> addresses = addressMapper.selectAddressAll();
+        return addresses;
     }
 }
