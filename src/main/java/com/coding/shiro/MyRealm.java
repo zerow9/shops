@@ -2,6 +2,8 @@ package com.coding.shiro;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -31,10 +33,11 @@ public class MyRealm extends AuthorizingRealm {
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(
             PrincipalCollection principals) {
-        SimpleAuthorizationInfo info=new SimpleAuthorizationInfo();
-        List<String> list=new ArrayList<String>();
-        list.add("2");
-        list.add("1");
+        String userName = (String) SecurityUtils.getSubject().getPrincipal();
+        SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+        List<String> list = new ArrayList<String>();
+        if (userName.equalsIgnoreCase("zhangwei"))
+            list.add("1");
         info.addStringPermissions(list);
         return info;
     }

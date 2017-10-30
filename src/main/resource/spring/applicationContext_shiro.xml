@@ -16,14 +16,21 @@
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager" />
         <property name="loginUrl" value="/login.action" />
+        <property name="successUrl" value="/frist.action" />
         <property name="unauthorizedUrl" value="/error.jsp" />
+        <property name="filters" >
+            <map>
+                <entry  key="authc" value-ref="myfilter" />
+            </map>
+        </property>
         <property name="filterChainDefinitions">
             <value>
-                /**=anon
+                /logout.action=logout
+                /=anon
+                /user/**=perms[1]
+                /** = authc
         </value>
         </property>
-
-
     </bean>
 
     <bean id="customRealm" class="com.coding.shiro.MyRealm" />
@@ -31,4 +38,6 @@
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="customRealm" />
     </bean>
+
+    <bean id="myfilter" class="com.coding.shiro.MyAuthenticationFilter" />
 </beans>
