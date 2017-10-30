@@ -3,11 +3,11 @@ package com.coding.serviceImpl;
 import com.coding.Iservice.AdminService;
 import com.coding.mapper.AddressMapper;
 import com.coding.mapper.AdminMapper;
-import com.coding.mapper.GroupsMapper;
+import com.coding.mapper.GroupMapper;
 import com.coding.mapper.UserMapper;
 import com.coding.pojo.Address;
 import com.coding.pojo.Admin;
-import com.coding.pojo.Groups;
+import com.coding.pojo.Group;
 import com.coding.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +21,7 @@ public class AdminServiceImpl implements AdminService{
     @Autowired
     private AddressMapper addressMapper;
     @Autowired
-    private GroupsMapper groupsMapper;
+    private GroupMapper groupMapper;
     @Autowired
     private AdminMapper adminMapper;
 
@@ -60,19 +60,19 @@ public class AdminServiceImpl implements AdminService{
 
     }
 
-    public void insertGroup(Groups groups) {
+    public void insertGroup(Group group) {
 
     }
 
-    public Groups selectGroupByPrimaryKey(Integer groupId) {
+    public Group selectGroupByPrimaryKey(Integer groupId) {
         return null;
     }
 
-    public void updateGroupByPrimaryKey(Groups groups) {
+    public void updateGroupByPrimaryKey(Group group) {
 
     }
 
-    public List<Groups> selectGroupAll() {
+    public List<Group> selectGroupAll() {
         return null;
     }
 

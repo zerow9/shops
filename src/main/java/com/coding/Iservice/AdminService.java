@@ -94,9 +94,8 @@ public interface AdminService {
     /**
      * 通过管理员唯一 ID 修改管理员信息
      * @param admin
-     * @param adminId
      */
-    public void updateAdminByPrimaryKey(Admin admin, Integer adminId);
+    public void updateAdminByPrimaryKey(Admin admin);
 
     /**
      * 查询所有管理员信息
@@ -126,9 +125,8 @@ public interface AdminService {
     /**
      * 根据地址唯一id更新地址信息
      * @param address
-     * @param addressId
      */
-    public void updateAddressByPrimaryKey(Address address, Integer addressId);
+    public void updateAddressByPrimaryKey(Address address);
 
     /**
      * 返回所有地址信息
