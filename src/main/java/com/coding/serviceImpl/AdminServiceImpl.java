@@ -82,14 +82,14 @@ public class AdminServiceImpl implements AdminService{
         return null;
     }
 
-    @Override
+    @Transactional
     public void deleteAdminByPrimaryKey(Integer adminId) {
         if (adminId!=0&&adminId!=null){
             adminMapper.deleteAdminByPrimaryKey(adminId);
         }
     }
 
-    @Override
+    @Transactional
     public void insertAdmin(Admin admin) {
         adminMapper.insertAdmin(admin);
 
