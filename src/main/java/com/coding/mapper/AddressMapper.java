@@ -9,32 +9,32 @@ public interface AddressMapper {
      * @param addressId
      */
 
-    public void deleteByPrimaryKey(Integer addressId);
+    public void deleteAddressByPrimaryKey(Integer addressId);
 
     /**
      * 插入一条地址信息
      * @param address
      */
-    public void insert(Address address);
+    public void insertAddress(Address address);
 
     /**
      * 根据地址唯一id查询地址信息
      * @param addressId
      * @return 地址信息
      */
-    public Address selectByPrimaryKey(Integer addressId);
+    public Address selectAddressByPrimaryKey(Integer addressId);
 
     /**
      * 根据地址唯一id更新地址信息
      * @param address
      * @param addressId
      */
-    public void updateByPrimaryKey(Address address, Integer addressId);
+    public void updateAddressByPrimaryKey(Address address, Integer addressId);
 
     /**
      * 返回所有地址信息
      * @return
      */
-    public List<Address> selectAll();
+    public List<Address> selectAddressAll();
 
 }
