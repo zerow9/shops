@@ -49,7 +49,7 @@ public interface UserService {
     /**
      * 根据地址唯一id更新地址信息
      * @param address
-     * @param addressId
+     * @param address
      */
     public void updateAddressByPrimaryKey(Address address);
 
