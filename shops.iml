@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
+<module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" version="4">
   <component name="FacetManager">
     <facet type="Spring" name="Spring">
       <configuration />
@@ -19,13 +19,11 @@
     </facet>
   </component>
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
-    <output url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/classes" />
-    <output-test url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/classes" />
+    <output url="file://$MODULE_DIR$/target/classes" />
+    <output-test url="file://$MODULE_DIR$/target/test-classes" />
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
-      <sourceFolder url="file://$MODULE_DIR$/src/test/resource" type="java-test-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/src/main/webapp/WEB-INF/classes" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -58,12 +56,13 @@
     <orderEntry type="library" name="Maven: org.mybatis:mybatis-spring:1.2.2" level="project" />
     <orderEntry type="library" name="Maven: com.github.miemiedev:mybatis-paginator:1.2.15" level="project" />
     <orderEntry type="library" name="Maven: com.github.pagehelper:pagehelper:3.4.2-fix" level="project" />
+    <orderEntry type="library" name="Maven: com.github.jsqlparser:jsqlparser:0.9" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.32" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba:druid:1.0.9" level="project" />
     <orderEntry type="module-library">
       <library name="Maven: com.alibaba:jconsole:1.8.0">
         <CLASSES>
-          <root url="jar://D:/ApplicationProgram/java/jdk/lib/jconsole.jar!/" />
+          <root url="jar://D:/Software/JAVA/jdk1.7.0_80/lib/jconsole.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -72,7 +71,7 @@
     <orderEntry type="module-library">
       <library name="Maven: com.alibaba:tools:1.8.0">
         <CLASSES>
-          <root url="jar://D:/ApplicationProgram/java/jdk/lib/tools.jar!/" />
+          <root url="jar://D:/Software/JAVA/jdk1.7.0_80/lib/tools.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
