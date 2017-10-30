@@ -8,6 +8,7 @@ import com.coding.mapper.UserMapper;
 import com.coding.pojo.Address;
 import com.coding.pojo.Admin;
 import com.coding.pojo.Group;
+import com.coding.pojo.Groups;
 import com.coding.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -60,12 +61,22 @@ public class AdminServiceImpl implements AdminService{
 
     }
 
+    @Override
+    public void insertGroup(Groups groups) {
+
+    }
+
     public void insertGroup(Group group) {
 
     }
 
     public Group selectGroupByPrimaryKey(Integer groupId) {
         return null;
+    }
+
+    @Override
+    public void updateGroupByPrimaryKey(Groups groups) {
+
     }
 
     public void updateGroupByPrimaryKey(Group group) {
@@ -97,6 +108,11 @@ public class AdminServiceImpl implements AdminService{
         return null;
     }
 
+    @Override
+    public void updateAdminByPrimaryKey(Admin admin) {
+
+    }
+
     public void updateAdminByPrimaryKey(Admin admin, Integer adminId) {
 
     }
@@ -116,6 +132,11 @@ public class AdminServiceImpl implements AdminService{
 
     public Address selectAddressByPrimaryKey(Integer addressId) {
         return null;
+    }
+
+    @Override
+    public void updateAddressByPrimaryKey(Address address) {
+
     }
 
     public void updateAddressByPrimaryKey(Address address, Integer addressId) {
