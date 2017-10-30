@@ -10,12 +10,14 @@ import com.coding.pojo.Admin;
 import com.coding.pojo.Group;
 import com.coding.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
 
-public class AdminServiceImpl implements AdminService{
+@Service
+public class AdminServiceImpl implements AdminService {
     @Autowired
     private UserMapper userMapper;
     @Autowired
@@ -27,7 +29,7 @@ public class AdminServiceImpl implements AdminService{
 
     @Transactional
     public void deleteUserByPrimaryKey(String userUuid) {
-        if (userUuid!=""&&userUuid!=null){
+        if (userUuid.equals("") && userUuid.equals(null)) {
             userMapper.deleteUserByPrimaryKey(userUuid);
         }
 
@@ -35,50 +37,59 @@ public class AdminServiceImpl implements AdminService{
 
     @Transactional
     public void insertUser(User user) {
-        String id= UUID.randomUUID().toString().replace("-", "_");
+        String id = UUID.randomUUID().toString().replace("-", "_");
         user.setUserUuid(id);
         userMapper.insertUser(user);
     }
 
     public User selectUserByPrimaryKey(String userUuid) {
-        if (userUuid!=""&&userUuid!=null){
-            User user = userMapper.selectUserByPrimaryKey(userUuid);
-            return  user;
+        if (userUuid.equals("") && userUuid.equals(null)) {
+            return userMapper.selectUserByPrimaryKey(userUuid);
         }
         return null;
     }
 
+    @Transactional
     public void updateUserByPrimaryKey(User user) {
+        userMapper.updateUserByPrimaryKey(user);
 
     }
 
     public List<User> selectUserAll() {
-        return null;
+        return userMapper.selectUserAll();
     }
 
+    @Transactional
     public void deleteGroupByPrimaryKey(Integer groupId) {
-
+        if (groupId != 0) {
+            groupMapper.deleteGroupByPrimaryKey(groupId);
+        }
     }
 
+    @Transactional
     public void insertGroup(Group group) {
-
+        groupMapper.insertGroup(group);
     }
 
     public Group selectGroupByPrimaryKey(Integer groupId) {
-        return null;
-    }
-
-    public void updateGroupByPrimaryKey(Group group) {
-
-    }
-
-    public List<Group> selectGroupAll() {
+        if (groupId != 0) {
+            return groupMapper.selectGroupByPrimaryKey(groupId);
+        }
         return null;
     }
 
     @Transactional
+    public void updateGroupByPrimaryKey(Group group) {
+        groupMapper.updateGroupByPrimaryKey(group);
+    }
+
+    public List<Group> selectGroupAll() {
+        return groupMapper.selectGroupAll();
+    }
+
+    @Transactional
     public void deleteAdminByPrimaryKey(Integer adminId) {
-        if (adminId!=0&&adminId!=null){
+        if (adminId != 0) {
             adminMapper.deleteAdminByPrimaryKey(adminId);
         }
     }
@@ -90,39 +101,46 @@ public class AdminServiceImpl implements AdminService{
     }
 
     public Admin selectAdminByPrimaryKey(Integer adminId) {
-        if (adminId!=0&&adminId!=null){
-            Admin admin = adminMapper.selectAdminByPrimaryKey(adminId);
-            return  admin;
+        if (adminId != 0) {
+            return adminMapper.selectAdminByPrimaryKey(adminId);
         }
         return null;
     }
 
-    public void updateAdminByPrimaryKey(Admin admin, Integer adminId) {
-
+    @Transactional
+    public void updateAdminByPrimaryKey(Admin admin) {
+        adminMapper.updateAdminByPrimaryKey(admin);
     }
 
     public List<Admin> selectAdminAll() {
-        return null;
+        return adminMapper.selectAdminAll();
     }
 
+    @Transactional
     public void deleteAddressByPrimaryKey(Integer addressId) {
-
-
+        if (addressId != 0) {
+            addressMapper.deleteAddressByPrimaryKey(addressId);
+        }
     }
 
+    @Transactional
     public void insertAddress(Address address) {
-
+        addressMapper.insertAddress(address);
     }
 
     public Address selectAddressByPrimaryKey(Integer addressId) {
+        if (addressId != 0) {
+            return addressMapper.selectAddressByPrimaryKey(addressId);
+        }
         return null;
     }
 
-    public void updateAddressByPrimaryKey(Address address, Integer addressId) {
-
+    @Transactional
+    public void updateAddressByPrimaryKey(Address address) {
+        addressMapper.updateAddressByPrimaryKey(address);
     }
 
     public List<Address> selectAddressAll() {
-        return null;
+        return addressMapper.selectAddressAll();
     }
 }
