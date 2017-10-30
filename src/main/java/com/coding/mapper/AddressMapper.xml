@@ -1,5 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.coding.mapper.AddressMapper" >
+    <!-- 根据用户唯一ID删除用户信息 -->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from address
+        where address_id = #{addressId,jdbcType=INTEGER}
+    </delete>
 
+    <!-- 插入一条地址信息，不用传入 addressId，字段自增 -->
+    <insert id="insert" parameterType="com.coding.pojo.Address">
+        insert into address (user_uuid, addressee_phone,
+      address, is_default_Address, take_goods_Province,
+      take_goods_City, take_goods_County, take_goods_Name,
+      address_x, address_y)
+        values (#{userUuid,jdbcType=VARCHAR}, #{addresseePhone,jdbcType=VARCHAR},
+      #{address,jdbcType=VARCHAR}, #{isDefaultAddress,jdbcType=INTEGER}, #{takeGoodsProvince,jdbcType=VARCHAR},
+      #{takeGoodsCity,jdbcType=VARCHAR}, #{takeGoodsCounty,jdbcType=VARCHAR}, #{takeGoodsName,jdbcType=VARCHAR},
+      #{addressX,jdbcType=DOUBLE}, #{addressY,jdbcType=DOUBLE})
+    </insert>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultType="com.coding.pojo.Address">
+
+    </select>
 </mapper>
