@@ -7,11 +7,11 @@ import com.coding.pojo.Address;
 import com.coding.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.UUID;
+
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
@@ -21,13 +21,13 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public void insertUser(User user) {
-        String id= UUID.randomUUID().toString().replace("-", "_");
+        String id = UUID.randomUUID().toString().replace("-", "_");
         user.setUserUuid(id);
         userMapper.insertUser(user);
     }
 
     public User selectUserByPrimaryKey(String userUuid) {
-        if (userUuid.equals("")&&userUuid.equals(null)){
+        if (userUuid.equals("") && userUuid.equals(null)) {
             return userMapper.selectUserByPrimaryKey(userUuid);
         }
         return null;
@@ -40,18 +40,18 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public void deleteAddressByPrimaryKey(Integer addressId) {
-        if (addressId != 0){
+        if (addressId != 0) {
             addressMapper.deleteAddressByPrimaryKey(addressId);
         }
     }
 
     @Transactional
     public void insertAddress(Address address) {
-            addressMapper.insertAddress(address);
+        addressMapper.insertAddress(address);
     }
 
     public Address selectAddressByPrimaryKey(Integer addressId) {
-        if (addressId != 0){
+        if (addressId != 0) {
             return addressMapper.selectAddressByPrimaryKey(addressId);
         }
         return null;
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public void updateAddressByPrimaryKey(Address address) {
-            addressMapper.updateAddressByPrimaryKey(address);
+        addressMapper.updateAddressByPrimaryKey(address);
     }
 
     public List<Address> selectAddressAll() {

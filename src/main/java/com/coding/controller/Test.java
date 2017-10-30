@@ -1,70 +1,51 @@
 package com.coding.controller;
 
-import com.coding.mapper.AddressMapper;
-import com.coding.mapper.AdminMapper;
-import com.coding.pojo.Address;
-import com.coding.pojo.Admin;
+import com.coding.mapper.GroupsMapper;
+import com.coding.pojo.Groups;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.util.Date;
 import java.util.List;
+
 @Controller
 public class Test {
 
     @Autowired
-    private AdminMapper adminMapper;
+    private GroupsMapper groupsMapper;
 
     @RequestMapping("test")
-    public void selectAdminAll(){
-        System.out.println("Controller~~~");
-        List<Admin> adminList = adminMapper.selectAdminAll();
-        System.out.println(adminList);
+    public void insertGroup() {
+        Groups groups = new Groups();
+        groups.setGroupJurisdiction("321312");
+        groups.setGroupName("用户组");
+
+        groupsMapper.insertGroups(groups);
     }
 
     @RequestMapping("test1")
-    public void insertAdmin(){
-        System.out.println("Controller~~~");
-        Admin admin = new Admin();
+    public void deleteGroupsByPrimaryKey() {
+        groupsMapper.deleteGroupsByPrimaryKey(2);
+    }
 
-        admin.setAdminAccount("2");
-        admin.setAdminEmail("2");
-        admin.setAdminPassword("2");
-        admin.setAdminPhone("2");
-        admin.setAdminRegisterTime(new Date());
-        admin.setGroupId(2);
-        System.out.println(admin);
-        adminMapper.insertAdmin(admin);
+
+    @RequestMapping("test2")
+    public void updateGroupsByPrimaryKey() {
+        Groups groups = new Groups();
+        groups.setGroupId(3);
+        groups.setGroupJurisdiction("3");
+        groups.setGroupName("3");
+        groupsMapper.updateGroupsByPrimaryKey(groups);
     }
 
     @RequestMapping("test3")
-    public void deleteAdminByPrimaryKey(){
-        System.out.println("Controller~~~");
-        adminMapper.deleteAdminByPrimaryKey(2);
+    public void selectGroupsByPrimaryKey() {
+        Groups groups = groupsMapper.selectGroupsByPrimaryKey(1);
+        System.out.println(groups);
     }
-
     @RequestMapping("test4")
-    public void selectAdminByPrimaryKey(){
-        System.out.println("Controller~~~");
-        Admin admin = adminMapper.selectAdminByPrimaryKey(2);
-        System.out.println(admin);
+    public void selectGroupsAll() {
+        List<Groups> groups = groupsMapper.selectGroupsAll();
+        System.out.println(groups);
     }
-
-    @RequestMapping("test5")
-    public void updateAdminByPrimaryKey(){
-        System.out.println("Controller~~~");
-
-        Admin admin = new Admin();
-        admin.setAdminId(2);
-        admin.setAdminAccount("3");
-        admin.setAdminEmail("3");
-        admin.setAdminPassword("3");
-        admin.setAdminPhone("3");
-        admin.setAdminRegisterTime(new Date());
-        admin.setGroupId(2);
-        adminMapper.updateAdminByPrimaryKey(admin);
-        System.out.println(admin);
-    }
-
 }
