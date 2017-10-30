@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.coding.mapper.AddressMapper" >
+
     <!-- 根据用户唯一ID删除用户信息 -->
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <delete id="deleteAddressByPrimaryKey" parameterType="java.lang.Integer">
         delete from address
         where address_id = #{addressId,jdbcType=INTEGER}
     </delete>
 
     <!-- 插入一条地址信息，不用传入 addressId，字段自增 -->
-    <insert id="insert" parameterType="com.coding.pojo.Address">
+    <insert id="insertAddress" parameterType="com.coding.pojo.Address">
         insert into address (user_uuid, addressee_phone,
       address, is_default_Address, take_goods_Province,
       take_goods_City, take_goods_County, take_goods_Name,
@@ -19,7 +20,50 @@
       #{addressX,jdbcType=DOUBLE}, #{addressY,jdbcType=DOUBLE})
     </insert>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultType="com.coding.pojo.Address">
-
+    <!-- Address表的所有字段  sql片段 增加冗余字段后需在此添加冗余字段名 -->
+    <sql id="Base_Column_List" >
+        address_id, user_uuid, addressee_phone, address, is_default_Address, take_goods_Province,
+        take_goods_City, take_goods_County, take_goods_Name, address_x, address_y
+    </sql>
+    <!-- 根据用户 ID 查询用户信息, 返回用户信息(增删 冗余字段 只需修改 sql 片段) -->
+    <select id="selectAddressByPrimaryKey" parameterType="java.lang.Integer" resultType="com.coding.pojo.Address">
+        SELECT
+        <include refid="Base_Column_List" />
+        from address
+        where address_id = #{addressId,jdbcType=INTEGER}
     </select>
+
+    <!-- 根据用户唯一 ID 进行信息修改（注释的是 冗余字段 ，当进行冗余字段添加时 可以修改） -->
+    <update id="updateAddressByPrimaryKey" parameterType="com.coding.pojo.Address">
+        update address
+        set user_uuid = #{userUuid,jdbcType=VARCHAR},
+        addressee_phone = #{addresseePhone,jdbcType=VARCHAR},
+        address = #{address,jdbcType=VARCHAR},
+        is_default_Address = #{isDefaultAddress,jdbcType=INTEGER},
+        take_goods_Province = #{takeGoodsProvince,jdbcType=VARCHAR},
+        take_goods_City = #{takeGoodsCity,jdbcType=VARCHAR},
+        take_goods_County = #{takeGoodsCounty,jdbcType=VARCHAR},
+        take_goods_Name = #{takeGoodsName,jdbcType=VARCHAR},
+        address_x = #{addressX,jdbcType=DOUBLE},
+        address_y = #{addressY,jdbcType=DOUBLE}
+        /*,
+        add1 = #{add1,jdbcType=VARCHAR},
+        add2 = #{add2,jdbcType=VARCHAR},
+        add3 = #{add3,jdbcType=VARCHAR},
+        add4 = #{add4,jdbcType=VARCHAR},
+        add5 = #{add5,jdbcType=VARCHAR},
+        add6 = #{add6,jdbcType=VARCHAR},
+        add7 = #{add7,jdbcType=VARCHAR},
+        add8 = #{add8,jdbcType=VARCHAR},
+        add9 = #{add9,jdbcType=VARCHAR},
+        add10 = #{add10,jdbcType=VARCHAR} */
+        where address_id = #{addressId,jdbcType=INTEGER}
+    </update>
+
+    <!-- 查询所有地址信息 -->
+    <select id="selectAddressAll" resultType="com.coding.pojo.Address" >
+        SELECT * from Address;
+    </select>
+
+
 </mapper>
