@@ -55,9 +55,9 @@
 		<ul class="nav "
 			style="margin-top: 40px; width: auto; margin-left: 150px;margin-right: 150px;">
 			<li>
-				<div class="input-group">
+				<div class="input-groups">
 					<input class="form-control" type="text" /> <span
-						class="input-group-btn">
+						class="input-groups-btn">
 						<button type="button" class="btn btn-danger">
 							<span class="glyphicon glyphicon-search"></span>
 						</button> </span>
