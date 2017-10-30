@@ -1,6 +1,12 @@
 package com.coding.pojo;
 
+
+import org.springframework.stereotype.Component;
+
+@Component
 public class Address {
+
+
     private Integer addressId;
 
     private String userUuid;
