@@ -19,9 +19,11 @@
         <property name="unauthorizedUrl" value="/error.jsp" />
         <property name="filterChainDefinitions">
             <value>
-                /** = authc
-            </value>
+                /**=anon
+        </value>
         </property>
+
+
     </bean>
 
     <bean id="customRealm" class="com.coding.shiro.MyRealm" />
