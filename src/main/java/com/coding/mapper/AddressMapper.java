@@ -6,35 +6,35 @@ import java.util.List;
 public interface AddressMapper {
     /**
      * 根据 addressId 删除地址信息
-     * @param addressId 地址唯一ID
+     * @param addressId
      */
 
-    public void deleteAddressByPrimaryKey(Integer addressId) throws Exception;
+    public void deleteAddressByPrimaryKey(Integer addressId);
 
     /**
      * 插入一条地址信息
-     * @param address 封装了地址信息的 Address 对象
+     * @param address
      */
-    public void insertAddress(Address address)throws Exception;
+    public void insertAddress(Address address);
 
     /**
      * 根据地址唯一id查询地址信息
-     * @param addressId 地址唯一ID
+     * @param addressId
      * @return 地址信息
      */
-    public Address selectAddressByPrimaryKey(Integer addressId)throws Exception;
+    public Address selectAddressByPrimaryKey(Integer addressId);
 
     /**
      * 根据地址唯一id更新地址信息
-     * @param address  封装了地址信息的 Address 对象
-     * @param addressId 地址唯一ID
+     * @param address
+     * @param addressId
      */
-    public void updateAddressByPrimaryKey(Address address)throws Exception;
+    public void updateAddressByPrimaryKey(Address address, Integer addressId);
 
     /**
      * 返回所有地址信息
-     * @return 封装了 Address 对象的集合
+     * @return
      */
-    public List<Address> selectAddressAll()throws Exception;
+    public List<Address> selectAddressAll();
 
 }
