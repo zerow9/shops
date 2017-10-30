@@ -2,7 +2,7 @@ package com.coding.Iservice;
 
 import com.coding.pojo.Address;
 import com.coding.pojo.Admin;
-import com.coding.pojo.Group;
+import com.coding.pojo.Groups;
 import com.coding.pojo.User;
 
 import java.util.List;
@@ -48,28 +48,28 @@ public interface AdminService {
 
     /**
      * 插入分组信息
-     * @param group
+     * @param groups
      */
-    public void insertGroup(Group group);
+    public void insertGroup(Groups groups);
 
     /**
      * 根据分组 ID 查询分组信息
      * @param groupId
      * @return
      */
-    public Group selectGroupByPrimaryKey(Integer groupId);
+    public Groups selectGroupByPrimaryKey(Integer groupId);
 
     /**
      * 根据分组 ID 更新分组信息
-     * @param group
+     * @param groups
      */
-    public void updateGroupByPrimaryKey(Group group);
+    public void updateGroupByPrimaryKey(Groups groups);
 
     /**
      * 查询所有分组信息
      * @return
      */
-    public List<Group> selectGroupAll();
+    public List<Groups> selectGroupAll();
 
     /*------------------------------------------管理员表------------------------------------------------------------------*/
     /**
@@ -94,9 +94,8 @@ public interface AdminService {
     /**
      * 通过管理员唯一 ID 修改管理员信息
      * @param admin
-     * @param adminId
      */
-    public void updateAdminByPrimaryKey(Admin admin, Integer adminId);
+    public void updateAdminByPrimaryKey(Admin admin);
 
     /**
      * 查询所有管理员信息
@@ -126,9 +125,8 @@ public interface AdminService {
     /**
      * 根据地址唯一id更新地址信息
      * @param address
-     * @param addressId
      */
-    public void updateAddressByPrimaryKey(Address address, Integer addressId);
+    public void updateAddressByPrimaryKey(Address address);
 
     /**
      * 返回所有地址信息

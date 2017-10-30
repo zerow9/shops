@@ -22,8 +22,8 @@
 
     <!-- Address表的所有字段  sql片段 增加冗余字段后需在此添加冗余字段名 -->
     <sql id="Base_Column_List" >
-        address_id, user_uuid, addressee_phone, address, is_default_Address, take_goods_Province,
-        take_goods_City, take_goods_County, take_goods_Name, address_x, address_y
+        address_id addressId, user_uuid userUuid, addressee_phone addresseePhone, address address, is_default_Address isDefaultAddress, take_goods_Province takeGoodsProvince,
+        take_goods_City takeGoodsCity, take_goods_County takeGoodsCounty, take_goods_Name takeGoodsName, address_x addressX, address_y addressY
     </sql>
     <!-- 根据用户 ID 查询用户信息, 返回用户信息(增删 冗余字段 只需修改 sql 片段) -->
     <select id="selectAddressByPrimaryKey" parameterType="java.lang.Integer" resultType="com.coding.pojo.Address">
@@ -36,18 +36,17 @@
     <!-- 根据用户唯一 ID 进行信息修改（注释的是 冗余字段 ，当进行冗余字段添加时 可以修改） -->
     <update id="updateAddressByPrimaryKey" parameterType="com.coding.pojo.Address">
         update address
-        set user_uuid = #{userUuid,jdbcType=VARCHAR},
-        addressee_phone = #{addresseePhone,jdbcType=VARCHAR},
-        address = #{address,jdbcType=VARCHAR},
-        is_default_Address = #{isDefaultAddress,jdbcType=INTEGER},
-        take_goods_Province = #{takeGoodsProvince,jdbcType=VARCHAR},
-        take_goods_City = #{takeGoodsCity,jdbcType=VARCHAR},
-        take_goods_County = #{takeGoodsCounty,jdbcType=VARCHAR},
-        take_goods_Name = #{takeGoodsName,jdbcType=VARCHAR},
-        address_x = #{addressX,jdbcType=DOUBLE},
-        address_y = #{addressY,jdbcType=DOUBLE}
-        /*,
-        add1 = #{add1,jdbcType=VARCHAR},
+        set user_uuid = #{userUuid},
+        addressee_phone = #{addresseePhone},
+        address = #{address},
+        is_default_Address = #{isDefaultAddress},
+        take_goods_Province = #{takeGoodsProvince},
+        take_goods_City = #{takeGoodsCity},
+        take_goods_County = #{takeGoodsCounty},
+        take_goods_Name = #{takeGoodsName},
+        address_x = #{addressX},
+        address_y = #{addressY}
+        <!--add1 = #{add1,jdbcType=VARCHAR},
         add2 = #{add2,jdbcType=VARCHAR},
         add3 = #{add3,jdbcType=VARCHAR},
         add4 = #{add4,jdbcType=VARCHAR},
@@ -56,13 +55,15 @@
         add7 = #{add7,jdbcType=VARCHAR},
         add8 = #{add8,jdbcType=VARCHAR},
         add9 = #{add9,jdbcType=VARCHAR},
-        add10 = #{add10,jdbcType=VARCHAR} */
+        add10 = #{add10,jdbcType=VARCHAR} -->
         where address_id = #{addressId,jdbcType=INTEGER}
     </update>
 
-    <!-- 查询所有地址信息 -->
+    <!-- 查询所有地址信息 （需要将数据库字段名修改为 pojo 指定的属性名） -->
     <select id="selectAddressAll" resultType="com.coding.pojo.Address" >
-        SELECT * from Address;
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM address
     </select>
 
 
