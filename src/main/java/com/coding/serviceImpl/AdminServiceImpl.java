@@ -28,7 +28,7 @@ public class AdminServiceImpl implements AdminService{
 
     @Transactional
     public void deleteUserByPrimaryKey(String userUuid) {
-        if (userUuid!=""&&userUuid!=null){
+        if (userUuid.equals("")&&userUuid.equals(null)){
             userMapper.deleteUserByPrimaryKey(userUuid);
         }
 
@@ -42,9 +42,8 @@ public class AdminServiceImpl implements AdminService{
     }
 
     public User selectUserByPrimaryKey(String userUuid) {
-        if (userUuid!=""&&userUuid!=null){
-            User user = userMapper.selectUserByPrimaryKey(userUuid);
-            return  user;
+        if (userUuid.equals("")&&userUuid.equals(null)){
+            return userMapper.selectUserByPrimaryKey(userUuid);
         }
         return null;
     }
@@ -56,13 +55,12 @@ public class AdminServiceImpl implements AdminService{
     }
 
     public List<User> selectUserAll() {
-        List<User> users = userMapper.selectUserAll();
-        return users;
+        return userMapper.selectUserAll();
     }
 
     @Transactional
     public void deleteGroupByPrimaryKey(Integer groupId) {
-        if (groupId!=0&&groupId!=null){
+        if (groupId != 0){
             groupMapper.deleteGroupByPrimaryKey(groupId);
         }
     }
@@ -73,9 +71,8 @@ public class AdminServiceImpl implements AdminService{
     }
 
     public Group selectGroupByPrimaryKey(Integer groupId) {
-        if (groupId!=0&&groupId!=null){
-            Group group=groupMapper.selectGroupByPrimaryKey(groupId);
-            return  group;
+        if (groupId != 0){
+            return groupMapper.selectGroupByPrimaryKey(groupId);
         }
         return null;
     }
@@ -86,13 +83,12 @@ public class AdminServiceImpl implements AdminService{
     }
 
     public List<Group> selectGroupAll() {
-        List<Group> groups = groupMapper.selectGroupAll();
-        return groups;
+        return groupMapper.selectGroupAll();
     }
 
     @Transactional
     public void deleteAdminByPrimaryKey(Integer adminId) {
-        if (adminId!=0&&adminId!=null){
+        if (adminId != 0){
             adminMapper.deleteAdminByPrimaryKey(adminId);
         }
     }
@@ -104,9 +100,8 @@ public class AdminServiceImpl implements AdminService{
     }
 
     public Admin selectAdminByPrimaryKey(Integer adminId) {
-        if (adminId!=0&&adminId!=null){
-            Admin admin = adminMapper.selectAdminByPrimaryKey(adminId);
-            return  admin;
+        if (adminId != 0){
+            return adminMapper.selectAdminByPrimaryKey(adminId);
         }
         return null;
     }
@@ -117,13 +112,12 @@ public class AdminServiceImpl implements AdminService{
     }
 
     public List<Admin> selectAdminAll() {
-        List<Admin> admins = adminMapper.selectAdminAll();
-        return admins;
+        return adminMapper.selectAdminAll();
     }
 
     @Transactional
     public void deleteAddressByPrimaryKey(Integer addressId) {
-        if (addressId!=0&&addressId!=null){
+        if (addressId != 0){
             addressMapper.deleteAddressByPrimaryKey(addressId);
         }
     }
@@ -134,9 +128,8 @@ public class AdminServiceImpl implements AdminService{
     }
 
     public Address selectAddressByPrimaryKey(Integer addressId) {
-        if (addressId!=0&&addressId!=null){
-            Address address =  addressMapper.selectAddressByPrimaryKey(addressId);
-            return  address;
+        if (addressId != 0){
+            return addressMapper.selectAddressByPrimaryKey(addressId);
         }
         return null;
     }
@@ -147,7 +140,6 @@ public class AdminServiceImpl implements AdminService{
     }
 
     public List<Address> selectAddressAll() {
-        List<Address> addresses = addressMapper.selectAddressAll();
-        return addresses;
+        return addressMapper.selectAddressAll();
     }
 }

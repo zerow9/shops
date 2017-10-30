@@ -27,9 +27,8 @@ public class UserServiceImpl implements UserService {
     }
 
     public User selectUserByPrimaryKey(String userUuid) {
-        if (userUuid!=""&&userUuid!=null){
-            User user = userMapper.selectUserByPrimaryKey(userUuid);
-            return  user;
+        if (userUuid.equals("")&&userUuid.equals(null)){
+            return userMapper.selectUserByPrimaryKey(userUuid);
         }
         return null;
     }
@@ -41,7 +40,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     public void deleteAddressByPrimaryKey(Integer addressId) {
-        if (addressId!=0&&addressId!=null){
+        if (addressId != 0){
             addressMapper.deleteAddressByPrimaryKey(addressId);
         }
     }
@@ -52,9 +51,8 @@ public class UserServiceImpl implements UserService {
     }
 
     public Address selectAddressByPrimaryKey(Integer addressId) {
-        if (addressId!=0&&addressId!=null){
-          Address address =  addressMapper.selectAddressByPrimaryKey(addressId);
-          return  address;
+        if (addressId != 0){
+            return addressMapper.selectAddressByPrimaryKey(addressId);
         }
         return null;
     }
@@ -65,7 +63,6 @@ public class UserServiceImpl implements UserService {
     }
 
     public List<Address> selectAddressAll() {
-        List<Address> addresses = addressMapper.selectAddressAll();
-        return addresses;
+        return addressMapper.selectAddressAll();
     }
 }
