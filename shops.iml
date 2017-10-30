@@ -2,7 +2,15 @@
 <module org.jetbrains.idea.maven.project.MavenProjectsManager.isMavenModule="true" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="Spring" name="Spring">
-      <configuration />
+      <configuration>
+        <fileset id="fileset" name="ApplicationContext_transaction" removed="false">
+          <file>file://$MODULE_DIR$/src/main/resource/spring/applicationContext_transaction.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resource/spring/applicationContext_service.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resource/spring/applicationContext_dao.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resource/spring/applicationContext_shiro.xml</file>
+          <file>file://$MODULE_DIR$/src/main/resource/springmvc/springmvc.xml</file>
+        </fileset>
+      </configuration>
     </facet>
     <facet type="web" name="Web">
       <configuration>

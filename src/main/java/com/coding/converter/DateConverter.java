@@ -1,4 +1,4 @@
 package com.coding.converter;
 
-public class Test {
+public class DateConverter {
 }
