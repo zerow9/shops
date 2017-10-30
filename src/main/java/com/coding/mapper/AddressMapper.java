@@ -8,7 +8,6 @@ public interface AddressMapper {
      * 根据 addressId 删除地址信息
      * @param addressId
      */
-
     public void deleteAddressByPrimaryKey(Integer addressId);
 
     /**
