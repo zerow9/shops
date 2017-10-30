@@ -3,5 +3,5 @@
 /.idea/
 
 # 忽略项目编译文件及目录
-*/target/
+target/
 
