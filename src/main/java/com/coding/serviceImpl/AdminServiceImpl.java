@@ -24,7 +24,8 @@ public class AdminServiceImpl implements AdminService{
     private GroupMapper groupMapper;
     @Autowired
     private AdminMapper adminMapper;
-    @Override
+
+    @Transactional
     public void deleteUserByPrimaryKey(String userUuid) {
         if (userUuid!=""&&userUuid!=null){
             userMapper.deleteUserByPrimaryKey(userUuid);
@@ -47,37 +48,30 @@ public class AdminServiceImpl implements AdminService{
         return null;
     }
 
-    @Override
     public void updateUserByPrimaryKey(User user) {
 
     }
 
-    @Override
     public List<User> selectUserAll() {
         return null;
     }
 
-    @Override
     public void deleteGroupByPrimaryKey(Integer groupId) {
 
     }
 
-    @Override
     public void insertGroup(Group group) {
 
     }
 
-    @Override
     public Group selectGroupByPrimaryKey(Integer groupId) {
         return null;
     }
 
-    @Override
     public void updateGroupByPrimaryKey(Group group) {
 
     }
 
-    @Override
     public List<Group> selectGroupAll() {
         return null;
     }
@@ -95,7 +89,6 @@ public class AdminServiceImpl implements AdminService{
 
     }
 
-    @Override
     public Admin selectAdminByPrimaryKey(Integer adminId) {
         if (adminId!=0&&adminId!=null){
             Admin admin = adminMapper.selectAdminByPrimaryKey(adminId);
@@ -104,38 +97,31 @@ public class AdminServiceImpl implements AdminService{
         return null;
     }
 
-    @Override
     public void updateAdminByPrimaryKey(Admin admin, Integer adminId) {
 
     }
 
-    @Override
     public List<Admin> selectAdminAll() {
         return null;
     }
 
-    @Override
     public void deleteAddressByPrimaryKey(Integer addressId) {
 
 
     }
 
-    @Override
     public void insertAddress(Address address) {
 
     }
 
-    @Override
     public Address selectAddressByPrimaryKey(Integer addressId) {
         return null;
     }
 
-    @Override
     public void updateAddressByPrimaryKey(Address address, Integer addressId) {
 
     }
 
-    @Override
     public List<Address> selectAddressAll() {
         return null;
     }
