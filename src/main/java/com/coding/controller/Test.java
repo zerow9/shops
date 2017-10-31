@@ -3,6 +3,7 @@ import com.coding.mapper.*;
 
 import com.coding.pojo.Item;
 import com.coding.pojo.Repertory;
+import com.coding.pojo.Vender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,30 +24,30 @@ public class Test {
     @Autowired
     private RepertoryMapper repertoryMapper;
 
+    @Autowired
+    private VenderMapper venderMapper;
+
     @RequestMapping("test")
     public void insertRepertory()throws Exception {
-        Repertory repertory = new Repertory();
-        repertory.setItemId(1);
-        repertory.setItemMarketPrice(22.5);
-        repertory.setItemOriginalPrice(22.0);
-        repertory.setRepertoryNumber(3);
-        repertory.setRepertoryPuttime(new Date());
-        repertory.setShopId(33);
-        repertory.setUpdateTime(new Date());
-        repertory.setVenderId(1);
-        repertory.setRepertoryId(9);
-        repertoryMapper.updateRepertoryByPrimaryKey(repertory);
-//        repertoryMapper.insertRepertory(repertory);
+//        Vender vender = new Vender();
+//        vender.setBusinessRange("a-b");
+//        vender.setIcId(123213);
+//        vender.setVenderAddress("北京a a a ");
+//        vender.setVenderEmail("asdsa@asd.com");
+//        vender.setVenderName("北京老布鞋");
+//        vender.setVenderPhone("12312312");
+//        vender.setVenderPost(12312);
+//        vender.setVenderId(3);
+////        venderMapper.insertVender(vender);
+//
+////        List<Vender> venders = venderMapper.selectVenderAll();
+////        System.out.println(venders);
+////        Vender vender1 = venderMapper.selectVenderByPrimaryKey(null);
+////        System.out.println(vender1);
+//
+//          venderMapper.updateVenderByPrimaryKey(vender);
 
-//        repertoryMapper.deleteRepertoryByPrimaryKey(1);
-
-//        Repertory repertory = repertoryMapper.selectRepertoryByPrimaryKey(0);
-//        System.out.println(repertory);
-//          List<Repertory> repertoryList = repertoryMapper.selectRepertoryAll();
-//          System.out.println(repertoryList);
-
-
-
+        venderMapper.deleteVenderByPrimaryKey(2);
     }
 
 }
