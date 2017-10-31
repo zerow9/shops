@@ -21,11 +21,18 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     private AdminMapper adminMapper;
     @Autowired
     private ItemTypeMapper itemTypeMapper;
+    @Autowired
+    private ItemMapper itemMapper;
+    @Autowired
+    private RepertoryMapper repertoryMapper;
+    @Autowired
+    private VenderMapper venderMapper;
+
 
     /*------------------------------------------用户表------------------------------------------------------------------*/
     @Transactional
     public void deleteUserByPrimaryKey(String userUuid)  throws Exception{
-        if (!userUuid.equals("") && !userUuid.equals(null)) {
+        if (!userUuid.equals("") ) {
             try {
                 userMapper.deleteUserByPrimaryKey(userUuid);
             }catch (Exception e){
@@ -161,6 +168,108 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         }catch (Exception e){
             throw new Exception("修改商品类别信息时出错");
         }
+    }
+
+    /*------------------------------------------商品表------------------------------------------------------------------*/
+    public void deleteItemByPrimaryKey(Integer itemId) throws Exception {
+        try {
+            itemMapper.deleteItemByPrimaryKey(itemId);
+        }catch (Exception e){
+            throw new Exception("删除商品时出错");
+        }
+    }
+
+    public void insertItem(Item item) throws Exception {
+        try {
+            itemMapper.insertItem(item);
+        }catch (Exception e){
+            throw new Exception("添加商品时出错");
+        }
+    }
+
+    public void updateItemByPrimaryKey(Item item) throws Exception {
+        try {
+            itemMapper.updateItemByPrimaryKey(item);
+        }catch (Exception e){
+            throw new Exception("修改商品信息时出错");
+        }
+    }
+    /*------------------------------------------库存表------------------------------------------------------------------*/
+    public void deleteRepertoryByPrimaryKey(Integer repertoryId) throws Exception {
+        try {
+            repertoryMapper.deleteRepertoryByPrimaryKey(repertoryId);
+        }catch (Exception e){
+            throw new Exception("删除库存信息时出错");
+        }
+    }
+
+    public void insertRepertory(Repertory repertory) throws Exception {
+        try {
+            repertoryMapper.insertRepertory(repertory);
+        }catch (Exception e){
+            throw new Exception("添加库存信息时出错");
+        }
+    }
+
+    public Repertory selectRepertoryByPrimaryKey(Integer repertoryId) throws Exception {
+        if (repertoryId != 0){
+            Repertory repertory = repertoryMapper.selectRepertoryByPrimaryKey(repertoryId);
+            except(repertory,"查询库存信息为空");
+        }
+        return null;
+    }
+
+    public void updateRepertoryByPrimaryKey(Repertory repertory) throws Exception {
+        try {
+            repertoryMapper.updateRepertoryByPrimaryKey(repertory);
+        }catch (Exception e){
+            throw new Exception("修改库存信息时出错");
+        }
+    }
+
+    public List<Repertory> selectRepertoryAll() throws Exception {
+        List<Repertory> repertories = repertoryMapper.selectRepertoryAll();
+        except(repertories,"查询库存列表为空");
+        return repertories;
+    }
+    /*------------------------------------------厂家信息表------------------------------------------------------------------*/
+    public void deleteVenderByPrimaryKey(Integer venderId) throws Exception {
+        try {
+            venderMapper.deleteVenderByPrimaryKey(venderId);
+        }catch (Exception e){
+            throw new Exception("删除厂家信息时出错");
+        }
+    }
+
+    public void insertVender(Vender vender) throws Exception {
+        try {
+            venderMapper.insertVender(vender);
+        }catch (Exception e){
+            throw new Exception("添加厂家信息时出错");
+        }
+
+    }
+
+    public Vender selectVenderByPrimaryKey(Integer venderId) throws Exception {
+        if(venderId != 0){
+            Vender vender = venderMapper.selectVenderByPrimaryKey(venderId);
+            except(vender,"查询厂家信息为空");
+        }
+        return null;
+    }
+
+    public void updateVenderByPrimaryKey(Vender vender) throws Exception {
+        try {
+            venderMapper.updateVenderByPrimaryKey(vender);
+        }catch (Exception e){
+            throw new Exception("修改厂家信息时出错");
+        }
+    }
+
+    public List<Vender> selectVenderAll() throws Exception {
+        List<Vender> venders = venderMapper.selectVenderAll();
+        except(venders,"查询厂家列表为空");
+        return venders;
     }
 
 

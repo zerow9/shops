@@ -3,9 +3,11 @@ package com.coding.serviceImpl;
 import com.coding.Iservice.IUserService;
 import com.coding.comomInterface.ErrorExc;
 import com.coding.mapper.AddressMapper;
+import com.coding.mapper.ItemMapper;
 import com.coding.mapper.ItemTypeMapper;
 import com.coding.mapper.UserMapper;
 import com.coding.pojo.Address;
+import com.coding.pojo.Item;
 import com.coding.pojo.ItemType;
 import com.coding.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,8 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     private AddressMapper addressMapper;
     @Autowired
     private ItemTypeMapper itemTypeMapper;
+    @Autowired
+    private ItemMapper itemMapper;
 
     /*----------------------------------------用户表------------------------------------------------------------------*/
 
@@ -36,7 +40,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     }
 
     public User selectUserByPrimaryKey(String userUuid) throws  Exception{
-        if (!userUuid.equals("") && !userUuid.equals(null)) {
+        if (!userUuid.equals("")) {
             User user= userMapper.selectUserByPrimaryKey(userUuid);
              except(user,"用户查询为空");
             return user;
@@ -95,7 +99,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
 
 
     public List<Address> selectAddressByUserID(String userUuid) throws Exception {
-        if (!userUuid.equals("") && !userUuid.equals(null)) {
+        if (!userUuid.equals("")) {
             List<Address> addresses = addressMapper.selectAddressByUserID(userUuid);
             except(addresses,"用户收获地址查询为空");
             return addresses;
@@ -106,7 +110,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     public ItemType selectItemTypeByPrimaryKey(Integer itemTypeId) throws Exception {
         if (itemTypeId != 0) {
             ItemType itemType = itemTypeMapper.selectItemTypeByPrimaryKey(itemTypeId);
-            except(itemTypeId,"商品类别查询为空");
+            except(itemTypeId,"查询商品类别为空");
             return itemType;
         }
         return null;
@@ -116,7 +120,23 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             return itemTypeMapper.selectItemTypeAll();
         }catch (Exception e){
-            throw new Exception("查询所有商品类别时出错");
+            throw new Exception("查询所有商品类别为空");
+        }
+    }
+    /*------------------------------------------商品表------------------------------------------------------------------*/
+    public Item selectItemByPrimaryKey(Integer itemId) throws Exception {
+        if (itemId != 0){
+            Item item = itemMapper.selectItemByPrimaryKey(itemId);
+            except(item,"查询商品时为空");
+        }
+        return null;
+    }
+
+    public List<Item> selectItemAll() throws Exception {
+        try {
+            return itemMapper.selectItemAll();
+        }catch (Exception e){
+            throw new Exception("查询商品列表为空");
         }
     }
 }
