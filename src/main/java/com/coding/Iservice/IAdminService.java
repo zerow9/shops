@@ -1,5 +1,6 @@
 package com.coding.Iservice;
 
+import com.coding.pojo.Address;
 import com.coding.pojo.Admin;
 import com.coding.pojo.Groups;
 import com.coding.pojo.User;
@@ -19,6 +20,12 @@ public interface IAdminService extends IUserService {
      * @return
      */
     public List<User> selectUserAll() throws Exception;
+/*------------------------------------------收获地址表表------------------------------------------------------------------*/
+    /**
+     * 返回所有地址信息
+     * @return
+     */
+    public List<Address> selectAddressAll() throws Exception;
 /*------------------------------------------分组表------------------------------------------------------------------*/
     /**
      * 通过分组 ID 删除分组信息
