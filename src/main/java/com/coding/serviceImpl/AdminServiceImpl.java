@@ -42,18 +42,16 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     }
 
     public List<User> selectUserAll()  throws Exception{
-        List<User> users = userMapper.selectUserAll();
-        except(users,"用户列表查询为空");
-        return userMapper.selectUserAll();
+            List<User> users = userMapper.selectUserAll();
+            if(users.isEmpty()) throw new Exception("用户列表查询为空");
+            return users;
     }
 
     /*------------------------------------------收获地址表------------------------------------------------------------------*/
     public List<Address> selectAddressAll() throws Exception {
-        try {
-            return addressMapper.selectAddressAll();
-        }catch (Exception e){
-            throw new Exception("查询全部收获地址表出错");
-        }
+            List<Address> addresses = addressMapper.selectAddressAll();
+            if(addresses.isEmpty()) throw new Exception("查询全部收获地址表为空");
+            return addresses;
     }
     /*------------------------------------------分组表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
@@ -95,9 +93,10 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     }
 
     public List<Groups> selectGroupsAll() throws Exception {
-        List<Groups> groups = groupsMapper.selectGroupsAll();
-        except(groups,"分组列表查询为空");
-        return groups;
+            List<Groups> groups =groupsMapper.selectGroupsAll();
+            if(groups.isEmpty()) throw new Exception("分组列表查询为空");
+            return groups;
+
     }
 
     /*------------------------------------------管理员表------------------------------------------------------------------*/
@@ -141,7 +140,8 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
 
     public List<Admin> selectAdminAll() throws Exception {
         List<Admin> admins = adminMapper.selectAdminAll();
-        except(admins,"管理员列表查询为空");
+        if(admins.isEmpty()) throw new Exception("管理员列表查询为空");
+//        except(admins,"管理员列表查询为空");
         return admins;
     }
 
@@ -238,7 +238,8 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
 
     public List<Repertory> selectRepertoryAll() throws Exception {
         List<Repertory> repertories = repertoryMapper.selectRepertoryAll();
-        except(repertories,"查询库存列表为空");
+        if(repertories.isEmpty()) throw new Exception("查询库存列表为空");
+//        except(repertories,"查询库存列表为空");
         return repertories;
     }
     /*------------------------------------------厂家信息表------------------------------------------------------------------*/
@@ -280,7 +281,8 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
 
     public List<Vender> selectVenderAll() throws Exception {
         List<Vender> venders = venderMapper.selectVenderAll();
-        except(venders,"查询厂家列表为空");
+        if(venders.isEmpty()) throw new Exception("查询厂家列表为空");
+//        except(venders,"查询厂家列表为空");
         return venders;
     }
 
