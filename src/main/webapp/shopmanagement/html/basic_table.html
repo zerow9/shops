@@ -9,6 +9,7 @@
 		<link rel="shortcut icon" href="../favicon.ico">
 		<link href="../css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
 		<link href="../css/style.min.css?v=4.0.0" rel="stylesheet">
+		<link href="../css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
 		<link href="../common/layui/css/layui.css" rel="stylesheet" />
 	</head>
 
@@ -76,6 +77,7 @@
 			<a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
 		</script>
 		<script src="../common/layui/layui.all.js" charset="utf-8" type="text/javascript"></script>
+		<script src="../js/plugins/sweetalert/sweetalert.min.js"></script>
 		<script>
 			layui.use('table', function() {
 				var table = layui.table;
@@ -89,10 +91,18 @@
 					if(obj.event === 'detail') {
 						layer.msg('ID：' + data.id + ' 的查看操作');
 					} else if(obj.event === 'del') {
-						layer.confirm('真的删除行么', function(index) {
-							obj.del();
-							layer.close(index);
-						});
+						swal({
+							title: "您确定要删除'ID：="+data.id+"信息吗",
+							text: "删除后将无法恢复，请谨慎操作！",
+							type: "warning",
+							showCancelButton: true,
+							confirmButtonColor: "#DD6B55",
+							confirmButtonText: "删除",
+							closeOnConfirm: false
+						}, function() {
+							//通 ajax 加载方法
+							swal("删除成功！", "您已经永久删除了这条信息。", "success")
+						})
 					} else if(obj.event === 'edit') {
 						layer.alert('编辑行：<br>' + JSON.stringify(data))
 					}
