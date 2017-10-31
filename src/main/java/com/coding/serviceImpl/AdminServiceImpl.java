@@ -1,14 +1,8 @@
 package com.coding.serviceImpl;
 
 import com.coding.Iservice.IAdminService;
-import com.coding.mapper.AddressMapper;
-import com.coding.mapper.AdminMapper;
-import com.coding.mapper.GroupsMapper;
-import com.coding.mapper.UserMapper;
-import com.coding.pojo.Address;
-import com.coding.pojo.Admin;
-import com.coding.pojo.Groups;
-import com.coding.pojo.User;
+import com.coding.mapper.*;
+import com.coding.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +19,8 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     private GroupsMapper groupsMapper;
     @Autowired
     private AdminMapper adminMapper;
+    @Autowired
+    private ItemTypeMapper itemTypeMapper;
 
     /*------------------------------------------用户表------------------------------------------------------------------*/
     @Transactional
@@ -141,5 +137,31 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         except(admins,"管理员列表查询为空");
         return admins;
     }
+
+    /*------------------------------------------商品类别表------------------------------------------------------------------*/
+    public void deleteItemTypeByPrimaryKey(Integer itemTypeId) throws Exception {
+        try {
+            itemTypeMapper.deleteItemTypeByPrimaryKey(itemTypeId);
+        }catch (Exception e){
+            throw new Exception("删除商品类别时出错");
+        }
+    }
+
+    public void insertItemType(ItemType itemType) throws Exception {
+        try {
+            itemTypeMapper.insertItemType(itemType);
+        }catch (Exception e){
+            throw new Exception("插入商品类别时出错");
+        }
+    }
+
+    public void updateItemTypeByPrimaryKey(ItemType itemType) throws Exception {
+        try {
+            itemTypeMapper.updateItemTypeByPrimaryKey(itemType);
+        }catch (Exception e){
+            throw new Exception("修改商品类别信息时出错");
+        }
+    }
+
 
 }

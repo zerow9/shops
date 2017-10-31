@@ -1,9 +1,6 @@
 package com.coding.Iservice;
 
-import com.coding.pojo.Address;
-import com.coding.pojo.Admin;
-import com.coding.pojo.Groups;
-import com.coding.pojo.User;
+import com.coding.pojo.*;
 
 import java.util.List;
 
@@ -90,4 +87,26 @@ public interface IAdminService extends IUserService {
      */
     public List<Admin> selectAdminAll() throws Exception;
 
+     /*------------------------------------------商品类别表------------------------------------------------------------------*/
+
+    /**
+     * 根据商品类别ID删除商品
+     * @param itemTypeId
+     * @throws Exception
+     */
+    public void deleteItemTypeByPrimaryKey(Integer itemTypeId)throws Exception;
+
+    /**
+     * 插入新商品类别
+     * @param itemType
+     * @throws Exception
+     */
+    public void  insertItemType(ItemType itemType)throws Exception;
+
+    /**
+     * 根据商品类别ID修改商品类别信息
+     * @param itemType
+     * @throws Exception
+     */
+    public void updateItemTypeByPrimaryKey(ItemType itemType)throws Exception;
 }
