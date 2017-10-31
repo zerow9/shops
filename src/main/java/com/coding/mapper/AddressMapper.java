@@ -9,7 +9,7 @@ public interface AddressMapper {
      * 根据 addressId 删除地址信息
      * @param addressId 地址唯一ID
      */
-    public void deleteAddressByPrimaryKey(Integer addressId);
+    public void deleteAddressByPrimaryKey(Integer addressId) ;
 
     /**
      * 插入一条地址信息
@@ -36,4 +36,5 @@ public interface AddressMapper {
      */
     public List<Address> selectAddressAll();
 
+    public List<Address> selectAddressByUserID(String uuid);
 }
