@@ -2,6 +2,7 @@ package com.coding.controller;
 import com.coding.mapper.*;
 
 import com.coding.pojo.Item;
+import com.coding.pojo.ItemType;
 import com.coding.pojo.Repertory;
 import com.coding.pojo.Vender;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,27 +28,28 @@ public class Test {
     @Autowired
     private VenderMapper venderMapper;
 
+    @Autowired
+    private ItemTypeMapper itemTypeMapper;
+
     @RequestMapping("test")
     public void insertRepertory()throws Exception {
-//        Vender vender = new Vender();
-//        vender.setBusinessRange("a-b");
-//        vender.setIcId(123213);
-//        vender.setVenderAddress("北京a a a ");
-//        vender.setVenderEmail("asdsa@asd.com");
-//        vender.setVenderName("北京老布鞋");
-//        vender.setVenderPhone("12312312");
-//        vender.setVenderPost(12312);
-//        vender.setVenderId(3);
-////        venderMapper.insertVender(vender);
-//
-////        List<Vender> venders = venderMapper.selectVenderAll();
-////        System.out.println(venders);
-////        Vender vender1 = venderMapper.selectVenderByPrimaryKey(null);
-////        System.out.println(vender1);
-//
-//          venderMapper.updateVenderByPrimaryKey(vender);
+//        ItemType itemType = new ItemType();
+//        itemType.setFatherTypeId(1);
+//        itemType.setTypeIntroduce("1");
+//        itemType.setTypeKeyWord("b");
+//        itemType.setTypeLevel(2);
+//        itemType.setTypeName("bb");
+//        itemType.setTypeId(1);
+//        itemTypeMapper.insertItemType(itemType);
 
-        venderMapper.deleteVenderByPrimaryKey(2);
+      //itemTypeMapper.deleteItemTypeByPrimaryKey(2);
+//        ItemType itemType = itemTypeMapper.selectItemTypeByPrimaryKey(null);
+//        System.out.println(itemType);
+
+//        itemTypeMapper.updateItemTypeByPrimaryKey(itemType);
+
+        List<ItemType> itemTypeList = itemTypeMapper.selectItemTypeAll();
+        System.out.println(itemTypeList);
     }
 
 }
