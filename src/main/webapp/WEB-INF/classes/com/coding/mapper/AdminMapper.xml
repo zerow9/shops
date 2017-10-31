@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coding.mapper.AdminMapper" >
+
+    <!-- 根据管理员ID删除管理员信息 -->
+    <delete id="deleteAdminByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from admin
+    where admin_id = #{adminId}
+    </delete>
+
+    <!-- 插入管理员信息，管理员ID不用传入，自增 -->
+    <insert id="insertAdmin" parameterType="com.coding.pojo.Admin">
+      insert into admin ( admin_account, admin_password,
+      admin_phone, admin_email, admin_register_time,
+      group_id
+      )
+    values (#{adminAccount,jdbcType=VARCHAR}, #{adminPassword,jdbcType=VARCHAR},
+      #{adminPhone,jdbcType=VARCHAR}, #{adminEmail,jdbcType=VARCHAR}, #{adminRegisterTime,jdbcType=TIMESTAMP},
+      #{groupId,jdbcType=INTEGER}
+      )
+    </insert>
+
+    <!-- 为pojo Admin指定返回类型 -->
+    <resultMap id="BaseResultMap" type="com.coding.pojo.Admin" >
+        <id column="admin_id" property="adminId" jdbcType="INTEGER" />
+        <result column="admin_account" property="adminAccount" jdbcType="VARCHAR" />
+        <result column="admin_password" property="adminPassword" jdbcType="VARCHAR" />
+        <result column="admin_phone" property="adminPhone" jdbcType="VARCHAR" />
+        <result column="admin_email" property="adminEmail" jdbcType="VARCHAR" />
+        <result column="admin_register_time" property="adminRegisterTime" jdbcType="TIMESTAMP" />
+        <result column="group_id" property="groupId" jdbcType="INTEGER" />
+    </resultMap>
+    <!-- Admin 表的字段，含有冗余字段（以注释） -->
+    <sql id="Base_Column_List" >
+        admin_id, admin_account, admin_password, admin_phone, admin_email, admin_register_time,
+        group_id<!--, adm1, adm2, adm3, adm4, adm5, adm6, adm7, adm8, adm9, adm10-->
+    </sql>
+    <!-- 根据 管理员ID 查询管理员信息，返回值通过 resultMap 指定封装到 pojo 的 Admin 类中 -->
+    <select id="selectAdminByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from admin
+        where admin_id = #{adminId,jdbcType=INTEGER}
+    </select>
+
+    <!-- 根据 用户ID 更新用户信息-->
+    <update id="updateAdminByPrimaryKey" parameterType="com.coding.pojo.Admin">
+        update admin
+    set admin_account = #{adminAccount,jdbcType=VARCHAR},
+      admin_password = #{adminPassword,jdbcType=VARCHAR},
+      admin_phone = #{adminPhone,jdbcType=VARCHAR},
+      admin_email = #{adminEmail,jdbcType=VARCHAR},
+      admin_register_time = #{adminRegisterTime,jdbcType=TIMESTAMP},
+      group_id = #{groupId,jdbcType=INTEGER}
+      <!--,
+      adm1 = #{adm1,jdbcType=VARCHAR},
+      adm2 = #{adm2,jdbcType=VARCHAR},
+      adm3 = #{adm3,jdbcType=VARCHAR},
+      adm4 = #{adm4,jdbcType=VARCHAR},
+      adm5 = #{adm5,jdbcType=VARCHAR},
+      adm6 = #{adm6,jdbcType=VARCHAR},
+      adm7 = #{adm7,jdbcType=VARCHAR},
+      adm8 = #{adm8,jdbcType=VARCHAR},
+      adm9 = #{adm9,jdbcType=VARCHAR},
+      adm10 = #{adm10,jdbcType=VARCHAR}-->
+    where admin_id = #{adminId,jdbcType=INTEGER}
+    </update>
+
+    <!-- 查询所有用户信息， 返回值通过 resultMap 指定封装到 pojo 的 Admin 类中，通过集合返回 -->
+    <select id="selectAdminAll" resultMap="BaseResultMap">
+        select *
+        from admin
+    </select>
+
+
+</mapper>

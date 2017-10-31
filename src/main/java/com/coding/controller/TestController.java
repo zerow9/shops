@@ -1,6 +1,6 @@
 package com.coding.controller;
 
-import com.coding.Iservice.IAdminServiceI;
+import com.coding.Iservice.IAdminService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TestController {
 
     @Autowired
-    private IAdminServiceI adminService;
+    private IAdminService adminService;
 
     @RequestMapping("test")
     public void getItemTypes() throws Exception {
