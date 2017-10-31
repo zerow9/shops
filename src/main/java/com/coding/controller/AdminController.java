@@ -1,6 +1,6 @@
 package com.coding.controller;
 
-import com.coding.Iservice.IAdminServiceI;
+import com.coding.Iservice.IAdminService;
 import com.coding.pojo.Address;
 import com.coding.pojo.Admin;
 import com.coding.pojo.Groups;
@@ -17,7 +17,7 @@ import java.util.List;
 public class AdminController {
 
     @Autowired
-    private IAdminServiceI adminService;
+    private IAdminService adminService;
 
     @RequestMapping(value = "deleteUserByPrimaryKey", method = {RequestMethod.GET,RequestMethod.POST})
     public String deleteUserByPrimaryKey(String userUuid) throws Exception {

@@ -1,7 +1,6 @@
 package com.coding.serviceImpl;
 
-import com.coding.Iservice.IAdminServiceI;
-import com.coding.mapper.AddressMapper;
+import com.coding.Iservice.IAdminService;
 import com.coding.mapper.AdminMapper;
 import com.coding.mapper.GroupsMapper;
 import com.coding.mapper.UserMapper;
@@ -15,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class IAdminServiceImplI extends IUserServiceImpl implements IAdminServiceI {
+public class ImplIAdminService extends IUserServiceImpl implements IAdminService {
     @Autowired
     private UserMapper userMapper;
     @Autowired
@@ -32,6 +31,8 @@ public class IAdminServiceImplI extends IUserServiceImpl implements IAdminServic
     }
 
     public List<User> selectUserAll()  throws Exception{
+        List<User> users = userMapper.selectUserAll();
+        except(users,"用户列表查询为空");
         return userMapper.selectUserAll();
     }
 
@@ -50,7 +51,9 @@ public class IAdminServiceImplI extends IUserServiceImpl implements IAdminServic
 
     public Groups selectGroupsByPrimaryKey(Integer groupId)  throws Exception{
         if (groupId != 0) {
-            return groupsMapper.selectGroupsByPrimaryKey(groupId);
+            Groups groups = groupsMapper.selectGroupsByPrimaryKey(groupId);
+            except(groups,"分组查询为空");
+            return groups;
         }
         return null;
     }
@@ -61,7 +64,9 @@ public class IAdminServiceImplI extends IUserServiceImpl implements IAdminServic
     }
 
     public List<Groups> selectGroupsAll() throws Exception {
-        return groupsMapper.selectGroupsAll();
+        List<Groups> groups = groupsMapper.selectGroupsAll();
+        except(groups,"分组列表查询为空");
+        return groups;
     }
 
     /*------------------------------------------管理员表------------------------------------------------------------------*/
@@ -80,7 +85,9 @@ public class IAdminServiceImplI extends IUserServiceImpl implements IAdminServic
 
     public Admin selectAdminByPrimaryKey(Integer adminId)  throws Exception{
         if (adminId != 0) {
-            return adminMapper.selectAdminByPrimaryKey(adminId);
+            Admin admin = adminMapper.selectAdminByPrimaryKey(adminId);
+            except(admin,"管理员查询为空");
+            return admin;
         }
         return null;
     }
@@ -91,7 +98,9 @@ public class IAdminServiceImplI extends IUserServiceImpl implements IAdminServic
     }
 
     public List<Admin> selectAdminAll() throws Exception {
-        return adminMapper.selectAdminAll();
+        List<Admin> admins = adminMapper.selectAdminAll();
+        except(admins,"管理员列表查询为空");
+        return admins;
     }
 
 }
