@@ -66,5 +66,12 @@
         FROM address
     </select>
 
+    <!--根据用户ID查询地址信息-->
+    <select id="selectAddressByUserID" parameterType="java.lang.String" resultType="com.coding.pojo.Address">
+        SELECT
+        <include refid="Base_Column_List" />
+        from address
+        where user_uuid = #{user_uuid}
+    </select>
 
 </mapper>

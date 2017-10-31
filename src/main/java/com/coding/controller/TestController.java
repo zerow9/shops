@@ -14,14 +14,12 @@ public class TestController {
     @Autowired
     private UserService userService;
 
-    // 商品分类
-    //itemtypes表示最终将方法返回值放在request中的key
-    @ModelAttribute("insertuser")
+    @RequestMapping("test")
     public void getItemTypes() throws Exception {
-        User user = new User();
-        user.setUserPhone("123456");
-        user.setUserPassword("123456");
-        userService.insertUser(user);
+       // User user = new User();
+       // user.setUserPhone("123456");
+       // user.setUserPassword("123456");
+       // userService.insertUser(user);
         System.out.println("OK");
     }
 }

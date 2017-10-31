@@ -44,11 +44,9 @@
 								<button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
 								<button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
 								<button class="layui-btn" data-type="isAll">验证是否全选</button>
-								<button class="layui-btn" data-type="addUser">添加用户方法1</button>
-								<button class="layui-btn" data-type="addUser1">添加用户方法2</button>
 							</div>
 							<div class="table-responsive">
-								<table class="layui-table" lay-data="{width: 892, height:332, url:'userlist.json', page:true, id:'idTest'}" lay-filter="demo">
+								<table class="layui-table" lay-data="{width: 892, height:332, url:'user.json', page:true, id:'idTest'}" lay-filter="demo">
 									<thead>
 										<tr>
 											<th lay-data="{checkbox:true, fixed: true}"></th>
@@ -81,7 +79,6 @@
 		<script>
 			layui.use('table', function() {
 				var table = layui.table;
-				
 				//监听表格复选框选择
 				table.on('checkbox(demo)', function(obj) {
 					console.log(obj)
@@ -116,36 +113,7 @@
 						isAll: function() { //验证是否全选
 							var checkStatus = table.checkStatus('idTest');
 							layer.msg(checkStatus.isAll ? '全选' : '未全选')
-						},
-						addUser:function(){
-							layer.open({
-							    type: 2,
-							    title:"添加用户",
-							    shadeClose: true,
-							    btn:['添加用户','取消'],
-					  			shade: 0.8,
-					  			area: ['80%', '90%'],
-							    content: 'adduser.html', //注意，如果str是object，那么需要字符拼接。
-							    yes:function(){
-							    	layer.msg("添加成功！");
-							    	layer.closeAll();
-							    },
-							    btn1:function(){
-							    	layer.close();
-							    }
-							  });
-						},
-						addUser1:function(){
-							layer.open({
-								type: 2,
-							    title:"添加用户",
-							    shadeClose: true,
-					  			shade: 0.8,
-					  			area: ['80%', '90%'],
-							    content: 'adduser.html', //注意，如果str是object，那么需要字符拼接。
-							});
 						}
-						
 					};
 
 				$('.demoTable .layui-btn').on('click', function() {

@@ -48,9 +48,6 @@
 		<ul class="nav navbar-nav navbar-right" style="margin-right: 25px;">
 			<li><a href="#"><span class="badge" style="background: #1B6D85;">欢迎  <%=SecurityUtils.getSubject().getPrincipal()%></span></a> 
 			</li>
-			<li><a href="login.action"><span
-					class="glyphicon glyphicon-user">登陆</span> </a>
-			</li>
 			<li><a href="logout.action"><span
 					class="glyphicon glyphicon-off">注销</span> </a>
 			</li>
