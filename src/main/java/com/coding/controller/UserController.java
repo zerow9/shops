@@ -9,54 +9,52 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("User")
+@RequestMapping("user")
 public class UserController {
+    
     @Autowired
-    private IUserService IUserService;
+    private IUserService iUserService;
 
     @RequestMapping(value = "insertUser",method = {RequestMethod.GET,RequestMethod.POST})
     public String insertUser(User user) throws Exception {
-        IUserService.insertUser(user);
+        iUserService.insertUser(user);
         return "";
     }
 
     @RequestMapping(value = "selectUserByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
     public String selectUserByPrimaryKey(String userUuid) throws Exception {
-        User user = IUserService.selectUserByPrimaryKey(userUuid);
+        User user = iUserService.selectUserByPrimaryKey(userUuid);
         return "";
     }
     @RequestMapping(value = "updateUserByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
     public String updateUserByPrimaryKey(User user) throws Exception {
-        IUserService.updateUserByPrimaryKey(user);
+        iUserService.updateUserByPrimaryKey(user);
         return "";
     }
     @RequestMapping(value = "deleteAddressByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
     public String deleteAddressByPrimaryKey(Integer addressId) throws Exception {
-        IUserService.deleteAddressByPrimaryKey(addressId);
+        iUserService.deleteAddressByPrimaryKey(addressId);
         return "";
     }
     @RequestMapping(value = "insertAddress",method = {RequestMethod.GET,RequestMethod.POST})
     public String insertAddress(Address address) throws Exception {
-        IUserService.insertAddress(address);
+        iUserService.insertAddress(address);
         return "";
     }
     @RequestMapping(value = "selectAddressByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
     public String selectAddressByPrimaryKey(Integer addressId) throws Exception {
-        Address address = IUserService.selectAddressByPrimaryKey(addressId);
+        Address address = iUserService.selectAddressByPrimaryKey(addressId);
         return "";
     }
     @RequestMapping(value = "updateAddressByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
     public String updateAddressByPrimaryKey(Address address) throws Exception {
-        IUserService.updateAddressByPrimaryKey(address);
+        iUserService.updateAddressByPrimaryKey(address);
         return "";
     }
     @RequestMapping(value = "selectAddressAll",method = {RequestMethod.GET,RequestMethod.POST})
     public String selectAddressAll() throws Exception {
-        IUserService.selectAddressAll();
+        iUserService.selectAddressAll();
         return "";
     }
-
-
-
 
 }
