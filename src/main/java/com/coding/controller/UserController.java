@@ -99,13 +99,6 @@ public class UserController {
         return "";
     }
 
-    /**
-     * 查询所有信息
-     */
-    @RequestMapping("selectAddressAll")
-    public String selectAddressAll() throws Exception {
-        userService.selectAddressAll();
-        return "";
-    }
+
 
 }
