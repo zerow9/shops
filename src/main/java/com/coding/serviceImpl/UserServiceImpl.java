@@ -15,7 +15,7 @@ import java.util.List;
 @Service("userService")
 public class UserServiceImpl extends ErrorExc implements IUserService {
     @Autowired
-    private UserMapper userMapper;
+    private  UserMapper userMapper;
     @Autowired
     private AddressMapper addressMapper;
 
@@ -23,7 +23,12 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
 
     @Transactional
     public void insertUser(User user)  throws Exception{
+        try{
         userMapper.insertUser(user);
+        } catch (Exception e){
+            throw  new Exception("插入用戶信息时出錯");
+        }
+
     }
 
     public User selectUserByPrimaryKey(String userUuid) throws  Exception{
@@ -37,20 +42,33 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
 
     @Transactional
     public void updateUserByPrimaryKey(User user) throws Exception{
-        userMapper.updateUserByPrimaryKey(user);
+        try {
+            userMapper.updateUserByPrimaryKey(user);
+        }catch (Exception e){
+            throw new Exception("修改用户信息时出错");
+        }
+
     }
 
     /*------------------------------------------收获地址表表------------------------------------------------------------------*/
     @Transactional
     public void deleteAddressByPrimaryKey(Integer addressId) throws Exception{
         if (addressId != 0) {
-            addressMapper.deleteAddressByPrimaryKey(addressId);
+            try {
+                addressMapper.deleteAddressByPrimaryKey(addressId);
+            }catch (Exception e){
+                throw new Exception("删除收获地址时出错");
+            }
         }
     }
 
     @Transactional
     public void insertAddress(Address address) throws Exception{
-        addressMapper.insertAddress(address);
+        try {
+            addressMapper.insertAddress(address);
+        }catch (Exception e){
+            throw new Exception("插入收获地址时出错");
+        }
     }
 
     public Address selectAddressByPrimaryKey(Integer addressId) throws Exception {
@@ -64,12 +82,13 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
 
     @Transactional
     public void updateAddressByPrimaryKey(Address address) throws Exception {
-        addressMapper.updateAddressByPrimaryKey(address);
+        try {
+            addressMapper.updateAddressByPrimaryKey(address);
+        }catch (Exception e){
+            throw new Exception("修改收获地址时出错");
+        }
     }
 
-    public List<Address> selectAddressAll() throws Exception {
-        return addressMapper.selectAddressAll();
-    }
 
     public List<Address> selectAddressByUserID(String userUuid) throws Exception {
         if (!userUuid.equals("") && !userUuid.equals(null)) {
@@ -79,7 +98,4 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         }
         return null;
     }
-
-
-
 }
