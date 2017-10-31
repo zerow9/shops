@@ -10,7 +10,7 @@ public interface UserMapper {
      * 根据用户 ID 删除用户信息
      * @param userUuid  用户唯一ID
      */
-    public void deleteUserByPrimaryKey(String userUuid);
+    public void deleteUserByPrimaryKey(String userUuid) throws Exception;
 
     /**
      * 插入一条用户信息
@@ -23,17 +23,17 @@ public interface UserMapper {
      * @param userUuid  封装了用户信息的 User 对象
      * @return  封装了用户信息的 User 对象
      */
-    public User selectUserByPrimaryKey(@Param("userUuid") String userUuid);
+    public User selectUserByPrimaryKey(@Param("userUuid") String userUuid) throws Exception;
 
     /**
      * 根据用户唯一 ID 更新用户信息
      * @param user  封装了用户信息的 User 对象
      */
-    public void  updateUserByPrimaryKey(User user);
+    public void  updateUserByPrimaryKey(User user) throws Exception;
 
     /**
      * 查询所有用户信息
      * @return  返回一个装有 封装用户信息的 User 类的集合
      */
-    public List<User> selectUserAll();
+    public List<User> selectUserAll() throws Exception;
 }

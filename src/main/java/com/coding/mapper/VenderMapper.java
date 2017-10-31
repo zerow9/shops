@@ -5,14 +5,14 @@ import com.coding.pojo.Vender;
 import java.util.List;
 
 public interface VenderMapper {
-    public void deleteVenderByPrimaryKey(Integer venderId);
+    public void deleteVenderByPrimaryKey(Integer venderId) throws Exception;
 
-    public void insertVender(Vender vender);
+    public void insertVender(Vender vender) throws Exception;
 
-    public Vender selectVenderByPrimaryKey(Integer venderId);
+    public Vender selectVenderByPrimaryKey(Integer venderId) throws Exception;
 
-    public void updateVenderByPrimaryKey(Vender vender);
+    public void updateVenderByPrimaryKey(Vender vender) throws Exception;
 
-    public List<Vender> selectVenderAll();
+    public List<Vender> selectVenderAll() throws Exception;
 
 }
