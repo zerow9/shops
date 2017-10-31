@@ -27,10 +27,16 @@
     </sql>
     <!--根据用户唯一ID查询用户信息-->
     <select id="selectGroupsByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from groups
-        where group_id = #{groupId,jdbcType=INTEGER}
+        <if test="groupId!=null and groupId!=0">
+            select
+            <include refid="Base_Column_List" />
+            from groups
+            where group_id = #{groupId,jdbcType=INTEGER}
+        </if>
+        <if test="groupId==null or groupId==0">
+            select group10 from groups where group_id = 1
+        </if>
+
     </select>
 
     <!--根据 用户唯一ID 更新用户信息-->

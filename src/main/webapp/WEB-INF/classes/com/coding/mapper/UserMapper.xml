@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.coding.mapper.UserMapper" >
+<mapper namespace="com.coding.mapper.UserMapper">
 
     <!--根据用户ID 删除用户信息-->
     <delete id="deleteUserByPrimaryKey" parameterType="java.lang.String">
@@ -11,43 +11,43 @@
 
     <!--增加用户信息-->
     <insert id="insertUser" parameterType="com.coding.pojo.User">
-      insert into user (user_uuid, user_phone, user_nickname,
-      user_password, user_email, user_name,
-      user_age, user_sex, user_register_date_time,
-      user_score, user_group, user_land_number,
-      user_current_time, user_land_ip, user_address,
-      <!--user2, user3, user4,
-      user5, user6, user7,
-      user8, user9, user10, -->
-      user_healthy)
-    values (#{userUuid,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, #{userNickname,jdbcType=VARCHAR},
-      #{userPassword,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
-      #{userAge,jdbcType=INTEGER}, #{userSex,jdbcType=VARCHAR}, #{userRegisterDateTime,jdbcType=TIMESTAMP},
-      #{userScore,jdbcType=INTEGER}, #{userGroup,jdbcType=INTEGER}, #{userLandNumber,jdbcType=INTEGER},
-      #{userCurrentTime,jdbcType=TIMESTAMP}, #{userLandIp,jdbcType=VARCHAR}, #{userAddress,jdbcType=INTEGER},
-      <!--#{user2,jdbcType=VARCHAR}, #{user3,jdbcType=VARCHAR}, #{user4,jdbcType=VARCHAR},
-      #{user5,jdbcType=VARCHAR}, #{user6,jdbcType=VARCHAR}, #{user7,jdbcType=VARCHAR},
-      #{user8,jdbcType=VARCHAR}, #{user9,jdbcType=VARCHAR}, #{user10,jdbcType=VARCHAR},-->
-      #{userHealthy,jdbcType=LONGVARCHAR})
+        insert into user (user_uuid, user_phone, user_nickname,
+        user_password, user_email, user_name,
+        user_age, user_sex, user_register_date_time,
+        user_score, user_group, user_land_number,
+        user_current_time, user_land_ip, user_address,
+        <!--user2, user3, user4,
+        user5, user6, user7,
+        user8, user9, user10, -->
+        user_healthy)
+        values (#{userUuid,jdbcType=VARCHAR}, #{userPhone,jdbcType=VARCHAR}, #{userNickname,jdbcType=VARCHAR},
+        #{userPassword,jdbcType=VARCHAR}, #{userEmail,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+        #{userAge,jdbcType=INTEGER}, #{userSex,jdbcType=VARCHAR}, #{userRegisterDateTime,jdbcType=TIMESTAMP},
+        #{userScore,jdbcType=INTEGER}, #{userGroup,jdbcType=INTEGER}, #{userLandNumber,jdbcType=INTEGER},
+        #{userCurrentTime,jdbcType=TIMESTAMP}, #{userLandIp,jdbcType=VARCHAR}, #{userAddress,jdbcType=INTEGER},
+        <!--#{user2,jdbcType=VARCHAR}, #{user3,jdbcType=VARCHAR}, #{user4,jdbcType=VARCHAR},
+        #{user5,jdbcType=VARCHAR}, #{user6,jdbcType=VARCHAR}, #{user7,jdbcType=VARCHAR},
+        #{user8,jdbcType=VARCHAR}, #{user9,jdbcType=VARCHAR}, #{user10,jdbcType=VARCHAR},-->
+        #{userHealthy,jdbcType=LONGVARCHAR})
     </insert>
 
     <!--封装 User 类-->
-    <resultMap id="BaseResultMap" type="com.coding.pojo.User" >
-        <id column="user_uuid" property="userUuid" jdbcType="VARCHAR" />
-        <result column="user_phone" property="userPhone" jdbcType="VARCHAR" />
-        <result column="user_nickname" property="userNickname" jdbcType="VARCHAR" />
-        <result column="user_password" property="userPassword" jdbcType="VARCHAR" />
-        <result column="user_email" property="userEmail" jdbcType="VARCHAR" />
-        <result column="user_name" property="userName" jdbcType="VARCHAR" />
-        <result column="user_age" property="userAge" jdbcType="INTEGER" />
-        <result column="user_sex" property="userSex" jdbcType="VARCHAR" />
-        <result column="user_register_date_time" property="userRegisterDateTime" jdbcType="TIMESTAMP" />
-        <result column="user_score" property="userScore" jdbcType="INTEGER" />
-        <result column="user_group" property="userGroup" jdbcType="INTEGER" />
-        <result column="user_land_number" property="userLandNumber" jdbcType="INTEGER" />
-        <result column="user_current_time" property="userCurrentTime" jdbcType="TIMESTAMP" />
-        <result column="user_land_ip" property="userLandIp" jdbcType="VARCHAR" />
-        <result column="user_address" property="userAddress" jdbcType="INTEGER" />
+    <resultMap id="BaseResultMap" type="com.coding.pojo.User">
+        <id column="user_uuid" property="userUuid" jdbcType="VARCHAR"/>
+        <result column="user_phone" property="userPhone" jdbcType="VARCHAR"/>
+        <result column="user_nickname" property="userNickname" jdbcType="VARCHAR"/>
+        <result column="user_password" property="userPassword" jdbcType="VARCHAR"/>
+        <result column="user_email" property="userEmail" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="user_age" property="userAge" jdbcType="INTEGER"/>
+        <result column="user_sex" property="userSex" jdbcType="VARCHAR"/>
+        <result column="user_register_date_time" property="userRegisterDateTime" jdbcType="TIMESTAMP"/>
+        <result column="user_score" property="userScore" jdbcType="INTEGER"/>
+        <result column="user_group" property="userGroup" jdbcType="INTEGER"/>
+        <result column="user_land_number" property="userLandNumber" jdbcType="INTEGER"/>
+        <result column="user_current_time" property="userCurrentTime" jdbcType="TIMESTAMP"/>
+        <result column="user_land_ip" property="userLandIp" jdbcType="VARCHAR"/>
+        <result column="user_address" property="userAddress" jdbcType="INTEGER"/>
         <!--<result column="user2" property="user2" jdbcType="VARCHAR" />
         <result column="user3" property="user3" jdbcType="VARCHAR" />
         <result column="user4" property="user4" jdbcType="VARCHAR" />
@@ -59,63 +59,68 @@
         <result column="user10" property="user10" jdbcType="VARCHAR" />-->
     </resultMap>
     <!--封装 User 类中的大文本类型-->
-    <resultMap id="ResultMapWithBLOBs" type="com.coding.pojo.User" extends="BaseResultMap" >
-        <result column="user_healthy" property="userHealthy" jdbcType="LONGVARCHAR" />
+    <resultMap id="ResultMapWithBLOBs" type="com.coding.pojo.User" extends="BaseResultMap">
+        <result column="user_healthy" property="userHealthy" jdbcType="LONGVARCHAR"/>
     </resultMap>
-    <sql id="Base_Column_List" >
+    <sql id="Base_Column_List">
         user_uuid, user_phone, user_nickname, user_password, user_email, user_name, user_age,
         user_sex, user_register_date_time, user_score, user_group, user_land_number, user_current_time,
         user_land_ip, user_address
     </sql>
-    <sql id="Blob_Column_List" >
+    <sql id="Blob_Column_List">
         user_healthy
     </sql>
     <!--根据用户ID查询用户信息-->
     <select id="selectUserByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
-        select
-        <include refid="Base_Column_List" />
-        ,
-        <include refid="Blob_Column_List" />
-        from user
-        where user_uuid = #{userUuid,jdbcType=VARCHAR}
+        <if test="userUuid!=null and userUuid!=''">
+            select
+            <include refid="Base_Column_List"/>
+            ,
+            <include refid="Blob_Column_List"/>
+            from user
+            where user_uuid = #{userUuid,jdbcType=VARCHAR}
+        </if>
+        <if test="userUuid==null or userUuid==''">
+            select user10 from user where user_uuid = "1";
+        </if>
     </select>
 
     <!--根据用户ID更新用户信息-->
     <update id="updateUserByPrimaryKey" parameterType="com.coding.pojo.User">
-    update user
-    set user_phone = #{userPhone,jdbcType=VARCHAR},
-      user_nickname = #{userNickname,jdbcType=VARCHAR},
-      user_password = #{userPassword,jdbcType=VARCHAR},
-      user_email = #{userEmail,jdbcType=VARCHAR},
-      user_name = #{userName,jdbcType=VARCHAR},
-      user_age = #{userAge,jdbcType=INTEGER},
-      user_sex = #{userSex,jdbcType=VARCHAR},
-      user_register_date_time = #{userRegisterDateTime,jdbcType=TIMESTAMP},
-      user_score = #{userScore,jdbcType=INTEGER},
-      user_group = #{userGroup,jdbcType=INTEGER},
-      user_land_number = #{userLandNumber,jdbcType=INTEGER},
-      user_current_time = #{userCurrentTime,jdbcType=TIMESTAMP},
-      user_land_ip = #{userLandIp,jdbcType=VARCHAR},
-      user_address = #{userAddress,jdbcType=INTEGER},
-      <!--user2 = #{user2,jdbcType=VARCHAR},
-      user3 = #{user3,jdbcType=VARCHAR},
-      user4 = #{user4,jdbcType=VARCHAR},
-      user5 = #{user5,jdbcType=VARCHAR},
-      user6 = #{user6,jdbcType=VARCHAR},
-      user7 = #{user7,jdbcType=VARCHAR},
-      user8 = #{user8,jdbcType=VARCHAR},
-      user9 = #{user9,jdbcType=VARCHAR},
-      user10 = #{user10,jdbcType=VARCHAR},-->
-      user_healthy = #{userHealthy,jdbcType=LONGVARCHAR}
-    where user_uuid = #{userUuid,jdbcType=VARCHAR}
+        update user
+        set user_phone = #{userPhone,jdbcType=VARCHAR},
+        user_nickname = #{userNickname,jdbcType=VARCHAR},
+        user_password = #{userPassword,jdbcType=VARCHAR},
+        user_email = #{userEmail,jdbcType=VARCHAR},
+        user_name = #{userName,jdbcType=VARCHAR},
+        user_age = #{userAge,jdbcType=INTEGER},
+        user_sex = #{userSex,jdbcType=VARCHAR},
+        user_register_date_time = #{userRegisterDateTime,jdbcType=TIMESTAMP},
+        user_score = #{userScore,jdbcType=INTEGER},
+        user_group = #{userGroup,jdbcType=INTEGER},
+        user_land_number = #{userLandNumber,jdbcType=INTEGER},
+        user_current_time = #{userCurrentTime,jdbcType=TIMESTAMP},
+        user_land_ip = #{userLandIp,jdbcType=VARCHAR},
+        user_address = #{userAddress,jdbcType=INTEGER},
+        <!--user2 = #{user2,jdbcType=VARCHAR},
+        user3 = #{user3,jdbcType=VARCHAR},
+        user4 = #{user4,jdbcType=VARCHAR},
+        user5 = #{user5,jdbcType=VARCHAR},
+        user6 = #{user6,jdbcType=VARCHAR},
+        user7 = #{user7,jdbcType=VARCHAR},
+        user8 = #{user8,jdbcType=VARCHAR},
+        user9 = #{user9,jdbcType=VARCHAR},
+        user10 = #{user10,jdbcType=VARCHAR},-->
+        user_healthy = #{userHealthy,jdbcType=LONGVARCHAR}
+        where user_uuid = #{userUuid,jdbcType=VARCHAR}
     </update>
 
     <!--查询所有用户信息-->
     <select id="selectUserAll" resultMap="ResultMapWithBLOBs">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         ,
-        <include refid="Blob_Column_List" />
+        <include refid="Blob_Column_List"/>
         from user
     </select>
 

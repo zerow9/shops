@@ -1,9 +1,11 @@
 package com.coding.serviceImpl;
 
 import com.coding.Iservice.IAdminService;
+import com.coding.mapper.AddressMapper;
 import com.coding.mapper.AdminMapper;
 import com.coding.mapper.GroupsMapper;
 import com.coding.mapper.UserMapper;
+import com.coding.pojo.Address;
 import com.coding.pojo.Admin;
 import com.coding.pojo.Groups;
 import com.coding.pojo.User;
@@ -18,6 +20,8 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     @Autowired
     private UserMapper userMapper;
     @Autowired
+    private AddressMapper addressMapper;
+    @Autowired
     private GroupsMapper groupsMapper;
     @Autowired
     private AdminMapper adminMapper;
@@ -26,7 +30,11 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     @Transactional
     public void deleteUserByPrimaryKey(String userUuid)  throws Exception{
         if (!userUuid.equals("") && !userUuid.equals(null)) {
-            userMapper.deleteUserByPrimaryKey(userUuid);
+            try {
+                userMapper.deleteUserByPrimaryKey(userUuid);
+            }catch (Exception e){
+                throw new Exception("删除用户信息时出错");
+            }
         }
     }
 
@@ -36,17 +44,33 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         return userMapper.selectUserAll();
     }
 
+    /*------------------------------------------收获地址表------------------------------------------------------------------*/
+    public List<Address> selectAddressAll() throws Exception {
+        try {
+            return addressMapper.selectAddressAll();
+        }catch (Exception e){
+            throw new Exception("查询全部收获地址表出错");
+        }
+    }
     /*------------------------------------------分组表------------------------------------------------------------------*/
     @Transactional
     public void deleteGroupsByPrimaryKey(Integer groupId)  throws Exception{
         if (groupId != 0) {
-            groupsMapper.deleteGroupsByPrimaryKey(groupId);
+            try {
+                groupsMapper.deleteGroupsByPrimaryKey(groupId);
+            }catch (Exception e){
+                throw new Exception("删除分组信息时出错");
+            }
         }
     }
 
     @Transactional
     public void insertGroups(Groups groups)  throws Exception{
-        groupsMapper.insertGroups(groups);
+        try {
+            groupsMapper.insertGroups(groups);
+        }catch (Exception e){
+            throw new Exception("插入分组信息时出错");
+        }
     }
 
     public Groups selectGroupsByPrimaryKey(Integer groupId)  throws Exception{
@@ -60,7 +84,11 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
 
     @Transactional
     public void updateGroupsByPrimaryKey(Groups groups) throws Exception {
-        groupsMapper.updateGroupsByPrimaryKey(groups);
+        try {
+            groupsMapper.updateGroupsByPrimaryKey(groups);
+        }catch (Exception e){
+            throw new Exception("修改分组信息时出错");
+        }
     }
 
     public List<Groups> selectGroupsAll() throws Exception {
@@ -73,14 +101,21 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     @Transactional
     public void deleteAdminByPrimaryKey(Integer adminId) throws Exception {
         if (adminId != 0) {
-            adminMapper.deleteAdminByPrimaryKey(adminId);
+            try {
+                adminMapper.deleteAdminByPrimaryKey(adminId);
+            }catch (Exception e){
+                throw new Exception("删除管理员时出错");
+            }
         }
     }
 
     @Transactional
     public void insertAdmin(Admin admin)  throws Exception{
-        adminMapper.insertAdmin(admin);
-
+        try {
+            adminMapper.insertAdmin(admin);
+        }catch (Exception e){
+            throw new Exception("插入管理员时出错");
+        }
     }
 
     public Admin selectAdminByPrimaryKey(Integer adminId)  throws Exception{
@@ -94,7 +129,11 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
 
     @Transactional
     public void updateAdminByPrimaryKey(Admin admin)  throws Exception{
-        adminMapper.updateAdminByPrimaryKey(admin);
+        try {
+            adminMapper.updateAdminByPrimaryKey(admin);
+        }catch (Exception e){
+            throw new Exception("修改管理员信息时出错");
+        }
     }
 
     public List<Admin> selectAdminAll() throws Exception {
