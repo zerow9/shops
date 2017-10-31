@@ -1,6 +1,7 @@
 package com.coding.serviceImpl;
 
 import com.coding.Iservice.IUserService;
+import com.coding.comomInterface.ErrorExc;
 import com.coding.mapper.AddressMapper;
 import com.coding.mapper.UserMapper;
 import com.coding.pojo.Address;
@@ -12,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class IUserServiceImpl implements IUserService {
+public class UserServiceImpl extends ErrorExc implements IUserService {
     @Autowired
     private UserMapper userMapper;
     @Autowired
@@ -26,10 +27,9 @@ public class IUserServiceImpl implements IUserService {
     }
 
     public User selectUserByPrimaryKey(String userUuid) throws  Exception{
-        if (userUuid.equals("") && userUuid.equals(null)) {
+        if (!userUuid.equals("") && !userUuid.equals(null)) {
             User user= userMapper.selectUserByPrimaryKey(userUuid);
-            if(user==null)
-                throw  new Exception("查询为空");
+             except(user,"用户查询为空");
             return user;
         }
         return null;
@@ -46,9 +46,6 @@ public class IUserServiceImpl implements IUserService {
         if (addressId != 0) {
             addressMapper.deleteAddressByPrimaryKey(addressId);
         }
-        else {
-            throw  new Exception("查询不到收获地址");
-        }
     }
 
     @Transactional
@@ -58,9 +55,10 @@ public class IUserServiceImpl implements IUserService {
 
     public Address selectAddressByPrimaryKey(Integer addressId) throws Exception {
         if (addressId != 0) {
-            return addressMapper.selectAddressByPrimaryKey(addressId);
+            Address address = addressMapper.selectAddressByPrimaryKey(addressId);
+            except(address,"收货地址查询为空");
+            return address;
         }
-        if(addressId==0) { throw  new Exception("查询不到收获地址");}
         return null;
     }
 
@@ -74,13 +72,14 @@ public class IUserServiceImpl implements IUserService {
     }
 
     public List<Address> selectAddressByUserID(String userUuid) throws Exception {
-        if (userUuid.equals("") && userUuid.equals(null)) {
+        if (!userUuid.equals("") && !userUuid.equals(null)) {
             List<Address> addresses = addressMapper.selectAddressByUserID(userUuid);
-            if(addresses==null)
-                throw  new Exception("该用户没有收获地址信息");
+            except(addresses,"用户收获地址查询为空");
             return addresses;
         }
         return null;
-
     }
+
+
+
 }

@@ -1,6 +1,8 @@
 package com.coding.mapper;
 
 import com.coding.pojo.Address;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface AddressMapper {
@@ -22,7 +24,7 @@ public interface AddressMapper {
      * @param addressId 地址唯一ID
      * @return 地址信息
      */
-    public Address selectAddressByPrimaryKey(Integer addressId);
+    public Address selectAddressByPrimaryKey(@Param("addressId") Integer addressId);
 
     /**
      * 根据地址唯一id更新地址信息
@@ -36,5 +38,10 @@ public interface AddressMapper {
      */
     public List<Address> selectAddressAll();
 
-    public List<Address> selectAddressByUserID(String uuid);
+    /**
+     *
+     * @param user_uuid 用户唯一ID
+     * @return  封装了地址信息的 Address 类的对象集合
+     */
+    public List<Address> selectAddressByUserID(@Param("user_uuid") String user_uuid);
 }

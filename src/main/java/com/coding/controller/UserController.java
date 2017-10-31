@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("admin")
+@RequestMapping("User")
 public class UserController {
     @Autowired
     private IUserService IUserService;
@@ -50,7 +50,7 @@ public class UserController {
         IUserService.updateAddressByPrimaryKey(address);
         return "";
     }
-    @RequestMapping(value = "updateAddressByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "selectAddressAll",method = {RequestMethod.GET,RequestMethod.POST})
     public String selectAddressAll() throws Exception {
         IUserService.selectAddressAll();
         return "";
