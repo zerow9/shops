@@ -6,13 +6,13 @@ import java.util.List;
 
 public interface ItemTypeMapper {
 
-    public void deleteItemTypeByPrimaryKey(Integer itemTypeId);
+    public void deleteItemTypeByPrimaryKey(Integer itemTypeId) throws Exception;
 
-    public void  insertItemType(ItemType itemType);
+    public void  insertItemType(ItemType itemType) throws Exception;
 
-    public ItemType selectItemTypeByPrimaryKey(Integer itemTypeId);
+    public ItemType selectItemTypeByPrimaryKey(Integer itemTypeId) throws Exception;
 
-    public void updateItemTypeByPrimaryKey(ItemType itemType);
+    public void updateItemTypeByPrimaryKey(ItemType itemType) throws Exception;
 
-    public List<ItemType> selectItemTypeAll();
+    public List<ItemType> selectItemTypeAll() throws Exception;
 }

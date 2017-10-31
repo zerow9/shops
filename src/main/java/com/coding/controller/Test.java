@@ -2,11 +2,13 @@ package com.coding.controller;
 import com.coding.mapper.*;
 
 import com.coding.pojo.Item;
+import com.coding.pojo.Repertory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class Test {
@@ -18,58 +20,33 @@ public class Test {
     @Autowired
     private ItemMapper itemMapper;
 
-    @RequestMapping("test")
-    public void insertItem(){
-       // List<Address> addressList = addressMapper.selectAddressByUserID("");
-        //System.out.println(addressList);
+    @Autowired
+    private RepertoryMapper repertoryMapper;
 
-//        Admin adminList = adminMapper.selectAdminByPrimaryKey(0);
-//        System.out.println(adminList);
-        Item item = new Item();
-        item.setItemCollectNumber(1);
-        item.setItemFormat("1");
-        item.setItemImages("1");
-        item.setItemIntroduce("1");
-        item.setItemMarketPrice(22.5);
-        item.setItemName("脚气膏");
-        item.setItemPrice(11.1);
-        item.setItemSaleNumber(11);
-        item.setItemScoreType(1);
-        item.setItemTypeId(2);
-        item.setScorePrice(600);
-        item.setRepertoryNumber(3);
-        item.setPostPrice(33.3);
-        item.setMakeDate(new Date());
-        item.setKeyWord("1");
-        item.setMakeVender(1);
-        item.setItemTypeThree(2);
-        item.setItemTypeTwo(3);
-        item.setItemTypeOne(4);
-        itemMapper.insertItem(item);
+    @RequestMapping("test")
+    public void insertRepertory()throws Exception {
+        Repertory repertory = new Repertory();
+        repertory.setItemId(1);
+        repertory.setItemMarketPrice(22.5);
+        repertory.setItemOriginalPrice(22.0);
+        repertory.setRepertoryNumber(3);
+        repertory.setRepertoryPuttime(new Date());
+        repertory.setShopId(33);
+        repertory.setUpdateTime(new Date());
+        repertory.setVenderId(1);
+        repertory.setRepertoryId(9);
+        repertoryMapper.updateRepertoryByPrimaryKey(repertory);
+//        repertoryMapper.insertRepertory(repertory);
+
+//        repertoryMapper.deleteRepertoryByPrimaryKey(1);
+
+//        Repertory repertory = repertoryMapper.selectRepertoryByPrimaryKey(0);
+//        System.out.println(repertory);
+//          List<Repertory> repertoryList = repertoryMapper.selectRepertoryAll();
+//          System.out.println(repertoryList);
+
+
+
     }
-    @RequestMapping("test1")
-    public void updateItemByPrimaryKey(){
-        Item item = new Item();
-        item.setItemCollectNumber(1);
-        item.setItemFormat("1");
-        item.setItemImages("1");
-        item.setItemIntroduce("1");
-        item.setItemMarketPrice(22.5);
-        item.setItemName("脱毛膏");
-        item.setItemPrice(11.1);
-        item.setItemSaleNumber(11);
-        item.setItemScoreType(1);
-        item.setItemTypeId(2);
-        item.setScorePrice(600);
-        item.setRepertoryNumber(3);
-        item.setPostPrice(33.3);
-        item.setMakeDate(new Date());
-        item.setKeyWord("1");
-        item.setMakeVender(1);
-        item.setItemTypeThree(2);
-        item.setItemTypeTwo(3);
-        item.setItemTypeOne(4);
-        item.setItemId(1);
-        itemMapper.updateItemByPrimaryKey(item);
-    }
+
 }

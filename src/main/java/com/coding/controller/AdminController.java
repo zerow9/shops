@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
-@Controller("admin")
+@Controller()
+@RequestMapping("/admin")
 public class AdminController extends UserController {
 
     @Autowired
@@ -182,4 +183,5 @@ public class AdminController extends UserController {
         List<Admin> admins = adminService.selectAdminAll();
         return "";
     }
+
 }
