@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.coding.mapper.ItemMapper">
+
+    <!--增加商品信息-->
+    <insert id="insertItem" parameterType="com.coding.pojo.Item">
+      insert into item (item_type_id, item_name,
+      item_price, item_market_price, item_score_type,
+      score_price, item_images, item_format,
+      item_type_one, item_type_two, item_type_three,
+      post_price, repertory_number, item_sale_number,
+      Item_collect_number, key_word, make_vender,
+      make_date,item_introduce
+      )
+    values (#{itemTypeId,jdbcType=INTEGER}, #{itemName,jdbcType=VARCHAR},
+      #{itemPrice,jdbcType=DOUBLE}, #{itemMarketPrice,jdbcType=DOUBLE}, #{itemScoreType,jdbcType=INTEGER},
+      #{scorePrice,jdbcType=INTEGER}, #{itemImages,jdbcType=VARCHAR}, #{itemFormat,jdbcType=VARCHAR},
+      #{itemTypeOne,jdbcType=INTEGER}, #{itemTypeTwo,jdbcType=INTEGER}, #{itemTypeThree,jdbcType=INTEGER},
+      #{postPrice,jdbcType=DOUBLE}, #{repertoryNumber,jdbcType=INTEGER}, #{itemSaleNumber,jdbcType=INTEGER},
+      #{itemCollectNumber,jdbcType=INTEGER}, #{keyWord,jdbcType=VARCHAR}, #{makeVender,jdbcType=INTEGER},
+      #{makeDate,jdbcType=TIMESTAMP}, #{itemIntroduce,jdbcType=LONGVARCHAR}
+      )
+    </insert>
+
+    <!--根据商品ID更新商品信息-->
+    <update id="updateItemByPrimaryKey" parameterType="com.coding.pojo.Item">
+        update item
+        set item_type_id = #{itemTypeId,jdbcType=INTEGER},
+        item_name = #{itemName,jdbcType=VARCHAR},
+        item_price = #{itemPrice,jdbcType=DOUBLE},
+        item_market_price = #{itemMarketPrice,jdbcType=DOUBLE},
+        item_score_type = #{itemScoreType,jdbcType=INTEGER},
+        score_price = #{scorePrice,jdbcType=INTEGER},
+        item_images = #{itemImages,jdbcType=VARCHAR},
+        item_format = #{itemFormat,jdbcType=VARCHAR},
+        item_type_one = #{itemTypeOne,jdbcType=INTEGER},
+        item_type_two = #{itemTypeTwo,jdbcType=INTEGER},
+        item_type_three = #{itemTypeThree,jdbcType=INTEGER},
+        post_price = #{postPrice,jdbcType=DOUBLE},
+        repertory_number = #{repertoryNumber,jdbcType=INTEGER},
+        item_sale_number = #{itemSaleNumber,jdbcType=INTEGER},
+        Item_collect_number = #{itemCollectNumber,jdbcType=INTEGER},
+        key_word = #{keyWord,jdbcType=VARCHAR},
+        make_vender = #{makeVender,jdbcType=INTEGER},
+        make_date = #{makeDate,jdbcType=TIMESTAMP}
+        <!--item1 = #{item1,jdbcType=VARCHAR},
+        item2 = #{item2,jdbcType=VARCHAR},
+        item3 = #{item3,jdbcType=VARCHAR},
+        item4 = #{item4,jdbcType=VARCHAR},
+        item5 = #{item5,jdbcType=VARCHAR},
+        item6 = #{item6,jdbcType=VARCHAR},
+        item7 = #{item7,jdbcType=VARCHAR},
+        item8 = #{item8,jdbcType=VARCHAR},
+        item9 = #{item9,jdbcType=VARCHAR},
+        item10 = #{item10,jdbcType=VARCHAR}-->
+        where item_id = #{itemId,jdbcType=INTEGER}
+    </update>
+
+    <!--将Item表中的字段封装到 Item 类中-->
+    <resultMap id="BaseResultMap" type="com.coding.pojo.Item">
+        <id column="item_id" jdbcType="INTEGER" property="itemId"/>
+        <result column="item_type_id" jdbcType="INTEGER" property="itemTypeId"/>
+        <result column="item_name" jdbcType="VARCHAR" property="itemName"/>
+        <result column="item_price" jdbcType="DOUBLE" property="itemPrice"/>
+        <result column="item_market_price" jdbcType="DOUBLE" property="itemMarketPrice"/>
+        <result column="item_score_type" jdbcType="INTEGER" property="itemScoreType"/>
+        <result column="score_price" jdbcType="INTEGER" property="scorePrice"/>
+        <result column="item_images" jdbcType="VARCHAR" property="itemImages"/>
+        <result column="item_format" jdbcType="VARCHAR" property="itemFormat"/>
+        <result column="item_type_one" jdbcType="INTEGER" property="itemTypeOne"/>
+        <result column="item_type_two" jdbcType="INTEGER" property="itemTypeTwo"/>
+        <result column="item_type_three" jdbcType="INTEGER" property="itemTypeThree"/>
+        <result column="post_price" jdbcType="DOUBLE" property="postPrice"/>
+        <result column="repertory_number" jdbcType="INTEGER" property="repertoryNumber"/>
+        <result column="item_sale_number" jdbcType="INTEGER" property="itemSaleNumber"/>
+        <result column="Item_collect_number" jdbcType="INTEGER" property="itemCollectNumber"/>
+        <result column="key_word" jdbcType="VARCHAR" property="keyWord"/>
+        <result column="make_vender" jdbcType="INTEGER" property="makeVender"/>
+        <result column="make_date" jdbcType="TIMESTAMP" property="makeDate"/>
+        <!--<result column="item1" jdbcType="VARCHAR" property="item1" />
+        <result column="item2" jdbcType="VARCHAR" property="item2" />
+        <result column="item3" jdbcType="VARCHAR" property="item3" />
+        <result column="item4" jdbcType="VARCHAR" property="item4" />
+        <result column="item5" jdbcType="VARCHAR" property="item5" />
+        <result column="item6" jdbcType="VARCHAR" property="item6" />
+        <result column="item7" jdbcType="VARCHAR" property="item7" />
+        <result column="item8" jdbcType="VARCHAR" property="item8" />
+        <result column="item9" jdbcType="VARCHAR" property="item9" />
+        <result column="item10" jdbcType="VARCHAR" property="item10" />-->
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.coding.pojo.Item">
+        <result column="item_introduce" jdbcType="LONGVARCHAR" property="itemIntroduce"/>
+    </resultMap>
+    <!--Item表的字段-->
+    <sql id="Base_Column_List">
+        item_id, item_type_id, item_name, item_price, item_market_price, item_score_type,
+        score_price, item_images, item_format, item_type_one, item_type_two, item_type_three,
+        post_price, repertory_number, item_sale_number, Item_collect_number, key_word, make_vender,
+        make_date
+    </sql>
+    <!--Item中的大文本字段-->
+    <sql id="Blob_Column_List">
+        item_introduce
+    </sql>
+    <!--根据商品的唯一ID查询商品信息-->
+    <select id="selectItemByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        <if test="itemId!=null and itemId!=''">
+            select
+            <include refid="Base_Column_List"/>
+            ,
+            <include refid="Blob_Column_List"/>
+            from item
+            where item_id = #{itemId,jdbcType=INTEGER}
+        </if>
+        <if test="itemId==null or itemId==''">
+            SELECT item10 from item where item_id = 1;
+        </if>
+    </select>
+
+    <!--根据商品id删除商品信息-->
+    <delete id="deleteItemByPrimaryKey" parameterType="java.lang.Integer">
+        delete from item
+    where item_id = #{itemId,jdbcType=INTEGER}
+    </delete>
+
+    <!--查询所有商品信息-->
+    <select id="selectItemAll" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from item
+    </select>
+</mapper>

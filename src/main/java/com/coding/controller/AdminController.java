@@ -6,6 +6,7 @@ import com.coding.pojo.Admin;
 import com.coding.pojo.Groups;
 import com.coding.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -14,125 +15,150 @@ import java.util.List;
 
 @Controller
 @RequestMapping("admin")
-public class AdminController {
+public class AdminController extends UserController {
 
     @Autowired
+    @Qualifier("adminService")
     private IAdminService adminService;
 
-    @RequestMapping(value = "deleteUserByPrimaryKey", method = {RequestMethod.GET,RequestMethod.POST})
-    public String deleteUserByPrimaryKey(String userUuid) throws Exception {
+    /**
+     *
+     * @param userUuid
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("deleteUserByPrimaryKey")
+    public String deleteUserByPrimaryKey(String userUuid)throws Exception{
         adminService.deleteUserByPrimaryKey(userUuid);
         return "";
     }
 
-    @RequestMapping(value = "insertUser",method = {RequestMethod.GET,RequestMethod.POST})
-    public String insertUser(User user) throws Exception {
-        adminService.insertUser(user);
-        return "";
-    }
-
-    @RequestMapping(value = "selectUserByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
-    public String selectUserByPrimaryKey(String userUuid) throws Exception {
-        User user = adminService.selectUserByPrimaryKey(userUuid);
-        return "";
-    }
-
-    @RequestMapping(value = "updateUserByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
-    public String updateUserByPrimaryKey(User user) throws Exception {
-        adminService.updateUserByPrimaryKey(user);
-        return "";
-    }
-
-    @RequestMapping(value = "selectUserAll",method = {RequestMethod.GET,RequestMethod.POST})
-    public String selectUserAll() throws Exception {
+    /**
+     * 查询所有用户信息
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("selectUserAll")
+    public String selectUserAll()throws Exception{
         List<User> users = adminService.selectUserAll();
         return "";
     }
 
-    @RequestMapping(value = "deleteGroupsByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
-    public String deleteGroupsByPrimaryKey(Integer groupId) throws Exception {
+    /**
+     * 通过分组ID删除分组信息
+     * @param groupId
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("deleteGroupsByPrimaryKey")
+    public String deleteGroupsByPrimaryKey(Integer groupId)throws Exception{
         adminService.deleteGroupsByPrimaryKey(groupId);
         return "";
     }
-    @RequestMapping(value = "insertGroups",method = {RequestMethod.GET,RequestMethod.POST})
-    public String insertGroups(Groups group) throws Exception {
-        adminService.insertGroups(group);
+
+    /**
+     * 插入分组信息
+     * @param groups
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("insertGroups")
+    public String insertGroups(Groups groups)throws Exception{
+        adminService.insertGroups(groups);
         return "";
     }
-    @RequestMapping(value = "selectGroupsByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
-    public String selectGroupsByPrimaryKey(Integer groupId) throws Exception {
+
+    /**
+     * 根据分组ID查询分组信息
+     * @param groupId
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("selectGroupsByPrimaryKey")
+    public String selectGroupsByPrimaryKey(Integer groupId)throws Exception{
         Groups groups = adminService.selectGroupsByPrimaryKey(groupId);
         return "";
     }
-    @RequestMapping(value = "updateGroupsByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
-    public String updateGroupsByPrimaryKey(Groups group) throws Exception {
-        adminService.updateGroupsByPrimaryKey(group);
-        return "";
-    }
-    @RequestMapping(value = "selectGroupAll",method = {RequestMethod.GET,RequestMethod.POST})
-    public String selectGroupAll() throws Exception {
-        List<Groups> groupss= adminService.selectGroupsAll();
+
+    /**
+     * 根据分组ID更新分组信息
+     * @param groups
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("updateGroupsByPrimaryKey")
+    public String updateGroupsByPrimaryKey(Groups groups)throws Exception{
+        adminService.updateGroupsByPrimaryKey(groups);
         return "";
     }
 
+    /**
+     * 查询所有分组信息
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("selectGroupsAll")
+    public String selectGroupsAll()throws Exception{
+        List<Groups>groups = adminService.selectGroupsAll();
+        return "";
+    }
 
-    @RequestMapping(value = "deleteAdminByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
-    public String deleteAdminByPrimaryKey(Integer adminId) throws Exception {
+    /**
+     * 根据管理员ID删除管理员
+     * @param adminId
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("deleteAdminByPrimaryKey")
+    public String deleteAdminByPrimaryKey(Integer adminId)throws Exception{
         adminService.deleteAdminByPrimaryKey(adminId);
         return "";
     }
-    @RequestMapping(value = "insertAdmin",method = {RequestMethod.GET,RequestMethod.POST})
-    public String insertAdmin(Admin admin) throws Exception {
+
+    /**
+     * 插入管理员信息
+     * @param admin
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("insertAdmin")
+    public String insertAdmin(Admin admin)throws Exception{
         adminService.insertAdmin(admin);
         return "";
     }
-    @RequestMapping(value = "selectAdminByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
-    public String selectAdminByPrimaryKey(Integer adminId) throws Exception {
+
+    /**
+     * 通过管理员唯一 ID 查询管理员信息
+     * @param adminId
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("selectAdminByPrimaryKey")
+    public String selectAdminByPrimaryKey(Integer adminId)throws Exception{
         Admin admin = adminService.selectAdminByPrimaryKey(adminId);
         return "";
     }
-    @RequestMapping(value = "updateAdminByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
-    public String updateAdminByPrimaryKey(Admin admin) throws Exception {
+
+    /**
+     * 通过管理员唯一 ID 修改管理员信息
+     * @param admin
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("updateAdminByPrimaryKey")
+    public String updateAdminByPrimaryKey(Admin admin)throws Exception{
         adminService.updateAdminByPrimaryKey(admin);
         return "";
     }
-    @RequestMapping(value = "selectAdminAll",method = {RequestMethod.GET,RequestMethod.POST})
-    public String selectAdminAll() throws Exception {
+
+    /**
+     * 查询所有管理员信息
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("selectAdminAll")
+    public String selectAdminAll()throws Exception{
         List<Admin> admins = adminService.selectAdminAll();
         return "";
     }
-
-    @RequestMapping(value = "deleteAddressByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
-    public String deleteAddressByPrimaryKey(Integer addressId) throws Exception {
-        adminService.deleteAddressByPrimaryKey(addressId);
-        return "";
-    }
-    @RequestMapping(value = "insertAddress",method = {RequestMethod.GET,RequestMethod.POST})
-    public String insertAddress(Address address) throws Exception {
-        adminService.insertAddress(address);
-        return "";
-    }
-    @RequestMapping(value = "selectAddressByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
-    public String selectAddressByPrimaryKey(Integer addressId) throws Exception {
-        Address address = adminService.selectAddressByPrimaryKey(addressId);
-        return "";
-    }
-    @RequestMapping(value = "updateAddressByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
-    public String updateAddressByPrimaryKey(Address address) throws Exception {
-        adminService.updateAddressByPrimaryKey(address);
-        return "";
-    }
-    @RequestMapping(value = "selectAddressAll",method = {RequestMethod.GET,RequestMethod.POST})
-    public String selectAddressAll() throws Exception {
-        List<Address> addresses = adminService.selectAddressAll();
-        return "";
-    }
-
-
-
-
-
-
-
-
 }
