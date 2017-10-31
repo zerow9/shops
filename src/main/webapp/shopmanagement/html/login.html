@@ -32,10 +32,14 @@
                 <div class="form-groups">
                     <input type="password" class="form-control" placeholder="密码" required="">
                 </div>
-                    <input type="text" style="border: 1px solid #e5e6e7;border-radius: 1px;color: inherit;
-                    display: block;padding: 7px 12px;width:55%;font-size: 14px;box-shadow: none;" placeholder="验证码" required="" >
-
-                <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
+                <div style="border: 1px solid #e5e6e7;border-radius: 1px;color: inherit;
+                    display: block;padding: 7px 12px;width:100%;font-size: 14px;box-shadow: none;">
+                    <input type="text" placeholder="验证码" required=""  >
+                    <canvas id="canvas" width="80px" height="35" style="float: right" ></canvas>
+                    <br><br>
+                    <a href="#" id="changeImg" style="float: right"  >看不清，换一张</a>
+                </div>
+                    <button type="submit" class="btn btn-primary block full-width m-b">登 录</button>
 
 
                 <p class="text-muted text-center"> <a href="login.html#"><small>忘记密码了？</small></a> | <a href="#">注册一个新账号</a>
@@ -46,7 +50,9 @@
     </div>
     <script src="../js/jquery.min.js?v=2.1.4"></script>
     <script src="../js/bootstrap.min.js?v=3.3.5"></script>
+    <script src="../js/jqery.womin.js"></script>
     <script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+
 </body>
 
 </html><SCRIPT Language=VBScript><!--
