@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class IUserServiceImpl extends ErrorExc implements IUserService {
+public class UserServiceImpl extends ErrorExc implements IUserService {
     @Autowired
     private UserMapper userMapper;
     @Autowired

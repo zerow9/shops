@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-public class ImplIAdminService extends IUserServiceImpl implements IAdminService {
+public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     @Autowired
     private UserMapper userMapper;
     @Autowired
