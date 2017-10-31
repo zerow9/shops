@@ -29,7 +29,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
 
     /*----------------------------------------用户表------------------------------------------------------------------*/
 
-    @Transactional
+    @Transactional(rollbackFor =Exception.class )
     public void insertUser(User user)  throws Exception{
         try{
         userMapper.insertUser(user);
@@ -48,7 +48,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         return null;
     }
 
-    @Transactional
+    @Transactional(rollbackFor =Exception.class )
     public void updateUserByPrimaryKey(User user) throws Exception{
         try {
             userMapper.updateUserByPrimaryKey(user);
@@ -59,7 +59,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     }
 
     /*------------------------------------------收获地址表表------------------------------------------------------------------*/
-    @Transactional
+    @Transactional(rollbackFor =Exception.class )
     public void deleteAddressByPrimaryKey(Integer addressId) throws Exception{
         if (addressId != 0) {
             try {
@@ -70,7 +70,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         }
     }
 
-    @Transactional
+    @Transactional(rollbackFor =Exception.class )
     public void insertAddress(Address address) throws Exception{
         try {
             addressMapper.insertAddress(address);
@@ -88,7 +88,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         return null;
     }
 
-    @Transactional
+    @Transactional(rollbackFor =Exception.class )
     public void updateAddressByPrimaryKey(Address address) throws Exception {
         try {
             addressMapper.updateAddressByPrimaryKey(address);

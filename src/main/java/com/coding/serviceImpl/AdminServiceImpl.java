@@ -30,7 +30,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
 
 
     /*------------------------------------------用户表------------------------------------------------------------------*/
-    @Transactional
+    @Transactional(rollbackFor =Exception.class )
     public void deleteUserByPrimaryKey(String userUuid)  throws Exception{
         if (!userUuid.equals("") ) {
             try {
@@ -56,7 +56,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         }
     }
     /*------------------------------------------分组表------------------------------------------------------------------*/
-    @Transactional
+    @Transactional(rollbackFor =Exception.class )
     public void deleteGroupsByPrimaryKey(Integer groupId)  throws Exception{
         if (groupId != 0) {
             try {
@@ -67,7 +67,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         }
     }
 
-    @Transactional
+    @Transactional(rollbackFor =Exception.class )
     public void insertGroups(Groups groups)  throws Exception{
         try {
             groupsMapper.insertGroups(groups);
@@ -85,7 +85,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         return null;
     }
 
-    @Transactional
+    @Transactional(rollbackFor =Exception.class )
     public void updateGroupsByPrimaryKey(Groups groups) throws Exception {
         try {
             groupsMapper.updateGroupsByPrimaryKey(groups);
@@ -101,7 +101,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     }
 
     /*------------------------------------------管理员表------------------------------------------------------------------*/
-    @Transactional
+    @Transactional(rollbackFor =Exception.class )
     public void deleteAdminByPrimaryKey(Integer adminId) throws Exception {
         if (adminId != 0) {
             try {
@@ -112,7 +112,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         }
     }
 
-    @Transactional
+    @Transactional(rollbackFor =Exception.class )
     public void insertAdmin(Admin admin)  throws Exception{
         try {
             adminMapper.insertAdmin(admin);
@@ -130,7 +130,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         return null;
     }
 
-    @Transactional
+    @Transactional(rollbackFor =Exception.class )
     public void updateAdminByPrimaryKey(Admin admin)  throws Exception{
         try {
             adminMapper.updateAdminByPrimaryKey(admin);
@@ -146,6 +146,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     }
 
     /*------------------------------------------商品类别表------------------------------------------------------------------*/
+    @Transactional(rollbackFor =Exception.class )
     public void deleteItemTypeByPrimaryKey(Integer itemTypeId) throws Exception {
         try {
             itemTypeMapper.deleteItemTypeByPrimaryKey(itemTypeId);
@@ -154,6 +155,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         }
     }
 
+    @Transactional(rollbackFor =Exception.class )
     public void insertItemType(ItemType itemType) throws Exception {
         try {
             itemTypeMapper.insertItemType(itemType);
@@ -162,6 +164,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         }
     }
 
+    @Transactional(rollbackFor =Exception.class )
     public void updateItemTypeByPrimaryKey(ItemType itemType) throws Exception {
         try {
             itemTypeMapper.updateItemTypeByPrimaryKey(itemType);
@@ -171,6 +174,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     }
 
     /*------------------------------------------商品表------------------------------------------------------------------*/
+    @Transactional(rollbackFor =Exception.class )
     public void deleteItemByPrimaryKey(Integer itemId) throws Exception {
         try {
             itemMapper.deleteItemByPrimaryKey(itemId);
@@ -179,6 +183,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         }
     }
 
+    @Transactional(rollbackFor =Exception.class )
     public void insertItem(Item item) throws Exception {
         try {
             itemMapper.insertItem(item);
@@ -187,6 +192,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         }
     }
 
+    @Transactional(rollbackFor =Exception.class )
     public void updateItemByPrimaryKey(Item item) throws Exception {
         try {
             itemMapper.updateItemByPrimaryKey(item);
@@ -195,6 +201,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         }
     }
     /*------------------------------------------库存表------------------------------------------------------------------*/
+    @Transactional(rollbackFor =Exception.class )
     public void deleteRepertoryByPrimaryKey(Integer repertoryId) throws Exception {
         try {
             repertoryMapper.deleteRepertoryByPrimaryKey(repertoryId);
@@ -203,6 +210,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         }
     }
 
+    @Transactional(rollbackFor =Exception.class )
     public void insertRepertory(Repertory repertory) throws Exception {
         try {
             repertoryMapper.insertRepertory(repertory);
@@ -219,6 +227,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         return null;
     }
 
+    @Transactional(rollbackFor =Exception.class )
     public void updateRepertoryByPrimaryKey(Repertory repertory) throws Exception {
         try {
             repertoryMapper.updateRepertoryByPrimaryKey(repertory);
@@ -233,6 +242,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         return repertories;
     }
     /*------------------------------------------厂家信息表------------------------------------------------------------------*/
+    @Transactional(rollbackFor =Exception.class )
     public void deleteVenderByPrimaryKey(Integer venderId) throws Exception {
         try {
             venderMapper.deleteVenderByPrimaryKey(venderId);
@@ -241,6 +251,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         }
     }
 
+    @Transactional(rollbackFor =Exception.class )
     public void insertVender(Vender vender) throws Exception {
         try {
             venderMapper.insertVender(vender);
@@ -258,6 +269,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         return null;
     }
 
+    @Transactional(rollbackFor =Exception.class )
     public void updateVenderByPrimaryKey(Vender vender) throws Exception {
         try {
             venderMapper.updateVenderByPrimaryKey(vender);
