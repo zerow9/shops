@@ -113,7 +113,7 @@
             where item_id = #{itemId,jdbcType=INTEGER}
         </if>
         <if test="itemId==null or itemId==''">
-            SELECT item10 from item where item_id = 1;
+            select item10 from item order by item_id DESC limit 1
         </if>
     </select>
 

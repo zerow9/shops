@@ -1,5 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.coding.mapper.ItemTypeMapper">
+    <!--根据商品类别ID删除商品类别信息-->
+    <delete id="deleteItemTypeByPrimaryKey" parameterType="java.lang.Integer">
+        delete from item_type
+    where type_id = #{typeId,jdbcType=INTEGER}
+    </delete>
 
+    <!--增加商品类别信息-->
+    <insert id="insertItemType" parameterType="com.coding.pojo.ItemType">
+        insert into item_type (type_id, type_name, father_type_id,
+      type_level, type_key_word
+      <!--, item_type1,
+      item_type2, item_type3, item_type4,
+      item_type5, item_type6, item_type7,
+      item_type8, item_type9, item_type10-->
+      ,
+      type_introduce)
+    values (#{typeId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{fatherTypeId,jdbcType=INTEGER},
+      #{typeLevel,jdbcType=INTEGER}, #{typeKeyWord,jdbcType=VARCHAR},<!-- #{itemType1,jdbcType=VARCHAR},
+      #{itemType2,jdbcType=VARCHAR}, #{itemType3,jdbcType=VARCHAR}, #{itemType4,jdbcType=VARCHAR},
+      #{itemType5,jdbcType=VARCHAR}, #{itemType6,jdbcType=VARCHAR}, #{itemType7,jdbcType=VARCHAR},
+      #{itemType8,jdbcType=VARCHAR}, #{itemType9,jdbcType=VARCHAR}, #{itemType10,jdbcType=VARCHAR},-->
+      #{typeIntroduce,jdbcType=LONGVARCHAR})
+    </insert>
+
+    <!--封装ItemTyoe类-->
+    <resultMap id="BaseResultMap" type="com.coding.pojo.ItemType">
+        <id column="type_id" jdbcType="INTEGER" property="typeId" />
+        <result column="type_name" jdbcType="VARCHAR" property="typeName" />
+        <result column="father_type_id" jdbcType="INTEGER" property="fatherTypeId" />
+        <result column="type_level" jdbcType="INTEGER" property="typeLevel" />
+        <result column="type_key_word" jdbcType="VARCHAR" property="typeKeyWord" />
+        <!--<result column="item_type1" jdbcType="VARCHAR" property="itemType1" />
+        <result column="item_type2" jdbcType="VARCHAR" property="itemType2" />
+        <result column="item_type3" jdbcType="VARCHAR" property="itemType3" />
+        <result column="item_type4" jdbcType="VARCHAR" property="itemType4" />
+        <result column="item_type5" jdbcType="VARCHAR" property="itemType5" />
+        <result column="item_type6" jdbcType="VARCHAR" property="itemType6" />
+        <result column="item_type7" jdbcType="VARCHAR" property="itemType7" />
+        <result column="item_type8" jdbcType="VARCHAR" property="itemType8" />
+        <result column="item_type9" jdbcType="VARCHAR" property="itemType9" />
+        <result column="item_type10" jdbcType="VARCHAR" property="itemType10" />-->
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.coding.pojo.ItemType">
+        <result column="type_introduce" jdbcType="LONGVARCHAR" property="typeIntroduce" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        type_id, type_name, father_type_id, type_level, type_key_word<!--, item_type1, item_type2,
+        item_type3, item_type4, item_type5, item_type6, item_type7, item_type8, item_type9,
+        item_type10-->
+    </sql>
+    <sql id="Blob_Column_List">
+        type_introduce
+    </sql>
+    <!--根据商品类别ID查询商品类别信息-->
+    <select id="selectItemTypeByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+       <if test="itemTypeId!=null and itemTypeId!=0" >
+           select
+           <include refid="Base_Column_List" />
+           ,
+           <include refid="Blob_Column_List" />
+           from item_type
+           where type_id = #{itemTypeId,jdbcType=INTEGER}
+       </if>
+        <!--如果传入的参数为 null 或者 0 那么就返回null-->
+      <if test="itemTypeId==null or itemTypeId==0">
+           select item_type10 from item_type order by type_id DESC limit 1
+       </if>
+    </select>
+
+    <!--根据商品类别ID更新商品类别信息-->
+    <update id="updateItemTypeByPrimaryKey" parameterType="com.coding.pojo.ItemType">
+        update item_type
+    set type_name = #{typeName,jdbcType=VARCHAR},
+      father_type_id = #{fatherTypeId,jdbcType=INTEGER},
+      type_level = #{typeLevel,jdbcType=INTEGER},
+      type_key_word = #{typeKeyWord,jdbcType=VARCHAR}
+      <!--,
+      item_type1 = #{itemType1,jdbcType=VARCHAR},
+      item_type2 = #{itemType2,jdbcType=VARCHAR},
+      item_type3 = #{itemType3,jdbcType=VARCHAR},
+      item_type4 = #{itemType4,jdbcType=VARCHAR},
+      item_type5 = #{itemType5,jdbcType=VARCHAR},
+      item_type6 = #{itemType6,jdbcType=VARCHAR},
+      item_type7 = #{itemType7,jdbcType=VARCHAR},
+      item_type8 = #{itemType8,jdbcType=VARCHAR},
+      item_type9 = #{itemType9,jdbcType=VARCHAR},
+      item_type10 = #{itemType10,jdbcType=VARCHAR}-->
+    where type_id = #{typeId,jdbcType=INTEGER}
+    </update>
+
+    <!--查询所有商品类品信息-->
+    <select id="selectItemTypeAll" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from item_type
+    </select>
 </mapper>

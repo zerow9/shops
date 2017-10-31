@@ -40,7 +40,7 @@ public interface ItemMapper {
     /**
      * 根据商品唯一ID更新商品信息
      *
-     * @param itemId 商品ID
+     * @param item 封装了商品信息的 Item 类对象
      */
-    public void updateItemByPrimaryKey(Item itemId) throws Exception;
+    public void updateItemByPrimaryKey(Item item) throws Exception;
 }

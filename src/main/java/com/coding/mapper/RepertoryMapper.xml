@@ -63,7 +63,7 @@
            where repertory_id = #{repertoryId,jdbcType=INTEGER}
        </if>
         <if test="repertoryId==null or repertoryId==0">
-            select repertory10 from repertory where repertory_id = 3
+            select repertory10 from repertory order by repertory_id DESC limit 1
         </if>
     </select>
 

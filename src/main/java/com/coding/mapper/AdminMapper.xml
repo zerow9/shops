@@ -44,7 +44,7 @@
             where admin_id = #{adminId,jdbcType=INTEGER}
         </if>
         <if test="adminId==null or adminId==0">
-            select adm10 from admin where admin_id = 1
+            select adm10 from admin order by admin_id DESC limit 1
         </if>
     </select>
 

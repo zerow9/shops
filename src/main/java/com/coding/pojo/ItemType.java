@@ -61,6 +61,8 @@ public class ItemType {
         this.typeIntroduce = typeIntroduce == null ? null : typeIntroduce.trim();
     }
 
+
+
     @Override
     public String toString() {
         return "ItemType{" +
