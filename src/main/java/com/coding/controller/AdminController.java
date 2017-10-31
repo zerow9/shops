@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @Controller
-@RequestMapping("user")
+@RequestMapping("admin")
 public class AdminController {
 
     @Autowired
@@ -96,7 +96,7 @@ public class AdminController {
         adminService.updateAdminByPrimaryKey(admin);
         return "";
     }
-    @RequestMapping(value = "selectGroupAll",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "selectAdminAll",method = {RequestMethod.GET,RequestMethod.POST})
     public String selectAdminAll() throws Exception {
         List<Admin> admins = adminService.selectAdminAll();
         return "";
