@@ -54,12 +54,6 @@ public interface IUserService {
     public void updateAddressByPrimaryKey(Address address) throws Exception;
 
     /**
-     * 返回所有地址信息
-     * @return
-     */
-    public List<Address> selectAddressAll() throws Exception;
-
-    /**
      * 根据用户uuid查询收获地址
      * @throws Exception
      */

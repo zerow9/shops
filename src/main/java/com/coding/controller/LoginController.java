@@ -27,8 +27,9 @@ public class LoginController {
         return "login";
     }
 
-    @RequestMapping("frist")
-    public String frist() {
-        return "index";
+    @RequestMapping("first")
+    public String first() {
+        return "admin/index";
     }
+
 }

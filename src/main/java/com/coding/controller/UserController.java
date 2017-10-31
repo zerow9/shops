@@ -4,56 +4,107 @@ import com.coding.Iservice.IUserService;
 import com.coding.pojo.Address;
 import com.coding.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@Controller
-@RequestMapping("user")
+import java.util.List;
+
+@Controller("user")
 public class UserController {
-    
+
     @Autowired
-    private IUserService iUserService;
+    @Qualifier("userService")
+    private IUserService userService;
 
-    @RequestMapping(value = "insertUser",method = {RequestMethod.GET,RequestMethod.POST})
+    /**
+     * 插入一条用户信息(注册)
+     *
+     * @param user 新用户
+     */
+    @RequestMapping("insertUser")
     public String insertUser(User user) throws Exception {
-        iUserService.insertUser(user);
+        userService.insertUser(user);
         return "";
     }
 
-    @RequestMapping(value = "selectUserByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
+    /**
+     * 根据用户ID查询用户信息(登录)
+     *
+     * @param userUuid 用户的uuid
+     */
+    @RequestMapping("selectUserByPrimaryKey")
     public String selectUserByPrimaryKey(String userUuid) throws Exception {
-        User user = iUserService.selectUserByPrimaryKey(userUuid);
+        User user = userService.selectUserByPrimaryKey(userUuid);
         return "";
     }
-    @RequestMapping(value = "updateUserByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
+
+    /**
+     * 根据用户ID修改用户信息
+     *
+     * @param user 更新用户的信息
+     */
+    @RequestMapping("updateUserByPrimaryKey")
     public String updateUserByPrimaryKey(User user) throws Exception {
-        iUserService.updateUserByPrimaryKey(user);
+        userService.updateUserByPrimaryKey(user);
         return "";
     }
-    @RequestMapping(value = "deleteAddressByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
+
+    /**
+     * 根据addressID删除地址信息
+     *
+     * @param addressId 地址id
+     */
+    @RequestMapping("deleteAddressByPrimaryKey")
     public String deleteAddressByPrimaryKey(Integer addressId) throws Exception {
-        iUserService.deleteAddressByPrimaryKey(addressId);
+        userService.deleteAddressByPrimaryKey(addressId);
         return "";
     }
-    @RequestMapping(value = "insertAddress",method = {RequestMethod.GET,RequestMethod.POST})
-    public String insertAddress(Address address) throws Exception {
-        iUserService.insertAddress(address);
+
+    /**
+     * 插入一条地址信息
+     *
+     * @param address 用户的收货地址
+     * @param uuid    用户的uuid
+     */
+    @RequestMapping("insertAddress")
+    public String insertAddress(Address address, String uuid) throws Exception {
+        address.setUserUuid(uuid);
+        userService.insertAddress(address);
         return "";
     }
-    @RequestMapping(value = "selectAddressByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
-    public String selectAddressByPrimaryKey(Integer addressId) throws Exception {
-        Address address = iUserService.selectAddressByPrimaryKey(addressId);
+
+    /**
+     * 查询用户地址
+     *
+     * @param userUuid 根据用户uuid查询用户地址
+     */
+    @RequestMapping("selectAddressByUserID")
+    public String selectAddressByUserID(String userUuid) throws Exception {
+        List<Address> address = userService.selectAddressByUserID(userUuid);
         return "";
     }
-    @RequestMapping(value = "updateAddressByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
-    public String updateAddressByPrimaryKey(Address address) throws Exception {
-        iUserService.updateAddressByPrimaryKey(address);
+
+    /**
+     * 根据用户ID更新地址信息
+     *
+     * @param address  更新地址信息
+     * @param userUuid 根据用户的uuid来更新地址
+     */
+    @RequestMapping("updateAddressByPrimaryKey")
+    public String updateAddressByPrimaryKey(Address address, String userUuid) throws Exception {
+        address.setUserUuid(userUuid);
+        userService.updateAddressByPrimaryKey(address);
         return "";
     }
-    @RequestMapping(value = "selectAddressAll",method = {RequestMethod.GET,RequestMethod.POST})
+
+    /**
+     * 查询所有信息
+     */
+    @RequestMapping("selectAddressAll")
     public String selectAddressAll() throws Exception {
-        iUserService.selectAddressAll();
+        userService.selectAddressAll();
         return "";
     }
 
