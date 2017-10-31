@@ -25,7 +25,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     /*------------------------------------------用户表------------------------------------------------------------------*/
     @Transactional
     public void deleteUserByPrimaryKey(String userUuid)  throws Exception{
-        if (userUuid.equals("") && userUuid.equals(null)) {
+        if (!userUuid.equals("") && !userUuid.equals(null)) {
             userMapper.deleteUserByPrimaryKey(userUuid);
         }
     }

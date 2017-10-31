@@ -27,7 +27,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     }
 
     public User selectUserByPrimaryKey(String userUuid) throws  Exception{
-        if (userUuid.equals("") && userUuid.equals(null)) {
+        if (!userUuid.equals("") && !userUuid.equals(null)) {
             User user= userMapper.selectUserByPrimaryKey(userUuid);
              except(user,"用户查询为空");
             return user;
@@ -72,7 +72,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     }
 
     public List<Address> selectAddressByUserID(String userUuid) throws Exception {
-        if (userUuid.equals("") && userUuid.equals(null)) {
+        if (!userUuid.equals("") && !userUuid.equals(null)) {
             List<Address> addresses = addressMapper.selectAddressByUserID(userUuid);
             except(addresses,"用户收获地址查询为空");
             return addresses;
