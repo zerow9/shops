@@ -11,9 +11,9 @@ function randomColor(min,max){
 }
 drawPic();
 document.getElementById("changeImg").onclick = function(e){
-    e.preventDefault();
+   e.preventDefault();
     drawPic();
-}
+};
 
 /**绘制验证码图片**/
 function drawPic(){
@@ -43,7 +43,7 @@ function drawPic(){
         ctx.rotate(-deg*Math.PI/180);
         ctx.translate(-x,-y);
     }
-    /**绘制干扰线**/
+    /**绘制干扰线
     for(var i=0; i<8; i++){
         ctx.strokeStyle = randomColor(40,180);
         ctx.beginPath();
@@ -51,11 +51,13 @@ function drawPic(){
         ctx.lineTo( randomNum(0,width), randomNum(0,height) );
         ctx.stroke();
     }
-    /**绘制干扰点**/
+     **/
+
+    /**绘制干扰点
     for(var i=0; i<100; i++){
         ctx.fillStyle = randomColor(0,255);
         ctx.beginPath();
         ctx.arc(randomNum(0,width),randomNum(0,height), 1, 0, 2*Math.PI);
         ctx.fill();
-    }
+    }**/
 }
