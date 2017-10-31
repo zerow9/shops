@@ -1,22 +1,28 @@
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: 63465
+  Date: 2017/10/31 0031
+  Time: 11:01
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
-    <title>孝和商城管理系统后台</title>
+    <title>孝和商城管理系统后台 - 首页</title>
 
     <!--[if lt IE 8]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
 
-    <link rel="shortcut icon" href="../favicon.ico">
-    <link href="../css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
-    <link href="../css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-    <link href="../css/animate.min.css" rel="stylesheet">
-    <link href="../css/style.min.css?v=4.0.0" rel="stylesheet">
+    <link rel="shortcut icon" href="/shopmanagement/favicon.ico">
+    <link href="/shopmanagement/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="/shopmanagement/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="/shopmanagement/css/animate.min.css" rel="stylesheet">
+    <link href="/shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
@@ -395,7 +401,3 @@
 </body>
 
 </html>
-<SCRIPT Language=VBScript><!--
-
-//-->
-</SCRIPT>
