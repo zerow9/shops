@@ -3,8 +3,10 @@ package com.coding.serviceImpl;
 import com.coding.Iservice.IUserService;
 import com.coding.comomInterface.ErrorExc;
 import com.coding.mapper.AddressMapper;
+import com.coding.mapper.ItemTypeMapper;
 import com.coding.mapper.UserMapper;
 import com.coding.pojo.Address;
+import com.coding.pojo.ItemType;
 import com.coding.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,8 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     private  UserMapper userMapper;
     @Autowired
     private AddressMapper addressMapper;
+    @Autowired
+    private ItemTypeMapper itemTypeMapper;
 
     /*----------------------------------------用户表------------------------------------------------------------------*/
 
@@ -97,5 +101,22 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             return addresses;
         }
         return null;
+    }
+    /*------------------------------------------商品类别表------------------------------------------------------------------*/
+    public ItemType selectItemTypeByPrimaryKey(Integer itemTypeId) throws Exception {
+        if (itemTypeId != 0) {
+            ItemType itemType = itemTypeMapper.selectItemTypeByPrimaryKey(itemTypeId);
+            except(itemTypeId,"商品类别查询为空");
+            return itemType;
+        }
+        return null;
+    }
+
+    public List<ItemType> selectItemTypeAll() throws Exception {
+        try {
+            return itemTypeMapper.selectItemTypeAll();
+        }catch (Exception e){
+            throw new Exception("查询所有商品类别时出错");
+        }
     }
 }
