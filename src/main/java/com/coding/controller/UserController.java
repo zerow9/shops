@@ -50,7 +50,7 @@ public class UserController {
         userService.updateAddressByPrimaryKey(address);
         return "";
     }
-    @RequestMapping(value = "updateAddressByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "selectAddressAll",method = {RequestMethod.GET,RequestMethod.POST})
     public String selectAddressAll(){
         userService.selectAddressAll();
         return "";

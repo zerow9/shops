@@ -96,7 +96,7 @@ public class AdminController {
         adminService.updateAdminByPrimaryKey(admin);
         return "";
     }
-    @RequestMapping(value = "selectGroupAll",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping(value = "selectAdminAll",method = {RequestMethod.GET,RequestMethod.POST})
     public String selectAdminAll(){
         List<Admin> admins = adminService.selectAdminAll();
         return "";
