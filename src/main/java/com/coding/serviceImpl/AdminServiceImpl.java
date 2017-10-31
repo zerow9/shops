@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service
+@Service("adminService")
 public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     @Autowired
     private UserMapper userMapper;
