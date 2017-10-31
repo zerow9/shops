@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
-@Controller("user")
+@Controller
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -43,7 +43,7 @@ public class UserController {
     /**
      * 根据用户ID修改用户信息
      *
-     * @param user 更新用户的信息
+             * @param user 更新用户的信息
      */
     @RequestMapping("updateUserByPrimaryKey")
     public String updateUserByPrimaryKey(User user) throws Exception {
@@ -98,7 +98,5 @@ public class UserController {
         userService.updateAddressByPrimaryKey(address);
         return "";
     }
-
-
 
 }

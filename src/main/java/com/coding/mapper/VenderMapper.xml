@@ -2,4 +2,104 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.coding.mapper.VenderMapper">
 
+    <!--根据厂家ID删除厂家信息-->
+    <delete id="deleteVenderByPrimaryKey" parameterType="java.lang.Integer">
+      delete from vender
+    where vender_id = #{venderId,jdbcType=INTEGER}
+    </delete>
+
+    <!--插入厂家信息-->
+    <insert id="insertVender" parameterType="com.coding.pojo.Vender">
+        insert into vender (vender_id, vender_name, vender_address,
+        vender_phone, ic_id, business_range,
+        vender_email, vender_post
+        <!--, vender1,
+        vender2, vender3, vender4,
+        vender5, vender6, vender7,
+        vender8, vender9, vender10-->
+        )
+        values (#{venderId,jdbcType=INTEGER}, #{venderName,jdbcType=VARCHAR}, #{venderAddress,jdbcType=VARCHAR},
+        #{venderPhone,jdbcType=VARCHAR}, #{icId,jdbcType=INTEGER}, #{businessRange,jdbcType=VARCHAR},
+        #{venderEmail,jdbcType=VARCHAR}, #{venderPost,jdbcType=INTEGER}
+        <!--, #{vender1,jdbcType=VARCHAR},
+      #{vender2,jdbcType=VARCHAR}, #{vender3,jdbcType=VARCHAR}, #{vender4,jdbcType=VARCHAR},
+      #{vender5,jdbcType=VARCHAR}, #{vender6,jdbcType=VARCHAR}, #{vender7,jdbcType=VARCHAR},
+      #{vender8,jdbcType=VARCHAR}, #{vender9,jdbcType=VARCHAR}, #{vender10,jdbcType=VARCHAR}-->
+        )
+    </insert>
+
+    <!--将Vender表的字段封装到 Vender 类中-->
+    <resultMap id="BaseResultMap" type="com.coding.pojo.Vender">
+        <id column="vender_id" jdbcType="INTEGER" property="venderId"/>
+        <result column="vender_name" jdbcType="VARCHAR" property="venderName"/>
+        <result column="vender_address" jdbcType="VARCHAR" property="venderAddress"/>
+        <result column="vender_phone" jdbcType="VARCHAR" property="venderPhone"/>
+        <result column="ic_id" jdbcType="INTEGER" property="icId"/>
+        <result column="business_range" jdbcType="VARCHAR" property="businessRange"/>
+        <result column="vender_email" jdbcType="VARCHAR" property="venderEmail"/>
+        <result column="vender_post" jdbcType="INTEGER" property="venderPost"/>
+        <!--<result column="vender1" jdbcType="VARCHAR" property="vender1" />
+        <result column="vender2" jdbcType="VARCHAR" property="vender2" />
+        <result column="vender3" jdbcType="VARCHAR" property="vender3" />
+        <result column="vender4" jdbcType="VARCHAR" property="vender4" />
+        <result column="vender5" jdbcType="VARCHAR" property="vender5" />
+        <result column="vender6" jdbcType="VARCHAR" property="vender6" />
+        <result column="vender7" jdbcType="VARCHAR" property="vender7" />
+        <result column="vender8" jdbcType="VARCHAR" property="vender8" />
+        <result column="vender9" jdbcType="VARCHAR" property="vender9" />
+        <result column="vender10" jdbcType="VARCHAR" property="vender10" />-->
+    </resultMap>
+    <!--vnder表中的字段-->
+    <sql id="Base_Column_List">
+        vender_id, vender_name, vender_address, vender_phone, ic_id, business_range, vender_email,
+        vender_post
+        <!--, vender1, vender2, vender3, vender4, vender5, vender6, vender7, vender8,
+        vender9, vender10-->
+    </sql>
+
+    <!--根据厂家ID查找厂家信息-->
+    <select id="selectVenderByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        <if test="venderId!=null and venderId!=0">
+            select
+            <include refid="Base_Column_List"/>
+            from vender
+            where vender_id = #{venderId,jdbcType=INTEGER}
+        </if>
+        <if test="venderId==null or venderId==0">
+            select vender10 from vender where vender_id = 3
+        </if>
+    </select>
+
+    <!--根据厂家ID更新厂家信息-->
+    <update id="updateVenderByPrimaryKey" parameterType="com.coding.pojo.Vender">
+        update vender
+    set vender_name = #{venderName,jdbcType=VARCHAR},
+      vender_address = #{venderAddress,jdbcType=VARCHAR},
+      vender_phone = #{venderPhone,jdbcType=VARCHAR},
+      ic_id = #{icId,jdbcType=INTEGER},
+      business_range = #{businessRange,jdbcType=VARCHAR},
+      vender_email = #{venderEmail,jdbcType=VARCHAR},
+      vender_post = #{venderPost,jdbcType=INTEGER}
+      <!--,
+      vender1 = #{vender1,jdbcType=VARCHAR},
+      vender2 = #{vender2,jdbcType=VARCHAR},
+      vender3 = #{vender3,jdbcType=VARCHAR},
+      vender4 = #{vender4,jdbcType=VARCHAR},
+      vender5 = #{vender5,jdbcType=VARCHAR},
+      vender6 = #{vender6,jdbcType=VARCHAR},
+      vender7 = #{vender7,jdbcType=VARCHAR},
+      vender8 = #{vender8,jdbcType=VARCHAR},
+      vender9 = #{vender9,jdbcType=VARCHAR},
+      vender10 = #{vender10,jdbcType=VARCHAR}-->
+    where vender_id = #{venderId,jdbcType=INTEGER}
+    </update>
+
+    <!--查询所有厂家信息-->
+    <select id="selectVenderAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from vender
+    </select>
+
+
 </mapper>
