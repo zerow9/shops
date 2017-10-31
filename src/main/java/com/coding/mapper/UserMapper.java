@@ -1,6 +1,7 @@
 package com.coding.mapper;
 
 import com.coding.pojo.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public interface UserMapper {
      * @param userUuid  封装了用户信息的 User 对象
      * @return  封装了用户信息的 User 对象
      */
-    public User selectUserByPrimaryKey(String userUuid);
+    public User selectUserByPrimaryKey(@Param("userUuid") String userUuid);
 
     /**
      * 根据用户唯一 ID 更新用户信息

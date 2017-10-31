@@ -1,6 +1,7 @@
 package com.coding.mapper;
 
 import com.coding.pojo.Groups;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,7 +23,7 @@ public interface GroupsMapper {
      * @param groupId 分组唯一ID
      * @return  封装了分组信息的 Groups 对象
      */
-    public Groups selectGroupsByPrimaryKey(Integer groupId);
+    public Groups selectGroupsByPrimaryKey(@Param("groupId") Integer groupId);
 
     /**
      * 根据分组 ID 更新分组信息

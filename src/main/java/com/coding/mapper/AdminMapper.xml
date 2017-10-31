@@ -37,10 +37,15 @@
     </sql>
     <!-- 根据 管理员ID 查询管理员信息，返回值通过 resultMap 指定封装到 pojo 的 Admin 类中 -->
     <select id="selectAdminByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
-        from admin
-        where admin_id = #{adminId,jdbcType=INTEGER}
+        <if test="adminId!=null and adminId!=0">
+            select
+            <include refid="Base_Column_List" />
+            from admin
+            where admin_id = #{adminId,jdbcType=INTEGER}
+        </if>
+        <if test="adminId==null or adminId==0">
+            select adm10 from admin where admin_id = 1
+        </if>
     </select>
 
     <!-- 根据 用户ID 更新用户信息-->

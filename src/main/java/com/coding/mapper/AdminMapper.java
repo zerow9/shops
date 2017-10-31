@@ -1,6 +1,7 @@
 package com.coding.mapper;
 
 import com.coding.pojo.Admin;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -23,12 +24,11 @@ public interface AdminMapper {
      * @param adminId   管理员唯一ID
      * @return
      */
-    public Admin selectAdminByPrimaryKey(Integer adminId);
+    public Admin selectAdminByPrimaryKey(@Param("adminId") Integer adminId);
 
     /**
      * 通过管理员唯一 ID 修改管理员信息
      * @param admin 封装了管理员信息的 Admin 对象
-     * @param adminId   管理员唯一ID
      */
     public void updateAdminByPrimaryKey(Admin admin);
 
