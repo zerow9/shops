@@ -54,11 +54,9 @@
                         </div>
                     </div>
                     <div class="layui-btn-group demoTable">
-                        <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
-                        <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
-                        <button class="layui-btn" data-type="isAll">验证是否全选</button>
-                        <button class="layui-btn" data-type="addUser">添加管理员方法1</button>
-                        <button class="layui-btn" data-type="addUser1">添加管理员方法2</button>
+                        <button class="layui-btn" data-type="getCheckLength">批量删除</button>
+                        <button class="layui-btn" data-type="isAll">全选</button>
+                        <button class="layui-btn" data-type="addUser">添加管理员</button>
                     </div>
                     <div class="table-responsive">
                         <table class="layui-table" lay-data="{width: 900, height:332, url:'<%=basePath%>admin/getAdminAll.action', page:true, id:'adminId'}" lay-filter="demo">

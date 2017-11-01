@@ -11,18 +11,10 @@ layui.use('table', function() {
         if(obj.event === 'detail') {
             layer.msg('ID：' + data.adminId + ' 的查看操作');
         } else if(obj.event === 'del') {
-            console.log("-------------------------"+data);
-            //自带的弹窗效果
-            /*
-            layer.confirm('真的删除行么', function(index) {
-                obj.del();
-                layer.close(index);
-            });
-            */
 
             //强势弹窗效果
             swal({
-                title: "您确定要删除'ID：="+data.adminId+"信息吗",
+                title: "您确定要删除"+data.adminId+"信息吗",
                 text: "删除后将无法恢复，请谨慎操作！",
                 type: "warning",
                 showCancelButton: true,
@@ -31,10 +23,10 @@ layui.use('table', function() {
                 closeOnConfirm: false
             }, function() {
                 //通 ajax 加载方法
-                $({
-
-                });
-                swal("删除成功！", "您已经永久删除了这条信息。", "success")
+               $.post('deleteAdminByPrimaryKey.action',{'adminId':data.adminId},function (index) {
+                   swal("删除成功！", "您已经永久删除了这条信息。", "success");
+                   window.location.reload();
+               });
             })
 
         } else if(obj.event === 'edit') {
@@ -59,34 +51,38 @@ layui.use('table', function() {
                 layer.msg(checkStatus.isAll ? '全选' : '未全选')
             },
             addUser:function(){
-                layer.open({
+                parent.layer.open({
                     type: 2,
-                    title:"添加用户",
+                    title:"添加管理员",
                     shadeClose: true,
-                    btn:['添加用户','取消'],
+                    btn:['添加管理员','取消'],
                     shade: 0.8,
                     maxmin: true,
                     area: ['80%', '90%'],
-                    content: 'adduser.html', //注意，如果str是object，那么需要字符拼接。
-                    yes:function(){
-                        layer.msg("添加成功！");
-                        layer.closeAll();
+                    content: 'admin/addAdmin.action', //注意，如果str是object，那么需要字符拼接。
+                    yes:function(index){
+                        var admin=parent.layer.getChildFrame('form',index);
+                        var s=admin.serialize();
+                        $.ajax({
+                            url:"insertAdmin.action?",
+                            data:s,
+                            type:"POST",
+                            success:function () {
+                                parent.layer.closeAll();
+                                swal({
+                                    title: "太帅了",
+                                    text: "数据插入成功！",
+                                    type: "success"
+                                })
+                            }
+                        });
                     },
                     btn1:function(){
                         layer.close();
                     }
                 });
-            },
-            addUser1:function(){
-                parent.layer.open({
-                    type: 2,
-                    title:"添加用户",
-                    shadeClose: true,
-                    shade: 0.8,
-                    area: ['80%', '90%'],
-                    content: 'adduser.html', //注意，如果str是object，那么需要字符拼接。
-                });
             }
+
 
         };
 

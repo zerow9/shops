@@ -65,13 +65,13 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">电话号码</label>
                                 <div class="layui-input-inline">
-                                    <input type="tel" name="user_phone" lay-verify="phone" autocomplete="off" placeholder="请输入电话号码" class="layui-input">
+                                    <input type="tel" name="adminPhone" lay-verify="phone" autocomplete="off" placeholder="请输入电话号码" class="layui-input">
                                 </div>
                             </div>
                             <div class="layui-inline">
                                 <label class="layui-form-label">验证邮箱</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" name="user_email" lay-verify="email" autocomplete="off" class="layui-input">
+                                    <input type="text" name="adminEmail" lay-verify="email" autocomplete="off" class="layui-input">
                                 </div>
                             </div>
                         </div>
@@ -79,21 +79,15 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">归属组</label>
                             <div class="layui-input-block">
-                                <select name="interest" lay-filter="aihao">
+                                <select name="groupId" lay-filter="aihao">
                                     <option value=""></option>
-                                    <option value="0" selected="">普通用户组</option>
+                                    <option value="3" selected="">普通用户组</option>
                                     <option value="1">商家组</option>
                                     <option value="2">管理员组</option>
                                 </select>
                             </div>
                         </div>
 
-                        <div class="layui-form-item">
-                            <div class="layui-input-block">
-                                <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
-                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
-                            </div>
-                        </div>
                     </form>
                 </div>
             </div>

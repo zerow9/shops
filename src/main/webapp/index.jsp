@@ -54,11 +54,24 @@
                 </li>
 
                 <!--主页设置-->
+
+
                 <li>
                     <a href="../../../shopmanagement/html/index_v1.html">
                         <i class="fa fa-home"></i>
                         <span class="nav-label">首页</span>
                     </a>
+                </li>
+
+                <li>
+                    <a href="javascript:;">
+                        <i class="fa fa-home"></i>
+                        <span class="nav-label">管理员管理</span>
+                    </a>
+                    <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="/admin/selectAdminAll.action">管理员列表</a>
+                        </li>
+                    </ul>
                 </li>
 
                 <!--用户管理-->
