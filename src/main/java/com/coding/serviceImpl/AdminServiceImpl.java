@@ -74,7 +74,6 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
 
     public List<User> selectUserByAgeRange(Integer former, Integer latter) throws Exception {
         except(former,latter);
-
         List<User> users = userMapper.selectUserByAgeRange(former,latter);
         if(users.isEmpty()) throw new Exception("根据年龄范围查询用户列表为空");
         return users;

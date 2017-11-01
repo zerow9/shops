@@ -37,7 +37,6 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             throw  new Exception("插入用戶信息时出錯");
         }
 
-
     }
 
     public User selectUserByPrimaryKey(String userUuid) throws  Exception{
