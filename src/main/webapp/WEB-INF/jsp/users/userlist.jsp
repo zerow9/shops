@@ -70,7 +70,7 @@
                                 <th lay-data="{field:'userName', width:80}">用户名</th>
                                 <th lay-data="{field:'userSex', width:80, sort: true}">性别</th>
                                 <th lay-data="{field:'userAge', width:80}">年龄</th>
-                                <th lay-data="{field:'userRegisterDateTime', width:177}">注册日期</th>
+                                <th lay-data="{field:'dateToString', width:177}">注册日期</th>
                                 <th lay-data="{field:'userScore', width:80, sort: true}">积分</th>
                                 <th lay-data="{field:'userGroup', width:80}">分组</th>
                                 <th lay-data="{field:'wealth', width:135, sort: true}">财富</th>
