@@ -62,7 +62,7 @@
                         <button class="layui-btn" data-type="addUser1">添加用户方法2</button>
                     </div>
                     <div class="table-responsive">
-                        <table class="layui-table" lay-data="{width: 900, height:332, url:'<%=basePath%>admin/getUserJson.action', page:true, id:'idTest'}" lay-filter="demo">
+                        <table class="layui-table" lay-data="{width: 1200, height:400, url:'<%=basePath%>admin/getUserJson.action', page:true, id:'idTest'}" lay-filter="demo">
                             <thead>
                             <tr>
                                 <th lay-data="{checkbox:true, fixed: true}"></th>

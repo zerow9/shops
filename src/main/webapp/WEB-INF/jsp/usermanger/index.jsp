@@ -69,11 +69,11 @@
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="userlist.html">用户列表</a>
+                        <li><a class="J_menuItem" href="/shopmanagement/html/userlist.html">用户列表</a>
                         </li>
-                        <li><a class="J_menuItem" href="user_group_list.html">用户组</a>
+                        <li><a class="J_menuItem" href="/shopmanagement/html/user_group_list.html">用户组</a>
                         </li>
-                        <li><a class="J_menuItem" href="complaints_list.html">投诉管理</a>
+                        <li><a class="J_menuItem" href="/shopmanagement/html/complaints_list.html">投诉管理</a>
                         </li>
                     </ul>
                 </li>
