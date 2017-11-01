@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import sun.plugin2.message.Serializer;
 
 
 import java.text.SimpleDateFormat;
@@ -121,9 +122,9 @@ public class AdminController extends UserController {
      * @return 删除成功后跳过的页面
      */
     @RequestMapping("deleteAdminByPrimaryKey")
-    public String deleteAdminByPrimaryKey(Integer adminId) throws Exception {
+    public boolean deleteAdminByPrimaryKey(Integer adminId) throws Exception {
         adminService.deleteAdminByPrimaryKey(adminId);
-        return "";
+        return true;
     }
 
     /**
@@ -134,11 +135,11 @@ public class AdminController extends UserController {
      * @throws Exception 插入数据为空
      */
     @RequestMapping("insertAdmin")
-    public String insertAdmin(Admin admin) throws Exception {
+    public void insertAdmin(Admin admin) throws Exception {
         if (admin == null)
             throw new Exception("插入数据为空");
+        admin.setAdminRegisterTime(new Date());
         adminService.insertAdmin(admin);
-        return "";
     }
 
     /**
@@ -221,5 +222,14 @@ public class AdminController extends UserController {
         jsonUser.setMsg("");
         JSONObject result= JSONObject.fromObject(jsonUser);
         return result.toString();
+    }
+
+    /**
+     *
+     * @return
+     */
+    @RequestMapping("addAdmin")
+    public String addAdmin(){
+        return "admins/addadmin";
     }
 }
