@@ -16,6 +16,7 @@ public class JSONAdmin extends JSONTemplet {
         return data;
     }
 
+
     public void setData(List<Admin> data) {
         this.data = data;
     }

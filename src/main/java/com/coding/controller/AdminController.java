@@ -27,7 +27,6 @@ public class AdminController extends UserController {
     @Qualifier("adminService")
     private IAdminService adminService;
 
-
     /**
      * 根据用户uuid删除用户
      *
@@ -215,8 +214,6 @@ public class AdminController extends UserController {
 
         //将 JSON 模板转化为 JSON 对象
         JSONObject jsonObject=JSONObject.fromObject(jsonAdmin);
-
-        System.out.println(jsonObject);
 
         return jsonObject.toString();
     }
