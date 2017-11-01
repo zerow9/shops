@@ -83,7 +83,7 @@ layui.use('table', function() {
                     shadeClose: true,
                     shade: 0.8,
                     area: ['80%', '90%'],
-                    content: 'adduser.html', //注意，如果str是object，那么需要字符拼接。
+                    content: 'adduser.html' //注意，如果str是object，那么需要字符拼接。
                 });
             }
 
