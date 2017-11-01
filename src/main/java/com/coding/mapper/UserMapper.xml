@@ -164,10 +164,13 @@
         where user_age between #{former} and #{latter};
     </select>
 
-    <delete id="deleteUsersByUuidList" parameterType="java.lang.String">
+    <!--根据用户ID批量删除用户信息-->
+    <delete id="deleteUsersByUuidArray" parameterType="java.lang.String">
         delete from user where user_uuid IN
-        <foreach collection="user_uuidList" item="user" open="(" separator="," close=")">
+        <foreach collection="user_uuidArray" item="user" open="(" separator="," close=")">
             #{user}
         </foreach>
     </delete>
+
+
 </mapper>
