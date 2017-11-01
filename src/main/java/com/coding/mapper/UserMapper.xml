@@ -81,7 +81,7 @@
             where user_uuid = #{userUuid,jdbcType=VARCHAR}
         </if>
         <if test="userUuid==null or userUuid==''">
-            select user10 from user where user_uuid = "1";
+            select user10 from user order by user_uuid DESC limit 1
         </if>
     </select>
 

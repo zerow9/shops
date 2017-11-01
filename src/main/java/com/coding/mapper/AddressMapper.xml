@@ -28,7 +28,7 @@
     <!-- 根据用户 ID 查询用户信息, 返回用户信息(增删 冗余字段 只需修改 sql 片段) -->
     <select id="selectAddressByPrimaryKey" parameterType="java.lang.Integer" resultType="com.coding.pojo.Address">
         <if test="addressId==null or addressId==0">
-            SELECT add10 FROM address WHERE address_id =2
+            select add10 from address order by address_id DESC limit 1
         </if>
         <if test="addressId!=null and addressId!=0">
             SELECT

@@ -7,25 +7,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("user")
+@RequestMapping("/user")
 public class UserController {
-    
+
     @Autowired
     @Qualifier("userService")
     private IUserService userService;
 
     /**
      * 插入一条用户信息(注册)
-     * @param user
-     * @return
-     * @throws Exception
+     *
+     * @param user 新用户
      */
-    @RequestMapping(value = "insertUser",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping("insertUser")
     public String insertUser(User user) throws Exception {
         userService.insertUser(user);
         return "";
@@ -33,11 +31,10 @@ public class UserController {
 
     /**
      * 根据用户ID查询用户信息(登录)
-     * @param userUuid
-     * @return
-     * @throws Exception
+     *
+     * @param userUuid 用户的uuid
      */
-    @RequestMapping(value = "selectUserByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping("selectUserByPrimaryKey")
     public String selectUserByPrimaryKey(String userUuid) throws Exception {
         User user = userService.selectUserByPrimaryKey(userUuid);
         return "";
@@ -45,11 +42,10 @@ public class UserController {
 
     /**
      * 根据用户ID修改用户信息
-     * @param user
-     * @return
-     * @throws Exception
+     *
+             * @param user 更新用户的信息
      */
-    @RequestMapping(value = "updateUserByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping("updateUserByPrimaryKey")
     public String updateUserByPrimaryKey(User user) throws Exception {
         userService.updateUserByPrimaryKey(user);
         return "";
@@ -57,11 +53,10 @@ public class UserController {
 
     /**
      * 根据addressID删除地址信息
-     * @param addressId
-     * @return
-     * @throws Exception
+     *
+     * @param addressId 地址id
      */
-    @RequestMapping(value = "deleteAddressByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
+    @RequestMapping("deleteAddressByPrimaryKey")
     public String deleteAddressByPrimaryKey(Integer addressId) throws Exception {
         userService.deleteAddressByPrimaryKey(addressId);
         return "";
@@ -69,12 +64,12 @@ public class UserController {
 
     /**
      * 插入一条地址信息
-     * @param address
-     * @return
-     * @throws Exception
+     *
+     * @param address 用户的收货地址
+     * @param uuid    用户的uuid
      */
-    @RequestMapping(value = "insertAddress",method = {RequestMethod.GET,RequestMethod.POST})
-    public String insertAddress(Address address,String uuid) throws Exception {
+    @RequestMapping("insertAddress")
+    public String insertAddress(Address address, String uuid) throws Exception {
         address.setUserUuid(uuid);
         userService.insertAddress(address);
         return "";
@@ -82,37 +77,25 @@ public class UserController {
 
     /**
      * 查询用户地址
-     * @param userUuid
-     * @return
-     * @throws Exception
+     *
+     * @param userUuid 根据用户uuid查询用户地址
      */
-    @RequestMapping(value = "selectAddressByUserID",method = {RequestMethod.GET,RequestMethod.POST})
-    public String selectAddressByUserID(String userUuid ) throws Exception {
+    @RequestMapping("selectAddressByUserID")
+    public String selectAddressByUserID(String userUuid) throws Exception {
         List<Address> address = userService.selectAddressByUserID(userUuid);
         return "";
     }
 
     /**
      * 根据用户ID更新地址信息
-     * @param address
-     * @return
-     * @throws Exception
+     *
+     * @param address  更新地址信息
+     * @param userUuid 根据用户的uuid来更新地址
      */
-    @RequestMapping(value = "updateAddressByPrimaryKey",method = {RequestMethod.GET,RequestMethod.POST})
-    public String updateAddressByPrimaryKey(Address address,String userUuid) throws Exception {
+    @RequestMapping("updateAddressByPrimaryKey")
+    public String updateAddressByPrimaryKey(Address address, String userUuid) throws Exception {
         address.setUserUuid(userUuid);
         userService.updateAddressByPrimaryKey(address);
-        return "";
-    }
-
-    /**
-     * 查询所有信息
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping(value = "selectAddressAll",method = {RequestMethod.GET,RequestMethod.POST})
-    public String selectAddressAll() throws Exception {
-        userService.selectAddressAll();
         return "";
     }
 

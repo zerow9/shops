@@ -34,7 +34,7 @@
             where group_id = #{groupId,jdbcType=INTEGER}
         </if>
         <if test="groupId==null or groupId==0">
-            select group10 from groups where group_id = 1
+            select group10 from groups order by group_id DESC limit 1
         </if>
 
     </select>

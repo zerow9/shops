@@ -1,7 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.coding.mapper.RepertoryMapper">
+    <!--根据库存ID删除库存信息-->
+    <delete id="deleteRepertoryByPrimaryKey" parameterType="java.lang.Integer">
+        delete from repertory
+    where repertory_id = #{repertoryId,jdbcType=INTEGER}
+    </delete>
 
+    <!--增加库存信息-->
+    <insert id="insertRepertory" parameterType="com.coding.pojo.Repertory">
+        insert into repertory (repertory_id, item_id, item_market_price,
+        item_original_price, shop_id, repertory_number,
+        repertory_puttime, update_time, vender_id
+        <!--,
+        repertory1, repertory2, repertory3,
+        repertory4, repertory5, repertory6,
+        repertory7, repertory8, repertory9,
+        repertory10-->)
+        values (#{repertoryId,jdbcType=INTEGER}, #{itemId,jdbcType=INTEGER}, #{itemMarketPrice,jdbcType=DOUBLE},
+        #{itemOriginalPrice,jdbcType=DOUBLE}, #{shopId,jdbcType=INTEGER}, #{repertoryNumber,jdbcType=INTEGER},
+        #{repertoryPuttime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{venderId,jdbcType=INTEGER}
+        <!--,
+      #{repertory1,jdbcType=VARCHAR}, #{repertory2,jdbcType=VARCHAR}, #{repertory3,jdbcType=VARCHAR},
+      #{repertory4,jdbcType=VARCHAR}, #{repertory5,jdbcType=VARCHAR}, #{repertory6,jdbcType=VARCHAR},
+      #{repertory7,jdbcType=VARCHAR}, #{repertory8,jdbcType=VARCHAR}, #{repertory9,jdbcType=VARCHAR},
+      #{repertory10,jdbcType=VARCHAR}-->)
+    </insert>
 
+    <!--将库存信息封装到 Repertory 类中-->
+    <resultMap id="BaseResultMap" type="com.coding.pojo.Repertory">
+        <id column="repertory_id" jdbcType="INTEGER" property="repertoryId"/>
+        <result column="item_id" jdbcType="INTEGER" property="itemId"/>
+        <result column="item_market_price" jdbcType="DOUBLE" property="itemMarketPrice"/>
+        <result column="item_original_price" jdbcType="DOUBLE" property="itemOriginalPrice"/>
+        <result column="shop_id" jdbcType="INTEGER" property="shopId"/>
+        <result column="repertory_number" jdbcType="INTEGER" property="repertoryNumber"/>
+        <result column="repertory_puttime" jdbcType="TIMESTAMP" property="repertoryPuttime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="vender_id" jdbcType="INTEGER" property="venderId"/>
+        <!--<result column="repertory1" jdbcType="VARCHAR" property="repertory1" />
+        <result column="repertory2" jdbcType="VARCHAR" property="repertory2" />
+        <result column="repertory3" jdbcType="VARCHAR" property="repertory3" />
+        <result column="repertory4" jdbcType="VARCHAR" property="repertory4" />
+        <result column="repertory5" jdbcType="VARCHAR" property="repertory5" />
+        <result column="repertory6" jdbcType="VARCHAR" property="repertory6" />
+        <result column="repertory7" jdbcType="VARCHAR" property="repertory7" />
+        <result column="repertory8" jdbcType="VARCHAR" property="repertory8" />
+        <result column="repertory9" jdbcType="VARCHAR" property="repertory9" />
+        <result column="repertory10" jdbcType="VARCHAR" property="repertory10" />-->
+    </resultMap>
+    <!--Repertory表的字段-->
+    <sql id="Base_Column_List">
+        repertory_id, item_id, item_market_price, item_original_price, shop_id, repertory_number,
+        repertory_puttime, update_time, vender_id
+    </sql>
+    <!--根据库存id查看库存信息-->
+    <select id="selectRepertoryByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+       <if test="repertoryId!=null and repertoryId!=0">
+           select
+           <include refid="Base_Column_List"/>
+           from repertory
+           where repertory_id = #{repertoryId,jdbcType=INTEGER}
+       </if>
+        <if test="repertoryId==null or repertoryId==0">
+            select repertory10 from repertory order by repertory_id DESC limit 1
+        </if>
+    </select>
+
+    <!--根据库存ID更新库存信息-->
+    <update id="updateRepertoryByPrimaryKey" parameterType="com.coding.pojo.Repertory">
+         update repertory
+      set item_id = #{itemId,jdbcType=INTEGER},
+      item_market_price = #{itemMarketPrice,jdbcType=DOUBLE},
+      item_original_price = #{itemOriginalPrice,jdbcType=DOUBLE},
+      shop_id = #{shopId,jdbcType=INTEGER},
+      repertory_number = #{repertoryNumber,jdbcType=INTEGER},
+      repertory_puttime = #{repertoryPuttime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      vender_id = #{venderId,jdbcType=INTEGER}
+      <!--,
+      repertory1 = #{repertory1,jdbcType=VARCHAR},
+      repertory2 = #{repertory2,jdbcType=VARCHAR},
+      repertory3 = #{repertory3,jdbcType=VARCHAR},
+      repertory4 = #{repertory4,jdbcType=VARCHAR},
+      repertory5 = #{repertory5,jdbcType=VARCHAR},
+      repertory6 = #{repertory6,jdbcType=VARCHAR},
+      repertory7 = #{repertory7,jdbcType=VARCHAR},
+      repertory8 = #{repertory8,jdbcType=VARCHAR},
+      repertory9 = #{repertory9,jdbcType=VARCHAR},
+      repertory10 = #{repertory10,jdbcType=VARCHAR}-->
+    where repertory_id = #{repertoryId,jdbcType=INTEGER}
+    </update>
+
+    <!--查询所有库存信息-->
+    <select id="selectRepertoryAll" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from repertory
+    </select>
 
 </mapper>

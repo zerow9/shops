@@ -2,11 +2,15 @@ package com.coding.controller;
 import com.coding.mapper.*;
 
 import com.coding.pojo.Item;
+import com.coding.pojo.ItemType;
+import com.coding.pojo.Repertory;
+import com.coding.pojo.Vender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class Test {
@@ -18,58 +22,34 @@ public class Test {
     @Autowired
     private ItemMapper itemMapper;
 
-    @RequestMapping("test")
-    public void insertItem(){
-       // List<Address> addressList = addressMapper.selectAddressByUserID("");
-        //System.out.println(addressList);
+    @Autowired
+    private RepertoryMapper repertoryMapper;
 
-//        Admin adminList = adminMapper.selectAdminByPrimaryKey(0);
-//        System.out.println(adminList);
-        Item item = new Item();
-        item.setItemCollectNumber(1);
-        item.setItemFormat("1");
-        item.setItemImages("1");
-        item.setItemIntroduce("1");
-        item.setItemMarketPrice(22.5);
-        item.setItemName("脚气膏");
-        item.setItemPrice(11.1);
-        item.setItemSaleNumber(11);
-        item.setItemScoreType(1);
-        item.setItemTypeId(2);
-        item.setScorePrice(600);
-        item.setRepertoryNumber(3);
-        item.setPostPrice(33.3);
-        item.setMakeDate(new Date());
-        item.setKeyWord("1");
-        item.setMakeVender(1);
-        item.setItemTypeThree(2);
-        item.setItemTypeTwo(3);
-        item.setItemTypeOne(4);
-        itemMapper.insertItem(item);
+    @Autowired
+    private VenderMapper venderMapper;
+
+    @Autowired
+    private ItemTypeMapper itemTypeMapper;
+
+    @RequestMapping("test")
+    public void insertRepertory()throws Exception {
+//        ItemType itemType = new ItemType();
+//        itemType.setFatherTypeId(1);
+//        itemType.setTypeIntroduce("1");
+//        itemType.setTypeKeyWord("b");
+//        itemType.setTypeLevel(2);
+//        itemType.setTypeName("bb");
+//        itemType.setTypeId(1);
+//        itemTypeMapper.insertItemType(itemType);
+
+      //itemTypeMapper.deleteItemTypeByPrimaryKey(2);
+//        ItemType itemType = itemTypeMapper.selectItemTypeByPrimaryKey(null);
+//        System.out.println(itemType);
+
+//        itemTypeMapper.updateItemTypeByPrimaryKey(itemType);
+
+        List<ItemType> itemTypeList = itemTypeMapper.selectItemTypeAll();
+        System.out.println(itemTypeList);
     }
-    @RequestMapping("test1")
-    public void updateItemByPrimaryKey(){
-        Item item = new Item();
-        item.setItemCollectNumber(1);
-        item.setItemFormat("1");
-        item.setItemImages("1");
-        item.setItemIntroduce("1");
-        item.setItemMarketPrice(22.5);
-        item.setItemName("脱毛膏");
-        item.setItemPrice(11.1);
-        item.setItemSaleNumber(11);
-        item.setItemScoreType(1);
-        item.setItemTypeId(2);
-        item.setScorePrice(600);
-        item.setRepertoryNumber(3);
-        item.setPostPrice(33.3);
-        item.setMakeDate(new Date());
-        item.setKeyWord("1");
-        item.setMakeVender(1);
-        item.setItemTypeThree(2);
-        item.setItemTypeTwo(3);
-        item.setItemTypeOne(4);
-        item.setItemId(1);
-        itemMapper.updateItemByPrimaryKey(item);
-    }
+
 }

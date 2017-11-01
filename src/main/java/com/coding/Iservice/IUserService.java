@@ -2,7 +2,10 @@ package com.coding.Iservice;
 
 
 import com.coding.pojo.Address;
+import com.coding.pojo.Item;
+import com.coding.pojo.ItemType;
 import com.coding.pojo.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -58,4 +61,37 @@ public interface IUserService {
      * @throws Exception
      */
     public List<Address> selectAddressByUserID(String userUuid) throws  Exception;
+     /*------------------------------------------商品类别表------------------------------------------------------------------*/
+
+    /**
+     * 根据商品ID查询商品类别信息
+      * @param itemTypeId
+     * @return ItemType
+     * @throws Exception
+     */
+    public ItemType selectItemTypeByPrimaryKey(Integer itemTypeId) throws Exception;
+
+    /**
+     * 查询所有商品类别信息
+     * @return  List<ItemType>
+     * @throws Exception
+     */
+    public List<ItemType> selectItemTypeAll()throws Exception;
+
+
+ /*------------------------------------------商品表------------------------------------------------------------------*/
+    /**
+     * 根据商品唯一ID查询商品信息
+     *
+     * @param itemId 商品唯一ID
+     * @return 封装了商品信息的 Item 类对象
+     */
+    public Item selectItemByPrimaryKey(@Param("itemId") Integer itemId) throws Exception;
+
+    /**
+     * 查询所有商品信息
+     *
+     * @return 封装了商品信息的 Item 类对象
+     */
+    public List<Item> selectItemAll() throws Exception;
 }
