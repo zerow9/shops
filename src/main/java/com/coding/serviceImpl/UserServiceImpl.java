@@ -48,13 +48,14 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         return null;
     }
 
-    @Transactional(rollbackFor =Exception.class )
-    public int updateUserByPrimaryKey(User user) throws Exception{
+    @Transactional(rollbackFor =Exception.class)
+    public void updateUserByPrimaryKey(User user) throws Exception{
         try {
-           return userMapper.updateUserByPrimaryKey(user);
+            except(userMapper.updateUserByPrimaryKey(user));
         }catch (Exception e){
             throw new Exception("修改用户信息时出错");
         }
+
 
     }
 
@@ -63,7 +64,8 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     public void deleteAddressByPrimaryKey(Integer addressId) throws Exception{
         if (addressId != 0) {
             try {
-                addressMapper.deleteAddressByPrimaryKey(addressId);
+               except(addressMapper.deleteAddressByPrimaryKey(addressId));
+//                addressMapper.deleteAddressByPrimaryKey(addressId);
             }catch (Exception e){
                 throw new Exception("删除收获地址时出错");
             }
@@ -91,7 +93,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     @Transactional(rollbackFor =Exception.class )
     public void updateAddressByPrimaryKey(Address address) throws Exception {
         try {
-            addressMapper.updateAddressByPrimaryKey(address);
+            except(addressMapper.updateAddressByPrimaryKey(address));
         }catch (Exception e){
             throw new Exception("修改收获地址时出错");
         }
@@ -127,6 +129,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         if (itemId != 0){
             Item item = itemMapper.selectItemByPrimaryKey(itemId);
             except(item,"查询商品时为空");
+            return item;
         }
         return null;
     }
