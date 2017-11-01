@@ -53,20 +53,33 @@ public class AdminController extends UserController {
      */
     @RequestMapping("selectUserAll")
     public String selectUserAll(Model modelAndView) throws Exception {
+        return "usermanger/userlist";
+    }
+
+    /**
+     * 返回 JSON 的方法
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("getUserJson")
+    @ResponseBody
+    public String getUserAll() throws Exception {
+
+        //获取 USER 数据
         List<User> users = adminService.selectUserAll();
+
+        //调用模板
         JSONUser jsonUser=new JSONUser();
         jsonUser.setData(users);
         jsonUser.setCount(users.size());
         jsonUser.setCode("");
         jsonUser.setMsg("");
 
+        //调用 JSON 对象
         JSONObject result= JSONObject.fromObject(jsonUser);
-        modelAndView.addAttribute("message",result);
-        System.out.println("---------------------------------------------------");
-        System.out.println(result);
-        return "usermanger/index";
-    }
 
+        return result.toString();
+    }
 
     /**
      * 通过分组ID删除分组信息
