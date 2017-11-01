@@ -223,6 +223,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         if (repertoryId != 0){
             Repertory repertory = repertoryMapper.selectRepertoryByPrimaryKey(repertoryId);
             except(repertory,"查询库存信息为空");
+            return  repertory;
         }
         return null;
     }
@@ -266,6 +267,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         if(venderId != 0){
             Vender vender = venderMapper.selectVenderByPrimaryKey(venderId);
             except(vender,"查询厂家信息为空");
+            return vender;
         }
         return null;
     }
