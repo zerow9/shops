@@ -70,6 +70,14 @@ public interface UserMapper {
      */
     public List<User> selectUserByAgeRange(@Param("former") Integer former,@Param("latter") Integer latter)throws  Exception;
 
-    public int deleteUsersByUuidList(@Param("user_uuidList") List<String> user_uuidList)throws Exception;
+    /**
+     * 批量删除用户信息
+     * @param user_uuidArray 需删除用户ID集合
+     * @return  1 ：删除成功  0 ：删除失败
+     * @throws Exception
+     */
+    public int deleteUsersByUuidArray(@Param("user_uuidArray") String[] user_uuidArray)throws Exception;
+
+
 
 }

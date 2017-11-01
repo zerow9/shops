@@ -27,6 +27,7 @@ public interface ItemTypeMapper {
      * @return 封装了商品类别信息的 ItemType 类对象
      * @throws Exception
      */
+
     public ItemType selectItemTypeByPrimaryKey(@Param("itemTypeId") Integer itemTypeId) throws Exception;
 
     /**
