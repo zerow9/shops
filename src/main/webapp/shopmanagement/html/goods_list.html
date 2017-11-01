@@ -1,115 +1,112 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-    <title>商品编辑</title>
-    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
-    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
-
-    <link rel="shortcut icon" href="../favicon.ico">
-    <link href="../css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
-    <link href="../css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-
-    <!-- Data Tables -->
-    <link href="../css/plugins/dataTables/dataTables.bootstrap.css" rel="stylesheet">
-
-    <link href="../css/animate.min.css" rel="stylesheet">
-    <link href="../css/style.min.css?v=4.0.0" rel="stylesheet">
-    <base target="_blank">
-
+    <title>商品列表</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="../common/layui/css/layui.css" media="all">
 </head>
 
-<body class="gray-bg">
+<body>
 
-<div class="wrapper wrapper-content animated fadeInRight">
+<div style="margin-bottom: 5px;">
 
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="ibox float-e-margins">
-
-                <div class="ibox-content">
-
-                    <table class="table table-striped table-bordered table-hover dataTables-example">
-                        <thead>
-                        <tr>
-                            <th>商品编号</th>
-                            <th>商品名称</th>
-                            <th>价格（元）</th>
-                            <th>总库存</th>
-                            <th>销量</th>
-                            <th>上下架</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr class="gradeX">
-                            <td>1</td>
-                            <td>神仙药</td>
-                            <td>0</td>
-                            <td>10086</td>
-                            <td>0</td>
-                            <td>
-                                <a href="#">已上架</a>
-                            </td>
-                            <td>
-                                <a href="#">编辑</a>
-                                <a href="#">删除</a>
-                            </td>
-                        </tr>
-                        </tbody>
-                        <tfoot>
-                        <tr>
-                            <th>商品编号</th>
-                            <th>商品名称</th>
-                            <th>价格（元）</th>
-                            <th>总库存</th>
-                            <th>销量</th>
-                            <th>上下架</th>
-                            <th>操作</th>
-                        </tr>
-                        </tfoot>
-                    </table>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <!-- 示例-970 -->
+    <ins class="adsbygoogle" style="display:inline-block;width:970px;height:90px"
+         data-ad-client="ca-pub-6111334333458862" data-ad-slot="3820120620"></ins>
 
 </div>
 
-<script src="../js/jquery.min.js?v=2.1.4"></script>
-<script src="../js/bootstrap.min.js?v=3.3.5"></script>
-<script src="../js/plugins/jeditable/jquery.jeditable.js"></script>
-<script src="../js/plugins/dataTables/jquery.dataTables.js"></script>
-<script src="../js/plugins/dataTables/dataTables.bootstrap.js"></script>
-<script src="../js/content.min.js?v=1.0.0"></script>
-<script>
-    $(document).ready(function () {
-        $(".dataTables-example").dataTable();
-        var oTable = $("#editable").dataTable();
-        oTable.$("td").editable("../example_ajax.php", {
-            "callback": function (sValue, y) {
-                var aPos = oTable.fnGetPosition(this);
-                oTable.fnUpdate(sValue, aPos[0], aPos[1])
-            }, "submitdata": function (value, settings) {
-                return {"row_id": this.parentNode.getAttribute("id"), "column": oTable.fnGetPosition(this)[2]}
-            }, "width": "90%", "height": "100%"
-        })
-    });
+<div class="layui-btn-group demoTable">
+    <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
+    <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
+    <button class="layui-btn" data-type="isAll">验证是否全选</button>
+</div>
 
-    function fnClickAddRow() {
-        $("#editable").dataTable().fnAddData(["Custom row", "New row", "New row", "New row", "New row"])
-    };
+<table class="layui-table" lay-data="{width: 1000, height: 500, url:'goods_lists.json', page:true, id:'idTest'}"
+       lay-filter="goods_lists_table">
+    <thead>
+    <tr>
+        <th lay-data="{checkbox:true, fixed: true}"></th>
+        <th lay-data="{field:'goods_id', width:100, sort: true, fixed: true}">ID</th>
+        <th lay-data="{field:'goods_name', width:200}">商品名称</th>
+        <th lay-data="{field:'goods_price', width:100, sort: true}">价格</th>
+        <th lay-data="{field:'goods_sales', width:100, sort: true}">销量</th>
+        <th lay-data="{field:'goods_shelve', width:200, align:'center', fixed: 'right', toolbar: '#shelve_bar'}">上下架
+        </th>
+        <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#operate_bar'}">操作</th>
+    </tr>
+    </thead>
+</table>
+
+<script type="text/html" id="shelve_bar">
+    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="shelve_status" id="shelve_status_bar">已上架</a>
 </script>
 
-<script type="text/javascript" src="http://tajs.qq.com/stats?sId=9051096" charset="UTF-8"></script>
+<script type="text/html" id="operate_bar">
+    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+</script>
+
+
+<script src="../common/layui/layui.js" charset="utf-8"></script>
+<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
+<script>
+    layui.use('table', function () {
+        var table = layui.table;
+        //监听表格复选框选择
+        table.on('checkbox(goods_lists_table)', function (obj) {
+            console.log(obj)
+        });
+        //监听工具条
+        table.on('tool(goods_lists_table)', function (table_tool) {
+            var data = table_tool.data;
+            if (table_tool.event === 'detail') {
+                layer.msg('ID：' + data.goods_id + ' 的查看操作');
+            } else if (table_tool.event === 'del') {
+                layer.confirm('真的删除行么', function (index) {
+                    table_tool.del();
+                    layer.close(index);
+                });
+            } else if (table_tool.event === 'edit') {
+                layer.alert('编辑行：<br>' + JSON.stringify(data))
+            } else if (table_tool.event === 'shelve_status') {
+                layer.msg("商品：" + data.goods_name + " 已下架。");
+            }
+        });
+
+        table.on('edit(test)', function (obj) {
+
+        });
+
+//        复选框操作
+        var $ = layui.$, active = {
+            getCheckData: function () { //获取选中数据
+                var checkStatus = table.checkStatus('idTest')
+                    , data = checkStatus.data;
+                layer.alert(JSON.stringify(data));
+            }
+            , getCheckLength: function () { //获取选中数目
+                var checkStatus = table.checkStatus('idTest')
+                    , data = checkStatus.data;
+                layer.msg('选中了：' + data.length + ' 个');
+            }
+            , isAll: function () { //验证是否全选
+                var checkStatus = table.checkStatus('idTest');
+                layer.msg(checkStatus.isAll ? '全选' : '未全选')
+            }
+        };
+
+//        测试的顶部功能按钮
+        $('.demoTable .layui-btn').on('click', function () {
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+</script>
 
 </body>
-
 </html>
