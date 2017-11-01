@@ -5,3 +5,6 @@
 # 忽略项目编译文件及目录
 target/
 
+# 忽略数据库配置文件
+src/main/resource/mybatis/db.properties
+

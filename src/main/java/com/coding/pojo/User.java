@@ -33,7 +33,7 @@ public class User {
 
     private Integer userAddress;
 
-
+    private String dateToString;
     private String userHealthy;
 
     public String getUserUuid() {
@@ -164,6 +164,14 @@ public class User {
         this.userHealthy = userHealthy == null ? null : userHealthy.trim();
     }
 
+    public void setDateToString(String dateToString) {
+        this.dateToString = dateToString;
+    }
+
+    public String getDateToString() {
+        return dateToString;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -183,6 +191,7 @@ public class User {
                 ", userLandIp='" + userLandIp + '\'' +
                 ", userAddress=" + userAddress +
                 ", userHealthy='" + userHealthy + '\'' +
+                ", dateToString='" + dateToString + '\'' +
                 '}';
     }
 }
