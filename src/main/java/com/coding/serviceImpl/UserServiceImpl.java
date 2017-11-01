@@ -29,7 +29,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
 
     /*----------------------------------------用户表------------------------------------------------------------------*/
 
-    @Transactional
+    @Transactional(rollbackFor =Exception.class )
     public void insertUser(User user)  throws Exception{
         try{
         userMapper.insertUser(user);
@@ -48,7 +48,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         return null;
     }
 
-    @Transactional
+    @Transactional(rollbackFor =Exception.class )
     public void updateUserByPrimaryKey(User user) throws Exception{
         try {
             userMapper.updateUserByPrimaryKey(user);
@@ -59,7 +59,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     }
 
     /*------------------------------------------收获地址表表------------------------------------------------------------------*/
-    @Transactional
+    @Transactional(rollbackFor =Exception.class )
     public void deleteAddressByPrimaryKey(Integer addressId) throws Exception{
         if (addressId != 0) {
             try {
@@ -70,7 +70,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         }
     }
 
-    @Transactional
+    @Transactional(rollbackFor =Exception.class )
     public void insertAddress(Address address) throws Exception{
         try {
             addressMapper.insertAddress(address);
@@ -88,7 +88,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         return null;
     }
 
-    @Transactional
+    @Transactional(rollbackFor =Exception.class )
     public void updateAddressByPrimaryKey(Address address) throws Exception {
         try {
             addressMapper.updateAddressByPrimaryKey(address);
@@ -101,7 +101,8 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     public List<Address> selectAddressByUserID(String userUuid) throws Exception {
         if (!userUuid.equals("")) {
             List<Address> addresses = addressMapper.selectAddressByUserID(userUuid);
-            except(addresses,"用户收获地址查询为空");
+            if(addresses.isEmpty()) throw new Exception("用户收获地址查询为空");
+//            exceptlist((List<Object>) addresses,"用户收获地址查询为空");
             return addresses;
         }
         return null;
@@ -117,11 +118,9 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     }
 
     public List<ItemType> selectItemTypeAll() throws Exception {
-        try {
-            return itemTypeMapper.selectItemTypeAll();
-        }catch (Exception e){
-            throw new Exception("查询所有商品类别为空");
-        }
+            List<ItemType> itemTypes = itemTypeMapper.selectItemTypeAll();
+            if(itemTypes.isEmpty()) throw new Exception("查询所有商品类别为空");
+            return itemTypes;
     }
     /*------------------------------------------商品表------------------------------------------------------------------*/
     public Item selectItemByPrimaryKey(Integer itemId) throws Exception {
@@ -133,10 +132,8 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     }
 
     public List<Item> selectItemAll() throws Exception {
-        try {
-            return itemMapper.selectItemAll();
-        }catch (Exception e){
-            throw new Exception("查询商品列表为空");
-        }
+            List<Item> items = itemMapper.selectItemAll();
+            if(items.isEmpty()) throw new Exception("查询商品列表为空");
+            return items;
     }
 }
