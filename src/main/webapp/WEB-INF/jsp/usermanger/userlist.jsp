@@ -66,13 +66,13 @@
                             <thead>
                             <tr>
                                 <th lay-data="{checkbox:true, fixed: true}"></th>
-                                <th lay-data="{field:'id', width:80, sort: true, fixed: true}">ID</th>
-                                <th lay-data="{field:'username', width:80}">用户名</th>
-                                <th lay-data="{field:'sex', width:80, sort: true}">性别</th>
-                                <th lay-data="{field:'city', width:80}">城市</th>
-                                <th lay-data="{field:'sign', width:177}">签名</th>
-                                <th lay-data="{field:'experience', width:80, sort: true}">积分</th>
-                                <th lay-data="{field:'classify', width:80}">职业</th>
+                                <th lay-data="{field:'userUuid', width:80, sort: true, fixed: true}">ID</th>
+                                <th lay-data="{field:'userName', width:80}">用户名</th>
+                                <th lay-data="{field:'userSex', width:80, sort: true}">性别</th>
+                                <th lay-data="{field:'userAge', width:80}">年龄</th>
+                                <th lay-data="{field:'userRegisterDateTime', width:177}">注册日期</th>
+                                <th lay-data="{field:'userScore', width:80, sort: true}">积分</th>
+                                <th lay-data="{field:'userGroup', width:80}">分组</th>
                                 <th lay-data="{field:'wealth', width:135, sort: true}">财富</th>
                                 <th lay-data="{fixed: 'right', width:180, align:'center', toolbar: '#barDemo'}">操作</th>
                             </tr>
@@ -91,7 +91,7 @@
 </script>
 <script src="../../../shopmanagement/common/layui/layui.js" charset="utf-8" type="text/javascript"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../../../shopmanagement/html/userlist.js"></script>
+<script src="../../../js/userlist.js"></script>
 
 </body>
 
