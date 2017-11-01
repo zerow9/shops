@@ -104,5 +104,6 @@
     <orderEntry type="library" name="Maven: org.codehaus.woodstox:wstx-asl:3.2.7" level="project" />
     <orderEntry type="library" name="Maven: org.noggit:noggit:0.5" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:4.1.3.RELEASE" level="project" />
+    <orderEntry type="library" name="commons-beanutils" level="project" />
   </component>
 </module>

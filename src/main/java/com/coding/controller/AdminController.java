@@ -5,17 +5,17 @@ import com.coding.pojo.Address;
 import com.coding.pojo.Admin;
 import com.coding.pojo.Groups;
 import com.coding.pojo.User;
+import com.coding.pojo.templet.JSONAdmin;
 import com.coding.pojo.templet.JSONUser;
-import com.sun.org.apache.bcel.internal.generic.NEW;
-import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import java.util.List;
 
@@ -61,7 +61,7 @@ public class AdminController extends UserController {
         jsonUser.setCode("");
         jsonUser.setMsg("");
 
-        JSONObject result=JSONObject.fromObject(jsonUser);
+        JSONObject result= JSONObject.fromObject(jsonUser);
         modelAndView.addAttribute("message",result);
         System.out.println("---------------------------------------------------");
         System.out.println(result);
@@ -195,9 +195,32 @@ public class AdminController extends UserController {
      * @return 插入成功之后的页面
      */
     @RequestMapping("selectAdminAll")
-    public String selectAdminAll() throws Exception {
-        List<Admin> admins = adminService.selectAdminAll();
-        return "";
+    public String selectAdminAll(Model model) throws Exception {
+        return "usermanger/adminlist";
     }
+
+    @RequestMapping("getAdminAll")
+    @ResponseBody
+    public String getAdminAll() throws Exception {
+
+        //获取管理员列表
+        List<Admin> admins = adminService.selectAdminAll();
+
+        //创建 JSON 模板
+        JSONAdmin jsonAdmin=new JSONAdmin();
+        jsonAdmin.setCode("");
+        jsonAdmin.setMsg("");
+        jsonAdmin.setCount(admins.size());
+        jsonAdmin.setData(admins);
+
+        //将 JSON 模板转化为 JSON 对象
+        JSONObject jsonObject=JSONObject.fromObject(jsonAdmin);
+
+        System.out.println(jsonObject);
+
+        return jsonObject.toString();
+    }
+
+
 
 }

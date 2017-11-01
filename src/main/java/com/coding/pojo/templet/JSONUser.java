@@ -4,7 +4,9 @@ import com.coding.pojo.User;
 
 import java.util.List;
 
-//封装 User 为 JSON 对象
+/**
+ * 封装 User 为 JSON 对象
+ */
 public class JSONUser extends JSONTemplet{
 
     //User 列表
