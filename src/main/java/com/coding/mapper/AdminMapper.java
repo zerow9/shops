@@ -8,7 +8,7 @@ import java.util.List;
 public interface AdminMapper {
 
     /**
-     * 根据 用户唯一id删除用户信息
+     * 根据 用户唯一id删除用户信息 （admin）
      * @param adminId 管理员唯一ID
      */
     public int deleteAdminByPrimaryKey(Integer adminId)  throws Exception;
