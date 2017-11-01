@@ -8,6 +8,8 @@ import java.util.List;
 public interface IAdminService extends IUserService {
     /*------------------------------------------用户表------------------------------------------------------------------*/
     /**
+     *
+     *
      * 根据用户 ID 删除用户信息
      * @param userUuid
      */
