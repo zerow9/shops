@@ -130,6 +130,15 @@ public interface IAdminService extends IUserService {
      */
     public List<Admin> selectAdminAll() throws Exception;
 
+    /**
+     * 批量删除管理员信息
+     *
+     * @param adminIdArray 管理员ID数组
+     * @return 0:删除失败 1:删除成功
+     * @throws Exception
+     */
+    public void deleteAdminByAdminIdArray(@Param("adminIdArray") Integer[] adminIdArray) throws Exception;
+
      /*------------------------------------------商品类别表------------------------------------------------------------------*/
 
     /**

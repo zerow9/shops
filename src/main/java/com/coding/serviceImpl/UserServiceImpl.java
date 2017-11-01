@@ -139,4 +139,12 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             if(items.isEmpty()) throw new Exception("查询商品列表为空");
             return items;
     }
+
+    public List<Item> selectItemFuzzyByItemName(String fuzzyItemName) throws Exception {
+        return null;
+    }
+
+    public List<Item> selectItemByItemType(Integer itemTypeId) throws Exception {
+        return null;
+    }
 }

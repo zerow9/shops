@@ -187,6 +187,9 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         return admins;
     }
 
+    public void deleteAdminByAdminIdArray(Integer[] adminIdArray) throws Exception {
+    }
+
     /*------------------------------------------商品类别表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
     public void deleteItemTypeByPrimaryKey(Integer itemTypeId) throws Exception {

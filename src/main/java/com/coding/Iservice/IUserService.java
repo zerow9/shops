@@ -93,4 +93,20 @@ public interface IUserService {
      * @return 封装了商品信息的 Item 类对象
      */
     public List<Item> selectItemAll() throws Exception;
+
+    /**
+     * 根据商品名称模糊查找商品信息
+     *
+     * @param  fuzzyItemName 商品名称
+     * @return 通过正则表达式满足模糊匹配的商品信息
+     */
+    public List<Item> selectItemFuzzyByItemName(@Param("fuzzyItemName") String fuzzyItemName)throws Exception;
+
+    /**
+     * 根据商品类别查找商品信息
+     * @param itemTypeId 商品类别ID
+     * @return 满足查询条件的 Item 类对象集合
+     * @throws Exception
+     */
+    public List<Item> selectItemByItemType(@Param("itemTypeId") Integer itemTypeId)throws Exception;
 }
