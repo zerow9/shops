@@ -36,7 +36,6 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         } catch (Exception e){
             throw  new Exception("插入用戶信息时出錯");
         }
-
     }
 
     public User selectUserByPrimaryKey(String userUuid) throws  Exception{
@@ -44,6 +43,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             User user= userMapper.selectUserByPrimaryKey(userUuid);
              except(user,"用户查询为空");
             return user;
+
         }
         return null;
     }

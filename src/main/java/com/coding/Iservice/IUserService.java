@@ -78,7 +78,6 @@ public interface IUserService {
      */
     public List<ItemType> selectItemTypeAll()throws Exception;
 
-
  /*------------------------------------------商品表------------------------------------------------------------------*/
     /**
      * 根据商品唯一ID查询商品信息
@@ -86,7 +85,7 @@ public interface IUserService {
      * @param itemId 商品唯一ID
      * @return 封装了商品信息的 Item 类对象
      */
-    public Item selectItemByPrimaryKey(@Param("itemId") Integer itemId) throws Exception;
+    public Item selectItemByPrimaryKey(Integer itemId) throws Exception;
 
     /**
      * 查询所有商品信息
