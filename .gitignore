@@ -8,3 +8,5 @@ target/
 # 忽略数据库配置文件
 src/main/resource/mybatis/db.properties
 
+# 忽略测试文件
+/src/test/
