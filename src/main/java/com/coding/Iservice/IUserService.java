@@ -28,7 +28,7 @@ public interface IUserService {
      * 根据用户唯一 ID 更新用户信息、修改个人信息
      * @param user
      */
-    public int  updateUserByPrimaryKey(User user) throws Exception;
+    public void  updateUserByPrimaryKey(User user) throws Exception;
     /*------------------------------------------收获地址表------------------------------------------------------------------*/
     /**
      * 根据 addressId 删除地址信息

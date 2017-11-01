@@ -9,7 +9,7 @@
 
     <!--增加商品类别信息-->
     <insert id="insertItemType" parameterType="com.coding.pojo.ItemType">
-        insert into item_type (type_id, type_name, father_type_id,
+        insert into item_type (type_name, father_type_id,
       type_level, type_key_word
       <!--, item_type1,
       item_type2, item_type3, item_type4,
@@ -17,7 +17,7 @@
       item_type8, item_type9, item_type10-->
       ,
       type_introduce)
-    values (#{typeId,jdbcType=INTEGER}, #{typeName,jdbcType=VARCHAR}, #{fatherTypeId,jdbcType=INTEGER},
+    values (#{typeName,jdbcType=VARCHAR}, #{fatherTypeId,jdbcType=INTEGER},
       #{typeLevel,jdbcType=INTEGER}, #{typeKeyWord,jdbcType=VARCHAR},<!-- #{itemType1,jdbcType=VARCHAR},
       #{itemType2,jdbcType=VARCHAR}, #{itemType3,jdbcType=VARCHAR}, #{itemType4,jdbcType=VARCHAR},
       #{itemType5,jdbcType=VARCHAR}, #{itemType6,jdbcType=VARCHAR}, #{itemType7,jdbcType=VARCHAR},

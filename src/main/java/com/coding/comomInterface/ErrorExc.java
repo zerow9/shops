@@ -8,5 +8,9 @@ public class ErrorExc {
         if(object==null)
             throw  new Exception(message);
     }
+    protected void except(int i) throws  Exception{
+        if(i==0)
+            throw new  Exception();
+    }
 
 }

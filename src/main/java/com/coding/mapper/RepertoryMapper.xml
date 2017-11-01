@@ -9,7 +9,7 @@
 
     <!--增加库存信息-->
     <insert id="insertRepertory" parameterType="com.coding.pojo.Repertory">
-        insert into repertory (repertory_id, item_id, item_market_price,
+        insert into repertory (item_id, item_market_price,
         item_original_price, shop_id, repertory_number,
         repertory_puttime, update_time, vender_id
         <!--,
@@ -17,7 +17,7 @@
         repertory4, repertory5, repertory6,
         repertory7, repertory8, repertory9,
         repertory10-->)
-        values (#{repertoryId,jdbcType=INTEGER}, #{itemId,jdbcType=INTEGER}, #{itemMarketPrice,jdbcType=DOUBLE},
+        values (#{itemId,jdbcType=INTEGER}, #{itemMarketPrice,jdbcType=DOUBLE},
         #{itemOriginalPrice,jdbcType=DOUBLE}, #{shopId,jdbcType=INTEGER}, #{repertoryNumber,jdbcType=INTEGER},
         #{repertoryPuttime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{venderId,jdbcType=INTEGER}
         <!--,
