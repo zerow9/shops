@@ -6,21 +6,25 @@
     {
       "group_id": 1,
       "group_name": "管理员组",
+      "group_description": "该组用户具有网站最高权限",
       "group_shelve": true
     },
     {
       "group_id": 1,
       "group_name": "运维组",
+      "group_description": "负责网站的日常运维工作",
       "group_shelve": true
     },
     {
       "group_id": 1,
       "group_name": "客服组",
+      "group_description": "负责客户的咨询",
       "group_shelve": true
     },
     {
       "group_id": 2,
       "group_name": "技术组",
+      "group_description": "负责网站开发及维护",
       "group_shelve": false
     }
   ]
