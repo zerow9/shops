@@ -52,5 +52,13 @@ public interface ItemMapper {
      */
     public List<Item> selectItemFuzzyByItemName(@Param("fuzzyItemName") String fuzzyItemName)throws Exception;
 
+    /**
+     * 根据商品类别查找商品信息
+     * @param itemTypeId 商品类别ID
+     * @return 满足查询条件的 Item 类对象集合
+     * @throws Exception
+     */
+    public List<Item> selectItemByItemType(@Param("itemTypeId") Integer itemTypeId)throws Exception;
+
 
 }
