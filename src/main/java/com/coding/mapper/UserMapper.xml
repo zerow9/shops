@@ -172,7 +172,7 @@
         </foreach>
     </delete>
 
-    <!---->
+    <!--分页查询-->
     <select id="selectUserAllPaging" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
