@@ -1,7 +1,6 @@
 package com.coding.controller;
 
 import com.coding.Iservice.IAdminService;
-import com.coding.pojo.Address;
 import com.coding.pojo.Admin;
 import com.coding.pojo.Groups;
 import com.coding.pojo.User;
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
-@Controller()
+@Controller
 @RequestMapping("/admin")
 public class AdminController extends UserController {
 
@@ -34,50 +33,14 @@ public class AdminController extends UserController {
      * @throws Exception 删除用户删除异常
      */
     @RequestMapping("deleteUserByPrimaryKey")
-    public String deleteUserByPrimaryKey(String userUuid) throws Exception {
+    @ResponseBody
+    public boolean deleteUserByPrimaryKey(String userUuid) throws Exception {
         try {
             adminService.deleteUserByPrimaryKey(userUuid);
         } catch (Exception e) {
             throw new Exception("删除用户失败");
         }
-        return "";
-    }
-
-
-    /**
-     * 查询所有用户信息
-     *
-     * @return 查询用户后跳转的页面
-     * @throws Exception 查询失败异常
-     */
-    @RequestMapping("selectUserAll")
-    public String selectUserAll(Model modelAndView) throws Exception {
-        return "usermanger/userlist";
-    }
-
-    /**
-     * 返回 JSON 的方法
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping("getUserJson")
-    @ResponseBody
-    public String getUserAll() throws Exception {
-
-        //获取 USER 数据
-        List<User> users = adminService.selectUserAll();
-
-        //调用模板
-        JSONUser jsonUser=new JSONUser();
-        jsonUser.setData(users);
-        jsonUser.setCount(users.size());
-        jsonUser.setCode("");
-        jsonUser.setMsg("");
-
-        //调用 JSON 对象
-        JSONObject result= JSONObject.fromObject(jsonUser);
-
-        return result.toString();
+        return true;
     }
 
     /**
@@ -213,23 +176,42 @@ public class AdminController extends UserController {
     @RequestMapping("getAdminAll")
     @ResponseBody
     public String getAdminAll() throws Exception {
-
-        //获取管理员列表
         List<Admin> admins = adminService.selectAdminAll();
-
-        //创建 JSON 模板
         JSONAdmin jsonAdmin=new JSONAdmin();
         jsonAdmin.setCode("");
         jsonAdmin.setMsg("");
         jsonAdmin.setCount(admins.size());
         jsonAdmin.setData(admins);
-
-        //将 JSON 模板转化为 JSON 对象
         JSONObject jsonObject=JSONObject.fromObject(jsonAdmin);
-
         return jsonObject.toString();
     }
 
+    /**
+     * 查询所有用户信息
+     *
+     * @return 查询用户后跳转的页面
+     * @throws Exception 查询失败异常
+     */
+    @RequestMapping("selectUserAll")
+    public String selectUserAll() throws Exception {
+        return "usermanger/userlist";
+    }
 
-
+    /**
+     * 返回 JSON 的方法
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("getUserJson")
+    @ResponseBody
+    public String getUserAll() throws Exception {
+        List<User> users = adminService.selectUserAll();
+        JSONUser jsonUser=new JSONUser();
+        jsonUser.setData(users);
+        jsonUser.setCount(users.size());
+        jsonUser.setCode("");
+        jsonUser.setMsg("");
+        JSONObject result= JSONObject.fromObject(jsonUser);
+        return result.toString();
+    }
 }

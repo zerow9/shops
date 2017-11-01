@@ -34,7 +34,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     public void deleteUserByPrimaryKey(String userUuid)  throws Exception{
         if (!userUuid.equals("") ) {
             try {
-                userMapper.deleteUserByPrimaryKey(userUuid);
+                except(userMapper.deleteUserByPrimaryKey(userUuid));
             }catch (Exception e){
                 throw new Exception("删除用户信息时出错");
             }
@@ -58,7 +58,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     public void deleteGroupsByPrimaryKey(Integer groupId)  throws Exception{
         if (groupId != 0) {
             try {
-                groupsMapper.deleteGroupsByPrimaryKey(groupId);
+                except(groupsMapper.deleteGroupsByPrimaryKey(groupId));
             }catch (Exception e){
                 throw new Exception("删除分组信息时出错");
             }
@@ -86,7 +86,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     @Transactional(rollbackFor =Exception.class )
     public void updateGroupsByPrimaryKey(Groups groups) throws Exception {
         try {
-            groupsMapper.updateGroupsByPrimaryKey(groups);
+            except(groupsMapper.updateGroupsByPrimaryKey(groups));
         }catch (Exception e){
             throw new Exception("修改分组信息时出错");
         }
@@ -104,7 +104,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     public void deleteAdminByPrimaryKey(Integer adminId) throws Exception {
         if (adminId != 0) {
             try {
-                adminMapper.deleteAdminByPrimaryKey(adminId);
+                except(adminMapper.deleteAdminByPrimaryKey(adminId));
             }catch (Exception e){
                 throw new Exception("删除管理员时出错");
             }
@@ -132,7 +132,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     @Transactional(rollbackFor =Exception.class )
     public void updateAdminByPrimaryKey(Admin admin)  throws Exception{
         try {
-            adminMapper.updateAdminByPrimaryKey(admin);
+            except(adminMapper.updateAdminByPrimaryKey(admin));
         }catch (Exception e){
             throw new Exception("修改管理员信息时出错");
         }
@@ -149,7 +149,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     @Transactional(rollbackFor =Exception.class )
     public void deleteItemTypeByPrimaryKey(Integer itemTypeId) throws Exception {
         try {
-            itemTypeMapper.deleteItemTypeByPrimaryKey(itemTypeId);
+            except(itemTypeMapper.deleteItemTypeByPrimaryKey(itemTypeId));
         }catch (Exception e){
             throw new Exception("删除商品类别时出错");
         }
@@ -167,7 +167,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     @Transactional(rollbackFor =Exception.class )
     public void updateItemTypeByPrimaryKey(ItemType itemType) throws Exception {
         try {
-            itemTypeMapper.updateItemTypeByPrimaryKey(itemType);
+            except(itemTypeMapper.updateItemTypeByPrimaryKey(itemType));
         }catch (Exception e){
             throw new Exception("修改商品类别信息时出错");
         }
@@ -177,7 +177,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     @Transactional(rollbackFor =Exception.class )
     public void deleteItemByPrimaryKey(Integer itemId) throws Exception {
         try {
-            itemMapper.deleteItemByPrimaryKey(itemId);
+            except(itemMapper.deleteItemByPrimaryKey(itemId));
         }catch (Exception e){
             throw new Exception("删除商品时出错");
         }
@@ -195,7 +195,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     @Transactional(rollbackFor =Exception.class )
     public void updateItemByPrimaryKey(Item item) throws Exception {
         try {
-            itemMapper.updateItemByPrimaryKey(item);
+            except(itemMapper.updateItemByPrimaryKey(item));
         }catch (Exception e){
             throw new Exception("修改商品信息时出错");
         }
@@ -204,7 +204,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     @Transactional(rollbackFor =Exception.class )
     public void deleteRepertoryByPrimaryKey(Integer repertoryId) throws Exception {
         try {
-            repertoryMapper.deleteRepertoryByPrimaryKey(repertoryId);
+            except(repertoryMapper.deleteRepertoryByPrimaryKey(repertoryId));
         }catch (Exception e){
             throw new Exception("删除库存信息时出错");
         }
@@ -231,7 +231,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     @Transactional(rollbackFor =Exception.class )
     public void updateRepertoryByPrimaryKey(Repertory repertory) throws Exception {
         try {
-            repertoryMapper.updateRepertoryByPrimaryKey(repertory);
+            except(repertoryMapper.updateRepertoryByPrimaryKey(repertory));
         }catch (Exception e){
             throw new Exception("修改库存信息时出错");
         }
@@ -247,7 +247,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     @Transactional(rollbackFor =Exception.class )
     public void deleteVenderByPrimaryKey(Integer venderId) throws Exception {
         try {
-            venderMapper.deleteVenderByPrimaryKey(venderId);
+            except(venderMapper.deleteVenderByPrimaryKey(venderId));
         }catch (Exception e){
             throw new Exception("删除厂家信息时出错");
         }
@@ -275,7 +275,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     @Transactional(rollbackFor =Exception.class )
     public void updateVenderByPrimaryKey(Vender vender) throws Exception {
         try {
-            venderMapper.updateVenderByPrimaryKey(vender);
+            except(venderMapper.updateVenderByPrimaryKey(vender));
         }catch (Exception e){
             throw new Exception("修改厂家信息时出错");
         }
