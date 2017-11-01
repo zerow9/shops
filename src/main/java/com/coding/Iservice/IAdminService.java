@@ -137,7 +137,7 @@ public interface IAdminService extends IUserService {
      * @return 0:删除失败 1:删除成功
      * @throws Exception
      */
-    public void deleteAdminByAdminIdArray(@Param("adminIdArray") Integer[] adminIdArray) throws Exception;
+    public void deleteAdminByAdminIdArray(Integer[] adminIdArray) throws Exception;
 
      /*------------------------------------------商品类别表------------------------------------------------------------------*/
 

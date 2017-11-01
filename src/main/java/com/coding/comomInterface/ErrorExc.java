@@ -13,6 +13,8 @@ public class ErrorExc {
             throw new  Exception();
     }
     protected void except(Integer former, Integer latter) throws  Exception{
+        if (former==null||former==0||latter==null||latter==0)
+            throw new Exception("区间范围未初始化");
         if(former>latter)
             throw new Exception("区间former需要小于等于latter");
     }

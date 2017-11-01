@@ -32,7 +32,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     /*------------------------------------------用户表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
     public void deleteUserByPrimaryKey(String userUuid)  throws Exception{
-        if (!userUuid.equals("") ) {
+        if (userUuid != null && !userUuid.equals("") ) {
             try {
                 except(userMapper.deleteUserByPrimaryKey(userUuid));
             }catch (Exception e){
@@ -47,7 +47,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     }
 
     public User selectUserByPhone(String userPhone) throws Exception {
-        if (!userPhone.equals("")) {
+        if (userPhone != null && !userPhone.equals("")) {
             User user= userMapper.selectUserByPhone(userPhone);
             except(user,"根据电话查询用户信息为空");
             return user;
@@ -56,7 +56,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     }
 
     public List<User> selectUserByGroupId(Integer user_group) throws Exception {
-        if (user_group!=0){
+        if (user_group != null &&user_group!=0){
         List<User> users = userMapper.selectUserByGroupId(user_group);
         if(users.isEmpty()) throw new Exception("根据分组查询用户列表为空");
         return users;
@@ -98,7 +98,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     /*------------------------------------------分组表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
     public void deleteGroupsByPrimaryKey(Integer groupId)  throws Exception{
-        if (groupId != 0) {
+        if (groupId != null && groupId != 0) {
             try {
                 except(groupsMapper.deleteGroupsByPrimaryKey(groupId));
             }catch (Exception e){
@@ -117,7 +117,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     }
 
     public Groups selectGroupsByPrimaryKey(Integer groupId)  throws Exception{
-        if (groupId != 0) {
+        if (groupId != null && groupId != 0) {
             Groups groups = groupsMapper.selectGroupsByPrimaryKey(groupId);
             except(groups,"分组查询为空");
             return groups;
@@ -144,7 +144,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     /*------------------------------------------管理员表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
     public void deleteAdminByPrimaryKey(Integer adminId) throws Exception {
-        if (adminId != 0) {
+        if (adminId != null && adminId != 0) {
             try {
                 except(adminMapper.deleteAdminByPrimaryKey(adminId));
             }catch (Exception e){
@@ -163,7 +163,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     }
 
     public Admin selectAdminByPrimaryKey(Integer adminId)  throws Exception{
-        if (adminId != 0) {
+        if (adminId != null && adminId != 0) {
             Admin admin = adminMapper.selectAdminByPrimaryKey(adminId);
             except(admin,"管理员查询为空");
             return admin;
@@ -188,15 +188,23 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     }
 
     public void deleteAdminByAdminIdArray(Integer[] adminIdArray) throws Exception {
+        if(adminIdArray==null||"".equals(adminIdArray))throw new Exception("没有adminid数组信息，批量管理员删除出错");
+        try {
+            except(adminMapper.deleteAdminByAdminIdArray(adminIdArray));
+        }catch (Exception e){
+            throw new Exception("批量删除管理员时出错");
+        }
     }
 
     /*------------------------------------------商品类别表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
     public void deleteItemTypeByPrimaryKey(Integer itemTypeId) throws Exception {
+        if (itemTypeId != null && itemTypeId != 0){
         try {
             except(itemTypeMapper.deleteItemTypeByPrimaryKey(itemTypeId));
         }catch (Exception e){
             throw new Exception("删除商品类别时出错");
+        }
         }
     }
 
@@ -221,10 +229,12 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     /*------------------------------------------商品表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
     public void deleteItemByPrimaryKey(Integer itemId) throws Exception {
+        if (itemId != null && itemId !=0){
         try {
             except(itemMapper.deleteItemByPrimaryKey(itemId));
         }catch (Exception e){
             throw new Exception("删除商品时出错");
+        }
         }
     }
 
@@ -248,11 +258,13 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     /*------------------------------------------库存表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
     public void deleteRepertoryByPrimaryKey(Integer repertoryId) throws Exception {
+        if(repertoryId != null && repertoryId != 0){
         try {
             except(repertoryMapper.deleteRepertoryByPrimaryKey(repertoryId));
         }catch (Exception e){
             throw new Exception("删除库存信息时出错");
         }
+    }
     }
 
     @Transactional(rollbackFor =Exception.class )
@@ -265,7 +277,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     }
 
     public Repertory selectRepertoryByPrimaryKey(Integer repertoryId) throws Exception {
-        if (repertoryId != 0){
+        if(repertoryId != null && repertoryId != 0){
             Repertory repertory = repertoryMapper.selectRepertoryByPrimaryKey(repertoryId);
             except(repertory,"查询库存信息为空");
             return  repertory;
@@ -291,10 +303,12 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     /*------------------------------------------厂家信息表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
     public void deleteVenderByPrimaryKey(Integer venderId) throws Exception {
+        if(venderId != null && venderId != 0){
         try {
             except(venderMapper.deleteVenderByPrimaryKey(venderId));
         }catch (Exception e){
             throw new Exception("删除厂家信息时出错");
+        }
         }
     }
 
@@ -309,7 +323,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     }
 
     public Vender selectVenderByPrimaryKey(Integer venderId) throws Exception {
-        if(venderId != 0){
+        if(venderId != null && venderId != 0){
             Vender vender = venderMapper.selectVenderByPrimaryKey(venderId);
             except(vender,"查询厂家信息为空");
             return vender;
