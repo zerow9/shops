@@ -49,9 +49,9 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     }
 
     @Transactional(rollbackFor =Exception.class )
-    public void updateUserByPrimaryKey(User user) throws Exception{
+    public int updateUserByPrimaryKey(User user) throws Exception{
         try {
-            userMapper.updateUserByPrimaryKey(user);
+           return userMapper.updateUserByPrimaryKey(user);
         }catch (Exception e){
             throw new Exception("修改用户信息时出错");
         }
