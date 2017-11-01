@@ -58,7 +58,6 @@ public interface IAdminService extends IUserService {
      * @throws Exception
      */
     public void deleteUsersByUuidArray(String[] user_uuidArray)throws Exception;
-
 /*------------------------------------------收获地址表表------------------------------------------------------------------*/
     /**
      * 返回所有地址信息

@@ -40,7 +40,6 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
             }
         }
     }
-
     public List<User> selectUserAll()  throws Exception{
             List<User> users = userMapper.selectUserAll();
             if(users.isEmpty()) throw new Exception("用户列表查询为空");

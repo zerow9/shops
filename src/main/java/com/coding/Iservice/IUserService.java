@@ -78,7 +78,6 @@ public interface IUserService {
      */
     public List<ItemType> selectItemTypeAll()throws Exception;
 
-
  /*------------------------------------------商品表------------------------------------------------------------------*/
     /**
      * 根据商品唯一ID查询商品信息
