@@ -170,7 +170,7 @@ public class AdminController extends UserController {
      */
     @RequestMapping("selectAdminAll")
     public String selectAdminAll(Model model) throws Exception {
-        return "usermanger/adminlist";
+        return "admins/adminlist";
     }
 
     @RequestMapping("getAdminAll")
@@ -194,7 +194,7 @@ public class AdminController extends UserController {
      */
     @RequestMapping("selectUserAll")
     public String selectUserAll() throws Exception {
-        return "usermanger/userlist";
+        return "users/userlist";
     }
 
     /**

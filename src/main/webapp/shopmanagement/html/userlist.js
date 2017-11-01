@@ -9,7 +9,7 @@ layui.use('table', function() {
     table.on('tool(demo)', function(obj) {
         var data = obj.data;
         if(obj.event === 'detail') {
-            layer.msg('ID：' + data.id + ' 的查看操作');
+            layer.msg('ID：' + data.userUuid + ' 的查看操作');
         } else if(obj.event === 'del') {
             //自带的弹窗效果
             /*
@@ -18,10 +18,9 @@ layui.use('table', function() {
                 layer.close(index);
             });
             */
-
             //强势弹窗效果
             swal({
-                title: "您确定要删除'ID：="+data.id+"信息吗",
+                title: "您确定要删除'ID：="+data.userUuid+"信息吗",
                 text: "删除后将无法恢复，请谨慎操作！",
                 type: "warning",
                 showCancelButton: true,
@@ -29,8 +28,12 @@ layui.use('table', function() {
                 confirmButtonText: "删除",
                 closeOnConfirm: false
             }, function() {
-                //通 ajax 加载方法
-                swal("删除成功！", "您已经永久删除了这条信息。", "success")
+                $.post('deleteUserByPrimaryKey.action?', {'userUuid':data.userUuid}, function(str){
+                    if(str===true)
+                        swal("删除成功！", "您已经永久删除了这条信息。", "success")
+                    window.location.reload();
+                });
+
             })
 
         } else if(obj.event === 'edit') {
