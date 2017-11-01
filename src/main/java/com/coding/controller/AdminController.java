@@ -5,11 +5,17 @@ import com.coding.pojo.Address;
 import com.coding.pojo.Admin;
 import com.coding.pojo.Groups;
 import com.coding.pojo.User;
+import com.coding.pojo.templet.JSONUser;
+import com.sun.org.apache.bcel.internal.generic.NEW;
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -47,9 +53,19 @@ public class AdminController extends UserController {
      * @throws Exception 查询失败异常
      */
     @RequestMapping("selectUserAll")
-    public String selectUserAll() throws Exception {
+    public String selectUserAll(Model modelAndView) throws Exception {
         List<User> users = adminService.selectUserAll();
-        return "";
+        JSONUser jsonUser=new JSONUser();
+        jsonUser.setData(users);
+        jsonUser.setCount(users.size());
+        jsonUser.setCode("");
+        jsonUser.setMsg("");
+
+        JSONObject result=JSONObject.fromObject(jsonUser);
+        modelAndView.addAttribute("message",result);
+        System.out.println("---------------------------------------------------");
+        System.out.println(result);
+        return "usermanger/index";
     }
 
 
