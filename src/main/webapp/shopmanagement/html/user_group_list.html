@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>商品列表</title>
+    <title>用户组列表</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -20,21 +20,17 @@
 </div>
 
 <div class="layui-btn-group demoTable">
-    <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
-    <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
-    <button class="layui-btn" data-type="isAll">验证是否全选</button>
+    <button class="layui-btn" data-type="getCheckData">添加用户组</button>
 </div>
 
-<table class="layui-table" lay-data="{width: 1000, height: 500, url:'goods_lists.json', page:true, id:'idTest'}"
-       lay-filter="goods_lists_table">
+<table class="layui-table" lay-data="{width: 1100, height: 500, url:'user_group_list.json', page:true, id:'idTest'}"
+       lay-filter="group_lists_table">
     <thead>
     <tr>
         <th lay-data="{checkbox:true, fixed: true}"></th>
-        <th lay-data="{field:'goods_id', width:100, sort: true, fixed: true}">ID</th>
-        <th lay-data="{field:'goods_name', width:200}">商品名称</th>
-        <th lay-data="{field:'goods_price', width:100, sort: true}">价格</th>
-        <th lay-data="{field:'goods_sales', width:100, sort: true}">销量</th>
-        <th lay-data="{field:'goods_shelve', width:200, align:'center', fixed: 'right', toolbar: '#shelve_bar'}">上下架
+        <th lay-data="{field:'group_id', width:100, sort: true, fixed: true}">ID</th>
+        <th lay-data="{field:'group_name', width:500}">用户组名称</th>
+        <th lay-data="{field:'group_shelve', width:200, align:'center', fixed: 'right', toolbar: '#shelve_bar'}">是否启用
         </th>
         <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#operate_bar'}">操作</th>
     </tr>
@@ -42,7 +38,7 @@
 </table>
 
 <script type="text/html" id="shelve_bar">
-    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="shelve_status" id="shelve_status_bar">已上架</a>
+    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="shelve_status" id="shelve_status_bar">是</a>
 </script>
 
 <script type="text/html" id="operate_bar">
@@ -58,23 +54,23 @@
     layui.use('table', function () {
         var table = layui.table;
         //监听表格复选框选择
-        table.on('checkbox(goods_lists_table)', function (obj) {
+        table.on('checkbox(group_lists_table)', function (obj) {
             console.log(obj)
         });
         //监听工具条
-        table.on('tool(goods_lists_table)', function (table_tool) {
+        table.on('tool(group_lists_table)', function (table_tool) {
             var data = table_tool.data;
             if (table_tool.event === 'detail') {
-                layer.msg('ID：' + data.goods_id + ' 的查看操作');
+                layer.msg('用户组ID：' + data.group_id + ' 的查看操作');
             } else if (table_tool.event === 'del') {
-                layer.confirm('真的删除行么', function (index) {
+                layer.confirm('确定删除用户组吗？', function (index) {
                     table_tool.del();
                     layer.close(index);
                 });
             } else if (table_tool.event === 'edit') {
                 layer.alert('编辑行：<br>' + JSON.stringify(data))
             } else if (table_tool.event === 'shelve_status') {
-                layer.msg("商品：" + data.goods_name + " 已下架。");
+                layer.msg("用户组：" + data.group_name + " 已禁用。");
             }
         });
 
