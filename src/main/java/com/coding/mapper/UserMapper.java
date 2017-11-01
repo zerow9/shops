@@ -78,6 +78,14 @@ public interface UserMapper {
      */
     public int deleteUsersByUuidArray(@Param("user_uuidArray") String[] user_uuidArray)throws Exception;
 
+    /**
+     * 通过分页查询所有用户信息
+     * @param nowPage 当前页面
+     * @param number  每页需要查询的用户数量
+     * @return
+     * @throws Exception
+     */
+    public List<User> selectUserAllPaging(@Param("nowPage") Integer nowPage,@Param("number") Integer number)throws Exception;
 
 
 }
