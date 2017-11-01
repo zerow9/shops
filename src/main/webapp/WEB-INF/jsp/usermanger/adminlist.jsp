@@ -61,7 +61,7 @@
                         <button class="layui-btn" data-type="addUser1">添加管理员方法2</button>
                     </div>
                     <div class="table-responsive">
-                        <table class="layui-table" lay-data="{width: 900, height:332, url:'<%=basePath%>admin/getAdminAll.action', page:true, id:'idTest'}" lay-filter="demo">
+                        <table class="layui-table" lay-data="{width: 900, height:332, url:'<%=basePath%>admin/getAdminAll.action', page:true, id:'adminId'}" lay-filter="demo">
                             <thead>
                             <tr>
                                 <th lay-data="{checkbox:true, fixed: true}"></th>
@@ -89,14 +89,7 @@
 </script>
 <script src="../../../shopmanagement/common/layui/layui.js" charset="utf-8" type="text/javascript"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../../../shopmanagement/html/userlist.js"></script>
-<script>
-    layui.use(function(){
-        var $=layui.jquery;
-
-        $("table").attr("url").val(${massage});
-    });
-</script>
+<script src="../../../js/adminlist.js"></script>
 
 </body>
 
