@@ -16,6 +16,7 @@ public class Admin {
     private Date adminRegisterTime;
 
     private Integer groupId;
+    private String dateToString;
 
     public Integer getAdminId() {
         return adminId;
@@ -71,6 +72,14 @@ public class Admin {
 
     public void setGroupId(Integer groupId) {
         this.groupId = groupId;
+    }
+
+    public void setDateToString(String dateToString) {
+        this.dateToString = dateToString;
+    }
+
+    public String getDateToString() {
+        return dateToString;
     }
 
     @Override

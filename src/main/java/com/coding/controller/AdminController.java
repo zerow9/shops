@@ -180,6 +180,12 @@ public class AdminController extends UserController {
     @ResponseBody
     public String getAdminAll() throws Exception {
         List<Admin> admins = adminService.selectAdminAll();
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        for(Admin admin:admins){
+            Date date=admin.getAdminRegisterTime();
+            if(date!=null)
+                admin.setDateToString(format.format(date));
+        }
         JSONAdmin jsonAdmin=new JSONAdmin();
         jsonAdmin.setCode("");
         jsonAdmin.setMsg("");

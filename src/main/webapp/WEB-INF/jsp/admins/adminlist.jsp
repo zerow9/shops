@@ -68,7 +68,7 @@
                                 <th lay-data="{field:'adminPassword', width:80, sort: true}">密码</th>
                                 <th lay-data="{field:'adminPhone', width:80}">电话号码</th>
                                 <th lay-data="{field:'adminEmail', width:177}">邮箱</th>
-                                <th lay-data="{field:'adminRegisterTime', width:80, sort: true}">注册时间</th>
+                                <th lay-data="{field:'dateToString', width:80, sort: true}">注册时间</th>
                                 <th lay-data="{field:'groupId', width:80}">分配规则组</th>
                                 <th lay-data="{fixed: 'right', width:180, align:'center', toolbar: '#barDemo'}">操作</th>
                             </tr>
