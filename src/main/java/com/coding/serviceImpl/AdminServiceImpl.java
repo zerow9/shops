@@ -47,6 +47,49 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
             return users;
     }
 
+    public User selectUserByPhone(String userPhone) throws Exception {
+        if (!userPhone.equals("")) {
+            User user= userMapper.selectUserByPhone(userPhone);
+            except(user,"根据电话查询用户信息为空");
+            return user;
+        }
+        return null;
+    }
+
+    public List<User> selectUserByGroupId(Integer user_group) throws Exception {
+        if (user_group!=0){
+        List<User> users = userMapper.selectUserByGroupId(user_group);
+        if(users.isEmpty()) throw new Exception("根据分组查询用户列表为空");
+        return users;
+        }
+        return null;
+    }
+
+    public List<User> selectUserByScoreRange(Integer former, Integer latter) throws Exception {
+        except(former,latter);
+        List<User> users = userMapper.selectUserByScoreRange(former,latter);
+        if(users.isEmpty()) throw new Exception("根据积分范围查询用户列表为空");
+        return users;
+    }
+
+    public List<User> selectUserByAgeRange(Integer former, Integer latter) throws Exception {
+        except(former,latter);
+        List<User> users = userMapper.selectUserByAgeRange(former,latter);
+        if(users.isEmpty()) throw new Exception("根据年龄范围查询用户列表为空");
+        return users;
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteUsersByUuidArray(String[] user_uuidArray) throws Exception {
+        if(user_uuidArray==null||"".equals(user_uuidArray))throw new Exception("没有uuid数组信息，批量用户删除出错");
+        try {
+            except(userMapper.deleteUsersByUuidArray(user_uuidArray));
+        }catch (Exception e){
+            throw new Exception("批量删除用户时出错");
+        }
+
+    }
+
     /*------------------------------------------收获地址表------------------------------------------------------------------*/
     public List<Address> selectAddressAll() throws Exception {
             List<Address> addresses = addressMapper.selectAddressAll();
