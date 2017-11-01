@@ -12,7 +12,7 @@ public interface VenderMapper {
      * @param venderId 厂家ID
      * @throws Exception
      */
-    public void deleteVenderByPrimaryKey(Integer venderId) throws Exception;
+    public int deleteVenderByPrimaryKey(Integer venderId) throws Exception;
 
     /**
      * 增加厂家信息
@@ -20,7 +20,7 @@ public interface VenderMapper {
      * @param vender 封装了厂家信息的 Vender 类对象
      * @throws Exception
      */
-    public void insertVender(Vender vender) throws Exception;
+    public int insertVender(Vender vender) throws Exception;
 
     /**
      * 根据厂家唯一ID 查询厂家信息
@@ -37,7 +37,7 @@ public interface VenderMapper {
      * @param vender 封装了厂家信息的 Vender 对象
      * @throws Exception
      */
-    public void updateVenderByPrimaryKey(Vender vender) throws Exception;
+    public int updateVenderByPrimaryKey(Vender vender) throws Exception;
 
     /**
      * 查询所有厂家信息

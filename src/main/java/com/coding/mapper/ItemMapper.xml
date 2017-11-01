@@ -131,4 +131,14 @@
         <include refid="Blob_Column_List"/>
         from item
     </select>
+
+    <!--通过正则表达式查找满足模糊匹配的商品信息-->
+    <select id="selectItemFuzzyByItemName" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from item
+        where item_name REGEXP #{fuzzyItemName};
+    </select>
 </mapper>

@@ -12,13 +12,13 @@ public interface RepertoryMapper {
      * @param repertoryId 库存ID
      * @throws Exception
      */
-    public void deleteRepertoryByPrimaryKey(Integer repertoryId) throws Exception;
+    public int deleteRepertoryByPrimaryKey(Integer repertoryId) throws Exception;
 
     /**
      * @param repertory 封装了库存信息的 Repertory 类对象
      * @throws Exception
      */
-    public void insertRepertory(Repertory repertory) throws Exception;
+    public int insertRepertory(Repertory repertory) throws Exception;
 
     /**
      * @param repertoryId 库存ID
@@ -31,7 +31,7 @@ public interface RepertoryMapper {
      * @param repertory 封装了库存信息的 Repertory 类对象
      * @throws Exception
      */
-    public void updateRepertoryByPrimaryKey(Repertory repertory) throws Exception;
+    public int updateRepertoryByPrimaryKey(Repertory repertory) throws Exception;
 
     /**
      * @return 装了库存信息的 Repertory 类对象集合

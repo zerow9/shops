@@ -12,14 +12,14 @@ public interface ItemMapper {
      *
      * @param itemId 商品唯一ID
      */
-    public void deleteItemByPrimaryKey(@Param("itemId") Integer itemId) throws Exception;
+    public int deleteItemByPrimaryKey(@Param("itemId") Integer itemId) throws Exception;
 
     /**
      * 增加商品信息
      *
      * @param item 封装了商品信息的 Item 类对象
      */
-    public void insertItem(Item item) throws Exception;
+    public int insertItem(Item item) throws Exception;
 
     /**
      * 根据商品唯一ID查询商品信息
@@ -42,5 +42,15 @@ public interface ItemMapper {
      *
      * @param item 封装了商品信息的 Item 类对象
      */
-    public void updateItemByPrimaryKey(Item item) throws Exception;
+    public int updateItemByPrimaryKey(Item item) throws Exception;
+
+    /**
+     * 根据商品名称模糊查找商品信息
+     *
+     * @param  fuzzyItemName 商品名称
+     * @return 通过正则表达式满足模糊匹配的商品信息
+     */
+    public List<Item> selectItemFuzzyByItemName(@Param("fuzzyItemName") String fuzzyItemName)throws Exception;
+
+
 }

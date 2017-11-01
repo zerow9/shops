@@ -124,4 +124,50 @@
         from user
     </select>
 
+    <!--通过电话查找用户信息-->
+    <select id="selectUserByPhone" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from user
+        where user_phone = #{userPhone}
+    </select>
+
+    <!--根据组别ID查找用户信息-->
+    <select id="selectUserByGroupId" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from user
+        where user_group = #{user_group}
+    </select>
+
+    <!--根据积分范围查找用户信息-->
+    <select id="selectUserByScoreRange" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from user
+        where user_score between #{former} and #{latter};
+    </select>
+
+    <!---->
+    <select id="selectUserByAgeRange" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from user
+        where user_age between #{former} and #{latter};
+    </select>
+
+    <delete id="deleteUsersByUuidList" parameterType="java.lang.String">
+        delete from user where user_uuid IN
+        <foreach collection="user_uuidList" item="user" open="(" separator="," close=")">
+            #{user}
+        </foreach>
+    </delete>
 </mapper>
