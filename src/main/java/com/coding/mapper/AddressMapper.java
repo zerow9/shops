@@ -8,7 +8,7 @@ import java.util.List;
 public interface AddressMapper {
 
     /**
-     * 根据 addressId 删除地址信息 (Add12312)
+     * 根据 addressId 删除地址信息 (Aasdasxcasdfa2)
      * @param addressId 地址唯一ID
      */
     public int deleteAddressByPrimaryKey(Integer addressId) throws Exception ;
