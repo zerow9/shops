@@ -63,7 +63,7 @@ public interface UserMapper {
 
 
     /**
-     *
+     * 根据年龄范围查询用户信息
      * @param former 范围低数值
      * @param latter 范围高数值
      * @return 封装了满足查询条件的 User 类对象集合
