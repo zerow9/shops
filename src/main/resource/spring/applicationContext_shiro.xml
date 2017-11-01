@@ -25,10 +25,7 @@
         </property>
         <property name="filterChainDefinitions">
             <value>
-                /logout.action=logout
-                /=anon
-                /user/**=perms[1]
-                /** = authc
+                /** = anon
         </value>
         </property>
     </bean>

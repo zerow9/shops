@@ -5,11 +5,17 @@ import com.coding.pojo.Address;
 import com.coding.pojo.Admin;
 import com.coding.pojo.Groups;
 import com.coding.pojo.User;
+import com.coding.pojo.templet.JSONAdmin;
+import com.coding.pojo.templet.JSONUser;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 
 import java.util.List;
 
@@ -20,7 +26,6 @@ public class AdminController extends UserController {
     @Autowired
     @Qualifier("adminService")
     private IAdminService adminService;
-
 
     /**
      * 根据用户uuid删除用户
@@ -47,11 +52,34 @@ public class AdminController extends UserController {
      * @throws Exception 查询失败异常
      */
     @RequestMapping("selectUserAll")
-    public String selectUserAll() throws Exception {
-        List<User> users = adminService.selectUserAll();
-        return "";
+    public String selectUserAll(Model modelAndView) throws Exception {
+        return "usermanger/userlist";
     }
 
+    /**
+     * 返回 JSON 的方法
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("getUserJson")
+    @ResponseBody
+    public String getUserAll() throws Exception {
+
+        //获取 USER 数据
+        List<User> users = adminService.selectUserAll();
+
+        //调用模板
+        JSONUser jsonUser=new JSONUser();
+        jsonUser.setData(users);
+        jsonUser.setCount(users.size());
+        jsonUser.setCode("");
+        jsonUser.setMsg("");
+
+        //调用 JSON 对象
+        JSONObject result= JSONObject.fromObject(jsonUser);
+
+        return result.toString();
+    }
 
     /**
      * 通过分组ID删除分组信息
@@ -179,9 +207,30 @@ public class AdminController extends UserController {
      * @return 插入成功之后的页面
      */
     @RequestMapping("selectAdminAll")
-    public String selectAdminAll() throws Exception {
-        List<Admin> admins = adminService.selectAdminAll();
-        return "";
+    public String selectAdminAll(Model model) throws Exception {
+        return "usermanger/adminlist";
     }
+
+    @RequestMapping("getAdminAll")
+    @ResponseBody
+    public String getAdminAll() throws Exception {
+
+        //获取管理员列表
+        List<Admin> admins = adminService.selectAdminAll();
+
+        //创建 JSON 模板
+        JSONAdmin jsonAdmin=new JSONAdmin();
+        jsonAdmin.setCode("");
+        jsonAdmin.setMsg("");
+        jsonAdmin.setCount(admins.size());
+        jsonAdmin.setData(admins);
+
+        //将 JSON 模板转化为 JSON 对象
+        JSONObject jsonObject=JSONObject.fromObject(jsonAdmin);
+
+        return jsonObject.toString();
+    }
+
+
 
 }
