@@ -25,10 +25,10 @@ public class UserController {
      * @param user 新用户
      */
     @RequestMapping("insertUser")
-    public String insertUser(User user) throws Exception {
+    public boolean insertUser(User user) throws Exception {
         user.setUserRegisterDateTime(new Date());
         userService.insertUser(user);
-        return "";
+        return true;
     }
 
     /**
@@ -45,7 +45,7 @@ public class UserController {
     /**
      * 根据用户ID修改用户信息
      *
-             * @param user 更新用户的信息
+     * @param user 更新用户的信息
      */
     @RequestMapping("updateUserByPrimaryKey")
     public String updateUserByPrimaryKey(User user) throws Exception {
@@ -101,4 +101,9 @@ public class UserController {
         return "";
     }
 
+
+    @RequestMapping("addUser")
+    public String addUser() {
+        return "users/adduser";
+    }
 }

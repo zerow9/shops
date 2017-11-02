@@ -58,8 +58,7 @@
                         <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
                         <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
                         <button class="layui-btn" data-type="isAll">验证是否全选</button>
-                        <button class="layui-btn" data-type="addUser">添加用户方法1</button>
-                        <button class="layui-btn" data-type="addUser1">添加用户方法2</button>
+                        <button class="layui-btn" data-type="addUser1">添加用户</button>
                     </div>
                     <div class="table-responsive">
                         <table class="layui-table"
