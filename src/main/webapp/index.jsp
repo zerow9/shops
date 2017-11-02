@@ -205,7 +205,7 @@
                             <li>
                                 <div class="dropdown-messages-box">
                                     <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" src="../../../shopmanagement/img/a4.jpg">
+                                        <img alt="image" class="img-circle" src="../../../shopmanagement/img/a0.jpg">
                                     </a>
                                     <div class="media-body ">
                                         <small class="pull-right text-navy">刚刚</small>
@@ -400,6 +400,11 @@
 <script src="../../../shopmanagement/js/hplus.min.js?v=4.0.0"></script>
 <script type="text/javascript" src="../../../shopmanagement/js/contabs.min.js"></script>
 <script src="../../../shopmanagement/js/plugins/pace/pace.min.js"></script>
+<script>
+    function closeWin(){
+        alert(1);
+    }
+</script>
 </body>
 
 </html>

@@ -51,45 +51,24 @@ layui.use('table', function() {
                 layer.msg(checkStatus.isAll ? '全选' : '未全选')
             },
             addUser:function(){
-                parent.layer.open({
+                layer.open({
                     type: 2,
                     title:"添加管理员",
                     shadeClose: true,
-                    btn:['添加管理员','取消'],
                     shade: 0.8,
                     maxmin: true,
                     area: ['80%', '90%'],
-                    content: 'admin/addAdmin.action', //注意，如果str是object，那么需要字符拼接。
-                    yes:function(index){
-                        var admin=parent.layer.getChildFrame('form',index);
-                        var s=admin.serialize();
-                        $.ajax({
-                            url:"insertAdmin.action",
-                            data:s,
-                            type:"POST",
-                            success:function () {
-                                var index = parent.layer.getFrameIndex(window.name);
-                                parent.layer.close(index);
-                                parent.layer.closeAll();
-                                swal({
-                                    title: "太帅了",
-                                    text: "数据插入成功！",
-                                    type: "success"
-                                })
-                            }
-                        });
-                    },
-                    btn1:function(){
-                        layer.close();
-                    }
+                    content: 'addAdmin.action', //注意，如果str是object，那么需要字符拼接。
                 });
             }
-
-
         };
 
     $('.demoTable .layui-btn').on('click', function() {
         var type = $(this).data('type');
         active[type] ? active[type].call(this) : '';
     });
+
+    function closeWin() {
+        alert(1);
+    }
 });
