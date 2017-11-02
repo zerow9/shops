@@ -33,6 +33,7 @@ layui.use(['form', 'layedit', 'laydate'], function () {
                 return "密码输入不一致，请重新输入！"
             }
 
+
         }
     });
 

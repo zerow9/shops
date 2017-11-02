@@ -82,6 +82,7 @@
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../../../js/adminlist.js"></script>
 
+
 </body>
 
 </html>

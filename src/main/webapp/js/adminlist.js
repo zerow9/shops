@@ -63,6 +63,7 @@ layui.use('table', function() {
             }
         };
 
+
     $('.demoTable .layui-btn').on('click', function() {
         var type = $(this).data('type');
         active[type] ? active[type].call(this) : '';
