@@ -199,6 +199,7 @@
             <if test="itemScoreType != null">
                 and item_score_type = #{itemScoreType}
             </if>
+
             <!--库存范围内查询-->
             <if test="formerRepertoryNumber != null">
                 <if test="latterRepertoryNumber != null and latterRepertoryNumber != 0">
@@ -211,13 +212,51 @@
                   and repertory_number BETWEEN 0 and #{latterRepertoryNum}
               </if>
             </if>
-            <if test="">
 
+            <!--销售量范围内查询-->
+            <if test="formerItemSaleNumber != null">
+                <if test="latterItemSaleNumber != null and latterItemSaleNumber != 0">
+                    and item_sale_number BETWEEN #{formerItemSaleNumber} and #{latterItemSaleNumber}
+                </if>
+                <!--如果销售量查询的时候只给定了一个最小值，只需要查询大于给定值的商品-->
+                <if test="latterItemSaleNumber == null or latterItemSaleNumber == 0">
+                    and item_sale_number >  #{formerItemSaleNumber}
+                    <!--BETWEEN #{formerItemSaleNumber} and #{latterItemSaleNumber}-->
+                </if>
+            </if>
+            <!--如果销售量查询的时候只给定了一个最大值，只需要查询小于给定值的商品，那么就给最小值设定初始值为0-->
+            <if test="formerItemSaleNumber == null">
+                <if test="latterItemSaleNumber != null and latterItemSaleNumber != 0">
+                    and item_sale_number  BETWEEN 0 and #{latterItemSaleNumber}
+                    <!--BETWEEN 0 and #{latterItemSaleNumber}-->
+                </if>
             </if>
 
+            <!--收藏量范围内查询-->
+            <if test="formerItemCollectNumber != null">
+                <if test="latterItemCollectNumber != null and latterItemCollectNumber != 0">
+                    and Item_collect_number BETWEEN #{formerItemCollectNumber} and #{latterItemCollectNumber}
+                </if>
+                <!--如果收藏量查询的时候只给定了一个最小值，只需要查询大于给定值的商品-->
+                <if test="latterItemCollectNumber == null or latterItemCollectNumber == 0">
+                    and Item_collect_number >  #{formerItemCollectNumber}
+                    <!--BETWEEN #{formerItemCollectNumber} and #{latterItemCollectNumber}-->
+                </if>
+            </if>
+            <!--如果收藏量查询的时候只给定了一个最大值，只需要查询小于给定值的商品，那么就给最小值设定初始值为0-->
+            <if test="formerItemCollectNumber == null">
+                <if test="latterItemCollectNumber != null and latterItemCollectNumber != 0">
+                    and Item_collect_number  BETWEEN 0 and #{latterItemCollectNumber}
+                    <!--BETWEEN 0 and #{latterItemCollectNumber}-->
+                </if>
+            </if>
 
-
-
+            <!--排序规则-->
+            <if test="sortByColumn != null and sortByColumn !=''">
+                <if test="sortRule != null and sortRule != ''">
+                    order by ${sortByColumn} ${sortRule}
+                </if>
+            </if>
 
             <!--分页-->
             <if test="indexNumber != null">
@@ -225,7 +264,7 @@
                     limit #{indexNumber},#{pageNumber}
                 </if>
             </if>
-            <if test="indexNumber == null">
+            <if test="indexNumber == null"></if>
             <if test="pageNumber != null and pageNumber != 0">
                 limit 0,#{pageNumber}
             </if>
