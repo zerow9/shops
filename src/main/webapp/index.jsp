@@ -69,7 +69,7 @@
                         <span class="nav-label">管理员管理</span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="/admin/selectAdminAll.action">管理员列表</a>
+                        <li><a class="J_menuItem" href="admin/selectAdminAll.action">管理员列表</a>
                         </li>
                     </ul>
                 </li>
@@ -82,11 +82,11 @@
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="/admin/selectUserAll.action">用户列表</a>
+                        <li><a class="J_menuItem" href="admin/selectUserAll.action">用户列表</a>
                         </li>
-                        <li><a class="J_menuItem" href="/shopmanagement/html/user_group_list.html">用户组</a>
+                        <li><a class="J_menuItem" href="jsp/admin/user/user_group_list.jsp">用户组</a>
                         </li>
-                        <li><a class="J_menuItem" href="/shopmanagement/html/complaints_list.html">投诉管理</a>
+                        <li><a class="J_menuItem" href="jsp/admin/user/user_complaints_list.jsp">投诉管理</a>
                         </li>
                     </ul>
                 </li>

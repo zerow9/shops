@@ -207,7 +207,8 @@ public class AdminController extends UserController {
     @RequestMapping("getUserJson")
     @ResponseBody
     public String getUserAll() throws Exception {
-        List<User> users = adminService.selectUserAll();
+       // List<User> users = adminService.selectUserAll();
+        List<User> users=adminService.selectUserAllPaging(0,10);
         for (User user : users)
             user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
         JsonFormat<User> json=new JsonFormat<>(users,users.size(),null,null);

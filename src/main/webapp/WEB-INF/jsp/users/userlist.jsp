@@ -62,7 +62,7 @@
                     </div>
                     <div class="table-responsive">
                         <table class="layui-table"
-                               lay-data="{width: 1200, height:400, url:'<%=basePath%>admin/getUserJson.action', page:true, id:'idTest'}"
+                               lay-data="{width: 1200, height:460, url:'<%=basePath%>admin/getUserJson.action', page:true, id:'idTest'}"
                                lay-filter="demo">
                             <thead>
                             <tr>
