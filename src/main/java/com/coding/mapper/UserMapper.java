@@ -1,5 +1,6 @@
 package com.coding.mapper;
 
+import com.coding.pojo.Paging;
 import com.coding.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
@@ -97,6 +98,15 @@ public interface UserMapper {
      * @throws Exception
      */
     public List<User> selectUserAllPaging(@Param("nowPage") Integer nowPage, @Param("number") Integer number) throws Exception;
-    
+
+
+    /**
+     * 通过关键字查询并分页显示用户信息
+     *
+     * @param paging 封装了分页信息的 Paging 类对象
+     * @return 封装了用户信息的 User 类对象集合
+     * @throws Exception
+     */
+    public List<User> selectUserPagingByKeyWord(Paging paging) throws Exception;
 
 }
