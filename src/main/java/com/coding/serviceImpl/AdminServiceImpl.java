@@ -99,7 +99,15 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
 
     @Override
     public List<User> selectUserPagingByKeyWord(PagingCustomUser paging) throws Exception {
-        return null;
+       try {
+           List<User>  users = userMapper.selectUserPagingByKeyWord(paging);
+           if(users.isEmpty()) throw new Exception("查询到的用户列表为空");
+           return users;
+       }catch (Exception e){
+           if (e.getMessage()==null)
+           throw new Exception("参数查询用户列表出错，请检查参数");
+           throw e;
+       }
     }
 
     /*------------------------------------------收获地址表------------------------------------------------------------------*/
