@@ -162,4 +162,5 @@
         where item_name REGEXP '${fuzzyItemName}'
         ORDER BY ${sortColumn}  ${sortRule}
     </select>
+
 </mapper>
