@@ -21,8 +21,8 @@ public class DateToString {
       return new DateTime(date.getTime()).toString("yyyy-MM-dd HH:mm:ss");
     }
 
-    public static Date toDate(String data){
-        return DateTime.parse(data, DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")).toDate();
+    public static Date toDate(String date){
+        return DateTime.parse(date, DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss")).toDate();
     }
 
 }
