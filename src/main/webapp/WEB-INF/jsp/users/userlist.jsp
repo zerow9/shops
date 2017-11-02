@@ -62,7 +62,7 @@
                     </div>
                     <div class="table-responsive">
                         <table class="layui-table"
-                               lay-data="{width: 1200, height:465, url:'<%=basePath%>admin/getUserJson.action', page:true, id:'idTest'}"
+                               lay-data="{width: 1200, height:460, url:'<%=basePath%>admin/getUserJson.action', page:true, id:'idTest'}"
                                lay-filter="demo">
                             <thead>
                             <tr>
@@ -94,7 +94,7 @@
 </script>
 <script src="../../../shopmanagement/common/layui/layui.js" charset="utf-8" type="text/javascript"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../../../js/userlist.js"></script>
+<script src="../../../js/adminlist.js"></script>
 
 </body>
 
