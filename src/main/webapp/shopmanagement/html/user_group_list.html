@@ -11,13 +11,13 @@
 
 <body>
 
-
 <div class="layui-btn-group user_group_button">
     <!--<button class="layui-btn" data-type="getCheckData">获取选中的数据</button>-->
     <button class="layui-btn" id="add_group_btn">添加用户组</button>
 </div>
 
-<table class="layui-table" lay-data="{width: 1100, height: 500, url:'user_group_list.json', page:true, id:'group_container_id'}"
+<table class="layui-table"
+       lay-data="{width: 1100, height: 500, url:'user_group_list.json', page:true, id:'group_container_id'}"
        lay-filter="group_lists_table">
     <thead>
     <tr>
@@ -42,7 +42,7 @@
     <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
 </script>
 
-<script src="../common/layui/layui.js" charset="utf-8"></script>
+<script src="/js/extends/layui/layui.all.js" charset="utf-8"></script>
 
 <script>
     layui.use('table', function () {
@@ -51,6 +51,7 @@
         table.on('checkbox(group_lists_table)', function (obj) {
             console.log(obj)
         });
+
         //监听工具条
         table.on('tool(group_lists_table)', function (table_tool) {
             var data = table_tool.data;
@@ -83,18 +84,25 @@
             active[type] ? active[type].call(this) : '';
         });
 
-        $("#add_group_btn").on('click',function () {
+//        添加用户组
+        $("#add_group_btn").on('click', function () {
             parent.layer.open({
                 type: 2
-                ,title: ['添加用户组', 'font-size:18px;']
-                ,closeBtn: 1
-                ,area: ['500px', '400px']
-                ,shade: 0.3  //遮罩
-                ,id: 'add_group_id' //设定一个id，防止重复弹出
-                ,btn: ['添加', '取消']
-                ,btnAlign: 'c' //按钮居中对齐
-                ,moveType: 0 //拖拽模式，0或者1
-                ,content:'add_user_group.html'
+                , title: ['添加用户组', 'font-size:18px;']
+                , closeBtn: 1
+                , area: ['500px', '400px']
+                , shade: 0.3  //遮罩
+                , id: 'add_group_id' //设定一个id，防止重复弹出
+                , btn: ['添加', '取消']
+                , btn1: function (index, layero) {  //添加按钮的操作
+                    return false
+                }
+                , btn2: function (index, layero) {  //取消按钮的操作
+                    return true
+                }
+                , move: false
+                , btnAlign: 'c' //按钮居中对齐
+                , content: 'add_user_group.html'
             })
         });
 
