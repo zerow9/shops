@@ -20,5 +20,9 @@ public class ErrorExc {
         if(former>latter)
             throw new Exception("区间former需要小于等于latter");
     }
+    protected  void exceptInitialize(Integer nowPage, Integer number)throws Exception{
+        if (nowPage==null||nowPage==0||number==null||number==0)
+            throw new Exception("页面参数未初始化");
+    }
 
 }

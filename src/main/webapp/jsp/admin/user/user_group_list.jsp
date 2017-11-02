@@ -1,23 +1,30 @@
-<!DOCTYPE html>
+<%--
+  Created by IntelliJ IDEA.
+  User: 63465
+  Date: 2017/11/2 0002
+  Time: 10:04
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+
 <head>
     <meta charset="utf-8">
     <title>用户组列表</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="../common/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../..//css/extends/layui/layui.css" media="all">
 </head>
 
 <body>
 
 <div class="layui-btn-group user_group_button">
-    <!--<button class="layui-btn" data-type="getCheckData">获取选中的数据</button>-->
     <button class="layui-btn" id="add_group_btn">添加用户组</button>
 </div>
 
 <table class="layui-table"
-       lay-data="{width: 1100, height: 500, url:'user_group_list.json', page:true, id:'group_container_id'}"
+       lay-data="{width: 1100, height: 500, url:'data/user_group_list.json', page:true, id:'group_container_id'}"
        lay-filter="group_lists_table">
     <thead>
     <tr>
@@ -42,7 +49,7 @@
     <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
 </script>
 
-<script src="/js/extends/layui/layui.all.js" charset="utf-8"></script>
+<script src="../../../js/extends/layui/layui.all.js" charset="utf-8"></script>
 
 <script>
     layui.use('table', function () {
