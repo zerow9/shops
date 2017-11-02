@@ -166,6 +166,8 @@
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="#">系统设置</a>
+                        </li>
                         <li><a class="J_menuItem" href="#">权限管理</a>
                         </li>
                         <li><a class="J_menuItem" href="#">数据管理</a>
