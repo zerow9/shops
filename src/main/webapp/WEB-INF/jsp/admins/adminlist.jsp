@@ -95,9 +95,7 @@
 <script src="../../../shopmanagement/js/content.min.js"></script>
 <script src="../../../shopmanagement/common/layui/layui.js"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../../../js/adminlist.js"></script>
-
-
+<script src="../../../js/admins/adminlist.js"></script>
 </body>
 
 </html>
