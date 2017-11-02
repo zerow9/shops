@@ -1,10 +1,7 @@
 package com.coding.comomInterface;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 
 public class DateToString {
 
@@ -13,4 +10,9 @@ public class DateToString {
         return format.format(date);
     }
 
+    public static int age(Date date){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy");
+        String year=format.format(date);
+        return 2017-Integer.valueOf(year);
+    }
 }

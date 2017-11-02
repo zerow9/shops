@@ -1,6 +1,8 @@
 package com.coding.controller;
 
 import com.coding.Iservice.IUserService;
+import com.coding.comomInterface.DateToString;
+import com.coding.myenum.MyUUID;
 import com.coding.pojo.Address;
 import com.coding.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.net.InetAddress;
+import java.net.Socket;
 import java.util.Date;
 import java.util.List;
 
@@ -25,10 +29,15 @@ public class UserController {
      * @param user 新用户
      */
     @RequestMapping("insertUser")
-    public boolean insertUser(User user) throws Exception {
+    public void insertUser(User user) throws Exception {
         user.setUserRegisterDateTime(new Date());
+        user.setUserAge(11);
+        user.setUserLandNumber(11);
+        user.setUserCurrentTime(new Date());
+        user.setUserLandIp(InetAddress.getLocalHost().getHostAddress());
+        user.setUserUuid(MyUUID.MyUUID.toString());
+        System.out.println(user);
         userService.insertUser(user);
-        return true;
     }
 
     /**
