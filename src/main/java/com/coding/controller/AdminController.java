@@ -33,6 +33,7 @@ public class AdminController extends UserController {
      * @return 删除成功之后跳转页面
      * @throws Exception 删除用户删除异常
      */
+
     @RequestMapping("deleteUserByPrimaryKey")
     @ResponseBody
     public boolean deleteUserByPrimaryKey(String userUuid) throws Exception {
@@ -206,7 +207,8 @@ public class AdminController extends UserController {
     @RequestMapping("getUserJson")
     @ResponseBody
     public String getUserAll() throws Exception {
-        List<User> users = adminService.selectUserAll();
+       // List<User> users = adminService.selectUserAll();
+        List<User> users=adminService.selectUserAllPaging(0,10);
         for (User user : users)
             user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
         JsonFormat<User> json=new JsonFormat<>(users,users.size(),null,null);

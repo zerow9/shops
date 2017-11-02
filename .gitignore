@@ -10,3 +10,4 @@ src/main/resource/mybatis/db.properties
 
 # 忽略测试文件
 /src/test/
+

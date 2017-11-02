@@ -14,7 +14,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="stylesheet" href="../../..//css/extends/layui/layui.css" media="all">
+    <link rel="stylesheet" href="../../../common/layui/css/layui.css" media="all">
 </head>
 
 <body>
@@ -24,7 +24,7 @@
 </div>
 
 <table class="layui-table"
-       lay-data="{width: 1100, height: 500, url:'data/user_group_list.json', page:true, id:'group_container_id'}"
+       lay-data="{width: 1100, height: 500, url:'/data/user_group_list.json', page:true, id:'group_container_id'}"
        lay-filter="group_lists_table">
     <thead>
     <tr>
@@ -49,7 +49,7 @@
     <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
 </script>
 
-<script src="../../../js/extends/layui/layui.all.js" charset="utf-8"></script>
+<script src="../../../common/layui/layui.js" charset="utf-8"></script>
 
 <script>
     layui.use('table', function () {
@@ -109,7 +109,7 @@
                 }
                 , move: false
                 , btnAlign: 'c' //按钮居中对齐
-                , content: 'add_user_group.html'
+                , content: '/jsp/admin/user/user_group_add.jsp'
             })
         });
 
