@@ -55,7 +55,7 @@ public interface AdminMapper {
     /**
      * 通过分页查询所有管理员信息
      *
-     * @param nowPage 当前页面
+     * @param nowPage 当前页
      * @param number  每页需要查询的用户数量
      * @return 封装了管理员信息的 Admin 类对象
      * @throws Exception
