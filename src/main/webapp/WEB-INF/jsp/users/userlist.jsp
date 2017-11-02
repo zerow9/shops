@@ -15,20 +15,19 @@
 <html>
 
 <head>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="shortcut icon" href="../../../favicon.ico">
+
     <link href="../../../shopmanagement/common/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet">
     <link href="../../../shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-    <link href="../../../shopmanagement/common/layui/css/layui.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="../../../css/module/my_layui.css" media="all">
+    <link href="../../../common/layui/css/layui.css" rel="stylesheet" >
+    <link href="../../../css/module/my_layui.css" rel="stylesheet">
 
 </head>
 
-<body class="gray-bg">
+<body>
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
@@ -57,16 +56,21 @@
                             <i class="fa fa-times"></i>
                         </a>
                     </div>
-                </div>
-                <div class="ibox-content">
 
+                </div>
+
+                <div class="ibox-content">
+                    <%--按钮组--%>
                     <div class="layui-btn-group demoTable">
                         <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
                         <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
                         <button class="layui-btn" data-type="isAll">验证是否全选</button>
                         <button class="layui-btn" data-type="addUser">添加用户</button>
                     </div>
+
                     <div class="table-responsive">
+
+                        <%--表格数据--%>
                         <table class="layui-table"
                                lay-data="{url:'<%=basePath%>admin/getUserJson.action', page:true, id:'idTest'}"
                                lay-filter="demo">
@@ -85,6 +89,7 @@
                             </tr>
                             </thead>
                         </table>
+
                     </div>
                 </div>
             </div>

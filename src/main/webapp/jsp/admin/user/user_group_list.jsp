@@ -14,11 +14,13 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
     <link href="../../../shopmanagement/common/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet">
     <link href="../../../shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../../common/layui/css/layui.css" media="all">
-    <link rel="stylesheet" href="../../../css/module/my_layui.css" media="all">
+    <link href="../../../common/layui/css/layui.css" rel="stylesheet" >
+    <link href="../../../css/module/my_layui.css" rel="stylesheet">
+
 </head>
 
 <body>
