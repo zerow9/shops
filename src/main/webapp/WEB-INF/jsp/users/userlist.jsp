@@ -84,7 +84,6 @@
                                 <th lay-data="{field:'dateToString', width:177}">注册日期</th>
                                 <th lay-data="{field:'userScore', width:80, sort: true}">积分</th>
                                 <th lay-data="{field:'userGroup', width:80}">分组</th>
-                                <th lay-data="{field:'wealth', width:135, sort: true}">财富</th>
                                 <th lay-data="{fixed: 'right', width:180, align:'center', toolbar: '#barDemo'}">操作</th>
                             </tr>
                             </thead>
