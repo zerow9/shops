@@ -60,5 +60,14 @@ public interface ItemMapper {
      */
     public List<Item> selectItemByItemType(@Param("itemTypeId") Integer itemTypeId)throws Exception;
 
+    /**
+     * 根据参数条件商品信息，并按要求进行排序（参数控制）
+     * @param fuzzyItemName 模糊查询的商品名称
+     * @param sortRule  排序规则  desc：降序 asc：升序
+     * @param sortColumn 需要按照什么字段进行排序（数据库中字段名字）
+     * @return 封装了商品属性的 Item 类对象集合（进行了排序）
+     * @throws Exception
+     */
+    public List<Item> selectItemFuzzyByItemNameSort(@Param("fuzzyItemName") String fuzzyItemName,@Param("sortRule")String sortRule,@Param("sortColumn")String sortColumn)throws Exception;
 
 }

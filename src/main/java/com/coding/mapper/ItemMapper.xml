@@ -151,4 +151,15 @@
         from item
         where item_type_id = #{itemTypeId}
     </select>
+
+    <!--通过正则表达式查找满足模糊匹配的商品信息按升序排序-->
+    <select id="selectItemFuzzyByItemNameSort" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from item
+        where item_name REGEXP '${fuzzyItemName}'
+        ORDER BY ${sortColumn}  ${sortRule}
+    </select>
 </mapper>
