@@ -57,7 +57,7 @@
 
 
                 <li>
-                    <a href="../../../shopmanagement/html/index_v1.html">
+                    <a class="J_menuItem" href="../../../shopmanagement/html/index_v1.html">
                         <i class="fa fa-home"></i>
                         <span class="nav-label">首页</span>
                     </a>
