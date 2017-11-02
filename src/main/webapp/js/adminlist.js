@@ -64,10 +64,12 @@ layui.use('table', function() {
                         var admin=parent.layer.getChildFrame('form',index);
                         var s=admin.serialize();
                         $.ajax({
-                            url:"insertAdmin.action?",
+                            url:"insertAdmin.action",
                             data:s,
                             type:"POST",
                             success:function () {
+                                var index = parent.layer.getFrameIndex(window.name);
+                                parent.layer.close(index);
                                 parent.layer.closeAll();
                                 swal({
                                     title: "太帅了",

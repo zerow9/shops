@@ -16,6 +16,7 @@ public class Admin {
     private Date adminRegisterTime;
 
     private Integer groupId;
+
     private String dateToString;
 
     public Integer getAdminId() {
@@ -92,6 +93,7 @@ public class Admin {
                 ", adminEmail='" + adminEmail + '\'' +
                 ", adminRegisterTime=" + adminRegisterTime +
                 ", groupId=" + groupId +
+                ", DateToString=" + dateToString +
                 '}';
     }
 }
