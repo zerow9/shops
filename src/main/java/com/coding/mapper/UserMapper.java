@@ -1,6 +1,7 @@
 package com.coding.mapper;
 
 import com.coding.pojo.Paging;
+import com.coding.pojo.PagingCustomUser;
 import com.coding.pojo.User;
 import org.apache.ibatis.annotations.Param;
 
@@ -101,12 +102,12 @@ public interface UserMapper {
 
 
     /**
-     * 通过关键字查询并分页显示用户信息
+     * 通过关键字查询并分页排序显示用户信息，包括年龄范围的限定
      *
-     * @param paging 封装了分页信息的 Paging 类对象
+     * @param paging 封装了分页查询需要的字段的 Paging 类对象
      * @return 封装了用户信息的 User 类对象集合
      * @throws Exception
      */
-    public List<User> selectUserPagingByKeyWord(Paging paging) throws Exception;
+    public List<User> selectUserPagingByKeyWord(PagingCustomUser paging) throws Exception;
 
 }

@@ -184,6 +184,8 @@
         });
 
 
+
+
         //监听提交
         form.on('submit(demo1)', function (data) {
             var parm = data.field;

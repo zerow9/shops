@@ -183,7 +183,7 @@
 
 
     <!--根据关键字查询用户信息并按照字段排序-->
-    <select id="selectUserPagingByKeyWord" parameterType="com.coding.pojo.Paging" resultMap="ResultMapWithBLOBs">
+    <select id="selectUserPagingByKeyWord" parameterType="com.coding.pojo.PagingCustomUser" resultMap="ResultMapWithBLOBs">
 
         select
         <include refid="Base_Column_List"/>
@@ -191,32 +191,42 @@
         <include refid="Blob_Column_List"/>
         from user
         <where>
+            <!--模糊查询-->
             <if test="keyWord!=null and keyWord!=''">
-                user_sex = #{keyWord}
-                or user_name REGEXP #{keyWord}
-                or user_group = #{keyWord}
+                and user_name REGEXP #{keyWord}
             </if>
+            <!--性别查询-->
+            <if test="user.userSex != null and user.userSex != ''">
+                and user_sex = #{user.userSex}
+            </if>
+            <!--组别查询-->
+            <if test="user.userGroup != null and user.userGroup != 0">
+                and user_group = #{user.userGroup}
+            </if>
+            <!--年龄范围查询-->
             <if test="latterAge != null and latterAge !=0">
                 and user_age BETWEEN #{formerAge} and #{latterAge}
             </if>
             <if test="latterAge == null or latterAge == 0">
                 and user_age BETWEEN #{formerAge} and 200
             </if>
-            <if test="sortByColumn!=null and sortByColumn!=''"></if>
+            <!--排序规则-->
             <if test="sortByColumn != null and sortByColumn !=''">
                 <if test="sortRule != null and sortRule != ''">
                     order by ${sortByColumn} ${sortRule}
                 </if>
             </if>
-
-            <if test="pageNumber != null and pageNumber != 0">
-                limit #{indexNumber},#{pageNumber}
+            <!--分页-->
+            <if test="indexNumber != null">
+                <if test="pageNumber != null and pageNumber != 0">
+                    limit #{indexNumber},#{pageNumber}
+                </if>
             </if>
-
+            <if test="indexNumber == null">
+                <if test="pageNumber != null and pageNumber != 0">
+                    limit 0,#{pageNumber}
+                </if>
+            </if>
         </where>
-
-        <if test="keyWord==null or keyWord==''">
-            select user10 from user order by user_uuid DESC limit 1
-        </if>
     </select>
 </mapper>

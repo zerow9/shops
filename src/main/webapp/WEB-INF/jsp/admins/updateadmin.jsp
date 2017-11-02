@@ -33,11 +33,15 @@
 
                 <div class="ibox-content">
                     <form class="layui-form" action="">
+
+
+                        <input type="hidden" name="adminId" value="${admin.adminId}"/>
+
                         <div class="layui-form-item">
                             <label class="layui-form-label">账号</label>
                             <div class="layui-input-block">
                                 <input type="text" name="adminAccount" lay-verify="required" autocomplete="off"
-                                       placeholder="请输入账号" class="layui-input">
+                                       placeholder="请输入账号" class="layui-input" value="${admin.adminAccount}" readonly>
                             </div>
                         </div>
 
@@ -46,17 +50,16 @@
                                 <label class="layui-form-label">请输入密码</label>
                                 <div class="layui-input-inline">
                                     <input type="password" name="adminPassword" lay-verify="pass" placeholder="请输入密码"
-                                           autocomplete="off" class="layui-input password">
+                                           value="${admin.adminPassword}" autocomplete="off"
+                                           class="layui-input password">
                                 </div>
-                                <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>
                             </div>
                             <div class="layui-form-item">
                                 <label class="layui-form-label">请确认密码</label>
                                 <div class="layui-input-inline">
                                     <input type="password" name="password" lay-verify="chackpass" placeholder="请再次输入密码"
-                                           autocomplete="off" class="layui-input">
+                                           autocomplete="off" class="layui-input" value="${admin.adminPassword}">
                                 </div>
-                                <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>
                             </div>
                         </div>
                         <div class="layui-form-item">
@@ -64,21 +67,21 @@
                                 <label class="layui-form-label">电话号码</label>
                                 <div class="layui-input-inline">
                                     <input type="tel" name="adminPhone" lay-verify="phone" autocomplete="off"
-                                           placeholder="请输入电话号码" class="layui-input">
+                                           placeholder="请输入电话号码" class="layui-input" value="${admin.adminPhone}">
                                 </div>
                             </div>
                             <div class="layui-inline">
                                 <label class="layui-form-label">验证邮箱</label>
                                 <div class="layui-input-inline">
                                     <input type="text" name="adminEmail" lay-verify="email" autocomplete="off"
-                                           class="layui-input">
+                                           class="layui-input" value="${admin.adminEmail}">
                                 </div>
                             </div>
                         </div>
 
                         <div class="layui-form-item">
                             <label class="layui-form-label">归属组</label>
-                            <div class="layui-input-block">
+                            <div class="layui-input-inline">
                                 <select name="groupId" lay-filter="aihao">
                                     <option value=""></option>
                                     <option value="3" selected="">普通用户组</option>
@@ -87,6 +90,15 @@
                                 </select>
                             </div>
                         </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">注册时间</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="adminRegisterTime1"  autocomplete="off"
+                                       class="layui-input" value="${admin.dateToString}" readonly>
+                            </div>
+                        </div>
+
 
                         <div class="layui-form-item">
                             <div class="layui-input-block">
@@ -104,5 +116,5 @@
 
 <script src="../../../shopmanagement/common/layui/layui.js" charset="utf-8" type="text/javascript"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../../../js/admins/addadmin.js"></script>
+<script src="../../../js/admins/updateadmin.js"></script>
 </body>

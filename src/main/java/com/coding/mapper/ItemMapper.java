@@ -1,6 +1,8 @@
 package com.coding.mapper;
 
 import com.coding.pojo.Item;
+import com.coding.pojo.Paging;
+import com.coding.pojo.PagingCustomItem;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -69,5 +71,15 @@ public interface ItemMapper {
      * @throws Exception
      */
     public List<Item> selectItemFuzzyByItemNameSort(@Param("fuzzyItemName") String fuzzyItemName,@Param("sortRule")String sortRule,@Param("sortColumn")String sortColumn)throws Exception;
+
+    /**
+     * 这是一个查询功能模块的集合，包含了众多的查询功能，根据 Paging 对象的封装
+     * 需要用到什么参数就将参数封装到 Paging 中，不需要用到的参数切忌不要封装。
+     * 该接口通过 Paging 中参数的封装去进行 SQL 语句拼接，参数的封装需要小心。
+     * @param paging 包含了所有查询条件的 Paging 类对象
+     * @return 封装了商品信息的 Item 类对象集合
+     * @throws Exception
+     */
+    public List<Item> selectItem(PagingCustomItem paging)throws Exception;
 
 }

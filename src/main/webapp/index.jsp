@@ -96,11 +96,11 @@
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="shopmanagement/html/goods_list.html">商品列表</a>
+                        <li><a class="J_menuItem" href="jsp/admin/goods/goods_list.jsp">商品列表</a>
                         </li>
-                        <li><a class="J_menuItem" href="shopmanagement/html/goods_type_list.html">商品分类</a>
+                        <li><a class="J_menuItem" href="jsp/admin/goods/goods_type_list.jsp">商品分类</a>
                         </li>
-                        <li><a class="J_menuItem" href="#">库存管理</a>
+                        <li><a class="J_menuItem" href="jsp/admin/goods/inventory_list.jsp">库存管理</a>
                         </li>
                     </ul>
                 </li>
@@ -166,6 +166,8 @@
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="#">系统设置</a>
+                        </li>
                         <li><a class="J_menuItem" href="#">权限管理</a>
                         </li>
                         <li><a class="J_menuItem" href="#">数据管理</a>
