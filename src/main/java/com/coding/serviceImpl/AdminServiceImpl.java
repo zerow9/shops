@@ -91,6 +91,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
 
     public List<User> selectUserAllPaging(Integer nowPage, Integer number) throws Exception {
         exceptInitialize(nowPage,number);
+        if(nowPage < 0) nowPage = 0;
         List<User> users = userMapper.selectUserAllPaging(nowPage,number);
         if(users.isEmpty()) throw new Exception("分页查询到的用户列表为空，或者已经是最后一页");
         return users;
