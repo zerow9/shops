@@ -132,15 +132,6 @@
         from item
     </select>
 
-    <!--通过正则表达式查找满足模糊匹配的商品信息-->
-    <select id="selectItemFuzzyByItemName" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
-        select
-        <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
-        from item
-        where item_name REGEXP #{fuzzyItemName}
-    </select>
 
     <!--根据商品类别查找商品信息-->
     <select id="selectItemByItemType" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
@@ -152,15 +143,36 @@
         where item_type_id = #{itemTypeId}
     </select>
 
+    <!--通过正则表达式查找满足模糊匹配的商品信息-->
+    <select id="selectItemFuzzyByItemName" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        <if test="fuzzyItemName!='' and fuzzyItemName!=null">
+            select
+            <include refid="Base_Column_List"/>
+            ,
+            <include refid="Blob_Column_List"/>
+            from item
+            where item_name REGEXP #{fuzzyItemName}
+        </if>
+        <if test="fuzzyItemName=='' or fuzzyItemName==null">
+            select item10 from item order by item_id DESC limit 1
+        </if>
+    </select>
+
+
     <!--通过正则表达式查找满足模糊匹配的商品信息按升序排序-->
     <select id="selectItemFuzzyByItemNameSort" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
-        select
-        <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
-        from item
-        where item_name REGEXP '${fuzzyItemName}'
-        ORDER BY ${sortColumn}  ${sortRule}
+        <if test="fuzzyItemName!='' and fuzzyItemName!=null">
+            select
+            <include refid="Base_Column_List"/>
+            ,
+            <include refid="Blob_Column_List"/>
+            from item
+            where item_name REGEXP '${fuzzyItemName}'
+            ORDER BY ${sortColumn}  ${sortRule}
+        </if>
+        <if test="fuzzyItemName=='' or fuzzyItemName==null">
+            select item10 from item order by item_id DESC limit 1
+        </if>
     </select>
 
 </mapper>

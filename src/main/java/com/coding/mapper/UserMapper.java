@@ -97,6 +97,6 @@ public interface UserMapper {
      * @throws Exception
      */
     public List<User> selectUserAllPaging(@Param("nowPage") Integer nowPage, @Param("number") Integer number) throws Exception;
-
+    
 
 }
