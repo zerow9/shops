@@ -157,4 +157,16 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         }
         return null;
     }
+
+    public List<Item> selectItemFuzzyByItemNameSort(String fuzzyItemName, String sortRule, String sortColumn) throws Exception {
+        if(fuzzyItemName!=null && sortRule != null && sortColumn != null){
+            List<Item> items;
+            try {
+               items =  itemMapper.selectItemFuzzyByItemNameSort(fuzzyItemName,sortRule,sortColumn);
+            }catch (Exception e){throw new Exception("商品参数错误，请检查重试");}
+             if(items.isEmpty()) throw new Exception("该参数查询的商品列表为空");
+             return items;
+        }
+        return null;
+    }
 }
