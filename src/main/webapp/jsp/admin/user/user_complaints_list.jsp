@@ -13,41 +13,82 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="../../../shopmanagement/common/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet">
+    <link href="../../../shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
+    <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link rel="stylesheet" href="../../../common/layui/css/layui.css" media="all">
+    <link rel="stylesheet" href="../../../css/module/my_layui.css" media="all">
 </head>
 
 <body>
 
-<div style="margin-bottom: 5px;">
+<div class="wrapper wrapper-content animated fadeInRight">
 
-    <!-- 示例-970 -->
-    <ins class="adsbygoogle" style="display:inline-block;width:970px;height:90px"
-         data-ad-client="ca-pub-6111334333458862" data-ad-slot="3820120620"></ins>
+    <div class="row">
 
+        <div class="layui-col-sm12">
+
+            <div class="ibox float-e-margins">
+
+                <blockquote class="layui-elem-quote">
+                    <h2>操作提示</h2>
+                    在这里，你可以增删改查投诉信息。
+                </blockquote>
+
+                <div class="ibox-title">
+                    <h5>投诉列表</h5>
+                    <div class="ibox-tools">
+                        <%--最大最小化按钮--%>
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <%--自定义操作--%>
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <%--关闭按钮--%>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+
+                    <div class="ibox-content">
+
+                        <div class="layui-btn-group user_group_button">
+                            <button class="layui-btn" id="add_group_btn">添加用户组</button>
+                        </div>
+
+                        <div class="table-responsive">
+
+                            <table class="layui-table"
+                                   lay-data="{url:'/data/user_complaints_list.json', page:true, id:'idTest'}"
+                                   lay-filter="complaints_lists_table">
+                                <thead>
+                                <tr>
+                                    <th lay-data="{checkbox:true, fixed: true}"></th>
+                                    <th lay-data="{field:'complaints_id', width:50, sort: true, fixed: true}">ID</th>
+                                    <th lay-data="{field:'complaints_user_id', width:100, sort: true}">投诉人</th>
+                                    <th lay-data="{field:'be_complaints_user_id', width:100, sort: true}">被投诉人</th>
+                                    <th lay-data="{field:'complaints_title', width:200}">投诉标题</th>
+                                    <th lay-data="{field:'complaints_content', width:200}">投诉内容</th>
+                                    <th lay-data="{field:'complaints_time', width:100, sort: true}">投诉时间</th>
+                                    <th lay-data="{field:'complaints_status', width:100, align:'center', fixed: 'right', toolbar: '#status_bar'}">
+                                        是否已处理
+                                    </th>
+                                    <th lay-data="{fixed: 'right', width:150, align:'center', toolbar: '#operate_bar'}">操作</th>
+                                </tr>
+                                </thead>
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
-
-<div class="layui-btn-complaints demoTable">
-</div>
-
-<table class="layui-table"
-       lay-data="{url:'/data/user_complaints_list.json', page:true, id:'idTest'}"
-       lay-filter="complaints_lists_table">
-    <thead>
-    <tr>
-        <th lay-data="{checkbox:true, fixed: true}"></th>
-        <th lay-data="{field:'complaints_id', width:50, sort: true, fixed: true}">ID</th>
-        <th lay-data="{field:'complaints_user_id', width:100, sort: true}">投诉人</th>
-        <th lay-data="{field:'be_complaints_user_id', width:100, sort: true}">被投诉人</th>
-        <th lay-data="{field:'complaints_title', width:200}">投诉标题</th>
-        <th lay-data="{field:'complaints_content', width:200}">投诉内容</th>
-        <th lay-data="{field:'complaints_time', width:100, sort: true}">投诉时间</th>
-        <th lay-data="{field:'complaints_status', width:100, align:'center', fixed: 'right', toolbar: '#status_bar'}">
-            是否已处理
-        </th>
-        <th lay-data="{fixed: 'right', width:150, align:'center', toolbar: '#operate_bar'}">操作</th>
-    </tr>
-    </thead>
-</table>
 
 <script type="text/html" id="status_bar">
     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="status_status" id="status_status_bar">是</a>
@@ -58,9 +99,11 @@
     <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
 </script>
 
+<script src="../../../js/extends/jquery/jquery.min.js"></script>
+<script src="../../../js/extends/bootstrap/bootstrap.js"></script>
+<script src="../../../shopmanagement/js/content.min.js"></script>
+<script src="../../../common/layui/layui.js"></script>
 
-<script src="../../../common/layui/layui.js" charset="utf-8"></script>
-<!-- 注意：如果你直接复制所有代码到本地，上述js路径需要改成你本地的 -->
 <script>
     layui.use('table', function () {
         var table = layui.table;

@@ -8,7 +8,12 @@
     background-color: #ecf8fc
 }
 
-.layui-elem-quote h1, h2, h3, h4, h5, h6 {
+.layui-elem-quote h1,
+.layui-elem-quote h2,
+.layui-elem-quote h3,
+.layui-elem-quote h4,
+.layui-elem-quote h5,
+.layui-elem-quote h6 {
     margin-bottom: 20px;
     color: #4fc0e8;
     font-size: 18px;

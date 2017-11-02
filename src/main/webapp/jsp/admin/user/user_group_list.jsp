@@ -32,39 +32,58 @@
             <div class="ibox float-e-margins">
 
                 <blockquote class="layui-elem-quote">
-                    <h2>操作提示：</h2>
-                    这个貌似不用多介绍，因为你已经在太多的地方都看到
+                    <h2>操作提示</h2>
+                    在这里，你可以增删改查用户组，并给用户组配置权限。
                 </blockquote>
 
-                <div class="ibox-content">
-
-                    <div class="layui-btn-group user_group_button">
-                        <button class="layui-btn" id="add_group_btn">添加用户组</button>
+                <div class="ibox-title">
+                    <h5>用户组列表</h5>
+                    <div class="ibox-tools">
+                        <%--最大最小化按钮--%>
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <%--自定义操作--%>
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <%--关闭按钮--%>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
                     </div>
 
-                    <div class="table-responsive">
-                        <table class="layui-table"
-                               lay-data="{url:'/data/user_group_list.json', page:true, id:'group_container_id'}"
-                               lay-filter="group_lists_table">
-                            <thead>
-                            <tr>
-                                <th lay-data="{checkbox:true, fixed: true}"></th>
-                                <th lay-data="{field:'group_id', width:100, sort: true, fixed: true}">ID</th>
-                                <th lay-data="{field:'group_name', width:200}">用户组名称</th>
-                                <th lay-data="{field:'group_description', width:300}">用户组描述</th>
-                                <th lay-data="{field:'group_shelve', width:200, align:'center', fixed: 'right', toolbar: '#shelve_bar'}">
-                                    是否启用
-                                </th>
-                                <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#operate_bar'}">操作
-                                </th>
-                            </tr>
-                            </thead>
-                        </table>
-                    </div>
+                    <div class="ibox-content">
 
+                        <div class="layui-btn-group user_group_button">
+                            <button class="layui-btn" id="add_group_btn">添加用户组</button>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="layui-table"
+                                   lay-data="{url:'/data/user_group_list.json', page:true, id:'group_container_id'}"
+                                   lay-filter="group_lists_table">
+                                <thead>
+                                <tr>
+                                    <th lay-data="{checkbox:true, fixed: true}"></th>
+                                    <th lay-data="{field:'group_id', width:100, sort: true, fixed: true}">ID</th>
+                                    <th lay-data="{field:'group_name', width:200}">用户组名称</th>
+                                    <th lay-data="{field:'group_description', width:300}">用户组描述</th>
+                                    <th lay-data="{field:'group_shelve', width:200, align:'center', fixed: 'right', toolbar: '#shelve_bar'}">
+                                        是否启用
+                                    </th>
+                                    <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#operate_bar'}">
+                                        操作
+                                    </th>
+                                </tr>
+                                </thead>
+                            </table>
+                        </div>
+
+                    </div>
                 </div>
-            </div>
 
+            </div>
         </div>
     </div>
 </div>
@@ -80,7 +99,10 @@
     <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
 </script>
 
-<script src="../../../common/layui/layui.js" charset="utf-8"></script>
+<script src="../../../js/extends/jquery/jquery.min.js"></script>
+<script src="../../../js/extends/bootstrap/bootstrap.js"></script>
+<script src="../../../shopmanagement/js/content.min.js"></script>
+<script src="../../../common/layui/layui.js"></script>
 
 <script>
     layui.use('table', function () {
