@@ -194,7 +194,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
 //        except(admins,"管理员列表查询为空");
         return admins;
     }
-
+    @Transactional(rollbackFor =Exception.class )
     public void deleteAdminByAdminIdArray(Integer[] adminIdArray) throws Exception {
         if(adminIdArray==null||"".equals(adminIdArray))throw new Exception("没有adminid数组信息，批量管理员删除出错");
         try {
