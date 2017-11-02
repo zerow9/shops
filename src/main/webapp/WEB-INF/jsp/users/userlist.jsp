@@ -62,7 +62,7 @@
                     </div>
                     <div class="table-responsive">
                         <table class="layui-table"
-                               lay-data="{width: 1200, height:465, url:'<%=basePath%>admin/getUserJson.action', page:true, id:'idTest'}"
+                               lay-data="{url:'<%=basePath%>admin/getUserJson.action', page:true, id:'idTest'}"
                                lay-filter="demo">
                             <thead>
                             <tr>
@@ -85,6 +85,7 @@
         </div>
     </div>
 </div>
+
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail"><i class="fa fa-eye" aria-hidden="true"
                                                                                 title="查看"></i></a>

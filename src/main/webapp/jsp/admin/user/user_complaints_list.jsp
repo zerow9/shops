@@ -30,7 +30,7 @@
 </div>
 
 <table class="layui-table"
-       lay-data="{width: 1100, height: 500, url:'/data/user_complaints_list.json', page:true, id:'idTest'}"
+       lay-data="{url:'/data/user_complaints_list.json', page:true, id:'idTest'}"
        lay-filter="complaints_lists_table">
     <thead>
     <tr>
