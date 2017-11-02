@@ -1,6 +1,6 @@
 package com.coding.pojo;
 
-public class PagingCustom {
+public class Paging {
     // x是当前页数，y是每页显示的个数
     private Integer indexNumber;//分页功能中 当前所在页的开始数（不是单纯的页数，是计算后的数值 (x-1)*y+1）
 

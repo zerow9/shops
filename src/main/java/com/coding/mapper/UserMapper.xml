@@ -183,7 +183,7 @@
 
 
     <!--根据关键字查询用户信息并按照字段排序-->
-    <select id="selectUserPagingByKeyWord" parameterType="com.coding.pojo.PagingCustom" resultMap="ResultMapWithBLOBs">
+    <select id="selectUserPagingByKeyWord" parameterType="com.coding.pojo.Paging" resultMap="ResultMapWithBLOBs">
 
         select
         <include refid="Base_Column_List"/>
