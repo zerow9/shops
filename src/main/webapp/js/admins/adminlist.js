@@ -52,7 +52,7 @@ layui.use('table', function() {
             getCheckLength: function() { //获取选中数目
                 var checkStatus = table.checkStatus('adminId'),
                     data = checkStatus.data;
-                layer.msg('选中了：' + data.length + ' 个');
+                layer.alert(JSON.stringify(data));
             },
             isAll: function() { //验证是否全选
                 var checkStatus = table.checkStatus('adminId');
