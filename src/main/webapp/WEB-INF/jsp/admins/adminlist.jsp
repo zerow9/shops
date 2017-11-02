@@ -11,17 +11,17 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="shortcut icon" href="../../../shopmanagement/favicon.ico">
+
     <link href="../../../shopmanagement/common/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet">
     <link href="../../../shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-    <link href="../../../shopmanagement/common/layui/css/layui.css" rel="stylesheet" />
-    <link rel="stylesheet" href="../../../css/module/my_layui.css" media="all">
+    <link href="../../../common/layui/css/layui.css" rel="stylesheet">
+    <link href="../../../css/module/my_layui.css" rel="stylesheet">
 
 </head>
 
-<body class="gray-bg">
+<body>
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
         <div class="col-sm-12">
@@ -59,7 +59,9 @@
                         <button class="layui-btn" data-type="addUser">添加管理员</button>
                     </div>
                     <div class="table-responsive">
-                        <table class="layui-table" lay-data="{ url:'<%=basePath%>admin/getAdminAll.action', page:true, id:'adminId'}" lay-filter="demo">
+                        <table class="layui-table"
+                               lay-data="{ url:'<%=basePath%>admin/getAdminAll.action', page:true, id:'adminId'}"
+                               lay-filter="demo">
                             <thead>
                             <tr>
                                 <th lay-data="{checkbox:true, fixed: true}"></th>
@@ -81,9 +83,11 @@
     </div>
 </div>
 <script type="text/html" id="barDemo">
-    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail"><i class="fa fa-eye" aria-hidden="true" title="查看"></i></a>
+    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail"><i class="fa fa-eye" aria-hidden="true"
+                                                                                title="查看"></i></a>
     <a class="layui-btn layui-btn-mini" lay-event="edit"><i class="fa fa-edit" aria-hidden="true" title="编辑"></i></a>
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del"><i class="fa fa-trash" aria-hidden="true" title="删除"></i></a>
+    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del"><i class="fa fa-trash" aria-hidden="true"
+                                                                            title="删除"></i></a>
 </script>
 
 <script src="../../../js/extends/jquery/jquery.min.js"></script>

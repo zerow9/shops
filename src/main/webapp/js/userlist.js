@@ -39,6 +39,7 @@ layui.use('table', function() {
         } else if(obj.event === 'edit') {
             // layer.alert('编辑行：<br>' + JSON.stringify(data))
         }
+
     });
 
     var $ = layui.$,
@@ -57,6 +58,7 @@ layui.use('table', function() {
                 var checkStatus = table.checkStatus('idTest');
                 layer.msg(checkStatus.isAll ? '全选' : '未全选')
             },
+
             addUser:function(){
                 layer.open({
                     type: 2,
@@ -71,10 +73,12 @@ layui.use('table', function() {
                     }
                 });
             }
+
         };
 
     $('.demoTable .layui-btn').on('click', function() {
         var type = $(this).data('type');
         active[type] ? active[type].call(this) : '';
     });
+
 });
