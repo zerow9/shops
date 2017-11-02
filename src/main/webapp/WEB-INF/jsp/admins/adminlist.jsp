@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: TongZhou
-  Date: 2017/11/1
-  Time: 9:47
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -88,6 +81,7 @@
 <script src="../../../shopmanagement/common/layui/layui.js" charset="utf-8" type="text/javascript"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../../../js/adminlist.js"></script>
+
 
 </body>
 

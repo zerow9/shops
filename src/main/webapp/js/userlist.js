@@ -66,27 +66,31 @@ layui.use('table', function() {
                     shade: 0.8,
                     maxmin: true,
                     area: ['80%', '90%'],
-                    content: 'adduser.html', //注意，如果str是object，那么需要字符拼接。
-                    yes:function(){
-                        layer.msg("添加成功！");
-                        layer.closeAll();
+                    content: 'user/addUser.action', //注意，如果str是object，那么需要字符拼接。
+                    yes:function(index){
+                        var admin=parent.layer.getChildFrame('form',index);
+                        var s=admin.serialize();
+                        $.ajax({
+                            url:"insertUser.action",
+                            data:s,
+                            type:"POST",
+                            success:function () {
+                                var index = parent.layer.getFrameIndex(window.name);
+                                parent.layer.close(index);
+                                parent.layer.closeAll();
+                                swal({
+                                    title: "太帅了",
+                                    text: "数据插入成功！",
+                                    type: "success"
+                                })
+                            }
+                        });
                     },
                     btn1:function(){
                         layer.close();
                     }
                 });
-            },
-            addUser1:function(){
-                parent.layer.open({
-                    type: 2,
-                    title:"添加用户",
-                    shadeClose: true,
-                    shade: 0.8,
-                    area: ['80%', '90%'],
-                    content: 'adduser.html', //注意，如果str是object，那么需要字符拼接。
-                });
             }
-
         };
 
     $('.demoTable .layui-btn').on('click', function() {

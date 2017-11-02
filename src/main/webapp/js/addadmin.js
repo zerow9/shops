@@ -1,93 +1,62 @@
-layui.use('table', function() {
-    var table = layui.table;
+layui.use(['form', 'layedit', 'laydate'], function () {
+    var form = layui.form,
+        layer = layui.layer,
+        layedit = layui.layedit,
+        laydate = layui.laydate;
 
-    //监听表格复选框选择
-    table.on('checkbox(demo)', function(obj) {
-        console.log(obj)
+    //定义JQuery
+    var $ = layui.$;
+
+    //日期
+    laydate.render({
+        elem: '#date'
     });
-    //监听工具条
-    table.on('tool(demo)', function(obj) {
-        var data = obj.data;
-        if(obj.event === 'detail') {
-            layer.msg('ID：' + data.id + ' 的查看操作');
-        } else if(obj.event === 'del') {
-            //自带的弹窗效果
-            /*
-            layer.confirm('真的删除行么', function(index) {
-                obj.del();
-                layer.close(index);
-            });
-            */
+    laydate.render({
+        elem: '#date1'
+    });
 
-            //强势弹窗效果
-            swal({
-                title: "您确定要删除'ID：="+data.id+"信息吗",
-                text: "删除后将无法恢复，请谨慎操作！",
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "删除",
-                closeOnConfirm: false
-            }, function() {
-                //通 ajax 加载方法
-                swal("删除成功！", "您已经永久删除了这条信息。", "success")
-            })
+    //自定义验证规则
+    form.verify({
+        title: function (value) {
+            if (value.length < 5) {
+                return '标题至少得5个字符啊';
+            }
+        },
+        pass: [/(.+){6,12}$/, '密码必须6到12位'],
+        content: function (value) {
+            layedit.sync(editIndex);
+        },
+        chackpass:function (value) {
+            //验证密码
+            var passdata=$(".password").val();
+            if(value!=passdata){
+                return "密码输入不一致，请重新输入！"
+            }
 
-        } else if(obj.event === 'edit') {
-            layer.alert('编辑行：<br>' + JSON.stringify(data))
+
         }
     });
 
-    var $ = layui.$,
-        active = {
-            getCheckData: function() { //获取选中数据
-                var checkStatus = table.checkStatus('idTest'),
-                    data = checkStatus.data;
-                layer.alert(JSON.stringify(data));
-            },
-            getCheckLength: function() { //获取选中数目
-                var checkStatus = table.checkStatus('idTest'),
-                    data = checkStatus.data;
-                layer.msg('选中了：' + data.length + ' 个');
-            },
-            isAll: function() { //验证是否全选
-                var checkStatus = table.checkStatus('idTest');
-                layer.msg(checkStatus.isAll ? '全选' : '未全选')
-            },
-            addUser:function(){
-                layer.open({
-                    type: 2,
-                    title:"添加用户",
-                    shadeClose: true,
-                    btn:['添加用户','取消'],
-                    shade: 0.8,
-                    maxmin: true,
-                    area: ['80%', '90%'],
-                    content: 'adduser.html', //注意，如果str是object，那么需要字符拼接。
-                    yes:function(){
-                        layer.msg("添加成功！");
-                        layer.closeAll();
-                    },
-                    btn1:function(){
-                        layer.close();
-                    }
-                });
-            },
-            addUser1:function(){
-                parent.layer.open({
-                    type: 2,
-                    title:"添加用户",
-                    shadeClose: true,
-                    shade: 0.8,
-                    area: ['80%', '90%'],
-                    content: 'selectAdminAll.action', //注意，如果str是object，那么需要字符拼接。
-                });
+
+    //监听提交
+    form.on('submit(demo1)', function (data) {
+        var parm = data.field;
+        $.ajax({
+            url: 'insertAdmin.action',
+            data: parm,
+            success: function () {
+
+                //关闭弹出的窗口
+                parent.layer.closeAll();
+                swal({
+                    title: "太帅了",
+                    text: "添加数据成功！",
+                    type: "success"
+                })
+                window.parent.location.reload();
             }
-
-        };
-
-    $('.demoTable .layui-btn').on('click', function() {
-        var type = $(this).data('type');
-        active[type] ? active[type].call(this) : '';
+        });
+        return false;
     });
+
 });

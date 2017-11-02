@@ -1,11 +1,11 @@
 package com.coding.controller;
 
 import com.coding.Iservice.IAdminService;
+import com.coding.comomInterface.DateToString;
 import com.coding.pojo.Admin;
 import com.coding.pojo.Groups;
 import com.coding.pojo.User;
-import com.coding.pojo.templet.JSONAdmin;
-import com.coding.pojo.templet.JSONUser;
+import com.coding.pojo.templet.JsonFormat;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -13,10 +13,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import sun.plugin2.message.Serializer;
 
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +33,7 @@ public class AdminController extends UserController {
      * @return 删除成功之后跳转页面
      * @throws Exception 删除用户删除异常
      */
+
     @RequestMapping("deleteUserByPrimaryKey")
     @ResponseBody
     public boolean deleteUserByPrimaryKey(String userUuid) throws Exception {
@@ -181,18 +180,10 @@ public class AdminController extends UserController {
     @ResponseBody
     public String getAdminAll() throws Exception {
         List<Admin> admins = adminService.selectAdminAll();
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        for(Admin admin:admins){
-            Date date=admin.getAdminRegisterTime();
-            if(date!=null)
-                admin.setDateToString(format.format(date));
-        }
-        JSONAdmin jsonAdmin=new JSONAdmin();
-        jsonAdmin.setCode("");
-        jsonAdmin.setMsg("");
-        jsonAdmin.setCount(admins.size());
-        jsonAdmin.setData(admins);
-        JSONObject jsonObject=JSONObject.fromObject(jsonAdmin);
+        for (Admin admin : admins)
+            admin.setDateToString(DateToString.change(admin.getAdminRegisterTime()));
+        JsonFormat<Admin> json=new JsonFormat<>(admins,admins.size(),null,null);
+        JSONObject jsonObject = JSONObject.fromObject(json);
         return jsonObject.toString();
     }
 
@@ -209,6 +200,7 @@ public class AdminController extends UserController {
 
     /**
      * 返回 JSON 的方法
+     *
      * @return
      * @throws Exception
      */
@@ -216,27 +208,16 @@ public class AdminController extends UserController {
     @ResponseBody
     public String getUserAll() throws Exception {
         List<User> users = adminService.selectUserAll();
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        for(User user:users){
-            Date date=user.getUserRegisterDateTime();
-            if(date!=null)
-                user.setDateToString(format.format(date));
-        }
-        JSONUser jsonUser=new JSONUser();
-        jsonUser.setData(users);
-        jsonUser.setCount(users.size());
-        jsonUser.setCode("");
-        jsonUser.setMsg("");
-        JSONObject result= JSONObject.fromObject(jsonUser);
+        for (User user : users)
+            user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
+        JsonFormat<User> json=new JsonFormat<>(users,users.size(),null,null);
+        JSONObject result = JSONObject.fromObject(json);
         return result.toString();
     }
 
-    /**
-     *
-     * @return
-     */
     @RequestMapping("addAdmin")
-    public String addAdmin(){
+    public String addAdmin() {
         return "admins/addadmin";
     }
+
 }

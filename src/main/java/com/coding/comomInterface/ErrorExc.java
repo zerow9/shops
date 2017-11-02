@@ -1,6 +1,8 @@
 package com.coding.comomInterface;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 public class ErrorExc {
 
@@ -17,6 +19,11 @@ public class ErrorExc {
             throw new Exception("区间范围未初始化");
         if(former>latter)
             throw new Exception("区间former需要小于等于latter");
+    }
+    protected  void exceptInitialize(Integer nowPage, Integer number)throws Exception{
+        if (nowPage==null||number==null||number==0){
+            throw new Exception("页面参数未初始化");
+        }
     }
 
 }

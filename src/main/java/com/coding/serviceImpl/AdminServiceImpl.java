@@ -89,6 +89,14 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
 
     }
 
+    public List<User> selectUserAllPaging(Integer nowPage, Integer number) throws Exception {
+        exceptInitialize(nowPage,number);
+        if(nowPage < 0) nowPage = 0;
+        List<User> users = userMapper.selectUserAllPaging(nowPage,number);
+        if(users.isEmpty()) throw new Exception("分页查询到的用户列表为空，或者已经是最后一页");
+        return users;
+    }
+
     /*------------------------------------------收获地址表------------------------------------------------------------------*/
     public List<Address> selectAddressAll() throws Exception {
             List<Address> addresses = addressMapper.selectAddressAll();
@@ -186,7 +194,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
 //        except(admins,"管理员列表查询为空");
         return admins;
     }
-
+    @Transactional(rollbackFor =Exception.class )
     public void deleteAdminByAdminIdArray(Integer[] adminIdArray) throws Exception {
         if(adminIdArray==null||"".equals(adminIdArray))throw new Exception("没有adminid数组信息，批量管理员删除出错");
         try {
@@ -194,6 +202,14 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         }catch (Exception e){
             throw new Exception("批量删除管理员时出错");
         }
+    }
+
+    public List<Admin> selectAdminAllPaging(Integer nowPage, Integer number) throws Exception {
+        exceptInitialize(nowPage,number);
+        if(nowPage < 0) nowPage = 0;
+        List<Admin> admins = adminMapper.selectAdminAllPaging(nowPage,number);
+        if(admins.isEmpty()) throw new Exception("分页查询到的用户列表为空，或者已经是最后一页");
+        return admins;
     }
 
     /*------------------------------------------商品类别表------------------------------------------------------------------*/
