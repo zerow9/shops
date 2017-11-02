@@ -23,10 +23,10 @@ layui.use('table', function() {
                 closeOnConfirm: false
             }, function() {
                 //通 ajax 加载方法
-               $.post('deleteAdminByPrimaryKey.action',{'adminId':data.adminId},function (index) {
-                   swal("删除成功！", "您已经永久删除了这条信息。", "success");
-                   window.location.reload();
-               });
+                $.post('deleteAdminByPrimaryKey.action',{'adminId':data.adminId},function (index) {
+                    swal("删除成功！", "您已经永久删除了这条信息。", "success");
+                    window.location.reload();
+                });
             })
 
         } else if(obj.event === 'edit') {
