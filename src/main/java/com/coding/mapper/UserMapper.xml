@@ -193,9 +193,15 @@
         <where>
             <!--模糊查询-->
             <if test="keyWord!=null and keyWord!=''">
-                user_sex = #{keyWord}
-                or user_name REGEXP #{keyWord}
-                or user_group = #{keyWord}
+                and user_name REGEXP #{keyWord}
+            </if>
+            <!--性别查询-->
+            <if test="user.userSex != null and user.userSex != ''">
+                and user_sex = #{user.userSex}
+            </if>
+            <!--组别查询-->
+            <if test="user.userGroup != null and user.userGroup != 0">
+                and user_group = #{user.userGroup}
             </if>
             <!--年龄范围查询-->
             <if test="latterAge != null and latterAge !=0">
