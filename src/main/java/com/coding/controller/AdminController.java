@@ -33,6 +33,7 @@ public class AdminController extends UserController {
      * @return 删除成功之后跳转页面
      * @throws Exception 删除用户删除异常
      */
+
     @RequestMapping("deleteUserByPrimaryKey")
     @ResponseBody
     public boolean deleteUserByPrimaryKey(String userUuid) throws Exception {
