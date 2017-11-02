@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
-<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
@@ -54,10 +53,8 @@
                 </li>
 
                 <!--主页设置-->
-
-
                 <li>
-                    <a class="J_menuItem" href="../../../shopmanagement/html/index_v1.html">
+                    <a class="J_menuItem" href="jsp/admin/home.jsp">
                         <i class="fa fa-home"></i>
                         <span class="nav-label">首页</span>
                     </a>
@@ -286,7 +283,7 @@
         </div>
         <div class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%"
-                    src="../../../shopmanagement/html/index_v1.html?v=4.0" frameborder="0"
+                    src="jsp/admin/home.jsp?v=4.0" frameborder="0"
                     data-id="index_v1.html" seamless></iframe>
         </div>
         <div class="footer">
@@ -402,7 +399,7 @@
 <script type="text/javascript" src="../../../shopmanagement/js/contabs.min.js"></script>
 <script src="../../../shopmanagement/js/plugins/pace/pace.min.js"></script>
 <script>
-    function closeWin(){
+    function closeWin() {
         alert(1);
     }
 </script>
