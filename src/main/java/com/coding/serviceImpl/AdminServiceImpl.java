@@ -97,6 +97,11 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         return users;
     }
 
+    @Override
+    public List<User> selectUserPagingByKeyWord(PagingCustomUser paging) throws Exception {
+        return null;
+    }
+
     /*------------------------------------------收获地址表------------------------------------------------------------------*/
     public List<Address> selectAddressAll() throws Exception {
             List<Address> addresses = addressMapper.selectAddressAll();
