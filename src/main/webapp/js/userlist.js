@@ -37,7 +37,7 @@ layui.use('table', function() {
             })
 
         } else if(obj.event === 'edit') {
-            layer.alert('编辑行：<br>' + JSON.stringify(data))
+            // layer.alert('编辑行：<br>' + JSON.stringify(data))
         }
     });
 
@@ -46,7 +46,7 @@ layui.use('table', function() {
             getCheckData: function() { //获取选中数据
                 var checkStatus = table.checkStatus('idTest'),
                     data = checkStatus.data;
-                layer.alert(JSON.stringify(data));
+                JSON.stringify(data);
             },
             getCheckLength: function() { //获取选中数目
                 var checkStatus = table.checkStatus('idTest'),
@@ -62,30 +62,10 @@ layui.use('table', function() {
                     type: 2,
                     title:"添加用户",
                     shadeClose: true,
-                    btn:['添加用户','取消'],
                     shade: 0.8,
                     maxmin: true,
                     area: ['80%', '90%'],
-                    content: 'user/addUser.action', //注意，如果str是object，那么需要字符拼接。
-                    yes:function(index){
-                        var admin=parent.layer.getChildFrame('form',index);
-                        var s=admin.serialize();
-                        $.ajax({
-                            url:"insertUser.action",
-                            data:s,
-                            type:"POST",
-                            success:function () {
-                                var index = parent.layer.getFrameIndex(window.name);
-                                parent.layer.close(index);
-                                parent.layer.closeAll();
-                                swal({
-                                    title: "太帅了",
-                                    text: "数据插入成功！",
-                                    type: "success"
-                                })
-                            }
-                        });
-                    },
+                    content: 'http://localhost:8080/user/addUser.action', //注意，如果str是object，那么需要字符拼接。
                     btn1:function(){
                         layer.close();
                     }
