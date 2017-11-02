@@ -60,6 +60,15 @@ public interface IAdminService extends IUserService {
      * @throws Exception
      */
     public void deleteUsersByUuidArray(String[] user_uuidArray)throws Exception;
+
+    /**
+     * 通过分页查询所有用户信息
+     * @param nowPage 当前页面
+     * @param number  每页需要查询的用户数量
+     * @return
+     * @throws Exception
+     */
+    public List<User> selectUserAllPaging(Integer nowPage,Integer number)throws Exception;
 /*------------------------------------------收获地址表表------------------------------------------------------------------*/
     /**
      * 返回所有地址信息
