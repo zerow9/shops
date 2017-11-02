@@ -135,11 +135,12 @@ public class AdminController extends UserController {
      * @throws Exception 插入数据为空
      */
     @RequestMapping("insertAdmin")
-    public void insertAdmin(Admin admin) throws Exception {
+    public boolean insertAdmin(Admin admin) throws Exception {
         if (admin == null)
             throw new Exception("插入数据为空");
         admin.setAdminRegisterTime(new Date());
         adminService.insertAdmin(admin);
+        return true;
     }
 
     /**
