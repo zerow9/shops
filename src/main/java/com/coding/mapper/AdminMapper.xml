@@ -85,4 +85,11 @@
         </foreach>
     </delete>
 
+    <!--分页查询-->
+    <select id="selectAdminAllPaging" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from admin limit #{nowPage},#{number}
+    </select>
+
 </mapper>
