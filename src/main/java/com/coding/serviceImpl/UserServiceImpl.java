@@ -36,14 +36,14 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         } catch (Exception e){
             throw  new Exception("插入用戶信息时出錯");
         }
-
     }
 
     public User selectUserByPrimaryKey(String userUuid) throws  Exception{
-        if (!userUuid.equals("")) {
+        if (userUuid != null && !userUuid.equals("")) {
             User user= userMapper.selectUserByPrimaryKey(userUuid);
              except(user,"用户查询为空");
             return user;
+
         }
         return null;
     }
@@ -62,7 +62,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     /*------------------------------------------收获地址表表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
     public void deleteAddressByPrimaryKey(Integer addressId) throws Exception{
-        if (addressId != 0) {
+        if (addressId != null && addressId != 0) {
             try {
                except(addressMapper.deleteAddressByPrimaryKey(addressId));
 //                addressMapper.deleteAddressByPrimaryKey(addressId);
@@ -82,7 +82,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     }
 
     public Address selectAddressByPrimaryKey(Integer addressId) throws Exception {
-        if (addressId != 0) {
+        if (addressId != null && addressId != 0) {
             Address address = addressMapper.selectAddressByPrimaryKey(addressId);
             except(address,"收货地址查询为空");
             return address;
@@ -101,7 +101,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
 
 
     public List<Address> selectAddressByUserID(String userUuid) throws Exception {
-        if (!userUuid.equals("")) {
+        if (userUuid != null && !userUuid.equals("")) {
             List<Address> addresses = addressMapper.selectAddressByUserID(userUuid);
             if(addresses.isEmpty()) throw new Exception("用户收获地址查询为空");
 //            exceptlist((List<Object>) addresses,"用户收获地址查询为空");
@@ -111,7 +111,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     }
     /*------------------------------------------商品类别表------------------------------------------------------------------*/
     public ItemType selectItemTypeByPrimaryKey(Integer itemTypeId) throws Exception {
-        if (itemTypeId != 0) {
+        if (itemTypeId != null && itemTypeId != 0) {
             ItemType itemType = itemTypeMapper.selectItemTypeByPrimaryKey(itemTypeId);
             except(itemTypeId,"查询商品类别为空");
             return itemType;
@@ -126,7 +126,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     }
     /*------------------------------------------商品表------------------------------------------------------------------*/
     public Item selectItemByPrimaryKey(Integer itemId) throws Exception {
-        if (itemId != 0){
+        if (itemId != null && itemId != 0){
             Item item = itemMapper.selectItemByPrimaryKey(itemId);
             except(item,"查询商品时为空");
             return item;
@@ -138,5 +138,23 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             List<Item> items = itemMapper.selectItemAll();
             if(items.isEmpty()) throw new Exception("查询商品列表为空");
             return items;
+    }
+
+    public List<Item> selectItemFuzzyByItemName(String fuzzyItemName) throws Exception {
+        if (fuzzyItemName != null && !fuzzyItemName.equals("")){
+            List<Item> items = itemMapper.selectItemFuzzyByItemName(fuzzyItemName);
+            if(items.isEmpty()) throw new Exception("没有该关键词的商品");
+            return items;
+        }
+        return null;
+    }
+
+    public List<Item> selectItemByItemType(Integer itemTypeId) throws Exception {
+        if ( itemTypeId != null && itemTypeId != 0 ){
+            List<Item> items = itemMapper.selectItemByItemType(itemTypeId);
+            if(items.isEmpty()) throw new Exception("没有该商品类别的商品");
+            return items;
+        }
+        return null;
     }
 }

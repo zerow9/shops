@@ -8,6 +8,8 @@ import java.util.List;
 public interface IAdminService extends IUserService {
     /*------------------------------------------用户表------------------------------------------------------------------*/
     /**
+     *
+     *
      * 根据用户 ID 删除用户信息
      * @param userUuid
      */
@@ -18,6 +20,46 @@ public interface IAdminService extends IUserService {
      * @return
      */
     public List<User> selectUserAll() throws Exception;
+
+    /**
+     * 根据电话号码查找用户信息
+     * @param userPhone 电话号码
+     * @return  封装了符合查找条件的 User 类对象
+     * @throws Exception
+     */
+    public User selectUserByPhone( String userPhone ) throws Exception;
+
+    /**
+     * 根据组别ID查找用户信息
+     * @param user_group 组别ID
+     * @return  返回满足查询条件封装类用户信息的 User 类对象集合
+     * @throws Exception
+     */
+    public List<User> selectUserByGroupId( Integer user_group) throws Exception;
+
+    /**
+     * 根据积分范围查找用户信息
+     * @param former 范围低数值
+     * @param latter 范围高数值
+     * @return 封装了满足查询条件的 User 类对象集合
+     */
+    public List<User> selectUserByScoreRange(Integer former,Integer latter)throws Exception;
+
+    /**
+     *
+     * @param former 范围低数值
+     * @param latter 范围高数值
+     * @return 封装了满足查询条件的 User 类对象集合
+     */
+    public List<User> selectUserByAgeRange(Integer former,Integer latter)throws  Exception;
+
+    /**
+     * 批量删除用户信息
+     * @param user_uuidArray 需删除用户ID集合
+     * @return  1 ：删除成功  0 ：删除失败
+     * @throws Exception
+     */
+    public void deleteUsersByUuidArray(String[] user_uuidArray)throws Exception;
 /*------------------------------------------收获地址表表------------------------------------------------------------------*/
     /**
      * 返回所有地址信息
@@ -88,6 +130,15 @@ public interface IAdminService extends IUserService {
      */
     public List<Admin> selectAdminAll() throws Exception;
 
+    /**
+     * 批量删除管理员信息
+     *
+     * @param adminIdArray 管理员ID数组
+     * @return 0:删除失败 1:删除成功
+     * @throws Exception
+     */
+    public void deleteAdminByAdminIdArray(Integer[] adminIdArray) throws Exception;
+
      /*------------------------------------------商品类别表------------------------------------------------------------------*/
 
     /**
@@ -117,7 +168,7 @@ public interface IAdminService extends IUserService {
      *
      * @param itemId 商品唯一ID
      */
-    public void deleteItemByPrimaryKey(@Param("itemId") Integer itemId) throws Exception;
+    public void deleteItemByPrimaryKey(Integer itemId) throws Exception;
 
     /**
      * 增加商品信息
@@ -152,7 +203,7 @@ public interface IAdminService extends IUserService {
      * @return 封装了库存信息的 Repertory 类对象
      * @throws Exception
      */
-    public Repertory selectRepertoryByPrimaryKey(@Param("repertoryId") Integer repertoryId) throws Exception;
+    public Repertory selectRepertoryByPrimaryKey(Integer repertoryId) throws Exception;
 
     /**
      * @param repertory 封装了库存信息的 Repertory 类对象
@@ -190,7 +241,7 @@ public interface IAdminService extends IUserService {
      * @return 封装类厂家信息的 Vender 对象
      * @throws Exception
      */
-    public Vender selectVenderByPrimaryKey(@Param("venderId") Integer venderId) throws Exception;
+    public Vender selectVenderByPrimaryKey(Integer venderId) throws Exception;
 
     /**
      * 根据厂家ID更新厂家信息

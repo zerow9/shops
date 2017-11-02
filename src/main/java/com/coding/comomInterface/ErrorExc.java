@@ -8,9 +8,15 @@ public class ErrorExc {
         if(object==null)
             throw  new Exception(message);
     }
-    protected void except(int i) throws  Exception{
-        if(i==0)
+    protected void except(int line) throws  Exception{
+        if(line==0)
             throw new  Exception();
+    }
+    protected void except(Integer former, Integer latter) throws  Exception{
+        if (former==null||former==0||latter==null||latter==0)
+            throw new Exception("区间范围未初始化");
+        if(former>latter)
+            throw new Exception("区间former需要小于等于latter");
     }
 
 }
