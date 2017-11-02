@@ -7,6 +7,9 @@ import com.coding.pojo.Groups;
 import com.coding.pojo.User;
 import com.coding.pojo.templet.JsonFormat;
 import net.sf.json.JSONObject;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -161,9 +165,10 @@ public class AdminController extends UserController {
      * @return 修改成功和跳转的页面
      */
     @RequestMapping("updateAdminByPrimaryKey")
-    public String updateAdminByPrimaryKey(Admin admin) throws Exception {
+    public boolean updateAdminByPrimaryKey(Admin admin,String adminRegisterTime1) throws Exception {
+        admin.setAdminRegisterTime(DateToString.toDate(adminRegisterTime1));
         adminService.updateAdminByPrimaryKey(admin);
-        return "";
+        return true;
     }
 
     /**
@@ -219,6 +224,24 @@ public class AdminController extends UserController {
     @RequestMapping("addAdmin")
     public String addAdmin() {
         return "admins/addadmin";
+    }
+
+    /**
+     *
+     * @param id
+     * @param model
+     * @return
+     */
+    @RequestMapping("updateAdmin")
+    public String updateAdmin(Integer id, Model model){
+        try {
+            Admin admin=adminService.selectAdminByPrimaryKey(id);
+            admin.setDateToString(DateToString.change(admin.getAdminRegisterTime()));
+            model.addAttribute("admin",admin);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "admins/updateadmin";
     }
 
 }

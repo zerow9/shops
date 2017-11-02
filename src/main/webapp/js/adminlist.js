@@ -30,13 +30,21 @@ layui.use('table', function() {
             })
 
         } else if(obj.event === 'edit') {
-            layer.alert('编辑行：<br>' + JSON.stringify(data))
+            layer.open({
+                type: 2,
+                title:"修改管理员",
+                shadeClose: true,
+                shade: 0.3,
+                maxmin: true,
+                area: ['80%', '90%'],
+                content: 'updateAdmin.action?id='+data.adminId, //注意，如果str是object，那么需要字符拼接。
+            });
         }
     });
 
     var $ = layui.$,
         active = {
-            getCheckData: function() { //获取选中数据
+            getCheckData: function() { //获取选中数据那就【
                 var checkStatus = table.checkStatus('adminId'),
                     data = checkStatus.data;
                 layer.alert(JSON.stringify(data));
