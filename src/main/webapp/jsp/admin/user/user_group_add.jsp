@@ -66,8 +66,23 @@
 
         //监听提交
         form.on('submit(demo1)', function (data) {
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
+            var parm = data.field;
+            $.ajax({
+                url: 'insertUser.action',
+                data: parm,
+                type:'POST',
+                success: function () {
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                    //关闭弹出的窗口
+                    parent.layer.closeAll();
+                    swal({
+                        title: "太帅了",
+                        text: "添加数据成功！",
+                        type: "success"
+                    })
+                    window.parent.location.reload();
+                }
             });
             return false;
         });
