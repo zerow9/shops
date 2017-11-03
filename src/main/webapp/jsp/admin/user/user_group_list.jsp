@@ -18,7 +18,7 @@
     <link href="../../../shopmanagement/common/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet">
     <link href="../../../shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-    <link href="../../../common/layui/css/layui.css" rel="stylesheet" >
+    <link href="../../../common/layui/css/layui.css" rel="stylesheet">
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
 
 </head>
@@ -36,7 +36,11 @@
                 <blockquote class="layui-elem-quote">
                     <h2>操作提示</h2>
                     在这里，你可以增删改查用户组，并给用户组配置权限。
-                </blockquote>
+                </blockquote>5
+
+                <div class="alert alert-info">
+                    H+是一个很棒的后台UI框架 <a class="alert-link" href="notifications.html#">了解更多</a>.
+                </div>
 
                 <div class="ibox-title">
                     <h5>用户组列表</h5>

@@ -2,7 +2,7 @@ package com.coding.controller;
 
 import com.coding.Iservice.IUserService;
 import com.coding.comomInterface.DateToString;
-import com.coding.myenum.MyUUID;
+import com.coding.comomInterface.MyUUID;
 import com.coding.pojo.Address;
 import com.coding.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +38,8 @@ public class UserController {
         user.setUserLandNumber(11);
         user.setUserCurrentTime(new Date());
         user.setUserLandIp(InetAddress.getLocalHost().getHostAddress());
-        user.setUserUuid(UUID.randomUUID().toString().replace("-", ""));
-        System.out.println(user);
+        user.setUserUuid(MyUUID.randomUUID());
+        user.setUserAddress(1);
         userService.insertUser(user);
         return true;
     }
@@ -112,19 +112,27 @@ public class UserController {
 
     @RequestMapping("updateUserByPrimaryKey")
     public boolean updateUserByPrimaryKey(String userRegisterDateTime1,User user) throws Exception {
-        user.setUserRegisterDateTime(DateToString.toDate(userRegisterDateTime1));
+        user.setUserRegisterDateTime(DateToString.date(userRegisterDateTime1));
         user.setUserCurrentTime(new Date());
         user.setUserLandIp(InetAddress.getLocalHost().getHostAddress());
         int landNumber = user.getUserLandNumber();
         user.setUserLandNumber(landNumber+1);
         userService.updateUserByPrimaryKey(user);
         return true;
-
     }
 
 
     @RequestMapping("addUser")
     public String addUser() {
         return "users/adduser";
+    }
+
+
+    @RequestMapping("seeUserIdByKey")
+    public String seeUserIdByKey(String userUuid, Model model) throws Exception {
+        User user = userService.selectUserByPrimaryKey(userUuid);
+        user.setDateToString(DateToString.date(user.getUserRegisterDateTime()));
+        model.addAttribute("user", user);
+        return "users/seeUser";
     }
 }

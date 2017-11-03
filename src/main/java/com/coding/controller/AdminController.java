@@ -2,7 +2,7 @@ package com.coding.controller;
 
 import com.coding.Iservice.IAdminService;
 import com.coding.comomInterface.DateToString;
-import com.coding.myenum.MyUUID;
+import com.coding.comomInterface.MyUUID;
 import com.coding.pojo.Admin;
 import com.coding.pojo.Groups;
 import com.coding.pojo.User;
@@ -15,9 +15,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.net.InetAddress;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin")
@@ -80,10 +80,20 @@ public class AdminController {
         return "";
     }
 
+
+    /**
+     * 批量删除管理员
+     *
+     * @param arrayString 管理员id集合
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("deleteAdminsByIdArray")
     public boolean deleteAdminsByIdArray(String arrayString) throws Exception {
+        List<Integer> list = new ArrayList<>();
         for (String uuid : arrayString.split(","))
-            adminService.deleteAdminByPrimaryKey(Integer.parseInt(uuid));
+            list.add(Integer.parseInt(uuid));
+        adminService.deleteAdminByAdminIdArray(list.toArray(new Integer[list.size()]));
         return true;
     }
 
@@ -135,6 +145,7 @@ public class AdminController {
         return true;
     }
 
+
     /**
      * 插入分组管理员信息
      *
@@ -170,8 +181,8 @@ public class AdminController {
      * @return 修改成功和跳转的页面
      */
     @RequestMapping("updateAdminByPrimaryKey")
-    public boolean updateAdminByPrimaryKey(Admin admin,String adminRegisterTime1) throws Exception {
-        admin.setAdminRegisterTime(DateToString.toDate(adminRegisterTime1));
+    public boolean updateAdminByPrimaryKey(Admin admin, String adminRegisterTime1) throws Exception {
+        admin.setAdminRegisterTime(DateToString.date(adminRegisterTime1));
         adminService.updateAdminByPrimaryKey(admin);
         return true;
     }
@@ -191,7 +202,7 @@ public class AdminController {
     public String getAdminAll() throws Exception {
         List<Admin> admins = adminService.selectAdminAll();
         for (Admin admin : admins)
-            admin.setDateToString(DateToString.change(admin.getAdminRegisterTime()));
+            admin.setDateToString(DateToString.date(admin.getAdminRegisterTime()));
         JsonFormat<Admin> json = new JsonFormat<>(admins, admins.size(), null, null);
         JSONObject jsonObject = JSONObject.fromObject(json);
         return jsonObject.toString();
@@ -217,10 +228,9 @@ public class AdminController {
     @RequestMapping("getUserJson")
     @ResponseBody
     public String getUserAll() throws Exception {
-        // List<User> users = adminService.selectUserAll();
         List<User> users = adminService.selectUserAllPaging(0, 10);
         for (User user : users)
-            user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
+            user.setDateToString(DateToString.date(user.getUserRegisterDateTime()));
         JsonFormat<User> json = new JsonFormat<>(users, users.size(), null, null);
         JSONObject result = JSONObject.fromObject(json);
         return result.toString();
@@ -232,31 +242,24 @@ public class AdminController {
     }
 
     /**
-     *
      * @param id
      * @param model
      * @return
      */
     @RequestMapping("updateAdmin")
-    public String updateAdmin(Integer id, Model model){
+    public String updateAdmin(Integer id, Model model) {
         try {
-            Admin admin=adminService.selectAdminByPrimaryKey(id);
-            admin.setDateToString(DateToString.change(admin.getAdminRegisterTime()));
-            model.addAttribute("admin",admin);
+            Admin admin = adminService.selectAdminByPrimaryKey(id);
+            admin.setDateToString(DateToString.date(admin.getAdminRegisterTime()));
+            model.addAttribute("admin", admin);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "admins/updateadmin";
     }
 
-    @RequestMapping("updateUserByPrimaryKey")
-    public String updateUser(String userUuid, Model model) throws Exception{
-        User user = adminService.selectUserByPrimaryKey(userUuid);
-        user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
-        model.addAttribute("user",user);
-        return "users/updateUser";
 
-    }
+
     @RequestMapping("insertUser")
     public boolean insertUser(User user) throws Exception {
         user.setUserRegisterDateTime(new Date());
@@ -264,22 +267,76 @@ public class AdminController {
         user.setUserLandNumber(11);
         user.setUserCurrentTime(new Date());
         user.setUserLandIp(InetAddress.getLocalHost().getHostAddress());
-        user.setUserUuid(MyUUID.MyUUID.toString());
+        user.setUserUuid(MyUUID.randomUUID());
         user.setUserAddress(111111);
         System.out.println(user);
         adminService.insertUser(user);
         return true;
     }
+
     @RequestMapping("addUser")
     public String addUser() {
         return "users/adduser";
     }
 
+
+    /**
+     * 根据UUID查询用户信息
+     *
+     * @param userUuid
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("selectUserIdByKey")
-    public String selectUserIdByKey(String userUuid, Model model) throws Exception{
+    public String selectUserIdByKey(String userUuid, Model model) throws Exception {
         User user = adminService.selectUserByPrimaryKey(userUuid);
-        user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
-        model.addAttribute("user",user);
+        user.setDateToString(DateToString.date(user.getUserRegisterDateTime()));
+        model.addAttribute("user", user);
         return "users/updateUser";
     }
+
+
+    @RequestMapping("deleteUserByUUidArray")
+    public boolean deleteUserByUUidArray(String arrayString) throws Exception {
+        adminService.deleteUsersByUuidArray(arrayString.split(","));
+        return true;
+    }
+
+    @RequestMapping("updateUserByPrimaryKey")
+    public boolean updateUserByPrimaryKey(String userRegisterDateTime1,User user) throws Exception {
+        user.setUserRegisterDateTime(DateToString.date(userRegisterDateTime1));
+        user.setUserCurrentTime(new Date());
+        user.setUserLandIp(InetAddress.getLocalHost().getHostAddress());
+        int landNumber = user.getUserLandNumber();
+        user.setUserLandNumber(landNumber+1);
+        adminService.updateUserByPrimaryKey(user);
+        return true;
+    }
+
+    @RequestMapping("updateUser")
+    public String updateUser(String userUuid, Model model) throws Exception {
+        User user = adminService.selectUserByPrimaryKey(userUuid);
+        user.setDateToString(DateToString.date(user.getUserRegisterDateTime()));
+        model.addAttribute("user", user);
+        return "users/updateUser";
+
+    }
+
+    @RequestMapping("seeUserIdByKey")
+    public String seeUserIdByKey(String userUuid, Model model) throws Exception {
+        User user = adminService.selectUserByPrimaryKey(userUuid);
+        user.setDateToString(DateToString.date(user.getUserRegisterDateTime()));
+        model.addAttribute("user", user);
+        return "users/detailUser";
+    }
+
+    @RequestMapping("seeAdminIdByKey")
+    public String seeAdminIdByKey(Integer adminId, Model model) throws Exception {
+        Admin admin = adminService.selectAdminByPrimaryKey(adminId);
+        admin.setDateToString(DateToString.date(admin.getAdminRegisterTime()));
+        model.addAttribute("admin", admin);
+        return "admins/detailAdmin";
+    }
+
 }
