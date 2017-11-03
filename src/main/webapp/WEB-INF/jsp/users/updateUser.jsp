@@ -34,6 +34,9 @@
 
                 <div class="ibox-content">
                     <form class="layui-form" action="">
+                        <input type="hidden" name="userUuid" lay-verify="required" autocomplete="off"
+                               class="layui-input" value="${user.userUuid}" >
+
                         <div class="layui-form-item">
                             <label class="layui-form-label">用户昵称</label>
                             <div class="layui-input-block">
@@ -105,7 +108,7 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">验证邮箱</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" name="userEmail" lay-verify="email" autocomplete="off"
+                                    <input type="text" name="userEmail" autocomplete="off"
                                            class="layui-input" value="${user.userEmail}">
                                 </div>
                             </div>
@@ -115,14 +118,14 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">年龄</label>
                                 <div class="layui-input-inline">
-                                    <input type="tel" name="userAge" lay-verify="phone" autocomplete="off"
+                                    <input type="tel" name="userAge" autocomplete="off"
                                            placeholder="请输入年龄" class="layui-input" value="${user.userAge}">
                                 </div>
                             </div>
                             <div class="layui-inline">
                                 <label class="layui-form-label">注册日期</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" name="userRegisterDateTime" lay-verify="email" readonly autocomplete="off"
+                                    <input type="text" name="userRegisterDateTime1" readonly autocomplete="off"
                                            class="layui-input" value="${user.dateToString}">
                                 </div>
                             </div>
@@ -132,8 +135,8 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">积分</label>
                                 <div class="layui-input-inline">
-                                    <input type="tel" name="userScore" lay-verify="phone" autocomplete="off" class="layui-input"
-                                           value="${user.userScore}">
+                                    <input type="tel" name="userScore" autocomplete="off" class="layui-input"
+                                           value="${user.userScore}" readonly>
                                 </div>
                             </div>
                         </div>
@@ -153,10 +156,14 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">地址</label>
                             <div class="layui-input-block">
-                                <input type="text" name="userAddress" lay-verify="required" placeholder="请输入地址"
+                                <input type="text" name="userAddress" placeholder="请输入地址"
                                        autocomplete="off" class="layui-input" value="${user.userAddress}">
                             </div>
                         </div>
+
+                        <input type="hidden" name="userLandNumber"
+                               autocomplete="off" class="layui-input" value="${user.userLandNumber}">
+
 
                         <div class="layui-form-item">
                             <div class="layui-input-block">
@@ -220,7 +227,7 @@
         form.on('submit(demo1)', function (data) {
             var parm = data.field;
             $.ajax({
-                url: 'insertUser.action',
+                url: 'http://localhost:8080/user/updateUserByPrimaryKey.action',
                 data: parm,
                 type:'POST',
                 success: function () {

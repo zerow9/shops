@@ -43,10 +43,11 @@ layui.use('table', function() {
                 title:"修改用户",
                 shadeClose: true,
                 shade: 0.3,
+                content: 'selectUserIdByKey.action?userUuid='+data.userUuid, //注意，如果str是object，那么需要字符拼接。
                 maxmin: true,
-                area: ['80%', '90%'],
-                content: 'updateUserByPrimaryKey.action?userUuid='+data.userUuid //注意，如果str是object，那么需要字符拼接。
+                area: ['80%', '90%']
             });
+
         }
 
     });
@@ -76,7 +77,7 @@ layui.use('table', function() {
                     shade: 0.8,
                     maxmin: true,
                     area: ['80%', '90%'],
-                    content: 'addUser.action', //注意，如果str是object，那么需要字符拼接。
+                    content: 'http://localhost:8080/user/addUser.action', //注意，如果str是object，那么需要字符拼接。
                     btn1:function(){
                         layer.close();
                     }
