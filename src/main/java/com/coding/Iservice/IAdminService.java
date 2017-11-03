@@ -69,6 +69,15 @@ public interface IAdminService extends IUserService {
      * @throws Exception
      */
     public List<User> selectUserAllPaging(Integer nowPage,Integer number)throws Exception;
+
+    /**
+     * 通过关键字查询并分页排序显示用户信息，包括年龄范围的限定
+     *
+     * @param paging 封装了分页查询需要的字段的 Paging 类对象
+     * @return 封装了用户信息的 User 类对象集合
+     * @throws Exception
+     */
+    public List<User> selectUserPagingByKeyWord(PagingCustomUser paging) throws Exception;
 /*------------------------------------------收获地址表表------------------------------------------------------------------*/
     /**
      * 返回所有地址信息

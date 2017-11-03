@@ -186,19 +186,24 @@
         <include refid="Blob_Column_List"/>
         from item
         <where>
-            <!--关键字模糊查询-->
+            <!--关键字模糊查询（商品名称或商品描述）-->
             <if test="keyWord != null and keyWord != ''">
                 item_name REGEXP #{keyWord}
                 or item_introduce REGEXP #{keyWord}
             </if>
-            <!--厂家模糊查询-->
-            <if test="item.makeVender != null and makeVender != ''">
-                and make_vender REGEXP #{item.makeVender}
+
+            <if test="item != null">
+                <!--厂家模糊查询-->
+                <if test="item.makeVender != null and item.makeVender != 0">
+                    and make_vender = ${item.makeVender}
+                </if>
+
+                <!--商品属性（是否为积分商品）-->
+                <if test="item.itemScoreType != null">
+                    and item_score_type = #{item.itemScoreType}
+                </if>
             </if>
-            <!--商品属性（是否为积分商品）-->
-            <if test="itemScoreType != null">
-                and item_score_type = #{itemScoreType}
-            </if>
+
 
             <!--库存范围内查询-->
             <if test="formerRepertoryNumber != null">
