@@ -20,10 +20,11 @@
         <id column="group_id" property="groupId" jdbcType="INTEGER" />
         <result column="group_name" property="groupName" jdbcType="VARCHAR" />
         <result column="group_jurisdiction" property="groupJurisdiction" jdbcType="VARCHAR" />
+        <result column="is_start" property="isStart" jdbcType="INTEGER"/>
     </resultMap>
     <!--Group表字段-->
     <sql id="Base_Column_List">
-        group_id, group_name, "group_jurisdiction"
+        group_id, group_name, "group_jurisdiction",is_start
     </sql>
     <!--根据用户唯一ID查询用户信息-->
     <select id="selectGroupsByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -43,7 +44,8 @@
     <update id="updateGroupsByPrimaryKey" parameterType="com.coding.pojo.Groups">
         update groups
         set group_name = #{groupName,jdbcType=VARCHAR},
-      group_jurisdiction = #{groupJurisdiction,jdbcType=VARCHAR}
+      group_jurisdiction = #{groupJurisdiction,jdbcType=VARCHAR},
+        is_start = #{isStart,jdbcType=INTEGER}
       <!--,
       group1 = #{group1,jdbcType=VARCHAR},
       group2 = #{group2,jdbcType=VARCHAR},

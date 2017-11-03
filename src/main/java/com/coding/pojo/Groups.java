@@ -7,6 +7,8 @@ public class Groups {
 
     private String groupJurisdiction;
 
+    public Integer isStart;
+
 
     public Integer getGroupId() {
         return groupId;
@@ -30,6 +32,14 @@ public class Groups {
 
     public void setGroupJurisdiction(String groupJurisdiction) {
         this.groupJurisdiction = groupJurisdiction == null ? null : groupJurisdiction.trim();
+    }
+
+    public Integer getIsStart() {
+        return isStart;
+    }
+
+    public void setIsStart(Integer isStart) {
+        this.isStart = isStart;
     }
 
     @Override
