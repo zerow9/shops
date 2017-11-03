@@ -26,10 +26,10 @@ layui.use(['form', 'layedit', 'laydate'], function () {
         content: function (value) {
             layedit.sync(editIndex);
         },
-        chackpass:function (value) {
+        chackpass: function (value) {
             //验证密码
-            var passdata=$(".password").val();
-            if(value!=passdata){
+            var passdata = $(".password").val();
+            if (value != passdata) {
                 return "密码输入不一致，请重新输入！"
             }
 
