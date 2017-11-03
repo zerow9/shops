@@ -186,70 +186,108 @@
         <include refid="Blob_Column_List"/>
         from item
         <where>
-            <!--关键字模糊查询-->
+            <!--关键字模糊查询（商品名称或商品描述）-->
             <if test="keyWord != null and keyWord != ''">
-                item_name REGEXP #{keyWord}
-                or item_introduce REGEXP #{keyWord}
+                and (item_name REGEXP #{keyWord}
+                or item_introduce REGEXP #{keyWord})
             </if>
-            <!--厂家模糊查询-->
-            <if test="item.makeVender != null and makeVender != ''">
-                and make_vender REGEXP #{item.makeVender}
-            </if>
-            <!--商品属性（是否为积分商品）-->
-            <if test="itemScoreType != null">
-                and item_score_type = #{itemScoreType}
+            <!--查询字段属于Item，需先判定 item 是否为空-->
+            <if test="item != null">
+                <!--厂家模糊查询-->
+                <if test="item.makeVender != null and item.makeVender != 0">
+                    and make_vender = ${item.makeVender}
+                </if>
+
+                <!--商品属性（是否为积分商品）-->
+                <if test="item.itemScoreType != null">
+                    and item_score_type = ${item.itemScoreType}
+                </if>
             </if>
 
             <!--库存范围内查询-->
             <if test="formerRepertoryNumber != null">
+                <!--最大 最小值不为空-->
                 <if test="latterRepertoryNumber != null and latterRepertoryNumber != 0">
-                    and repertory_number BETWEEN #{formerRepertoryNumber} and #{latterRepertoryNumber}
+                    <if test="formerRepertoryNumber &lt; latterRepertoryNumber ">
+                        and repertory_number BETWEEN #{formerRepertoryNumber} and #{latterRepertoryNumber}
+                    </if>
+                    <if test="formerRepertoryNumber &gt; latterRepertoryNumber ">
+                        and repertory_number BETWEEN #{latterRepertoryNumber} and #{formerRepertoryNumber}
+                    </if>
+                    <if test="formerRepertoryNumber == latterRepertoryNumber ">
+                        and repertory_number = #{latterRepertoryNumber}
+                    </if>
+                </if>
+                <!--只给定了最小值-->
+                <if test="latterRepertoryNumber == null or latterRepertoryNumber == 0">
+                    and repertory_number &gt;= #{formerRepertoryNumber}
+                    <!--BETWEEN #{formerRepertoryNumber} and #{latterRepertoryNumber}-->
                 </if>
             </if>
             <!--如果库存量查询的时候只给定了一个最大值，只需要查询小于给定值的商品，那么就给最小值设定初始值为0-->
             <if test="formerRepertoryNumber == null">
               <if test="latterRepertoryNumber != null and latterRepertoryNumber != 0">
-                  and repertory_number BETWEEN 0 and #{latterRepertoryNum}
+                  and repertory_number &lt;= #{latterRepertoryNumber}
+                  <!--BETWEEN 0 and #{latterRepertoryNum}-->
               </if>
             </if>
 
             <!--销售量范围内查询-->
             <if test="formerItemSaleNumber != null">
+                <!--给定了 最大 最小值-->
                 <if test="latterItemSaleNumber != null and latterItemSaleNumber != 0">
-                    and item_sale_number BETWEEN #{formerItemSaleNumber} and #{latterItemSaleNumber}
+                    <if test="formerItemSaleNumber &lt; latterItemSaleNumber">
+                        and item_sale_number BETWEEN #{formerItemSaleNumber} and #{latterItemSaleNumber}
+                    </if>
+                    <if test="formerItemSaleNumber &gt; latterItemSaleNumber">
+                        and item_sale_number BETWEEN #{latterItemSaleNumber} and #{formerItemSaleNumber}
+                    </if>
+                    <if test="formerItemSaleNumber == latterItemSaleNumber">
+                        and item_sale_number = ${latterItemSaleNumber}
+                    </if>
                 </if>
                 <!--如果销售量查询的时候只给定了一个最小值，只需要查询大于给定值的商品-->
                 <if test="latterItemSaleNumber == null or latterItemSaleNumber == 0">
-                    and item_sale_number >  #{formerItemSaleNumber}
+                    and item_sale_number &gt;=  #{formerItemSaleNumber}
                     <!--BETWEEN #{formerItemSaleNumber} and #{latterItemSaleNumber}-->
                 </if>
             </if>
             <!--如果销售量查询的时候只给定了一个最大值，只需要查询小于给定值的商品，那么就给最小值设定初始值为0-->
             <if test="formerItemSaleNumber == null">
                 <if test="latterItemSaleNumber != null and latterItemSaleNumber != 0">
-                    and item_sale_number  BETWEEN 0 and #{latterItemSaleNumber}
+                    and item_sale_number  &lt;= #{latterItemSaleNumber}
                     <!--BETWEEN 0 and #{latterItemSaleNumber}-->
                 </if>
             </if>
 
             <!--收藏量范围内查询-->
             <if test="formerItemCollectNumber != null">
+                <!--给定了最大值和最小值-->
                 <if test="latterItemCollectNumber != null and latterItemCollectNumber != 0">
-                    and Item_collect_number BETWEEN #{formerItemCollectNumber} and #{latterItemCollectNumber}
+                    <if test="formerItemCollectNumber &lt; latterItemCollectNumber">
+                        and Item_collect_number BETWEEN #{formerItemCollectNumber} and #{latterItemCollectNumber}
+                    </if>
+                    <if test="formerItemCollectNumber &gt; latterItemCollectNumber">
+                        and Item_collect_number BETWEEN #{latterItemCollectNumber} and #{formerItemCollectNumber}
+                    </if>
+                    <if test="formerItemCollectNumber == latterItemCollectNumber">
+                        and Item_collect_number = #{latterItemCollectNumber}
+                    </if>
                 </if>
                 <!--如果收藏量查询的时候只给定了一个最小值，只需要查询大于给定值的商品-->
                 <if test="latterItemCollectNumber == null or latterItemCollectNumber == 0">
-                    and Item_collect_number >  #{formerItemCollectNumber}
+                    and Item_collect_number &gt;=  #{formerItemCollectNumber}
                     <!--BETWEEN #{formerItemCollectNumber} and #{latterItemCollectNumber}-->
                 </if>
             </if>
             <!--如果收藏量查询的时候只给定了一个最大值，只需要查询小于给定值的商品，那么就给最小值设定初始值为0-->
             <if test="formerItemCollectNumber == null">
                 <if test="latterItemCollectNumber != null and latterItemCollectNumber != 0">
-                    and Item_collect_number  BETWEEN 0 and #{latterItemCollectNumber}
+                    and Item_collect_number &lt;= #{latterItemCollectNumber}
                     <!--BETWEEN 0 and #{latterItemCollectNumber}-->
                 </if>
             </if>
+
 
             <!--排序规则-->
             <if test="sortByColumn != null and sortByColumn !=''">

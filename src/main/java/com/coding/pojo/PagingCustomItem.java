@@ -1,5 +1,8 @@
 package com.coding.pojo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class PagingCustomItem extends Paging {
     private Double formerPrice;//一些功能需要价格范围内查询，这是左侧较小值
 

@@ -38,6 +38,16 @@ layui.use('table', function() {
 
         } else if(obj.event === 'edit') {
             // layer.alert('编辑行：<br>' + JSON.stringify(data))
+            layer.open({
+                type: 2,
+                title:"修改用户",
+                shadeClose: true,
+                shade: 0.3,
+                content: 'selectUserIdByKey.action?userUuid='+data.userUuid, //注意，如果str是object，那么需要字符拼接。
+                maxmin: true,
+                area: ['80%', '90%']
+            });
+
         }
 
     });

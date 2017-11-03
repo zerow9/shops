@@ -1,4 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" uri="http://java.sun.com/jsp/jstl/sql" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://"
@@ -13,7 +15,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>添加用户</title>
+    <title>修改用户</title>
 
     <link rel="shortcut icon" href="../../../shopmanagement/favicon.ico">
     <link href="../../../shopmanagement/common/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet">
@@ -32,34 +34,48 @@
 
                 <div class="ibox-content">
                     <form class="layui-form" action="">
+                        <input type="hidden" name="userUuid" lay-verify="required" autocomplete="off"
+                               class="layui-input" value="${user.userUuid}" >
+
                         <div class="layui-form-item">
                             <label class="layui-form-label">用户昵称</label>
                             <div class="layui-input-block">
-                                <input type="text" name="userNickname" lay-verify="required" autocomplete="off" placeholder="请输入昵称" class="layui-input">
+                                <input type="text" name="userNickname" lay-verify="required" autocomplete="off"
+                                       placeholder="请输入昵称" class="layui-input" value="${user.userNickname}">
                             </div>
                         </div>
 
                         <div class="layui-form-item">
                             <label class="layui-form-label">真实姓名</label>
                             <div class="layui-input-block">
-                                <input type="text" name="userName" lay-verify="required" placeholder="请输入真实姓名" autocomplete="off" class="layui-input">
+                                <input type="text" name="userName" lay-verify="required"
+                                       placeholder="请输入真实姓名" autocomplete="off" class="layui-input"
+                                       value="${user.userName}">
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <div class="layui-form-item">
                                 <label class="layui-form-label">性别</label>
                                 <div class="layui-input-block">
-                                    <input type="radio" name="userSex" value="男" title="男" checked="">
-                                    <input type="radio" name="userSex" value="女" title="女">
-                                    <input type="radio" name="userSex" value="保密" title="保密">
+                                    <input type="radio" name="userSex" title="男" value="男"
+                                           <c:if test="${user.userSex== '男'}">checked="checked"</c:if>>
+                                    <input type="radio" name="userSex" title="女" value="女"
+                                           <c:if test="${user.userSex== '女'}">checked="checked"</c:if>>
+                                    <input type="radio" name="userSex" title="保密" value="保密"
+                                           <c:if test="${user.userSex== '保密'}">checked="checked"</c:if>>
                                 </div>
                             </div>
                             <div class="layui-form-item">
-                                <label class="layui-form-label">健康状况</label>
+                                <label class="layui-form-label" >健康状况</label>
                                 <div class="layui-input-block">
-                                    <input type="radio" name="userHealthy" value="健康" title="健康" checked="">
-                                    <input type="radio" name="userHealthy" value="不健康" title="不健康">
-                                    <input type="radio" name="userHealthy" value="保密" title="保密">
+                                    <input type="radio" name="userHealthy" title="健康" value="健康"
+                                           <c:if test="${user.userHealthy== '健康'}">checked="checked"</c:if>>
+                                    <input type="radio" name="userHealthy" title="亚健康" value="亚健康"
+                                           <c:if test="${user.userHealthy== '亚健康'}">checked="checked"</c:if>>
+                                    <input type="radio" name="userHealthy" title="不健康" value="不健康"
+                                           <c:if test="${user.userHealthy== '不健康'}">checked="checked"</c:if>>
+                                    <input type="radio" name="userHealthy" title="保密" value="保密"
+                                           <c:if test="${user.userHealthy== '保密'}">checked="checked"</c:if>>
                                 </div>
                             </div>
                         </div>
@@ -67,14 +83,16 @@
                             <div class="layui-form-item">
                                 <label class="layui-form-label">请输入密码</label>
                                 <div class="layui-input-inline">
-                                    <input type="password" name="userPassword" lay-verify="pass" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                                    <input type="password" name="userPassword" lay-verify="pass" placeholder="请输入密码"
+                                           autocomplete="off" class="layui-input" value="${user.userPassword}">
                                 </div>
                                 <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>
                             </div>
                             <div class="layui-form-item">
                                 <label class="layui-form-label">请确认密码</label>
                                 <div class="layui-input-inline">
-                                    <input type="password" name="password" lay-verify="pass" placeholder="请再次输入密码" autocomplete="off" class="layui-input">
+                                    <input type="password" name="password" lay-verify="pass" placeholder="请再次输入密码"
+                                           autocomplete="off" class="layui-input" value="${user.userPassword}">
                                 </div>
                                 <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>
                             </div>
@@ -83,29 +101,46 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">电话号码</label>
                                 <div class="layui-input-inline">
-                                    <input type="tel" name="userPhone" lay-verify="phone" autocomplete="off" placeholder="请输入电话号码" class="layui-input">
+                                    <input type="tel" name="userPhone" lay-verify="phone" autocomplete="off" placeholder="请输入电话号码"
+                                           class="layui-input" value="${user.userPhone}">
                                 </div>
                             </div>
                             <div class="layui-inline">
                                 <label class="layui-form-label">验证邮箱</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" name="userEmail" lay-verify="email" autocomplete="off" class="layui-input">
-                                </div>
-                            </div>
-                            <div class="layui-inline">
-                                <label class="layui-form-label">出生日期</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" name="userBirthDay" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+                                    <input type="text" name="userEmail" autocomplete="off"
+                                           class="layui-input" value="${user.userEmail}">
                                 </div>
                             </div>
                         </div>
 
                         <div class="layui-form-item">
-                            <label class="layui-form-label">积分</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="userScore" value="0" autocomplete="off" class="layui-input" readonly="readonly">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">年龄</label>
+                                <div class="layui-input-inline">
+                                    <input type="tel" name="userAge" autocomplete="off"
+                                           placeholder="请输入年龄" class="layui-input" value="${user.userAge}">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">注册日期</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" name="userRegisterDateTime1" readonly autocomplete="off"
+                                           class="layui-input" value="${user.dateToString}">
+                                </div>
                             </div>
                         </div>
+
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">积分</label>
+                                <div class="layui-input-inline">
+                                    <input type="tel" name="userScore" autocomplete="off" class="layui-input"
+                                           value="${user.userScore}" readonly>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="layui-form-item">
                             <label class="layui-form-label">归属组</label>
                             <div class="layui-input-block">
@@ -118,15 +153,17 @@
                             </div>
                         </div>
 
-                        <%--<div class="layui-form-item" pane="">--%>
-                            <%--<label class="layui-form-label">爱好</label>--%>
-                            <%--<div class="layui-input-block">--%>
-                                <%--<input type="checkbox" name="like1[write]" lay-skin="primary" title="看报">--%>
-                                <%--<input type="checkbox" name="like1[read]" lay-skin="primary" title="阅读">--%>
-                                <%--<input type="checkbox" name="like1[game]" lay-skin="primary" title="散步">--%>
-                                <%--<input type="checkbox" name="like1[hhh]" lay-skin="primary" title="看电视">--%>
-                            <%--</div>--%>
-                        <%--</div>--%>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">地址</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="userAddress" placeholder="请输入地址"
+                                       autocomplete="off" class="layui-input" value="${user.userAddress}">
+                            </div>
+                        </div>
+
+                        <input type="hidden" name="userLandNumber"
+                               autocomplete="off" class="layui-input" value="${user.userLandNumber}">
+
 
                         <div class="layui-form-item">
                             <div class="layui-input-block">
@@ -183,23 +220,24 @@
             }
         });
 
+
+
+
         //监听提交
         form.on('submit(demo1)', function (data) {
             var parm = data.field;
             $.ajax({
-                url: 'insertUser.action',
+                url: 'http://localhost:8080/user/updateUserByPrimaryKey.action',
                 data: parm,
                 type:'POST',
                 success: function () {
-                    var index = parent.layer.getFrameIndex(window.name);
-                    parent.layer.close(index);
                     //关闭弹出的窗口
                     parent.layer.closeAll();
                     swal({
                         title: "太帅了",
                         text: "添加数据成功！",
                         type: "success"
-                    })
+                    });
                     window.parent.location.reload();
                 }
             });

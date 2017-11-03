@@ -183,7 +183,8 @@
 
 
     <!--根据关键字查询用户信息并按照字段排序-->
-    <select id="selectUserPagingByKeyWord" parameterType="com.coding.pojo.PagingCustomUser" resultMap="ResultMapWithBLOBs">
+    <select id="selectUserPagingByKeyWord" parameterType="com.coding.pojo.PagingCustomUser"
+            resultMap="ResultMapWithBLOBs">
 
         select
         <include refid="Base_Column_List"/>
@@ -195,21 +196,66 @@
             <if test="keyWord!=null and keyWord!=''">
                 and user_name REGEXP #{keyWord}
             </if>
-            <!--性别查询-->
-            <if test="user.userSex != null and user.userSex != ''">
-                and user_sex = #{user.userSex}
-            </if>
-            <!--组别查询-->
-            <if test="user.userGroup != null and user.userGroup != 0">
-                and user_group = #{user.userGroup}
+            <!--用户属性进行查询，得 user 不为null前提-->
+            <if test="user != null">
+                <!--性别查询-->
+                <if test="user.userSex != null and user.userSex != ''">
+                    and user_sex = #{user.userSex}
+                </if>
+                <!--组别查询-->
+                <if test="user.userGroup != null and user.userGroup != 0">
+                    and user_group = #{user.userGroup}
+                </if>
             </if>
             <!--年龄范围查询-->
-            <if test="latterAge != null and latterAge !=0">
-                and user_age BETWEEN #{formerAge} and #{latterAge}
+            <if test="formerAge == null or formerAge == 0">
+                <if test="latterAge != null and latterAge != 0">
+                    and user_age &lt; #{latterAge}
+                </if>
             </if>
-            <if test="latterAge == null or latterAge == 0">
-                and user_age BETWEEN #{formerAge} and 200
+            <if test="formerAge != null " >
+                <if test="latterAge == null or latterAge == 0">
+                    and user_age  &gt; #{formerAge}
+                </if>
+                <if test="latterAge != null or latterAge != 0">
+                    <if test="formerAge &lt; latterAge">
+                        and user_age BETWEEN #{formerAge} and #{latterAge}
+                    </if>
+                    <if test="formerAge &gt; latterAge">
+                        and user_age BETWEEN #{latterAge} and #{formerAge}
+                    </if>
+                    <if test="formerAge == latterAge">
+                        and user_age = #{latterAge}
+                    </if>
+                </if>
             </if>
+
+            <!--积分查询-->
+            <if test="formerScore != null">
+                <!--有最大值和最小值-->
+                <if test="latterScore != null ">
+                    <if test="formerScore &lt;latterScore ">
+                        and user_score BETWEEN #{formerScore} and #{latterScore}
+                    </if>
+                    <if test="formerScore &gt;latterScore ">
+                        and user_score BETWEEN #{latterScore} and #{formerScore}
+                    </if>
+                    <if test="formerScore == latterScore ">
+                        and user_score = #{latterScore}
+                    </if>
+                </if>
+                <!--只有最小值-->
+                <if test="latterScore == null">
+                    and user_score &gt;= #{formerScore}
+                </if>
+            </if>
+            <!--只有最大值-->
+            <if test="formerScore == null">
+                <if test="latterScore != null and latterScore != 0">
+                    and user_score &lt;= #{latterScore}
+                </if>
+            </if>
+
             <!--排序规则-->
             <if test="sortByColumn != null and sortByColumn !=''">
                 <if test="sortRule != null and sortRule != ''">

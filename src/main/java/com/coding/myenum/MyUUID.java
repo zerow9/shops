@@ -14,6 +14,6 @@ public enum MyUUID {
 
     @Override
     public String toString() {
-        return this.uuid;
+        return uuid;
     }
 }

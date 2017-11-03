@@ -2,29 +2,26 @@ package com.coding.controller;
 
 import com.coding.Iservice.IAdminService;
 import com.coding.comomInterface.DateToString;
+import com.coding.myenum.MyUUID;
 import com.coding.pojo.Admin;
 import com.coding.pojo.Groups;
 import com.coding.pojo.User;
 import com.coding.pojo.templet.JsonFormat;
 import net.sf.json.JSONObject;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-
-import java.text.SimpleDateFormat;
+import java.net.InetAddress;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminController extends UserController {
+public class AdminController {
 
     @Autowired
     @Qualifier("adminService")
@@ -82,6 +79,14 @@ public class AdminController extends UserController {
         }
         return "";
     }
+
+    @RequestMapping("deleteAdminsByIdArray")
+    public boolean deleteAdminsByIdArray(String arrayString) throws Exception {
+        for (String uuid : arrayString.split(","))
+            adminService.deleteAdminByPrimaryKey(Integer.parseInt(uuid));
+        return true;
+    }
+
 
     /**
      * 根据分组ID查询分组信息
@@ -187,7 +192,7 @@ public class AdminController extends UserController {
         List<Admin> admins = adminService.selectAdminAll();
         for (Admin admin : admins)
             admin.setDateToString(DateToString.change(admin.getAdminRegisterTime()));
-        JsonFormat<Admin> json=new JsonFormat<>(admins,admins.size(),null,null);
+        JsonFormat<Admin> json = new JsonFormat<>(admins, admins.size(), null, null);
         JSONObject jsonObject = JSONObject.fromObject(json);
         return jsonObject.toString();
     }
@@ -212,11 +217,11 @@ public class AdminController extends UserController {
     @RequestMapping("getUserJson")
     @ResponseBody
     public String getUserAll() throws Exception {
-       // List<User> users = adminService.selectUserAll();
-        List<User> users=adminService.selectUserAllPaging(0,10);
+        // List<User> users = adminService.selectUserAll();
+        List<User> users = adminService.selectUserAllPaging(0, 10);
         for (User user : users)
             user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
-        JsonFormat<User> json=new JsonFormat<>(users,users.size(),null,null);
+        JsonFormat<User> json = new JsonFormat<>(users, users.size(), null, null);
         JSONObject result = JSONObject.fromObject(json);
         return result.toString();
     }
@@ -244,4 +249,37 @@ public class AdminController extends UserController {
         return "admins/updateadmin";
     }
 
+    @RequestMapping("updateUserByPrimaryKey")
+    public String updateUser(String userUuid, Model model) throws Exception{
+        User user = adminService.selectUserByPrimaryKey(userUuid);
+        user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
+        model.addAttribute("user",user);
+        return "users/updateUser";
+
+    }
+    @RequestMapping("insertUser")
+    public boolean insertUser(User user) throws Exception {
+        user.setUserRegisterDateTime(new Date());
+        user.setUserAge(111);
+        user.setUserLandNumber(11);
+        user.setUserCurrentTime(new Date());
+        user.setUserLandIp(InetAddress.getLocalHost().getHostAddress());
+        user.setUserUuid(MyUUID.MyUUID.toString());
+        user.setUserAddress(111111);
+        System.out.println(user);
+        adminService.insertUser(user);
+        return true;
+    }
+    @RequestMapping("addUser")
+    public String addUser() {
+        return "users/adduser";
+    }
+
+    @RequestMapping("selectUserIdByKey")
+    public String selectUserIdByKey(String userUuid, Model model) throws Exception{
+        User user = adminService.selectUserByPrimaryKey(userUuid);
+        user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
+        model.addAttribute("user",user);
+        return "users/updateUser";
+    }
 }

@@ -8,12 +8,14 @@ import com.coding.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/user")
@@ -29,15 +31,17 @@ public class UserController {
      * @param user 新用户
      */
     @RequestMapping("insertUser")
-    public void insertUser(User user) throws Exception {
+    public boolean insertUser(User user) throws Exception {
+        System.out.println(user);
         user.setUserRegisterDateTime(new Date());
         user.setUserAge(11);
         user.setUserLandNumber(11);
         user.setUserCurrentTime(new Date());
         user.setUserLandIp(InetAddress.getLocalHost().getHostAddress());
-        user.setUserUuid(MyUUID.MyUUID.toString());
+        user.setUserUuid(UUID.randomUUID().toString().replace("-", ""));
         System.out.println(user);
         userService.insertUser(user);
+        return true;
     }
 
     /**
@@ -54,13 +58,9 @@ public class UserController {
     /**
      * 根据用户ID修改用户信息
      *
-     * @param user 更新用户的信息
+     * @param userUuid 更新用户的信息
      */
-    @RequestMapping("updateUserByPrimaryKey")
-    public String updateUserByPrimaryKey(User user) throws Exception {
-        userService.updateUserByPrimaryKey(user);
-        return "";
-    }
+
 
     /**
      * 根据addressID删除地址信息
@@ -108,6 +108,18 @@ public class UserController {
         address.setUserUuid(userUuid);
         userService.updateAddressByPrimaryKey(address);
         return "";
+    }
+
+    @RequestMapping("updateUserByPrimaryKey")
+    public boolean updateUserByPrimaryKey(String userRegisterDateTime1,User user) throws Exception {
+        user.setUserRegisterDateTime(DateToString.toDate(userRegisterDateTime1));
+        user.setUserCurrentTime(new Date());
+        user.setUserLandIp(InetAddress.getLocalHost().getHostAddress());
+        int landNumber = user.getUserLandNumber();
+        user.setUserLandNumber(landNumber+1);
+        userService.updateUserByPrimaryKey(user);
+        return true;
+
     }
 
 
