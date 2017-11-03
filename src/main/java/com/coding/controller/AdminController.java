@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +23,9 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+
+    private Integer count = null;
+    private Integer counts = null;
 
     @Autowired
     @Qualifier("adminService")
@@ -36,13 +40,9 @@ public class AdminController {
      */
 
     @RequestMapping("deleteUserByPrimaryKey")
-    @ResponseBody
     public boolean deleteUserByPrimaryKey(String userUuid) throws Exception {
-        try {
-            adminService.deleteUserByPrimaryKey(userUuid);
-        } catch (Exception e) {
-            throw new Exception("删除用户失败");
-        }
+        adminService.deleteUserByPrimaryKey(userUuid);
+        count--;
         return true;
     }
 
@@ -94,6 +94,7 @@ public class AdminController {
         for (String uuid : arrayString.split(","))
             list.add(Integer.parseInt(uuid));
         adminService.deleteAdminByAdminIdArray(list.toArray(new Integer[list.size()]));
+        counts = null;
         return true;
     }
 
@@ -142,6 +143,7 @@ public class AdminController {
     @RequestMapping("deleteAdminByPrimaryKey")
     public boolean deleteAdminByPrimaryKey(Integer adminId) throws Exception {
         adminService.deleteAdminByPrimaryKey(adminId);
+        counts--;
         return true;
     }
 
@@ -159,6 +161,7 @@ public class AdminController {
             throw new Exception("插入数据为空");
         admin.setAdminRegisterTime(new Date());
         adminService.insertAdmin(admin);
+        counts++;
         return true;
     }
 
@@ -199,11 +202,13 @@ public class AdminController {
 
     @RequestMapping("getAdminAll")
     @ResponseBody
-    public String getAdminAll() throws Exception {
-        List<Admin> admins = adminService.selectAdminAll();
+    public String getAdminAll(Integer page, Integer limit) throws Exception {
+        if ((page == 1 && counts == null) || counts == null)
+            counts = adminService.selectAdminAll().size();
+        List<Admin> admins = adminService.selectAdminAllPaging(page - 1, limit);
         for (Admin admin : admins)
             admin.setDateToString(DateToString.date(admin.getAdminRegisterTime()));
-        JsonFormat<Admin> json = new JsonFormat<>(admins, admins.size(), null, null);
+        JsonFormat<Admin> json = new JsonFormat<>(admins, counts, null, null);
         JSONObject jsonObject = JSONObject.fromObject(json);
         return jsonObject.toString();
     }
@@ -227,11 +232,13 @@ public class AdminController {
      */
     @RequestMapping("getUserJson")
     @ResponseBody
-    public String getUserAll() throws Exception {
-        List<User> users = adminService.selectUserAllPaging(0, 10);
+    public String getUserAll(Integer page, Integer limit) throws Exception {
+        if ((page == 1 && count == null) || count == null)
+            count = adminService.selectUserAll().size();
+        List<User> users = adminService.selectUserAllPaging(page - 1, limit);
         for (User user : users)
             user.setDateToString(DateToString.date(user.getUserRegisterDateTime()));
-        JsonFormat<User> json = new JsonFormat<>(users, users.size(), null, null);
+        JsonFormat<User> json = new JsonFormat<>(users, count, null, null);
         JSONObject result = JSONObject.fromObject(json);
         return result.toString();
     }
@@ -247,17 +254,12 @@ public class AdminController {
      * @return
      */
     @RequestMapping("updateAdmin")
-    public String updateAdmin(Integer id, Model model) {
-        try {
-            Admin admin = adminService.selectAdminByPrimaryKey(id);
-            admin.setDateToString(DateToString.date(admin.getAdminRegisterTime()));
-            model.addAttribute("admin", admin);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    public String updateAdmin(Integer id, Model model) throws Exception {
+        Admin admin = adminService.selectAdminByPrimaryKey(id);
+        admin.setDateToString(DateToString.date(admin.getAdminRegisterTime()));
+        model.addAttribute("admin", admin);
         return "admins/updateadmin";
     }
-
 
 
     @RequestMapping("insertUser")
@@ -271,6 +273,7 @@ public class AdminController {
         user.setUserAddress(111111);
         System.out.println(user);
         adminService.insertUser(user);
+        count ++;
         return true;
     }
 
@@ -300,16 +303,17 @@ public class AdminController {
     @RequestMapping("deleteUserByUUidArray")
     public boolean deleteUserByUUidArray(String arrayString) throws Exception {
         adminService.deleteUsersByUuidArray(arrayString.split(","));
+        count =null;
         return true;
     }
 
     @RequestMapping("updateUserByPrimaryKey")
-    public boolean updateUserByPrimaryKey(String userRegisterDateTime1,User user) throws Exception {
+    public boolean updateUserByPrimaryKey(String userRegisterDateTime1, User user) throws Exception {
         user.setUserRegisterDateTime(DateToString.date(userRegisterDateTime1));
         user.setUserCurrentTime(new Date());
         user.setUserLandIp(InetAddress.getLocalHost().getHostAddress());
         int landNumber = user.getUserLandNumber();
-        user.setUserLandNumber(landNumber+1);
+        user.setUserLandNumber(landNumber + 1);
         adminService.updateUserByPrimaryKey(user);
         return true;
     }
