@@ -24,7 +24,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">用户组名称</label>
         <div class="layui-input-block">
-            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入用户组名称"
+            <input type="text" name="group_name" lay-verify="group_name" autocomplete="off" placeholder="请输入用户组名称"
                    class="layui-input">
         </div>
     </div>
@@ -32,7 +32,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">用户组描述</label>
         <div class="layui-input-block">
-            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入用户组描述"
+            <input type="text" name="group_description" lay-verify="group_description" autocomplete="off" placeholder="请输入用户组描述"
                    class="layui-input">
         </div>
     </div>
@@ -40,7 +40,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label">是否启用</label>
         <div class="layui-input-block">
-            <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="switch" lay-text="启用|禁用">
+            <input type="checkbox" checked="" name="group_status" lay-skin="switch" lay-filter="switch" lay-text="启用|禁用">
         </div>
     </div>
 
@@ -66,8 +66,23 @@
 
         //监听提交
         form.on('submit(demo1)', function (data) {
-            layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
+            var parm = data.field;
+            $.ajax({
+                url: 'insertUser.action',
+                data: parm,
+                type:'POST',
+                success: function () {
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
+                    //关闭弹出的窗口
+                    parent.layer.closeAll();
+                    swal({
+                        title: "太帅了",
+                        text: "添加数据成功！",
+                        type: "success"
+                    })
+                    window.parent.location.reload();
+                }
             });
             return false;
         });
