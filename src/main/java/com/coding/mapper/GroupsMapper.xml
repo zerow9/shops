@@ -10,8 +10,8 @@
 
     <!--插入分组信息-->
     <insert id="insertGroups" parameterType="com.coding.pojo.Groups">
-        insert into groups (group_name, group_jurisdiction)
-        values (#{groupName,jdbcType=VARCHAR}, #{groupJurisdiction,jdbcType=VARCHAR})
+        insert into groups (group_name, group_jurisdiction,is_start)
+        values (#{groupName,jdbcType=VARCHAR}, #{groupJurisdiction,jdbcType=VARCHAR}, #{isStart,jdbcType=INTEGER})
     </insert>
 
 
