@@ -38,8 +38,8 @@ public class UserController {
         user.setUserLandNumber(11);
         user.setUserCurrentTime(new Date());
         user.setUserLandIp(InetAddress.getLocalHost().getHostAddress());
-        user.setUserUuid(UUID.randomUUID().toString().replace("-", ""));
-        System.out.println(user);
+        user.setUserUuid(MyUUID.MyUUID.toString());
+        user.setUserAddress(1);
         userService.insertUser(user);
         return true;
     }
