@@ -111,7 +111,7 @@ layui.use('table', function() {
                     shade: 0.8,
                     maxmin: true,
                     area: ['80%', '90%'],
-                    content: 'http://localhost:8080/user/addUser.action', //注意，如果str是object，那么需要字符拼接。
+                    content: 'addUser.action',
                     btn1:function(){
                         layer.close();
                     }
@@ -124,5 +124,4 @@ layui.use('table', function() {
         var type = $(this).data('type');
         active[type] ? active[type].call(this) : '';
     });
-
 });
