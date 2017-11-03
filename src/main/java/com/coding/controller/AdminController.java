@@ -182,7 +182,7 @@ public class AdminController {
      */
     @RequestMapping("updateAdminByPrimaryKey")
     public boolean updateAdminByPrimaryKey(Admin admin, String adminRegisterTime1) throws Exception {
-        admin.setAdminRegisterTime(DateToString.toDate(adminRegisterTime1));
+        admin.setAdminRegisterTime(DateToString.date(adminRegisterTime1));
         adminService.updateAdminByPrimaryKey(admin);
         return true;
     }
@@ -202,7 +202,7 @@ public class AdminController {
     public String getAdminAll() throws Exception {
         List<Admin> admins = adminService.selectAdminAll();
         for (Admin admin : admins)
-            admin.setDateToString(DateToString.change(admin.getAdminRegisterTime()));
+            admin.setDateToString(DateToString.date(admin.getAdminRegisterTime()));
         JsonFormat<Admin> json = new JsonFormat<>(admins, admins.size(), null, null);
         JSONObject jsonObject = JSONObject.fromObject(json);
         return jsonObject.toString();
@@ -230,7 +230,7 @@ public class AdminController {
     public String getUserAll() throws Exception {
         List<User> users = adminService.selectUserAllPaging(0, 10);
         for (User user : users)
-            user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
+            user.setDateToString(DateToString.date(user.getUserRegisterDateTime()));
         JsonFormat<User> json = new JsonFormat<>(users, users.size(), null, null);
         JSONObject result = JSONObject.fromObject(json);
         return result.toString();
@@ -250,7 +250,7 @@ public class AdminController {
     public String updateAdmin(Integer id, Model model) {
         try {
             Admin admin = adminService.selectAdminByPrimaryKey(id);
-            admin.setDateToString(DateToString.change(admin.getAdminRegisterTime()));
+            admin.setDateToString(DateToString.date(admin.getAdminRegisterTime()));
             model.addAttribute("admin", admin);
         } catch (Exception e) {
             e.printStackTrace();
@@ -291,7 +291,7 @@ public class AdminController {
     @RequestMapping("selectUserIdByKey")
     public String selectUserIdByKey(String userUuid, Model model) throws Exception {
         User user = adminService.selectUserByPrimaryKey(userUuid);
-        user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
+        user.setDateToString(DateToString.date(user.getUserRegisterDateTime()));
         model.addAttribute("user", user);
         return "users/updateUser";
     }
@@ -305,7 +305,7 @@ public class AdminController {
 
     @RequestMapping("updateUserByPrimaryKey")
     public boolean updateUserByPrimaryKey(String userRegisterDateTime1,User user) throws Exception {
-        user.setUserRegisterDateTime(DateToString.toDate(userRegisterDateTime1));
+        user.setUserRegisterDateTime(DateToString.date(userRegisterDateTime1));
         user.setUserCurrentTime(new Date());
         user.setUserLandIp(InetAddress.getLocalHost().getHostAddress());
         int landNumber = user.getUserLandNumber();
@@ -317,7 +317,7 @@ public class AdminController {
     @RequestMapping("updateUser")
     public String updateUser(String userUuid, Model model) throws Exception {
         User user = adminService.selectUserByPrimaryKey(userUuid);
-        user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
+        user.setDateToString(DateToString.date(user.getUserRegisterDateTime()));
         model.addAttribute("user", user);
         return "users/updateUser";
 
@@ -326,7 +326,7 @@ public class AdminController {
     @RequestMapping("seeUserIdByKey")
     public String seeUserIdByKey(String userUuid, Model model) throws Exception {
         User user = adminService.selectUserByPrimaryKey(userUuid);
-        user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
+        user.setDateToString(DateToString.date(user.getUserRegisterDateTime()));
         model.addAttribute("user", user);
         return "users/detailUser";
     }
@@ -334,7 +334,7 @@ public class AdminController {
     @RequestMapping("seeAdminIdByKey")
     public String seeAdminIdByKey(Integer adminId, Model model) throws Exception {
         Admin admin = adminService.selectAdminByPrimaryKey(adminId);
-        admin.setDateToString(DateToString.change(admin.getAdminRegisterTime()));
+        admin.setDateToString(DateToString.date(admin.getAdminRegisterTime()));
         model.addAttribute("admin", admin);
         return "admins/detailAdmin";
     }

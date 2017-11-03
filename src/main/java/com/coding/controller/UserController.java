@@ -112,7 +112,7 @@ public class UserController {
 
     @RequestMapping("updateUserByPrimaryKey")
     public boolean updateUserByPrimaryKey(String userRegisterDateTime1,User user) throws Exception {
-        user.setUserRegisterDateTime(DateToString.toDate(userRegisterDateTime1));
+        user.setUserRegisterDateTime(DateToString.date(userRegisterDateTime1));
         user.setUserCurrentTime(new Date());
         user.setUserLandIp(InetAddress.getLocalHost().getHostAddress());
         int landNumber = user.getUserLandNumber();
@@ -131,7 +131,7 @@ public class UserController {
     @RequestMapping("seeUserIdByKey")
     public String seeUserIdByKey(String userUuid, Model model) throws Exception {
         User user = userService.selectUserByPrimaryKey(userUuid);
-        user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
+        user.setDateToString(DateToString.date(user.getUserRegisterDateTime()));
         model.addAttribute("user", user);
         return "users/seeUser";
     }
