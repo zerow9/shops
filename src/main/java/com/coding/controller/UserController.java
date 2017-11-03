@@ -8,12 +8,14 @@ import com.coding.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.net.InetAddress;
 import java.net.Socket;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/user")
@@ -29,15 +31,17 @@ public class UserController {
      * @param user 新用户
      */
     @RequestMapping("insertUser")
-    public void insertUser(User user) throws Exception {
+    public Boolean insertUser(User user) throws Exception {
+        System.out.println(user);
         user.setUserRegisterDateTime(new Date());
         user.setUserAge(11);
         user.setUserLandNumber(11);
         user.setUserCurrentTime(new Date());
         user.setUserLandIp(InetAddress.getLocalHost().getHostAddress());
-        user.setUserUuid(MyUUID.MyUUID.toString());
+        user.setUserUuid(UUID.randomUUID().toString().replace("-", ""));
         System.out.println(user);
         userService.insertUser(user);
+        return true;
     }
 
     /**
@@ -57,9 +61,17 @@ public class UserController {
      * @param user 更新用户的信息
      */
     @RequestMapping("updateUserByPrimaryKey")
-    public String updateUserByPrimaryKey(User user) throws Exception {
-        userService.updateUserByPrimaryKey(user);
-        return "";
+//    updateUserByPrimaryKey.action?userUuid=15086fc080414458b83a0df3407276c2
+//    public String updateUserByPrimaryKey(User user) throws Exception {
+//        userService.updateUserByPrimaryKey(user);
+//        return "";
+//    }
+    public String updateUser(String userUuid, Model model) throws Exception{
+        User user = userService.selectUserByPrimaryKey(userUuid);
+        user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
+        model.addAttribute("user",user);
+        return "users/updateUser";
+
     }
 
     /**
