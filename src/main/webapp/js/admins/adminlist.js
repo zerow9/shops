@@ -11,7 +11,6 @@ layui.use('table', function () {
         if (obj.event === 'detail') {
             layer.msg('ID：' + data.adminId + ' 的查看操作');
         } else if (obj.event === 'del') {
-
             //强势弹窗效果
             swal({
                 title: "您确定要删除" + data.adminId + "信息吗",
@@ -57,7 +56,12 @@ layui.use('table', function () {
                 for (var i = 0; i < data.length; i++) {//遍历数组
                     array[i] = data[i].adminId;
                 }
-                console.log(array);
+
+                //判断数据是否选中
+                if(data.length===0){
+                    layer.msg("数据没有选中！");
+                    return;
+                }
                 //强势弹窗效果
                 swal({
                     title: "您确定要删除这" + array.length + "信息吗",
@@ -76,7 +80,9 @@ layui.use('table', function () {
                 })
             },
             isAll: function () { //验证是否全选
+                table.checkStatus.isAll=true;
                 var checkStatus = table.checkStatus('adminId');
+
                 layer.msg(checkStatus.isAll ? '全选' : '未全选')
             },
             addUser: function () {

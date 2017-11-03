@@ -183,9 +183,6 @@
             }
         });
 
-
-
-
         //监听提交
         form.on('submit(demo1)', function (data) {
             var parm = data.field;
@@ -194,6 +191,8 @@
                 data: parm,
                 type:'POST',
                 success: function () {
+                    var index = parent.layer.getFrameIndex(window.name);
+                    parent.layer.close(index);
                     //关闭弹出的窗口
                     parent.layer.closeAll();
                     swal({
