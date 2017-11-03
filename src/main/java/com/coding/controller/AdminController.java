@@ -2,7 +2,7 @@ package com.coding.controller;
 
 import com.coding.Iservice.IAdminService;
 import com.coding.comomInterface.DateToString;
-import com.coding.myenum.MyUUID;
+import com.coding.comomInterface.MyUUID;
 import com.coding.pojo.Admin;
 import com.coding.pojo.Groups;
 import com.coding.pojo.User;
@@ -267,7 +267,7 @@ public class AdminController {
         user.setUserLandNumber(11);
         user.setUserCurrentTime(new Date());
         user.setUserLandIp(InetAddress.getLocalHost().getHostAddress());
-        user.setUserUuid(MyUUID.MyUUID.toString());
+        user.setUserUuid(MyUUID.randomUUID());
         user.setUserAddress(111111);
         System.out.println(user);
         adminService.insertUser(user);

@@ -2,7 +2,7 @@ package com.coding.controller;
 
 import com.coding.Iservice.IUserService;
 import com.coding.comomInterface.DateToString;
-import com.coding.myenum.MyUUID;
+import com.coding.comomInterface.MyUUID;
 import com.coding.pojo.Address;
 import com.coding.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,7 @@ public class UserController {
         user.setUserLandNumber(11);
         user.setUserCurrentTime(new Date());
         user.setUserLandIp(InetAddress.getLocalHost().getHostAddress());
-        user.setUserUuid(MyUUID.MyUUID.toString());
+        user.setUserUuid(MyUUID.randomUUID());
         user.setUserAddress(1);
         userService.insertUser(user);
         return true;
