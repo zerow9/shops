@@ -1,0 +1,21 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 100,
+  "data": [
+    {
+      "type_id": 1,
+      "type_name": "药品",
+      "type_grade": 1,
+      "type_parent": 0,
+      "type_description": "药品类别"
+    },
+    {
+      "type_id": 3,
+      "type_name": "工具",
+      "type_grade": 1,
+      "type_parent": 0,
+      "type_description": "工具类别"
+    }
+  ]
+}

@@ -55,16 +55,16 @@
 
                     <div class="table-responsive">
 
-                        <table class="layui-table" lay-data="{url:'goods_lists.json', page:true, id:'idTest'}"
-                               lay-filter="goods_lists_table">
+                        <table class="layui-table" lay-data="{url:'/data/type_lists.json', page:true, id:'idTest'}"
+                               lay-filter="type_lists_table">
                             <thead>
                             <tr>
                                 <th lay-data="{checkbox:true, fixed: true}"></th>
-                                <th lay-data="{field:'goods_id', width:100, sort: true, fixed: true}">ID</th>
-                                <th lay-data="{field:'goods_name', width:200}">分类名称</th>
-                                <th lay-data="{field:'goods_price', width:100}">分类级别</th>
-                                <th lay-data="{field:'goods_sales', width:100}">父级分类</th>
-                                <th lay-data="{field:'goods_description', width:100}">分类描述</th>
+                                <th lay-data="{field:'type_id', width:100, sort: true, fixed: true}">ID</th>
+                                <th lay-data="{field:'type_name', width:200}">分类名称</th>
+                                <th lay-data="{field:'type_grade', width:100}">分类级别</th>
+                                <th lay-data="{field:'type_parent', width:100}">父级分类</th>
+                                <th lay-data="{field:'type_description', width:100}">分类描述</th>
                                 <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#operate_bar'}">操作
                                 </th>
                             </tr>
@@ -78,6 +78,12 @@
     </div>
 </div>
 
+<script type="text/html" id="operate_bar">
+    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+</script>
+
 <script src="../../../js/extends/jquery/jquery.min.js"></script>
 <script src="../../../js/extends/bootstrap/bootstrap.js"></script>
 <script src="../../../shopmanagement/js/content.min.js"></script>
@@ -87,12 +93,12 @@
     layui.use('table', function () {
         var table = layui.table;
         //监听表格复选框选择
-        table.on('checkbox(group_lists_table)', function (obj) {
+        table.on('checkbox(type_lists_table)', function (obj) {
             console.log(obj)
         });
 
         //监听工具条
-        table.on('tool(group_lists_table)', function (table_tool) {
+        table.on('tool(type_lists_table)', function (table_tool) {
             var data = table_tool.data;
             if (table_tool.event === 'detail') {
                 layer.msg('用户组ID：' + data.group_id + ' 的查看操作');
@@ -111,7 +117,7 @@
 //        复选框操作
         var $ = layui.$, active = {
             getCheckData: function () { //获取选中数据
-                var checkStatus = table.checkStatus('group_container_id')
+                var checkStatus = table.checkStatus('type_lists_table')
                     , data = checkStatus.data;
                 layer.alert(JSON.stringify(data));
             }

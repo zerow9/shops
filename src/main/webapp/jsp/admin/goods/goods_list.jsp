@@ -10,7 +10,7 @@
     <link href="../../../shopmanagement/common/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet">
     <link href="../../../shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-    <link href="../../../common/layui/css/layui.css" rel="stylesheet" >
+    <link href="../../../common/layui/css/layui.css" rel="stylesheet">
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
 
 </head>
@@ -66,9 +66,12 @@
                                     <th lay-data="{field:'goods_name', width:200}">商品名称</th>
                                     <th lay-data="{field:'goods_price', width:100, sort: true}">价格</th>
                                     <th lay-data="{field:'goods_sales', width:100, sort: true}">销量</th>
-                                    <th lay-data="{field:'goods_shelve', width:200, align:'center', fixed: 'right', toolbar: '#shelve_bar'}">上下架
+                                    <th lay-data="{field:'goods_shelve', width:200, align:'center', fixed: 'right', toolbar: '#shelve_bar'}">
+                                        上下架
                                     </th>
-                                    <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#operate_bar'}">操作</th>
+                                    <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#operate_bar'}">
+                                        操作
+                                    </th>
                                 </tr>
                                 </thead>
                             </table>

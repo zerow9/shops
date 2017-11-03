@@ -72,7 +72,10 @@ public interface IAdminService extends IUserService {
 
     /**
      * 通过关键字查询并分页排序显示用户信息，包括年龄范围的限定
-     *
+     * 参数绑定如下后面有括号代表可修改，括号内容代表绑定字段名
+     *WHERE user_name REGEXP ?（keyword） and user_sex = ?（user.usersex） and user_group = ?（user.usergroup）
+     *  and user_age BETWEEN ?(formerage) and ?(latterage) and user_score BETWEEN ?(formerscore)
+     *  and ?(latterscore) order by user_age(sortByColumn) ASC(sortRule) limit ?(indexNumber),? (pageNumber)
      * @param paging 封装了分页查询需要的字段的 Paging 类对象
      * @return 封装了用户信息的 User 类对象集合
      * @throws Exception

@@ -1,10 +1,7 @@
 package com.coding.Iservice;
 
 
-import com.coding.pojo.Address;
-import com.coding.pojo.Item;
-import com.coding.pojo.ItemType;
-import com.coding.pojo.User;
+import com.coding.pojo.*;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -118,5 +115,15 @@ public interface IUserService {
      * @throws Exception
      */
     public List<Item> selectItemFuzzyByItemNameSort(String fuzzyItemName,String sortRule,String sortColumn)throws Exception;
+
+    /**
+     * 这是一个查询功能模块的集合，包含了众多的查询功能，根据 Paging 对象的封装
+     * 需要用到什么参数就将参数封装到 Paging 中，不需要用到的参数切忌不要封装。
+     * 该接口通过 Paging 中参数的封装去进行 SQL 语句拼接，参数的封装需要小心。
+     * @param paging 包含了所有查询条件的 Paging 类对象
+     * @return 封装了商品信息的 Item 类对象集合
+     * @throws Exception
+     */
+    public List<Item> selectItem(PagingCustomItem paging)throws Exception;
 
 }
