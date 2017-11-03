@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.net.InetAddress;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -80,10 +81,20 @@ public class AdminController {
         return "";
     }
 
+
+    /**
+     * 批量删除管理员
+     * @param arrayString 管理员id集合
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("deleteAdminsByIdArray")
     public boolean deleteAdminsByIdArray(String arrayString) throws Exception {
+        List<Integer> list =new ArrayList<>();
         for (String uuid : arrayString.split(","))
-            adminService.deleteAdminByPrimaryKey(Integer.parseInt(uuid));
+            list.add(Integer.parseInt(uuid));
+        adminService.deleteAdminByAdminIdArray(list.toArray(new Integer[list.size()]));
+//            adminService.deleteAdminByPrimaryKey(Integer.parseInt(uuid));
         return true;
     }
 
@@ -275,11 +286,33 @@ public class AdminController {
         return "users/adduser";
     }
 
+
+    /**
+     * 根据UUID查询用户信息
+     * @param userUuid
+     * @param model
+     * @return
+     * @throws Exception
+     */
     @RequestMapping("selectUserIdByKey")
     public String selectUserIdByKey(String userUuid, Model model) throws Exception{
         User user = adminService.selectUserByPrimaryKey(userUuid);
         user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
         model.addAttribute("user",user);
         return "users/updateUser";
+    }
+
+
+    @RequestMapping("deleteUserByUUidArray")
+    public boolean deleteUserByUUidArray(String arrayString) throws Exception {
+//        List<String> list=new ArrayList<>();
+//        list.add(arrayString);
+////        for (String uuid : arrayString.split(","))
+////            list.add(uuid);
+        adminService.deleteUsersByUuidArray(arrayString.split(","));
+//            adminService.deleteUsersByUuidArray(uuid);
+//        adminService.deleteAdminByAdminIdArray();
+//            adminService.deleteAdminByPrimaryKey(Integer.parseInt(uuid));
+        return true;
     }
 }

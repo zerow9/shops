@@ -30,7 +30,7 @@ layui.use('table', function() {
             }, function() {
                 $.post('deleteUserByPrimaryKey.action?', {'userUuid':data.userUuid}, function(str){
                     if(str===true)
-                        swal("删除成功！", "您已经永久删除了这条信息。", "success")
+                        swal("删除成功！", "您已经永久删除了这条信息。", "success");
                     window.location.reload();
                 });
 
@@ -55,14 +55,39 @@ layui.use('table', function() {
     var $ = layui.$,
         active = {
             getCheckData: function() { //获取选中数据
-                var checkStatus = table.checkStatus('idTest'),
+                var checkStatus = table.checkStatus('userUuid'),
                     data = checkStatus.data;
                 JSON.stringify(data);
             },
             getCheckLength: function() { //获取选中数目
-                var checkStatus = table.checkStatus('idTest'),
+
+                var array = new Array();//定义数组
+                var checkStatus = table.checkStatus('userUuid'),
                     data = checkStatus.data;
-                layer.msg('选中了：' + data.length + ' 个');
+                for (var i = 0; i < data.length; i++) {//遍历数组
+                    array[i] = data[i].userUuid;
+                }
+                //判断数据是否选中
+                if(data.length===0){
+                    layer.msg("数据没有选中！");
+                    return;
+                }
+                //强势弹窗效果
+                swal({
+                    title: "您确定要删除这" + array.length + "信息吗",
+                    text: "删除后将无法恢复，请谨慎操作！",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "删除",
+                    closeOnConfirm: false
+                }, function () {
+                    //通 ajax 加载方法
+                    $.post('deleteUserByUUidArray.action', {'arrayString': array.toString()}, function (index) {
+                        swal("删除成功！", "您已经永久删除了这条信息。", "success");
+                        window.location.reload();
+                    });
+                })
             },
             isAll: function() { //验证是否全选
                 var checkStatus = table.checkStatus('idTest');
