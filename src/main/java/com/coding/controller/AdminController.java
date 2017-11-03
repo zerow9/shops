@@ -80,6 +80,14 @@ public class AdminController {
         return "";
     }
 
+    @RequestMapping("deleteAdminsByIdArray")
+    public boolean deleteAdminsByIdArray(String arrayString) throws Exception {
+        for (String uuid : arrayString.split(","))
+            adminService.deleteAdminByPrimaryKey(Integer.parseInt(uuid));
+        return true;
+    }
+
+
     /**
      * 根据分组ID查询分组信息
      *
@@ -265,5 +273,13 @@ public class AdminController {
     @RequestMapping("addUser")
     public String addUser() {
         return "users/adduser";
+    }
+
+    @RequestMapping("selectUserIdByKey")
+    public String selectUserIdByKey(String userUuid, Model model) throws Exception{
+        User user = adminService.selectUserByPrimaryKey(userUuid);
+        user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
+        model.addAttribute("user",user);
+        return "users/updateUser";
     }
 }

@@ -60,13 +60,7 @@ public class UserController {
      *
      * @param userUuid 更新用户的信息
      */
-    @RequestMapping("selectUserIdByKey")
-    public String selectUserIdByKey(String userUuid, Model model) throws Exception{
-        User user = userService.selectUserByPrimaryKey(userUuid);
-        user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
-        model.addAttribute("user",user);
-        return "users/updateUser";
-    }
+
 
     /**
      * 根据addressID删除地址信息
