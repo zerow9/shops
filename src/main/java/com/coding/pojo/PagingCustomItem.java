@@ -4,9 +4,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class PagingCustomItem extends Paging {
-    private Double formerPrice;//一些功能需要价格范围内查询，这是左侧较小值
+    private Double formerItemMarketPrice;//一些功能需要价格范围内查询，这是左侧较小值
 
-    private Double latterPrice;//一些功能需要价格范围内查询，这是右侧较大值
+    private Double latterItemMarketPrice;//一些功能需要价格范围内查询，这是右侧较大值
 
     private Integer formerRepertoryNumber;//一些功能需要库存范围内查询，这是左侧较小值
 
@@ -23,20 +23,20 @@ public class PagingCustomItem extends Paging {
 
     private Item item;//封装了商品信息，当需要利用商品的基本信息查询时调用
 
-    public Double getFormerPrice() {
-        return formerPrice;
+    public Double getFormerItemMarketPrice() {
+        return formerItemMarketPrice;
     }
 
-    public void setFormerPrice(Double formerPrice) {
-        this.formerPrice = formerPrice;
+    public void setFormerItemMarketPrice(Double formerItemMarketPrice) {
+        this.formerItemMarketPrice = formerItemMarketPrice;
     }
 
-    public Double getLatterPrice() {
-        return latterPrice;
+    public Double getLatterItemMarketPrice() {
+        return latterItemMarketPrice;
     }
 
-    public void setLatterPrice(Double latterPrice) {
-        this.latterPrice = latterPrice;
+    public void setLatterItemMarketPrice(Double latterItemMarketPrice) {
+        this.latterItemMarketPrice = latterItemMarketPrice;
     }
 
     public Item getItem() {

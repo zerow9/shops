@@ -252,7 +252,7 @@
                     <!--BETWEEN #{formerItemSaleNumber} and #{latterItemSaleNumber}-->
                 </if>
             </if>
-            <!--如果销售量查询的时候只给定了一个最大值，只需要查询小于给定值的商品，那么就给最小值设定初始值为0-->
+            <!--如果销售量查询的时候只给定了一个最大值，只需要查询小于给定值的商品-->
             <if test="formerItemSaleNumber == null">
                 <if test="latterItemSaleNumber != null and latterItemSaleNumber != 0">
                     and item_sale_number  &lt;= #{latterItemSaleNumber}
@@ -280,7 +280,7 @@
                     <!--BETWEEN #{formerItemCollectNumber} and #{latterItemCollectNumber}-->
                 </if>
             </if>
-            <!--如果收藏量查询的时候只给定了一个最大值，只需要查询小于给定值的商品，那么就给最小值设定初始值为0-->
+            <!--如果收藏量查询的时候只给定了一个最大值，只需要查询小于给定值的商品-->
             <if test="formerItemCollectNumber == null">
                 <if test="latterItemCollectNumber != null and latterItemCollectNumber != 0">
                     and Item_collect_number &lt;= #{latterItemCollectNumber}
@@ -288,6 +288,31 @@
                 </if>
             </if>
 
+            <!--商品价格范围-->
+            <if test="formerItemMarketPrice != null">
+                <!--较大值和较小值都传入-->
+                <if test="latterItemMarketPrice != null and latterItemMarketPrice != 0">
+                    <if test="formerItemMarketPrice &lt; latterItemMarketPrice">
+                        and item_market_price BETWEEN #{formerItemMarketPrice} and #{latterItemMarketPrice}
+                    </if>
+                    <if test="formerItemMarketPrice &gt; latterItemMarketPrice">
+                        and item_market_price BETWEEN #{latterItemMarketPrice} and #{formerItemMarketPrice}
+                    </if>
+                    <if test="formerItemMarketPrice == latterItemMarketPrice">
+                        and item_market_price = #{latterItemMarketPrice}
+                    </if>
+                </if>
+                <!--只传入较小值-->
+                <if test="latterItemMarketPrice == null or latterItemMarketPrice == 0">
+                    and item_market_price &gt; #{formerItemMarketPrice}
+                </if>
+            </if>
+            <!--如果价格查询的时候只给定了一个最大值，只需要查询小于给定值的商品-->
+            <if test="formerItemMarketPrice == null">
+                <if test="latterItemMarketPrice != null and latterItemMarketPrice != 0">
+                    and item_market_price &lt; #{latterItemMarketPrice}
+                </if>
+            </if>
 
             <!--排序规则-->
             <if test="sortByColumn != null and sortByColumn !=''">
