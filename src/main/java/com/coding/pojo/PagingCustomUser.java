@@ -15,7 +15,9 @@ public class PagingCustomUser extends Paging{
 
     private Integer latterAge;//一些功能需要年龄范围内查询，这是右侧较大值
 
-    private User user; //对于User对象，只用到了其中的userSex、userGroup 两个属性，其他属性不做利用
+    private User user;
+    //对于User对象，只用到了其中的userSex、
+    // userGroup 两个属性，其他属性不做利用
 
     public Integer getFormerAge() {
         return formerAge;
