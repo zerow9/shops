@@ -25,15 +25,7 @@ require(
                 x : 'left',
                 data:['直达','营销广告','搜索引擎','邮件营销','联盟广告','视频广告','百度','谷歌','必应','其他']
             },
-            toolbox: {
-                show : true,
-                feature : {
-                    mark : {show: true},
-                    dataView : {show: true, readOnly: false},
-                    restore : {show: true},
-                    saveAsImage : {show: true}
-                }
-            },
+
             calculable : true,
             series : [
                 {

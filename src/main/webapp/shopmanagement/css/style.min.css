@@ -3137,9 +3137,10 @@ body.body-small .footer.fixed {
 .content-tabs button {
     background: #fff;
     border: 0;
-    height: 40px;
-    width: 40px;
-    outline: 0
+    height:40px;
+    width:70px;
+    outline: 0;
+    padding-right: 20px
 }
 
 .content-tabs button:hover {
@@ -3148,7 +3149,7 @@ body.body-small .footer.fixed {
 
 nav.page-tabs {
     margin-left: 40px;
-    width: 100000px;
+    width: 900px;
     height: 40px;
     overflow: hidden
 }

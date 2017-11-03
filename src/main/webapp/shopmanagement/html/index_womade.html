@@ -19,7 +19,7 @@
     <link href="../css/style.womin.css" rel="stylesheet">
 </head>
 
-<body class="fixed-sidebar full-height-layout " style="overflow:auto ! important;background-color: #ffffcc !important; ">
+<body class="fixed-sidebar full-height-layout " style="overflow:auto ! important;background-color: #ffffcc ">
 
 <div id="wrapper">
     <!--左侧导航开始-->
@@ -177,7 +177,7 @@
     <!--左侧导航结束-->
 
     <!--右侧部分开始-->
-    <div id="page-wrapper" class="gray-bg dashbard-1">
+    <div id="page-wrapper" class="gray-bg dashbard-1" style="position: relative;right: -35px" >
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i
@@ -253,7 +253,7 @@
         </div>
 
         <!--begin：标签栏-->
-        <div class="row content-tabs">
+        <div class="row content-tabs" style="position: relative;width: 100%">
             <!-- << -->
             <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i></button>
             <!--标签标题容器-->
@@ -264,22 +264,18 @@
             </nav>
             <!-- >> -->
             <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i></button>
-
-
             <!--退出-->
             <a href="login.html" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
         </div>
         <!--end：标签栏-->
 
         <!--修改内容如下：-->
-        <div class="write" id="wo_showtime"  >
+        <div id="wo_showtime" class="big" >
             <!-- 展示顶部-->
-            <div id="show_top" style="width: 1000px;height:400px;"></div>
+            <div id="show_top"  class="show_one" ></div>
             <!-- 展示中部-->
-            <div id="show_middle" style="width: 1000px;height:500px;float:left;">
-            </div>
-            <div id="show_bottom" style="width: 500px;height:500px;float:right"></div>
-
+            <div id="show_left" class="show_two" ></div>
+            <div id="show_right" class="show_three" ></div>
         </div>
 
 
@@ -396,6 +392,7 @@
 <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
 <script src="../js/echarts.demo0.js"></script>
 <script src="../js/echarts.demo1.js"></script>
+<script src="../js/echarts.demo2.js"></script>
 </body>
 
 </html>
