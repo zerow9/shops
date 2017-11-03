@@ -47,6 +47,7 @@ layui.use('table', function() {
                 maxmin: true,
                 area: ['80%', '90%']
             });
+
         }
 
     });
