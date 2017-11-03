@@ -6,10 +6,7 @@ import com.coding.mapper.AddressMapper;
 import com.coding.mapper.ItemMapper;
 import com.coding.mapper.ItemTypeMapper;
 import com.coding.mapper.UserMapper;
-import com.coding.pojo.Address;
-import com.coding.pojo.Item;
-import com.coding.pojo.ItemType;
-import com.coding.pojo.User;
+import com.coding.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -168,5 +165,17 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
              return items;
         }
         return null;
+    }
+
+    public List<Item> selectItem(PagingCustomItem paging) throws Exception {
+        try {
+            List<Item>  items = itemMapper.selectItem(paging);
+            if(items.isEmpty()) throw new Exception("查询到的商品列表为空");
+            return items;
+        }catch (Exception e){
+            if (!e.getMessage().contains("商品列表为空"))
+                throw new Exception("参数查询商品列表出错，请检查参数");
+            throw e;
+        }
     }
 }

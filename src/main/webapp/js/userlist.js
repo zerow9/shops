@@ -9,7 +9,16 @@ layui.use('table', function() {
     table.on('tool(demo)', function(obj) {
         var data = obj.data;
         if(obj.event === 'detail') {
-            layer.msg('ID：' + data.userUuid + ' 的查看操作');
+            layer.open({
+                type: 2,
+                title:"查看用户",
+                shadeClose: true,
+                shade: 0.3,
+                content: 'seeUserIdByKey.action?userUuid='+data.userUuid, //注意，如果str是object，那么需要字符拼接。
+                maxmin: true,
+                area: ['80%', '90%']
+            });
+
         } else if(obj.event === 'del') {
             //自带的弹窗效果
             /*

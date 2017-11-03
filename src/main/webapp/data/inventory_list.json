@@ -1,0 +1,23 @@
+{
+  "code": 0,
+  "msg": "",
+  "count": 100,
+  "data": [
+    {
+      "inventory_id": 1,
+      "goods_id":1,
+      "goods_name": "神仙药",
+      "store_id":1,
+      "store_name":"上海分店",
+      "inventory_sales": 10
+    },
+    {
+      "inventory_id": 1,
+      "goods_id":2,
+      "goods_name": "老花镜",
+      "store_id":3,
+      "store_name":"江苏分店",
+      "inventory_sales": 100
+    }
+  ]
+}

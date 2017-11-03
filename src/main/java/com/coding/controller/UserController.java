@@ -119,12 +119,20 @@ public class UserController {
         user.setUserLandNumber(landNumber+1);
         userService.updateUserByPrimaryKey(user);
         return true;
-
     }
 
 
     @RequestMapping("addUser")
     public String addUser() {
         return "users/adduser";
+    }
+
+
+    @RequestMapping("seeUserIdByKey")
+    public String seeUserIdByKey(String userUuid, Model model) throws Exception {
+        User user = userService.selectUserByPrimaryKey(userUuid);
+        user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
+        model.addAttribute("user", user);
+        return "users/seeUser";
     }
 }

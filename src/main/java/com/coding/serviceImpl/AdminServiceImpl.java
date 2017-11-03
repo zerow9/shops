@@ -106,7 +106,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
        }catch (Exception e){
            if (!e.getMessage().contains("用户列表为空"))
             throw new Exception("参数查询用户列表出错，请检查参数");
-        throw e;
+           throw e;
     }
     }
 
