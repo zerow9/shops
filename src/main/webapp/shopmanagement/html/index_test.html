@@ -16,10 +16,10 @@
     <link rel="stylesheet" href="../common/layui/css/layui.css">
     <link href="../css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
     <link href="../css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-    <link href="../css/style.min.css" rel="stylesheet">
+    <link href="../css/style.womin.css" rel="stylesheet">
 </head>
 
-<body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
+<body class="fixed-sidebar full-height-layout " style="overflow:auto ! important;background-color: #ffffcc !important; ">
 
 <div id="wrapper">
     <!--左侧导航开始-->
@@ -208,7 +208,7 @@
                                         <small class="text-muted">今天</small>
                                     </div>
                                 </div>
-                            </li>buy
+                            </li>
                             <li class="divider"></li>
                             <li>
                                 <div class="text-center link-block">
@@ -264,23 +264,24 @@
             </nav>
             <!-- >> -->
             <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i></button>
+
+
             <!--退出-->
             <a href="login.html" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
         </div>
         <!--end：标签栏-->
 
-       <!-- 右侧内容展示部分-->
-
-        <div >
-           <!-- 展示顶部-->
-            <div id="show_top" style="width: 600px;height:400px;">
-                <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
-            </div>
+        <!--修改内容如下：-->
+        <div class="write" id="wo_showtime"  >
+            <!-- 展示顶部-->
+            <div id="show_top" style="width: 1000px;height:400px;"></div>
             <!-- 展示中部-->
-            <div id="show_middle"></div>
-            <!-- 展示底部-->
-            <div id="show_bottom"></div>
+            <div id="show_middle" style="width: 1000px;height:500px;float:left;">
+            </div>
+            <div id="show_bottom" style="width: 500px;height:500px;float:right"></div>
+
         </div>
+
 
 
     </div>
@@ -391,8 +392,10 @@
 <script src="../js/hplus.min.js?v=4.0.0"></script>
 <script type="text/javascript" src="../js/contabs.min.js"></script>
 <script src="../js/plugins/pace/pace.min.js"></script>
-<!--修改部分-->
-<script src="../js/woecharts.js"></script>
+<!--1.修改部分-->
+<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+<script src="../js/echarts.demo0.js"></script>
+<script src="../js/echarts.demo1.js"></script>
 </body>
 
 </html>
