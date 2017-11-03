@@ -165,7 +165,7 @@ public class AdminController extends UserController {
      * @return 修改成功和跳转的页面
      */
     @RequestMapping("updateAdminByPrimaryKey")
-    public boolean updateAdminByPrimaryKey(Admin admin,String adminRegisterTime1) throws Exception {
+    public boolean updateAdminByPrimaryKey(Admin admin, String adminRegisterTime1) throws Exception {
         admin.setAdminRegisterTime(DateToString.toDate(adminRegisterTime1));
         adminService.updateAdminByPrimaryKey(admin);
         return true;
@@ -187,7 +187,7 @@ public class AdminController extends UserController {
         List<Admin> admins = adminService.selectAdminAll();
         for (Admin admin : admins)
             admin.setDateToString(DateToString.change(admin.getAdminRegisterTime()));
-        JsonFormat<Admin> json=new JsonFormat<>(admins,admins.size(),null,null);
+        JsonFormat<Admin> json = new JsonFormat<>(admins, admins.size(), null, null);
         JSONObject jsonObject = JSONObject.fromObject(json);
         return jsonObject.toString();
     }
@@ -212,11 +212,11 @@ public class AdminController extends UserController {
     @RequestMapping("getUserJson")
     @ResponseBody
     public String getUserAll() throws Exception {
-       // List<User> users = adminService.selectUserAll();
-        List<User> users=adminService.selectUserAllPaging(0,10);
+        // List<User> users = adminService.selectUserAll();
+        List<User> users = adminService.selectUserAllPaging(0, 10);
         for (User user : users)
             user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
-        JsonFormat<User> json=new JsonFormat<>(users,users.size(),null,null);
+        JsonFormat<User> json = new JsonFormat<>(users, users.size(), null, null);
         JSONObject result = JSONObject.fromObject(json);
         return result.toString();
     }
@@ -227,21 +227,49 @@ public class AdminController extends UserController {
     }
 
     /**
+     * 跳转到管理员页面
      *
      * @param id
      * @param model
      * @return
      */
     @RequestMapping("updateAdmin")
-    public String updateAdmin(Integer id, Model model){
+    public String updateAdmin(Integer id, Model model) {
         try {
-            Admin admin=adminService.selectAdminByPrimaryKey(id);
+            Admin admin = adminService.selectAdminByPrimaryKey(id);
             admin.setDateToString(DateToString.change(admin.getAdminRegisterTime()));
-            model.addAttribute("admin",admin);
+            model.addAttribute("admin", admin);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "admins/updateadmin";
+    }
+
+    /***
+     * 批量删除
+     * @return
+     */
+    @RequestMapping("deleteAdminsByIdArray")
+    public boolean deleteAdminsByIdArray(String arrayString) {
+
+        //获取传入的数组分割为数组
+        String[] array = arrayString.split(",");
+
+        // 定义整型数组
+        Integer[] adminIdArray = new Integer[array.length];
+
+        //遍历数组
+        for (int i = 0; i < adminIdArray.length; i++) {
+            adminIdArray[i] = Integer.valueOf(array[i]);
+        }
+
+        try {
+            adminService.deleteAdminByAdminIdArray(adminIdArray);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return true;
     }
 
 }
