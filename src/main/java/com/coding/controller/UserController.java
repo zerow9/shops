@@ -31,7 +31,7 @@ public class UserController {
      * @param user 新用户
      */
     @RequestMapping("insertUser")
-    public Boolean insertUser(User user) throws Exception {
+    public boolean insertUser(User user) throws Exception {
         System.out.println(user);
         user.setUserRegisterDateTime(new Date());
         user.setUserAge(11);
@@ -58,20 +58,14 @@ public class UserController {
     /**
      * 根据用户ID修改用户信息
      *
-     * @param user 更新用户的信息
+     * @param userUuid 更新用户的信息
      */
-    @RequestMapping("updateUserByPrimaryKey")
-//    updateUserByPrimaryKey.action?userUuid=15086fc080414458b83a0df3407276c2
-//    public String updateUserByPrimaryKey(User user) throws Exception {
-//        userService.updateUserByPrimaryKey(user);
-//        return "";
-//    }
-    public String updateUser(String userUuid, Model model) throws Exception{
+    @RequestMapping("selectUserIdByKey")
+    public String selectUserIdByKey(String userUuid, Model model) throws Exception{
         User user = userService.selectUserByPrimaryKey(userUuid);
         user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
         model.addAttribute("user",user);
         return "users/updateUser";
-
     }
 
     /**
@@ -120,6 +114,17 @@ public class UserController {
         address.setUserUuid(userUuid);
         userService.updateAddressByPrimaryKey(address);
         return "";
+    }
+
+    @RequestMapping("updateUserByPrimaryKey")
+    public boolean updateUserByPrimaryKey(String userRegisterDateTime1,User user) throws Exception {
+        user.setUserRegisterDateTime(DateToString.toDate(userRegisterDateTime1));
+        user.setUserCurrentTime(new Date());
+        user.setUserLandIp(InetAddress.getLocalHost().getHostAddress());
+        int landNumber = user.getUserLandNumber();
+        user.setUserLandNumber(landNumber+1);
+        userService.updateUserByPrimaryKey(user);
+        return true;
     }
 
 
