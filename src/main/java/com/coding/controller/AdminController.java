@@ -2,29 +2,26 @@ package com.coding.controller;
 
 import com.coding.Iservice.IAdminService;
 import com.coding.comomInterface.DateToString;
+import com.coding.myenum.MyUUID;
 import com.coding.pojo.Admin;
 import com.coding.pojo.Groups;
 import com.coding.pojo.User;
 import com.coding.pojo.templet.JsonFormat;
 import net.sf.json.JSONObject;
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormat;
-import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-
-import java.text.SimpleDateFormat;
+import java.net.InetAddress;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Controller
 @RequestMapping("/admin")
-public class AdminController extends UserController {
+public class AdminController {
 
     @Autowired
     @Qualifier("adminService")
@@ -165,7 +162,7 @@ public class AdminController extends UserController {
      * @return 修改成功和跳转的页面
      */
     @RequestMapping("updateAdminByPrimaryKey")
-    public boolean updateAdminByPrimaryKey(Admin admin, String adminRegisterTime1) throws Exception {
+    public boolean updateAdminByPrimaryKey(Admin admin,String adminRegisterTime1) throws Exception {
         admin.setAdminRegisterTime(DateToString.toDate(adminRegisterTime1));
         adminService.updateAdminByPrimaryKey(admin);
         return true;
@@ -227,49 +224,46 @@ public class AdminController extends UserController {
     }
 
     /**
-     * 跳转到管理员页面
      *
      * @param id
      * @param model
      * @return
      */
     @RequestMapping("updateAdmin")
-    public String updateAdmin(Integer id, Model model) {
+    public String updateAdmin(Integer id, Model model){
         try {
-            Admin admin = adminService.selectAdminByPrimaryKey(id);
+            Admin admin=adminService.selectAdminByPrimaryKey(id);
             admin.setDateToString(DateToString.change(admin.getAdminRegisterTime()));
-            model.addAttribute("admin", admin);
+            model.addAttribute("admin",admin);
         } catch (Exception e) {
             e.printStackTrace();
         }
         return "admins/updateadmin";
     }
 
-    /***
-     * 批量删除
-     * @return
-     */
-    @RequestMapping("deleteAdminsByIdArray")
-    public boolean deleteAdminsByIdArray(String arrayString) {
+    @RequestMapping("updateUserByPrimaryKey")
+    public String updateUser(String userUuid, Model model) throws Exception{
+        User user = adminService.selectUserByPrimaryKey(userUuid);
+        user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
+        model.addAttribute("user",user);
+        return "users/updateUser";
 
-        //获取传入的数组分割为数组
-        String[] array = arrayString.split(",");
-
-        // 定义整型数组
-        Integer[] adminIdArray = new Integer[array.length];
-
-        //遍历数组
-        for (int i = 0; i < adminIdArray.length; i++) {
-            adminIdArray[i] = Integer.valueOf(array[i]);
-        }
-
-        try {
-            adminService.deleteAdminByAdminIdArray(adminIdArray);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
+    }
+    @RequestMapping("insertUser")
+    public boolean insertUser(User user) throws Exception {
+        user.setUserRegisterDateTime(new Date());
+        user.setUserAge(111);
+        user.setUserLandNumber(11);
+        user.setUserCurrentTime(new Date());
+        user.setUserLandIp(InetAddress.getLocalHost().getHostAddress());
+        user.setUserUuid(MyUUID.MyUUID.toString());
+        user.setUserAddress(111111);
+        System.out.println(user);
+        adminService.insertUser(user);
         return true;
     }
-
+    @RequestMapping("addUser")
+    public String addUser() {
+        return "users/adduser";
+    }
 }

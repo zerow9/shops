@@ -58,14 +58,8 @@ public class UserController {
     /**
      * 根据用户ID修改用户信息
      *
-     * @param user 更新用户的信息
      */
     @RequestMapping("updateUserByPrimaryKey")
-//    updateUserByPrimaryKey.action?userUuid=15086fc080414458b83a0df3407276c2
-//    public String updateUserByPrimaryKey(User user) throws Exception {
-//        userService.updateUserByPrimaryKey(user);
-//        return "";
-//    }
     public String updateUser(String userUuid, Model model) throws Exception{
         User user = userService.selectUserByPrimaryKey(userUuid);
         user.setDateToString(DateToString.change(user.getUserRegisterDateTime()));
