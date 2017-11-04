@@ -21,6 +21,7 @@
     <link href="../../../common/layui/css/layui.css" rel="stylesheet">
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
 
+
 </head>
 
 <body>
@@ -37,7 +38,6 @@
                     <h2>操作提示</h2>
                     在这里，你可以增删改查用户组，并给用户组配置权限。
                 </blockquote>
-
                 <div class="ibox-title">
                     <h5>用户组列表</h5>
                     <div class="ibox-tools">
@@ -63,15 +63,15 @@
 
                         <div class="table-responsive">
                             <table class="layui-table"
-                                   lay-data="{url:'/data/user_group_list.json', page:true, id:'group_container_id'}"
+                                   lay-data="{url:'getGroupsJson.action', page:true, id:'group_container_id'}"
                                    lay-filter="group_lists_table">
                                 <thead>
                                 <tr>
                                     <th lay-data="{checkbox:true, fixed: true}"></th>
-                                    <th lay-data="{field:'group_id', width:100, sort: true, fixed: true}">ID</th>
-                                    <th lay-data="{field:'group_name', width:200}">用户组名称</th>
-                                    <th lay-data="{field:'group_description', width:300}">用户组描述</th>
-                                    <th lay-data="{field:'group_shelve', width:200, align:'center', fixed: 'right', toolbar: '#shelve_bar'}">
+                                    <th lay-data="{field:'groupId', width:100, sort: true, fixed: true}">ID</th>
+                                    <th lay-data="{field:'groupName', width:200}">用户组名称</th>
+                                    <th lay-data="{field:'groupJurisdiction', width:300}">用户组描述</th>
+                                    <th lay-data="{field:'isStart', width:200, align:'center', fixed: 'right', toolbar: '#shelve_bar'}">
                                         是否启用
                                     </th>
                                     <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#operate_bar'}">
@@ -105,7 +105,7 @@
 <script src="../../../js/extends/bootstrap/bootstrap.js"></script>
 <script src="../../../shopmanagement/js/content.min.js"></script>
 <script src="../../../common/layui/layui.js"></script>
-
+<script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script>
     layui.use('table', function () {
         var table = layui.table;
@@ -120,10 +120,23 @@
             if (table_tool.event === 'detail') {
                 layer.msg('用户组ID：' + data.group_id + ' 的查看操作');
             } else if (table_tool.event === 'del') {
-                layer.confirm('确定删除用户组吗？', function (index) {
-                    table_tool.del();
-                    layer.close(index);
-                });
+                //强势弹窗效果
+                swal({
+                    title: "您确定要删除'ID：=" + data.groupId + "信息吗",
+                    text: "删除后将无法恢复，请谨慎操作！",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "删除",
+                    closeOnConfirm: false
+                }, function () {
+                    $.post('deleteGroupsByPrimaryKey.action?', {'groupId': data.groupId}, function (str) {
+                        if (str === true)
+                            swal("删除成功！", "您已经永久删除了这条信息。", "success");
+                        window.location.reload();
+                    });
+
+                })
             } else if (table_tool.event === 'edit') {
                 layer.alert('编辑行：<br>' + JSON.stringify(data))
             } else if (table_tool.event === 'shelve_status') {
@@ -155,16 +168,17 @@
                 , area: ['350px', '256px']
                 , shade: 0.3  //遮罩
                 , id: 'add_group_id' //设定一个id，防止重复弹出
-//                , btn: ['添加', '取消']
-                , btn1: function (index, layero) {  //添加按钮的操作
-                    return false
-                }
+                , btn: ['添加', '取消']
                 , btn2: function (index, layero) {  //取消按钮的操作
                     return true
                 }
                 , move: false
                 , btnAlign: 'c' //按钮居中对齐
-                , content: '/jsp/admin/user/user_group_add.jsp'
+                , content: 'admin/addGroups.action'
+                , shadeClose: true
+                , end: function () {
+                    window.location.reload();
+                }
             })
         });
 

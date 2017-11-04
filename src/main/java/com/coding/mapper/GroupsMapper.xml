@@ -24,7 +24,7 @@
     </resultMap>
     <!--Group表字段-->
     <sql id="Base_Column_List">
-        group_id, group_name, "group_jurisdiction",is_start
+        group_id, group_name, group_jurisdiction,is_start
     </sql>
     <!--根据用户唯一ID查询用户信息-->
     <select id="selectGroupsByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -65,5 +65,46 @@
         SELECT
         <include refid="Base_Column_List" />
         FROM  groups
+    </select>
+
+    <!--用户组查询功能模块-->
+    <select id="selectGroups" parameterType="com.coding.pojo.PagingCustomGroups" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List" />
+        FROM  groups
+        <where>
+            <!--根据用户组基本信息查询-->
+            <if test="groups != null">
+                <!--主键查询-->
+                <if test="groups.groupId != null and groups.groupId != 0">
+                    and group_id = #{groups.groupId}
+                </if>
+                <!--权限查询（例如：需要查询包含了功能ID为delete的所有用户组）-->
+                <if test="groups.groupJurisdiction != null and groups.groupJurisdiction != ''">
+                    and group_jurisdiction REGEXP #{groups.groupJurisdiction}
+                </if>
+                <!--查询开启状态的用户组-->
+                <if test="groups.isStart != null">
+                    and is_start = #{groups.isStart}
+                </if>
+                <!--根据组别名查询用户组-->
+                <if test="groups.groupName != null and groups.groupName != ''">
+                    and group_name = #{groups.groupName}
+                </if>
+            </if>
+            <!--分页-->
+        </where>
+        <if test="indexNumber != null">
+            <if test="pageNumber != null and pageNumber != 0">
+                limit #{indexNumber},#{pageNumber}
+            </if>
+        </if>
+        <if test="indexNumber == null">
+            <if test="pageNumber != null and pageNumber != 0">
+                limit 0,#{pageNumber}
+            </if>
+        </if>
+
+
     </select>
 </mapper>
