@@ -7,6 +7,7 @@ import com.coding.pojo.Admin;
 import com.coding.pojo.Groups;
 import com.coding.pojo.User;
 import com.coding.pojo.templet.JsonFormat;
+
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,6 +27,7 @@ public class AdminController {
 
     private Integer count = null;
     private Integer counts = null;
+    private Integer countGroups = null;
 
     @Autowired
     @Qualifier("adminService")
@@ -60,6 +62,7 @@ public class AdminController {
         } catch (Exception e) {
             throw new Exception("删除分组异常");
         }
+        countGroups--;
         return true;
     }
 
@@ -77,6 +80,7 @@ public class AdminController {
         } catch (Exception e) {
             throw new Exception("增加分组失败");
         }
+        countGroups++;
         return true;
     }
 
@@ -245,10 +249,10 @@ public class AdminController {
     @RequestMapping("getGroupsJson")
     @ResponseBody
     public String getGroupsJson(Integer page, Integer limit) throws Exception {
-        if ((page == 1 && count == null) || count == null)
-            count = adminService.selectUserAll().size();
+        if ((page == 1 && countGroups == null) || countGroups == null)
+            countGroups = adminService.selectGroupsAll().size();
         List<Groups> groups = adminService.selectGroupsPaging((page-1)*limit, limit);
-        JsonFormat<Groups> json = new JsonFormat<>(groups, count, null, null);
+        JsonFormat<Groups> json = new JsonFormat<>(groups, countGroups, null, null);
         JSONObject result = JSONObject.fromObject(json);
         return result.toString();
     }

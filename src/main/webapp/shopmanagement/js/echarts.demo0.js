@@ -9,7 +9,7 @@ require.config({
 require(
     [
         'echarts',
-        'echarts/chart/pie' // 使用柱状图就加载bar模块，按需加载
+        'echarts/chart/pie'
     ],
     function (ec) {
         // 基于准备好的dom，初始化echarts图表
@@ -23,6 +23,7 @@ require(
             legend: {
                 orient : 'vertical',
                 x : 'left',
+                y : 'top',
                 data:['直达','营销广告','搜索引擎','邮件营销','联盟广告','视频广告','百度','谷歌','必应','其他']
             },
 

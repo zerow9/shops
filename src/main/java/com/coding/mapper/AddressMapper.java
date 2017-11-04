@@ -44,4 +44,11 @@ public interface AddressMapper {
      * @return  封装了地址信息的 Address 类的对象集合
      */
     public List<Address> selectAddressByUserID(@Param("user_uuid") String user_uuid) throws Exception;
+
+    /**
+     * 返回地址表中一共有多少条数据
+     * @return 封装了地址信息的 Address 类对象
+     * @throws Exception
+     */
+    public Integer selectAddressCount()throws Exception;
 }

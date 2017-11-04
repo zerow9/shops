@@ -335,4 +335,9 @@
         </where>
     </select>
 
+    <!--查询商品表中一共有多少条数据-->
+    <select id="selectItemCount" resultType="java.lang.Integer">
+        select count(*) from item
+    </select>
+
 </mapper>

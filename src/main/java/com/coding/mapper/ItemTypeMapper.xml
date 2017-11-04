@@ -99,4 +99,9 @@
         <include refid="Blob_Column_List" />
         from item_type
     </select>
+
+    <!---->
+    <select id="selectItemTypeCount" resultType="java.lang.Integer">
+        select count(*) from item_type
+    </select>
 </mapper>

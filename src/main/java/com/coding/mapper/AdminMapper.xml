@@ -92,4 +92,9 @@
         from admin limit #{nowPage},#{number}
     </select>
 
+    <!--查询管理员表中一共有多少条数据-->
+    <select id="selectAdminCount" resultType="java.lang.Integer">
+        select count(*) from admin
+    </select>
+
 </mapper>
