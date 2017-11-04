@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coding.mapper.ComplaintMapper">
+    <!--投诉表普通字段封装-->
+    <resultMap id="BaseResultMap" type="com.coding.pojo.Complaint">
+        <id column="complaint_id" property="complaintId" jdbcType="INTEGER"/>
+        <result column="accuser_id" property="accuserId" jdbcType="INTEGER"/>
+        <result column="accused_id" property="accusedId" jdbcType="INTEGER"/>
+        <result column="complaint_tittle" property="complaintTittle" jdbcType="VARCHAR"/>
+        <result column="complaint_date" property="complaintDate" jdbcType="TIMESTAMP"/>
+        <result column="is_deal" property="isDeal" jdbcType="INTEGER"/>
+    </resultMap>
+    <!--大文本字段封装-->
+    <resultMap id="ResultMapWithBLOBs" type="com.coding.pojo.Complaint" extends="BaseResultMap">
+        <result column="complaint_content" property="complaintContent" jdbcType="LONGVARCHAR"/>
+    </resultMap>
+    <!--投诉表所有普通字段-->
+    <sql id="Base_Column_List">
+    complaint_id, accuser_id, accused_id, complaint_tittle, complaint_date, is_deal
+--     ,
+--     complaint1, complaint2, complaint3, complaint4, complaint5, complaint6, complaint7,
+--     complaint8, complaint9, complaint10
+  </sql>
+    <!--投诉表大文本字段-->
+    <sql id="Blob_Column_List">
+    complaint_content
+  </sql>
+
+    <!--根据主键删除投诉信息-->
+    <delete id="deleteComplaintByPrimaryKey" parameterType="java.lang.Integer">
+        delete from complaint
+        where complaint_id = #{complaintId,jdbcType=INTEGER}
+    </delete>
+
+    <!--按需插入投诉信息-->
+    <insert id="insertComplaintSelective" parameterType="com.coding.pojo.Complaint">
+        insert into complaint
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="complaintId != null">
+                complaint_id,
+            </if>
+            <if test="accuserId != null">
+                accuser_id,
+            </if>
+            <if test="accusedId != null">
+                accused_id,
+            </if>
+            <if test="complaintTittle != null">
+                complaint_tittle,
+            </if>
+            <if test="complaintDate != null">
+                complaint_date,
+            </if>
+            <if test="isDeal != null">
+                is_deal,
+            </if>
+            <if test="complaintContent != null">
+                complaint_content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="complaintId != null">
+                #{complaintId,jdbcType=INTEGER},
+            </if>
+            <if test="accuserId != null">
+                #{accuserId,jdbcType=INTEGER},
+            </if>
+            <if test="accusedId != null">
+                #{accusedId,jdbcType=INTEGER},
+            </if>
+            <if test="complaintTittle != null">
+                #{complaintTittle,jdbcType=VARCHAR},
+            </if>
+            <if test="complaintDate != null">
+                #{complaintDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDeal != null">
+                #{isDeal,jdbcType=INTEGER},
+            </if>
+            <if test="complaintContent != null">
+                #{complaintContent,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <!--按需更新投诉信息-->
+    <update id="updateByPrimaryKeySelective" parameterType="com.coding.pojo.Complaint">
+        update complaint
+        <set>
+            <if test="accuserId != null">
+                accuser_id = #{accuserId,jdbcType=INTEGER},
+            </if>
+            <if test="accusedId != null">
+                accused_id = #{accusedId,jdbcType=INTEGER},
+            </if>
+            <if test="complaintTittle != null">
+                complaint_tittle = #{complaintTittle,jdbcType=VARCHAR},
+            </if>
+            <if test="complaintDate != null">
+                complaint_date = #{complaintDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="isDeal != null">
+                is_deal = #{isDeal,jdbcType=INTEGER},
+            </if>
+            <if test="complaintContent != null">
+                complaint_content = #{complaintContent,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where complaint_id = #{complaintId,jdbcType=INTEGER}
+    </update>
+
+    <!--投诉表的查询大SQL-->
+    <select id="selectComplaint" parameterType="com.coding.pojo.PagingCustomComplaint" resultMap="ResultMapWithBLOBs" >
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from complaint
+        <where>
+            <!--根据投诉基本信息进行查询-->
+            <if test="complaint != null">
+                <if test="complaint.complaintId != null and complaint.complaintId != 0">
+                    and complaint_id = #{complaint.complaintId}
+                </if>
+                <if test="complaint.accuserId != null and complaint.accuserId != 0">
+                    and accuser_id = #{complaint.accuserId}
+                </if>
+                <if test="complaint.accusedId != null and complaint.accusedId != 0">
+                    and accused_id = #{complaint.accusedId}
+                </if>
+                <if test="complaint.isDeal != null">
+                    and is_deal = #{complaint.isDeal}
+                </if>
+            </if>
+            <!--根据时间段查询投诉信息-->
+            <if test="formerComplaintDate != null and formerComplaintDate!=''">
+                <!--给定了较大值和较小值-->
+                <if test="latterComplaintDate != null and latterComplaintDate != ''">
+                    and complaint_date between #{formerComplaintDate} and #{latterComplaintDate}
+                </if>
+                <!--只给定了最小值-->
+                <if test="latterComplaintDate == null or latterComplaintDate == ''">
+                    and complaint_date &gt;= #{formerComplaintDate}
+                </if>
+            </if>
+            <if test="formerComplaintDate == null or formerComplaintDate!=''">
+                <if test="latterComplaintDate != null or latterComplaintDate != ''">
+                    and complaint_date &lt;= #{latterComplaintDate}
+                </if>
+            </if>
+        </where>
+    </select>
+
+</mapper>
