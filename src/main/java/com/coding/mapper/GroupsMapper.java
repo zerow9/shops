@@ -39,7 +39,7 @@ public interface GroupsMapper {
     public List<Groups> selectGroupsAll() throws Exception;
 
     /**
-     * 用户组查询功能模块
+     * 用户组查询功能模块（包含主键查询、权限查询、状态查询、组别名查询、分页功能）
      * @return 封装了用户组信息的 Groups 类对象集合
      * @throws Exception
      */
