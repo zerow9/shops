@@ -71,13 +71,13 @@ public class AdminController {
      * @throws Exception 插入失败
      */
     @RequestMapping("insertGroups")
-    public String insertGroups(Groups groups) throws Exception {
+    public boolean insertGroups(Groups groups) throws Exception {
         try {
             adminService.insertGroups(groups);
         } catch (Exception e) {
             throw new Exception("增加分组失败");
         }
-        return "";
+        return true;
     }
 
 
@@ -130,8 +130,7 @@ public class AdminController {
      */
     @RequestMapping("selectGroupsAll")
     public String selectGroupsAll() throws Exception {
-        List<Groups> groups = adminService.selectGroupsAll();
-        return "";
+        return "groups/groupsList";
     }
 
     /**
@@ -343,4 +342,12 @@ public class AdminController {
         return "admins/detailAdmin";
     }
 
+    @RequestMapping("getGroupsAll")
+    @ResponseBody
+    public String getGroupsAll(Integer page, Integer limit) throws Exception {//
+        List<Groups> groupss = adminService.selectGroupsAll();
+        JsonFormat<Groups> json = new JsonFormat<>(groupss, groupss.size(), null, null);
+        JSONObject jsonObject = JSONObject.fromObject(json);
+        return jsonObject.toString();
+    }
 }
