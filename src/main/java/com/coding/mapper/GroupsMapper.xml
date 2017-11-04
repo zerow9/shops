@@ -93,17 +93,17 @@
                 </if>
             </if>
             <!--分页-->
-            <if test="indexNumber != null">
-                <if test="pageNumber != null and pageNumber != 0">
-                    limit #{indexNumber},#{pageNumber}
-                </if>
-            </if>
-            <if test="indexNumber == null">
-                <if test="pageNumber != null and pageNumber != 0">
-                    limit 0,#{pageNumber}
-                </if>
-            </if>
         </where>
+        <if test="indexNumber != null">
+            <if test="pageNumber != null and pageNumber != 0">
+                limit #{indexNumber},#{pageNumber}
+            </if>
+        </if>
+        <if test="indexNumber == null">
+            <if test="pageNumber != null and pageNumber != 0">
+                limit 0,#{pageNumber}
+            </if>
+        </if>
 
 
     </select>

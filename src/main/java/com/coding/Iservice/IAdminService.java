@@ -119,6 +119,16 @@ public interface IAdminService extends IUserService {
      */
     public List<Groups> selectGroupsAll() throws Exception;
 
+    /**
+     * 通过分页查询所有用户组信息
+     *
+     * @param nowPage 当前页面
+     * @param number  每页需要查询的用户数量
+     * @return 封装了用户组信息的 Groups 类对象
+     * @throws Exception
+     */
+    public List<Groups> selectGroupsPaging(Integer nowPage,Integer number) throws Exception;
+
     /*------------------------------------------管理员表------------------------------------------------------------------*/
     /**
      * 根据 用户唯一id删除用户信息
