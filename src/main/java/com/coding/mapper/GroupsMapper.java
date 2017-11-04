@@ -1,6 +1,7 @@
 package com.coding.mapper;
 
 import com.coding.pojo.Groups;
+import com.coding.pojo.PagingCustomGroups;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -37,4 +38,10 @@ public interface GroupsMapper {
      */
     public List<Groups> selectGroupsAll() throws Exception;
 
+    /**
+     * 用户组查询功能模块
+     * @return 封装了用户组信息的 Groups 类对象集合
+     * @throws Exception
+     */
+    public List<Groups> selectGroups(PagingCustomGroups pagingCustomGroups) throws Exception;
 }
