@@ -14,6 +14,14 @@ public interface GroupsMapper {
     public int deleteGroupsByPrimaryKey(Integer groupId) throws Exception;
 
     /**
+     * 批量删除用户组
+     * @return 是否删除成功 非0:成功 0:不成功
+     * @throws Exception
+     */
+    public int deleteGroupsByPrimaryKeyArray(@Param("groups_idArray") Integer [] groups_idArray) throws Exception;
+
+
+    /**
      * 插入分组信息
      * @param groups 封装了分组信息的 Groups 对象
      */
