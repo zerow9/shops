@@ -84,7 +84,7 @@
                         text: "添加数据成功！",
                         type: "success"
                     });
-                    window.parent.location.reload();
+                    window.location.reload();
                 }
             });
             return false;

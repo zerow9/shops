@@ -350,4 +350,9 @@ public class AdminController {
         JSONObject jsonObject = JSONObject.fromObject(json);
         return jsonObject.toString();
     }
+
+    @RequestMapping("addGroups")
+    public String addGroups() {
+        return "groups/groupsAdd";
+    }
 }
