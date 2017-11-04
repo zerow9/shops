@@ -205,7 +205,7 @@ public class AdminController {
     public String getAdminAll(Integer page, Integer limit) throws Exception {
         if ((page == 1 && counts == null) || counts == null)
             counts = adminService.selectAdminAll().size();
-        List<Admin> admins = adminService.selectAdminAllPaging(page - 1, limit);
+        List<Admin> admins = adminService.selectAdminAllPaging((page-1)*limit, limit);
         for (Admin admin : admins)
             admin.setDateToString(DateToString.date(admin.getAdminRegisterTime()));
         JsonFormat<Admin> json = new JsonFormat<>(admins, counts, null, null);
@@ -235,7 +235,7 @@ public class AdminController {
     public String getUserAll(Integer page, Integer limit) throws Exception {
         if ((page == 1 && count == null) || count == null)
             count = adminService.selectUserAll().size();
-        List<User> users = adminService.selectUserAllPaging(page - 1, limit);
+        List<User> users = adminService.selectUserAllPaging((page-1)*limit, limit);
         for (User user : users)
             user.setDateToString(DateToString.date(user.getUserRegisterDateTime()));
         JsonFormat<User> json = new JsonFormat<>(users, count, null, null);
