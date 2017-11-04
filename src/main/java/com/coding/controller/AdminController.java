@@ -54,13 +54,13 @@ public class AdminController {
      * @throws Exception 删除分组异常
      */
     @RequestMapping("deleteGroupsByPrimaryKey")
-    public String deleteGroupsByPrimaryKey(Integer groupId) throws Exception {
+    public boolean deleteGroupsByPrimaryKey(Integer groupId) throws Exception {
         try {
             adminService.deleteGroupsByPrimaryKey(groupId);
         } catch (Exception e) {
             throw new Exception("删除分组异常");
         }
-        return "";
+        return true;
     }
 
     /**
