@@ -36,11 +36,7 @@
                 <blockquote class="layui-elem-quote">
                     <h2>操作提示</h2>
                     在这里，你可以增删改查用户组，并给用户组配置权限。
-                </blockquote>5
-
-                <div class="alert alert-info">
-                    H+是一个很棒的后台UI框架 <a class="alert-link" href="notifications.html#">了解更多</a>.
-                </div>
+                </blockquote>
 
                 <div class="ibox-title">
                     <h5>用户组列表</h5>
