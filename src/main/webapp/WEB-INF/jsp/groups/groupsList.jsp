@@ -168,16 +168,14 @@
                 , area: ['350px', '256px']
                 , shade: 0.3  //遮罩
                 , id: 'add_group_id' //设定一个id，防止重复弹出
-//                , btn: ['添加', '取消']
-//                , btn1: function (index, layero) {  //添加按钮的操作
-//                    return false
-//                }
-//                , btn2: function (index, layero) {  //取消按钮的操作
-//                    return true
-//                }
+                , btn: ['添加', '取消']
+                , btn2: function (index, layero) {  //取消按钮的操作
+                    return true
+                }
                 , move: false
                 , btnAlign: 'c' //按钮居中对齐
                 , content: 'admin/addGroups.action'
+                , shadeClose: true
                 , end: function () {
                     window.location.reload();
                 }
