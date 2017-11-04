@@ -120,29 +120,18 @@
             if (table_tool.event === 'detail') {
                 layer.msg('用户组ID：' + data.group_id + ' 的查看操作');
             } else if (table_tool.event === 'del') {
-//                layer.confirm('确定删除用户组吗？', function (index) {
-//                    table_tool.del();
-//                    layer.close(index);
-//                });
-                //自带的弹窗效果
-                /*
-                layer.confirm('真的删除行么', function(index) {
-                    obj.del();
-                    layer.close(index);
-                });
-                */
                 //强势弹窗效果
                 swal({
-                    title: "您确定要删除'ID：="+data.groupId+"信息吗",
+                    title: "您确定要删除'ID：=" + data.groupId + "信息吗",
                     text: "删除后将无法恢复，请谨慎操作！",
                     type: "warning",
                     showCancelButton: true,
                     confirmButtonColor: "#DD6B55",
                     confirmButtonText: "删除",
                     closeOnConfirm: false
-                }, function() {
-                    $.post('deleteGroupsByPrimaryKey.action?', {'groupId':data.groupId}, function(str){
-                        if(str===true)
+                }, function () {
+                    $.post('deleteGroupsByPrimaryKey.action?', {'groupId': data.groupId}, function (str) {
+                        if (str === true)
                             swal("删除成功！", "您已经永久删除了这条信息。", "success");
                         window.location.reload();
                     });
@@ -180,15 +169,18 @@
                 , shade: 0.3  //遮罩
                 , id: 'add_group_id' //设定一个id，防止重复弹出
 //                , btn: ['添加', '取消']
-                , btn1: function (index, layero) {  //添加按钮的操作
-                    return false
-                }
-                , btn2: function (index, layero) {  //取消按钮的操作
-                    return true
-                }
+//                , btn1: function (index, layero) {  //添加按钮的操作
+//                    return false
+//                }
+//                , btn2: function (index, layero) {  //取消按钮的操作
+//                    return true
+//                }
                 , move: false
                 , btnAlign: 'c' //按钮居中对齐
                 , content: 'admin/addGroups.action'
+                , end: function () {
+                    window.location.reload();
+                }
             })
         });
 
