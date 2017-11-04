@@ -17,13 +17,13 @@ public class MyRealm extends AuthorizingRealm {
 
     @Override
     public void setName(String name) {
-        super.setName("zhangwei");
+        super.setName("root");
     }
 
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(
             AuthenticationToken token) throws AuthenticationException {
-        String code = "111";
+        String code = "root";
         String userName = (String) token.getPrincipal();
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(userName,
                 code, this.getName());
@@ -36,8 +36,14 @@ public class MyRealm extends AuthorizingRealm {
         String userName = (String) SecurityUtils.getSubject().getPrincipal();
         SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
         List<String> list = new ArrayList<String>();
-        if (userName.equalsIgnoreCase("zhangwei"))
-            list.add("1");
+        if (userName.equalsIgnoreCase("root")) {
+            list.add("del");
+            list.add("update");
+            list.add("add");
+        } else {
+            list.add("update");
+            list.add("add");
+        }
         info.addStringPermissions(list);
         return info;
     }

@@ -1,0 +1,5 @@
+# Default database connection for the remote database, if you need a local database, modify the relevant parameters
+jdbc.driver=com.mysql.jdbc.Driver
+jdbc.url=jdbc:mysql://120.77.153.17:3306/ycd_mall?useUnicode=true&characterEncoding=UTF-8
+jdbc.username=shop
+jdbc.password=CahqSBUe3nKMpMTe

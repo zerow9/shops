@@ -38,4 +38,11 @@ public interface RepertoryMapper {
      * @throws Exception
      */
     public List<Repertory> selectRepertoryAll() throws Exception;
+
+    /**
+     * 返回库存表中一共有多少条数据
+     * @return 封装了库存信息的 Repertory 类对象
+     * @throws Exception
+     */
+    public Integer selectRepertoryCount()throws Exception;
 }

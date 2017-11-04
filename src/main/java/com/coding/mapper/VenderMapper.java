@@ -47,4 +47,11 @@ public interface VenderMapper {
      */
     public List<Vender> selectVenderAll() throws Exception;
 
+    /**
+     * 返回厂家中一共有多少条数据
+     * @return 封装了厂家信息的 Repertory 类对象
+     * @throws Exception
+     */
+    public int selectVenderCount()throws Exception;
+
 }

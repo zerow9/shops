@@ -101,5 +101,9 @@
         from vender
     </select>
 
+    <!--查询厂家表中一共有多少条数据-->
+    <select id="selectVenderCount" resultType="java.lang.Integer">
+        select count(*) from vender
+    </select>
 
 </mapper>

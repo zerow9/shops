@@ -44,4 +44,11 @@ public interface GroupsMapper {
      * @throws Exception
      */
     public List<Groups> selectGroups(PagingCustomGroups pagingCustomGroups) throws Exception;
+
+    /**
+     * 返回分组表中一共有多少条数据
+     * @return 封装了分组信息的 Adin 类对象
+     * @throws Exception
+     */
+    public Integer selectGroupsCount()throws Exception;
 }

@@ -110,4 +110,11 @@ public interface UserMapper {
      */
     public List<User> selectUserPagingByKeyWord(PagingCustomUser paging) throws Exception;
 
+    /**
+     * 查询用户表中一共有多少数据
+     * @return 封装了用户信息的 User 类对象集合
+     * @throws Exception
+     */
+    public Integer selectUserCount()throws Exception;
+
 }
