@@ -14,26 +14,32 @@
 		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
 
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
-        <property name="securityManager" ref="securityManager" />
-        <property name="loginUrl" value="/login.action" />
-        <property name="unauthorizedUrl" value="/error.jsp" />
-        <property name="filters" >
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/login.action"/>
+        <property name="successUrl" value="/first.action"/>
+        <property name="unauthorizedUrl" value="/error.jsp"/>
+        <property name="filters">
             <map>
-                <entry  key="authc" value-ref="myfilter" />
+                <entry key="authc" value-ref="myfilter"/>
             </map>
         </property>
         <property name="filterChainDefinitions">
             <value>
-                /** = anon
-        </value>
+                /logout.action=logout
+                /admin/selectUserAll.action=anon
+                /admin/getUserJson.action=anon
+                /admin/**=perms[del,add,update]
+                /user/**=perms[add,update]
+                /** = authc
+            </value>
         </property>
     </bean>
 
-    <bean id="customRealm" class="com.coding.shiro.MyRealm" />
+    <bean id="customRealm" class="com.coding.shiro.MyRealm"/>
 
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
-        <property name="realm" ref="customRealm" />
+        <property name="realm" ref="customRealm"/>
     </bean>
 
-    <bean id="myfilter" class="com.coding.shiro.MyAuthenticationFilter" />
+    <bean id="myfilter" class="com.coding.shiro.MyAuthenticationFilter"/>
 </beans>
