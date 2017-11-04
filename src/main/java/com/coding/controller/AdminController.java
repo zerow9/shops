@@ -7,6 +7,7 @@ import com.coding.pojo.Admin;
 import com.coding.pojo.Groups;
 import com.coding.pojo.User;
 import com.coding.pojo.templet.JsonFormat;
+
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,6 +27,7 @@ public class AdminController {
 
     private Integer count = null;
     private Integer counts = null;
+    private Integer countGroups = null;
 
     @Autowired
     @Qualifier("adminService")
@@ -54,13 +56,14 @@ public class AdminController {
      * @throws Exception 删除分组异常
      */
     @RequestMapping("deleteGroupsByPrimaryKey")
-    public String deleteGroupsByPrimaryKey(Integer groupId) throws Exception {
+    public boolean deleteGroupsByPrimaryKey(Integer groupId) throws Exception {
         try {
             adminService.deleteGroupsByPrimaryKey(groupId);
         } catch (Exception e) {
             throw new Exception("删除分组异常");
         }
-        return "";
+        countGroups--;
+        return true;
     }
 
     /**
@@ -71,13 +74,14 @@ public class AdminController {
      * @throws Exception 插入失败
      */
     @RequestMapping("insertGroups")
-    public String insertGroups(Groups groups) throws Exception {
+    public boolean insertGroups(Groups groups) throws Exception {
         try {
             adminService.insertGroups(groups);
         } catch (Exception e) {
             throw new Exception("增加分组失败");
         }
-        return "";
+        countGroups++;
+        return true;
     }
 
 
@@ -130,8 +134,7 @@ public class AdminController {
      */
     @RequestMapping("selectGroupsAll")
     public String selectGroupsAll() throws Exception {
-        List<Groups> groups = adminService.selectGroupsAll();
-        return "";
+        return "groups/groupsList";
     }
 
     /**
@@ -243,6 +246,17 @@ public class AdminController {
         return result.toString();
     }
 
+    @RequestMapping("getGroupsJson")
+    @ResponseBody
+    public String getGroupsJson(Integer page, Integer limit) throws Exception {
+        if ((page == 1 && countGroups == null) || countGroups == null)
+            countGroups = adminService.selectGroupsAll().size();
+        List<Groups> groups = adminService.selectGroupsPaging((page-1)*limit, limit);
+        JsonFormat<Groups> json = new JsonFormat<>(groups, countGroups, null, null);
+        JSONObject result = JSONObject.fromObject(json);
+        return result.toString();
+    }
+
     @RequestMapping("addAdmin")
     public String addAdmin() {
         return "admins/addadmin";
@@ -343,4 +357,18 @@ public class AdminController {
         return "admins/detailAdmin";
     }
 
+    @RequestMapping("getGroupsAll")
+    @ResponseBody
+    public String getGroupsAll(Integer page, Integer limit) throws Exception {//
+        List<Groups> groupss = adminService.selectGroupsAll();
+        System.out.println(groupss);
+        JsonFormat<Groups> json = new JsonFormat<>(groupss, groupss.size(), null, null);
+        JSONObject jsonObject = JSONObject.fromObject(json);
+        return jsonObject.toString();
+    }
+
+    @RequestMapping("addGroups")
+    public String addGroups() {
+        return "groups/groupsAdd";
+    }
 }

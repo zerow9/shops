@@ -328,11 +328,16 @@
                 </if>
             </if>
             <if test="indexNumber == null">
-            <if test="pageNumber != null and pageNumber != 0">
+                 <if test="pageNumber != null and pageNumber != 0">
                 limit 0,#{pageNumber}
-            </if>
+                 </if>
             </if>
         </where>
+    </select>
+
+    <!--查询商品表中一共有多少条数据-->
+    <select id="selectItemCount" resultType="java.lang.Integer">
+        select count(*) from item
     </select>
 
 </mapper>

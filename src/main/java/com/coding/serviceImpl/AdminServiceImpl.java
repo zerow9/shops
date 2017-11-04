@@ -162,6 +162,17 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
 
     }
 
+    public List<Groups> selectGroupsPaging(Integer nowPage,Integer number) throws Exception{
+        exceptInitialize(nowPage,number);
+        PagingCustomGroups pagingCustomGroups = new PagingCustomGroups();
+        pagingCustomGroups.setIndexNumber(nowPage);
+        pagingCustomGroups.setPageNumber(number);
+        if(nowPage < 0) nowPage = 0;
+        List<Groups> groups = groupsMapper.selectGroups(pagingCustomGroups);
+        if(groups.isEmpty()) throw new Exception("分页查询到的用户列表为空，或者已经是最后一页");
+        return groups;
+    }
+
     /*------------------------------------------管理员表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
     public void deleteAdminByPrimaryKey(Integer adminId) throws Exception {

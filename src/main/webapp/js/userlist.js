@@ -117,7 +117,6 @@ layui.use('table', function() {
                     }
                 });
             }
-
         };
 
     $('.demoTable .layui-btn').on('click', function() {
