@@ -99,4 +99,9 @@
         from repertory
     </select>
 
+    <!--查询库存表中一共有多少数据-->
+    <select id="selectRepertoryCount" resultType="java.lang.Integer">
+        select count(*) from repertory
+    </select>
+
 </mapper>

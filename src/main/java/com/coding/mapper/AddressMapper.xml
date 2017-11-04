@@ -82,8 +82,11 @@
         <if test="user_uuid==null or user_uuid==''">
             SELECT add10 from address where address_id =1
         </if>
+    </select>
 
-
+    <!--查询地址表中一共有多少条数据-->
+    <select id="selectAddressCount" resultType="java.lang.Integer">
+        select COUNT(*) from address
     </select>
 
 </mapper>

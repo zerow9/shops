@@ -104,7 +104,10 @@
                 limit 0,#{pageNumber}
             </if>
         </if>
+    </select>
 
-
+    <!--查询分组别中一共有多少条数据-->
+    <select id="selectGroupsCount" resultType="java.lang.Integer">
+        select count(*) from groups
     </select>
 </mapper>

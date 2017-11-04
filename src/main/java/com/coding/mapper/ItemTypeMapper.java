@@ -44,4 +44,11 @@ public interface ItemTypeMapper {
      * @throws Exception
      */
     public List<ItemType> selectItemTypeAll() throws Exception;
+
+    /**
+     * 返回商品类别表中一共有多少条数据
+     * @return 封装了商品类别信息的 ItemType 类对象
+     * @throws Exception
+     */
+    public Integer selectItemTypeCount()throws Exception;
 }

@@ -62,4 +62,12 @@ public interface AdminMapper {
      */
     public List<Admin> selectAdminAllPaging(@Param("nowPage") Integer nowPage, @Param("number") Integer number) throws Exception;
 
+    /**
+     * 返回管理员表中一共有多少条数据
+     * @return 封装了管理员信息的 Groups 类对象
+     * @throws Exception
+     */
+    public Integer selectAdminCount()throws Exception;
+
+
 }
