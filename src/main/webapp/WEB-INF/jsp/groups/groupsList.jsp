@@ -63,7 +63,7 @@
 
                         <div class="table-responsive">
                             <table class="layui-table"
-                                   lay-data="{url:'getGroupsAll.action', page:true, id:'group_container_id'}"
+                                   lay-data="{url:'getGroupsJson.action', page:true, id:'group_container_id'}"
                                    lay-filter="group_lists_table">
                                 <thead>
                                 <tr>

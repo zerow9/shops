@@ -242,6 +242,17 @@ public class AdminController {
         return result.toString();
     }
 
+    @RequestMapping("getGroupsJson")
+    @ResponseBody
+    public String getGroupsJson(Integer page, Integer limit) throws Exception {
+        if ((page == 1 && count == null) || count == null)
+            count = adminService.selectUserAll().size();
+        List<Groups> groups = adminService.selectGroupsPaging((page-1)*limit, limit);
+        JsonFormat<Groups> json = new JsonFormat<>(groups, count, null, null);
+        JSONObject result = JSONObject.fromObject(json);
+        return result.toString();
+    }
+
     @RequestMapping("addAdmin")
     public String addAdmin() {
         return "admins/addadmin";
@@ -346,6 +357,7 @@ public class AdminController {
     @ResponseBody
     public String getGroupsAll(Integer page, Integer limit) throws Exception {//
         List<Groups> groupss = adminService.selectGroupsAll();
+        System.out.println(groupss);
         JsonFormat<Groups> json = new JsonFormat<>(groupss, groupss.size(), null, null);
         JSONObject jsonObject = JSONObject.fromObject(json);
         return jsonObject.toString();
