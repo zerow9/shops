@@ -3289,6 +3289,7 @@ nav.page-tabs .page-tabs-content {
 
 .no-margins {
     margin: 0 !important
+    font-weight: bold;
 }
 
 .no-top-border {
@@ -3952,7 +3953,9 @@ a.close-canvas-menu:hover {
 }
 
 .m-t-md {
-    margin-top: 20px
+    margin-top: 20px;
+    font-size: 14px;
+    font-weight: bold;
 }
 
 .m-t-lg {

@@ -2881,7 +2881,7 @@ body, body.full-height-layout #page-wrapper, body.full-height-layout #wrapper, h
     position: relative;
 }
 .show_one{
-    width: 100%;
+    width: 99%;
     height:400px;
 }
 .show_two{
