@@ -26,7 +26,6 @@
         <property name="filterChainDefinitions">
             <value>
                 /logout.action=logout
-                /shopmanagement/**=anon
                 /admin/selectUserAll.action=anon
                 /admin/getUserJson.action=anon
                 /admin/**=perms[del,add,update]
