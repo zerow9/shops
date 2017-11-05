@@ -63,8 +63,9 @@
 
                 <li>
                     <a href="javascript:;">
-                        <i class="fa fa-home"></i>
+                        <i class="fa fa-user"></i>
                         <span class="nav-label">管理员管理</span>
+                        <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="admin/selectAdminAll.action">管理员列表</a>
@@ -262,7 +263,7 @@
             </button>
             <nav class="page-tabs J_menuTabs">
                 <div class="page-tabs-content">
-                    <a href="javascript:;" class="active J_menuTab" data-id="index_v1.html">首页</a>
+                    <a href="javascript:;" class="active J_menuTab" data-id="../../../jsp/admin/home.jsp">首页</a>
                 </div>
             </nav>
             <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
@@ -287,7 +288,7 @@
         <div class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%"
                     src="../../../jsp/admin/home.jsp" frameborder="0"
-                    data-id="jsp/admin/home.jsp" seamless></iframe>
+                    data-id="../../../jsp/admin/home.jsp" seamless></iframe>
         </div>
         <div class="footer">
             <div class="pull-right">&copy; 2014-2015 <a href="http://www.zi-han.net/" target="_blank">zihan's blog</a>
