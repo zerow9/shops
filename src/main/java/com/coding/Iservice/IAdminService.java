@@ -87,6 +87,13 @@ public interface IAdminService extends IUserService {
      * @return
      */
     public List<Address> selectAddressAll() throws Exception;
+
+    /**
+     * 返回地址表中一共有多少条数据
+     * @return 封装了地址信息的 Address 类对象
+     * @throws Exception
+     */
+    public Integer selectAddressCount()throws Exception;
 /*------------------------------------------分组表------------------------------------------------------------------*/
     /**
      * 通过分组 ID 删除分组信息
@@ -179,6 +186,13 @@ public interface IAdminService extends IUserService {
      */
     public List<Admin> selectAdminAllPaging(Integer nowPage,Integer number) throws Exception;
 
+    /**
+     * 根据帐号去查找密码
+     * @param adminAccount Admin 帐号
+     * @return 如果数据库中有该帐号信息，那么就返回该用户密码(设计不规范，导致账户可能会重复，返回密码列表，去密码列表中匹配)
+     * @throws Exception
+     */
+    public List<String> selectAdminPassword(@Param("adminAccount") String adminAccount)throws Exception;
      /*------------------------------------------商品类别表------------------------------------------------------------------*/
 
     /**
