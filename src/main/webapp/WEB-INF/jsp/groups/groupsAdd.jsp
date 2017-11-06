@@ -32,7 +32,8 @@
     <div class="layui-form-item">
         <label class="layui-form-label">用户组描述</label>
         <div class="layui-input-block">
-            <input type="text" name="groupJurisdiction" lay-verify="group_description" autocomplete="off" placeholder="请输入用户组描述"
+            <input type="text" name="groupJurisdiction" lay-verify="group_description" autocomplete="off"
+                   placeholder="请输入用户组描述"
                    class="layui-input">
         </div>
     </div>
@@ -54,13 +55,13 @@
 
 </form>
 
-<script src="../../../common/layui/layui.js" charset="utf-8"></script>
 <script src="../../../js/extends/jquery/jquery.min.js"></script>
+<script src="../../../common/layui/layui.js" charset="utf-8"></script>
 <script>
     layui.use(['form'], function () {
         var form = layui.form
             , layer = layui.layer;
-        var $=layui.$;
+        var $ = layui.$;
         //监听指定开关
         form.on('switch(switch)', function (data) {
             layer.tips((this.checked ? '启用' : '禁用') + "组", data.othis)
@@ -74,18 +75,13 @@
             $.ajax({
                 url: 'insertGroups.action',
                 data: parm,
-                type:'POST',
+                type: 'POST',
                 success: function () {
                     var index = parent.layer.getFrameIndex(window.name);
                     parent.layer.close(index);
                     //关闭弹出的窗口
-                    parent.layer.closeAll();
-                    swal({
-                        title: "太帅了",
-                        text: "添加数据成功！",
-                        type: "success"
-                    });
-                    window.location.reload();
+                    parent.layer.msg("添加成功！");
+//                    window.location.reload();
                 }
             });
             return false;

@@ -110,17 +110,6 @@ public class UserController {
         return "";
     }
 
-    @RequestMapping("updateUserByPrimaryKey")
-    public boolean updateUserByPrimaryKey(String userRegisterDateTime1,User user) throws Exception {
-        user.setUserRegisterDateTime(DateToString.date(userRegisterDateTime1));
-        user.setUserCurrentTime(new Date());
-        user.setUserLandIp(InetAddress.getLocalHost().getHostAddress());
-        int landNumber = user.getUserLandNumber();
-        user.setUserLandNumber(landNumber+1);
-        userService.updateUserByPrimaryKey(user);
-        return true;
-    }
-
 
     @RequestMapping("addUser")
     public String addUser() {

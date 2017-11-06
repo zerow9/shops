@@ -54,4 +54,14 @@ public class Paging {
         this.sortRule = sortRule;
     }
 
+    @Override
+    public String toString() {
+        return "Paging{" +
+                "indexNumber=" + indexNumber +
+                ", pageNumber=" + pageNumber +
+                ", keyWord='" + keyWord + '\'' +
+                ", sortByColumn='" + sortByColumn + '\'' +
+                ", sortRule='" + sortRule + '\'' +
+                '}';
+    }
 }

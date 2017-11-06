@@ -207,8 +207,8 @@ public class AdminController {
     @ResponseBody
     public String getAdminAll(Integer page, Integer limit) throws Exception {
         if ((page == 1 && counts == null) || counts == null)
-            counts = adminService.selectAdminAll().size();
-        List<Admin> admins = adminService.selectAdminAllPaging((page-1)*limit, limit);
+            counts = adminService.selectAdminCount();
+        List<Admin> admins = adminService.selectAdminAllPaging((page - 1) * limit, limit);
         for (Admin admin : admins)
             admin.setDateToString(DateToString.date(admin.getAdminRegisterTime()));
         JsonFormat<Admin> json = new JsonFormat<>(admins, counts, null, null);
@@ -237,8 +237,8 @@ public class AdminController {
     @ResponseBody
     public String getUserAll(Integer page, Integer limit) throws Exception {
         if ((page == 1 && count == null) || count == null)
-            count = adminService.selectUserAll().size();
-        List<User> users = adminService.selectUserAllPaging((page-1)*limit, limit);
+            count = adminService.selectUserCount();
+        List<User> users = adminService.selectUserAllPaging((page - 1) * limit, limit);
         for (User user : users)
             user.setDateToString(DateToString.date(user.getUserRegisterDateTime()));
         JsonFormat<User> json = new JsonFormat<>(users, count, null, null);
@@ -250,8 +250,8 @@ public class AdminController {
     @ResponseBody
     public String getGroupsJson(Integer page, Integer limit) throws Exception {
         if ((page == 1 && countGroups == null) || countGroups == null)
-            countGroups = adminService.selectGroupsAll().size();
-        List<Groups> groups = adminService.selectGroupsPaging((page-1)*limit, limit);
+            countGroups = adminService.selectGroupsCount();
+        List<Groups> groups = adminService.selectGroupsPaging((page - 1) * limit, limit);
         JsonFormat<Groups> json = new JsonFormat<>(groups, countGroups, null, null);
         JSONObject result = JSONObject.fromObject(json);
         return result.toString();
@@ -287,7 +287,7 @@ public class AdminController {
         user.setUserAddress(111111);
         System.out.println(user);
         adminService.insertUser(user);
-        count ++;
+        count++;
         return true;
     }
 
@@ -317,9 +317,10 @@ public class AdminController {
     @RequestMapping("deleteUserByUUidArray")
     public boolean deleteUserByUUidArray(String arrayString) throws Exception {
         adminService.deleteUsersByUuidArray(arrayString.split(","));
-        count =null;
+        count = null;
         return true;
     }
+
 
     @RequestMapping("updateUserByPrimaryKey")
     public boolean updateUserByPrimaryKey(String userRegisterDateTime1, User user) throws Exception {
@@ -355,16 +356,6 @@ public class AdminController {
         admin.setDateToString(DateToString.date(admin.getAdminRegisterTime()));
         model.addAttribute("admin", admin);
         return "admins/detailAdmin";
-    }
-
-    @RequestMapping("getGroupsAll")
-    @ResponseBody
-    public String getGroupsAll(Integer page, Integer limit) throws Exception {//
-        List<Groups> groupss = adminService.selectGroupsAll();
-        System.out.println(groupss);
-        JsonFormat<Groups> json = new JsonFormat<>(groupss, groupss.size(), null, null);
-        JSONObject jsonObject = JSONObject.fromObject(json);
-        return jsonObject.toString();
     }
 
     @RequestMapping("addGroups")

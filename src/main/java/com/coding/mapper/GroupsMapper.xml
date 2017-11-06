@@ -100,8 +100,14 @@
                     and group_name = #{groups.groupName}
                 </if>
             </if>
-            <!--分页-->
         </where>
+        <!--排序规则-->
+        <if test="sortByColumn != null and sortByColumn !=''">
+            <if test="sortRule != null and sortRule != ''">
+                order by ${sortByColumn} ${sortRule}
+            </if>
+        </if>
+        <!--分页-->
         <if test="indexNumber != null">
             <if test="pageNumber != null and pageNumber != 0">
                 limit #{indexNumber},#{pageNumber}
