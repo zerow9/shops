@@ -274,12 +274,6 @@ public interface IAdminService extends IUserService {
      */
     public void updateItemByPrimaryKey(Item item) throws Exception;
 
-    /**
-     * 返回商品表中一共有多少条数据
-     * @return 封装了商品信息的 Item 类对象
-     * @throws Exception
-     */
-    public Integer selectItemCount()throws Exception;
  /*------------------------------------------库存表------------------------------------------------------------------*/
     /**
      * 根据库存ID删除库存信息
