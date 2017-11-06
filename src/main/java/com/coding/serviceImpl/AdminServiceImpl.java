@@ -188,6 +188,17 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         return groups;
     }
 
+    public List<Groups> selectGroupsPaging(Integer nowPage, Integer number) throws Exception {
+        exceptInitialize(nowPage,number);
+        PagingCustomGroups pagingCustomGroups = new PagingCustomGroups();
+        if(nowPage < 0) nowPage = 0;
+        pagingCustomGroups.setIndexNumber(nowPage);
+        pagingCustomGroups.setPageNumber(number);
+        List<Groups> groups = groupsMapper.selectGroups(pagingCustomGroups);
+        if(groups.isEmpty()) throw new Exception("分页查询到的用户列表为空，或者已经是最后一页");
+        return groups;
+    }
+
     public Integer selectGroupsCount() throws Exception {
         try {
             return groupsMapper.selectGroupsCount();
