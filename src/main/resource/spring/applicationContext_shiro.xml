@@ -1,17 +1,7 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
-		http://www.springframework.org/schema/mvc
-		http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
-		http://www.springframework.org/schema/context
-		http://www.springframework.org/schema/context/spring-context-3.2.xsd
-		http://www.springframework.org/schema/aop
-		http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
-		http://www.springframework.org/schema/tx
-		http://www.springframework.org/schema/tx/spring-tx-3.2.xsd ">
+		http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
 
     <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
         <property name="securityManager" ref="securityManager"/>
@@ -20,26 +10,48 @@
         <property name="unauthorizedUrl" value="/error.jsp"/>
         <property name="filters">
             <map>
-                <entry key="authc" value-ref="myfilter"/>
+                <entry key="authc" value-ref="myFilter"/>
             </map>
         </property>
         <property name="filterChainDefinitions">
             <value>
                 /logout.action=logout
                 /shopmanagement/**=anon
-                /admin/deleteAdminByPrimaryKey.action=perms[root]
-                /admin/deleteGroupsByPrimaryKey.action=perms[root]
                 /admin/**=perms[del,add,update]
                 /** = authc
             </value>
         </property>
     </bean>
 
-    <bean id="customRealm" class="com.coding.shiro.MyRealm"/>
+    <bean id="customRealm" class="com.coding.shiro.MyRealm" />
 
     <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
         <property name="realm" ref="customRealm"/>
+        <property name="cacheManager" ref="ehCacheManager"/>
+        <property name="sessionManager" ref="sessionManager"/>
+        <property name="rememberMeManager" ref="rememberMeManager"/>
     </bean>
 
-    <bean id="myfilter" class="com.coding.shiro.MyAuthenticationFilter"/>
+    <bean id="ehCacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">
+        <!--<property name="cacheManagerConfigFile" value="classpath:ehcache/shiro_ehcache.xml"/>-->
+    </bean>
+
+    <bean id="sessionManager" class="org.apache.shiro.web.session.mgt.DefaultWebSessionManager">
+        <property name="globalSessionTimeout" value="600000"/>
+        <property name="deleteInvalidSessions" value="true"/>
+    </bean>
+
+    <bean id="rememberMeManager" class="org.apache.shiro.web.mgt.CookieRememberMeManager">
+        <property name="cookie" ref="rememberMeCookie"/>
+    </bean>
+    <bean id="rememberMeCookie" class="org.apache.shiro.web.servlet.SimpleCookie">
+        <constructor-arg value="weiGe"/>
+        <property name="maxAge" value="2592000"/>
+    </bean>
+
+    <bean id="myFilter" class="com.coding.shiro.MyAuthenticationFilter ">
+        <property name="usernameParam" value="username"/>
+        <property name="passwordParam" value="password"/>
+    </bean>
+
 </beans>

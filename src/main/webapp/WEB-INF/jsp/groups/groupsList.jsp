@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 63465
-  Date: 2017/11/2 0002
-  Time: 10:04
-  To change this template use File | Settings | File Templates.
---%>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
@@ -97,7 +91,9 @@
 <script type="text/html" id="operate_bar">
     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
     <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
+    <shiro:hasPermission name="root">
     <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+    </shiro:hasPermission>
 </script>
 
 <script src="../../../js/extends/jquery/jquery.min.js"></script>

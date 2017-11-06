@@ -66,4 +66,8 @@ public class MyRealm extends AuthorizingRealm {
         info.addStringPermissions(list);
         return info;
     }
+
+    public void clearCache() {
+        super.clearCache(SecurityUtils.getSubject().getPrincipals());
+    }
 }

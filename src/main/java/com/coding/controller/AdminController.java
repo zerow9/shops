@@ -9,6 +9,7 @@ import com.coding.pojo.User;
 import com.coding.pojo.templet.JsonFormat;
 
 import net.sf.json.JSONObject;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -56,6 +57,7 @@ public class AdminController {
      * @throws Exception 删除分组异常
      */
     @RequestMapping("deleteGroupsByPrimaryKey")
+    @RequiresPermissions("root")
     public boolean deleteGroupsByPrimaryKey(Integer groupId) throws Exception {
         try {
             adminService.deleteGroupsByPrimaryKey(groupId);
@@ -371,6 +373,7 @@ public class AdminController {
      * @throws Exception
      */
     @RequestMapping("deleteGroupsByIdArray")
+    @RequiresPermissions("root")
     public boolean deleteGroupsByIdArray(String arrayString) throws Exception {
         List<Integer> list =new ArrayList<>();
         for (String uuid : arrayString.split(","))

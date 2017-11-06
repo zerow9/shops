@@ -21,7 +21,7 @@ public class LoginController {
             } else if ("randomCodeError".equals(exceptionClassName)) {
                 throw new Exception("验证码错误 ");
             } else {
-                throw new Exception("其他错误");
+                throw new Exception("其他错误"+exceptionClassName);
             }
         }
         return "login/login";
