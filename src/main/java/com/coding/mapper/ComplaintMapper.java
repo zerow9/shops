@@ -25,11 +25,11 @@ public interface ComplaintMapper {
 
     /**
      * 根据投诉表ID按需更新投诉表信息
-     * @param record 封装了投诉信息的 Complaint 类对象
+     * @param complaint 封装了投诉信息的 Complaint 类对象
      * @return 是否更新成功 非0:成功 0:失败
      * @throws Exception
      */
-    public int updateComplaintByPrimaryKeySelective(Complaint record)throws Exception;
+    public int updateComplaintByPrimaryKeySelective(Complaint complaint)throws Exception;
 
     /**
      * 投诉表查询功能大集合
@@ -41,6 +41,11 @@ public interface ComplaintMapper {
      */
     public List<Complaint> selectComplaint(PagingCustomComplaint pagingCustomComplaint)throws Exception;
 
-
+    /**
+     * 查询一共有多少条投诉信息
+     * @return 返回一共有多少条投诉信息
+     * @throws Exception
+     */
+    public Integer selectComplaintCount()throws Exception;
 
 }

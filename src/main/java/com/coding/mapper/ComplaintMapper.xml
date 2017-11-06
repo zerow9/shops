@@ -122,9 +122,11 @@
                 <if test="complaint.complaintId != null and complaint.complaintId != 0">
                     and complaint_id = #{complaint.complaintId}
                 </if>
-                <if test="complaint.accuserId != null and complaint.accuserId != 0">
+                <!--根据用户 uuid 查询投诉信息-->
+                <if test="complaint.accuserId != null and complaint.accuserId != ''">
                     and accuser_id = #{complaint.accuserId}
                 </if>
+                <!--根据用户 AdminId 查询投诉信息-->
                 <if test="complaint.accusedId != null and complaint.accusedId != 0">
                     and accused_id = #{complaint.accusedId}
                 </if>
@@ -143,12 +145,17 @@
                     and complaint_date &gt;= #{formerComplaintDate}
                 </if>
             </if>
+            <!--给定了最大值-->
             <if test="formerComplaintDate == null or formerComplaintDate!=''">
-                <if test="latterComplaintDate != null or latterComplaintDate != ''">
+                <if test="latterComplaintDate != null and latterComplaintDate != ''">
                     and complaint_date &lt;= #{latterComplaintDate}
                 </if>
             </if>
         </where>
     </select>
 
+    <!--查询一共有多少条投诉信息-->
+    <select id="selectComplaintCount" resultType="java.lang.Integer">
+        select count(*) from complaint
+    </select>
 </mapper>

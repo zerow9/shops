@@ -7,9 +7,9 @@ import java.util.Date;
 public class Complaint {
     private Integer complaintId;
 
-    private Integer accuserId;
+    private String accuserId;// 用户 uuid
 
-    private Integer accusedId;
+    private Integer accusedId;// 管理员 id
 
     private String complaintTittle;
 
@@ -27,11 +27,11 @@ public class Complaint {
         this.complaintId = complaintId;
     }
 
-    public Integer getAccuserId() {
+    public String getAccuserId() {
         return accuserId;
     }
 
-    public void setAccuserId(Integer accuserId) {
+    public void setAccuserId(String accuserId) {
         this.accuserId = accuserId;
     }
 
