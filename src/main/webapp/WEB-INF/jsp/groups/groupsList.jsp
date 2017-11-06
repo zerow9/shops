@@ -226,11 +226,11 @@
                     parent.layer.close(index);
                     $.post('deleteGroupsByIdArray.action', {'arrayString': groupids.toString()}, function (result, status) {
                         console.log('post返回信息：' + '\nresult:' + result + '\nstatus:' + status);
-                        if (result === false) {
-                            layer.msg("删除成功！");
+                        if (status === 'success') {
+                            parent.layer.msg("删除成功！");
                             window.location.reload();
                         } else {
-                            layer.msg("删除失败！");
+                            parent.layer.msg("删除失败！");
                         }
                     });
                 }
