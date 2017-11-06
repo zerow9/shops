@@ -80,7 +80,7 @@ public interface IAdminService extends IUserService {
      * @return 封装了用户信息的 User 类对象集合
      * @throws Exception
      */
-    public List<User> selectUserPagingByKeyWord(PagingCustomUser paging) throws Exception;
+    public List<User> selectUser(PagingCustomUser paging) throws Exception;
 /*------------------------------------------收获地址表表------------------------------------------------------------------*/
     /**
      * 返回所有地址信息
