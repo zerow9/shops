@@ -59,6 +59,8 @@
 
                         <div class="layui-btn-group user_group_button">
                             <button class="layui-btn" id="add_group_btn">添加用户组</button>
+                            <button class="layui-btn" id="del_group_btn">删除用户组</button>
+                            <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
                         </div>
 
                         <div class="table-responsive">
@@ -89,7 +91,6 @@
         </div>
     </div>
 </div>
-
 
 <script type="text/html" id="shelve_bar">
     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="shelve_status" id="shelve_status_bar">是</a>
@@ -135,7 +136,6 @@
                             swal("删除成功！", "您已经永久删除了这条信息。", "success");
                         window.location.reload();
                     });
-
                 })
             } else if (table_tool.event === 'edit') {
                 layer.alert('编辑行：<br>' + JSON.stringify(data))
@@ -151,9 +151,18 @@
                     , data = checkStatus.data;
                 layer.alert(JSON.stringify(data));
             }
+            , getCheckLength: function () { //获取选中数目
+                var checkStatus = table.checkStatus('group_container_id')
+                    , data = checkStatus.data;
+                layer.msg('选中了：' + data.length + ' 个');
+            }
+            , isAll: function () { //验证是否全选
+                var checkStatus = table.checkStatus('group_container_id');
+                layer.msg(checkStatus.isAll ? '全选' : '未全选')
+            }
         };
 
-//        测试的顶部功能按钮
+//        监听顶部功能按钮
         $('.user_group_button .layui-btn').on('click', function () {
             var type = $(this).data('type');
             active[type] ? active[type].call(this) : '';
@@ -179,6 +188,45 @@
                 , end: function () {
                     window.location.reload();
                 }
+            })
+        });
+
+//        删除用户组
+        $("#del_group_btn").on('click', function () {
+            var checkStatus = table.checkStatus('group_container_id')
+                , data = checkStatus.data;
+            layer.alert(JSON.stringify(data));
+            parent.layer.open({
+                type: 1
+                , title: ['删除用户组', 'font-size:18px;']
+                , closeBtn: 1
+                , area: ['350px', '256px']
+                , shade: 0.3  //遮罩
+                , id: 'del_group_id' //设定一个id，防止重复弹出
+                , btn: ['删除', '取消']
+                , btn1: function (index, layero) {
+                    parent.layer.close(index);
+                    $.post('deleteUserByUUidArray.action?', JSON.stringify(data), function (result, status) {
+                        $.console("Data: " + data + "\nStatus: " + status);
+                        if (result === true) {
+                            parent.layer.msg("删除成功！");
+                            window.location.reload();
+                        } else {
+                            parent.layer.msg("删除失败！");
+                        }
+                    });
+                }
+                , btn2: function (index, layero) {  //取消按钮的操作
+                    layer.close(index);
+                    layer.msg("已取消删除！");
+                }
+//                , move: false
+                , btnAlign: 'c' //按钮居中对齐
+                , content: 'admin/addGroups.action'
+                , shadeClose: true
+//                , end: function () {
+//                    window.location.reload();
+//                }
             })
         });
 
