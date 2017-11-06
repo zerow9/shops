@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PagingCustomOrder extends Paging {
 
-    private Order order;//订单基本信息
+    private Orders order;//订单基本信息
 
     private String formerOrderCreateTime;//一些功能需要订单创建时间范围内查询，这是左侧较小值
 
@@ -24,11 +24,11 @@ public class PagingCustomOrder extends Paging {
     private String latterOrderCompletionTime;//一些功能需要订单完成时间范围内查询，这是右侧较大值
 
 
-    public Order getOrder() {
+    public Orders getOrder() {
         return order;
     }
 
-    public void setOrder(Order order) {
+    public void setOrder(Orders order) {
         this.order = order;
     }
 

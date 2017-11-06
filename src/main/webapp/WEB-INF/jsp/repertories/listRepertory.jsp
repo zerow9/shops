@@ -1,16 +1,14 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 63465
-  Date: 2017/11/2 0002
-  Time: 10:04
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://"
+            + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";
+%>
 <html>
-
 <head>
     <meta charset="utf-8">
-    <title>用户组列表</title>
+    <title>库存列表</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -35,10 +33,11 @@
 
                 <blockquote class="layui-elem-quote">
                     <h2>操作提示</h2>
-                    在这里，你可以增删改查用户组，并给用户组配置权限。
+                    在这里，你可以增删改查商品。
                 </blockquote>
+
                 <div class="ibox-title">
-                    <h5>用户组列表</h5>
+                    <h5>库存列表</h5>
                     <div class="ibox-tools">
                         <%--最大最小化按钮--%>
                         <a class="collapse-link">
@@ -56,30 +55,35 @@
 
                     <div class="ibox-content">
 
-                        <div class="layui-btn-group user_group_button">
-                            <button class="layui-btn" id="add_group_btn">添加用户组</button>
-                            <button class="layui-btn" id="del_group_btn">删除用户组</button>
+                        <div class="layui-btn-group demoTable">
+                            <button class="layui-btn" data-type="getCheckLength">批量删除</button>
+                            <button class="layui-btn" data-type="isAll">全选</button>
+                            <button class="layui-btn" data-type="addRepertory">添加商品</button>
                         </div>
 
                         <div class="table-responsive">
-                            <table class="layui-table"
-                                   lay-data="{url:'getGroupsJson.action', page:true, id:'group_container_id'}"
-                                   lay-filter="group_lists_table">
+
+                            <table class="layui-table" lay-data="{url:'<%=basePath%>admin/getRepertoryAll.action', page:true, id:'repertoryId'}"
+                                   lay-filter="goods_lists_table">
                                 <thead>
                                 <tr>
                                     <th lay-data="{checkbox:true, fixed: true}"></th>
-                                    <th lay-data="{field:'groupId', width:100, sort: true, fixed: true}">ID</th>
-                                    <th lay-data="{field:'groupName', width:200}">用户组名称</th>
-                                    <th lay-data="{field:'groupJurisdiction', width:300}">用户组描述</th>
-                                    <th lay-data="{field:'isStart', width:200, align:'center', fixed: 'right', toolbar: '#shelve_bar'}">
-                                        是否启用
-                                    </th>
+                                    <th lay-data="{field:'repertoryId', width:100，fixed='true'}">库存编号</th>
+                                    <th lay-data="{field:'itemId', width:100}">商品编号</th>
+                                    <th lay-data="{field:'itemMarketPrice', width:200}">商品市场价格</th>
+                                    <th lay-data="{field:'itemOriginalPrice', width:200}">商品原始价格</th>
+                                    <th lay-data="{field:'shopId', width:200}">商店</th>
+                                    <th lay-data="{field:'repertoryNumber', width:200}">库存量</th>
+                                    <th lay-data="{field:'repertoryPuttime', width:200}">入库时间</th>
+                                    <th lay-data="{field:'updateTime', width:100,}">修改时间</th>
+                                    <th lay-data="{field:'venderId', width:100}">商家编号</th>
                                     <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#operate_bar'}">
                                         操作
                                     </th>
                                 </tr>
                                 </thead>
                             </table>
+
                         </div>
 
                     </div>
@@ -91,7 +95,7 @@
 </div>
 
 <script type="text/html" id="shelve_bar">
-    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="shelve_status" id="shelve_status_bar">是</a>
+    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="shelve_status" id="shelve_status_bar">已上架</a>
 </script>
 
 <script type="text/html" id="operate_bar">
@@ -105,8 +109,7 @@
 <script src="../../../shopmanagement/js/content.min.js"></script>
 <script src="../../../common/layui/layui.js"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../../../js/user/group/group_list.js"></script>
+<script src="../../../js/repertories/repertorylist.js"></script>
 
 </body>
-
 </html>

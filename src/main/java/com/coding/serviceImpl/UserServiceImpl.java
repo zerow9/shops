@@ -49,7 +49,9 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             except(userMapper.updateUserByPrimaryKey(user));
         }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
             throw new Exception("修改用户信息时出错");
+                throw e;
         }
 
 
@@ -80,7 +82,9 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
                except(addressMapper.deleteAddressByPrimaryKey(addressId));
 //                addressMapper.deleteAddressByPrimaryKey(addressId);
             }catch (Exception e){
-                throw new Exception("删除收获地址时出错");
+                if (!e.getMessage().contains("操作无效"))
+                  throw new Exception("删除收获地址时出错");
+                throw e;
             }
         }
     }
@@ -108,7 +112,9 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             except(addressMapper.updateAddressByPrimaryKey(address));
         }catch (Exception e){
-            throw new Exception("修改收获地址时出错");
+            if (!e.getMessage().contains("操作无效"))
+                 throw new Exception("修改收获地址时出错");
+            throw e;
         }
     }
 
@@ -129,7 +135,9 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
                 except(complaintMapper.deleteComplaintByPrimaryKey(complaintId));
 //                addressMapper.deleteAddressByPrimaryKey(addressId);
             }catch (Exception e){
-                throw new Exception("删除投诉信息时出错");
+                if (!e.getMessage().contains("操作无效"))
+                    throw new Exception("删除投诉信息时出错");
+                throw e;
             }
         }
     }
@@ -146,8 +154,19 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             except(complaintMapper.updateComplaintByPrimaryKeySelective(record));
         }catch (Exception e){
-            throw new Exception("修改投诉信息时出错");
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("修改投诉信息时出错");
+            throw e;
         }
+    }
+
+    public Complaint selectComplaintByPrimaryKey(Integer complaintId) throws Exception {
+        if (complaintId != null && complaintId != 0) {
+            Complaint complaint = complaintMapper.selectComplaintByPrimaryKey(complaintId);
+            except(complaint,"查询用户投诉信息为空");
+            return complaint;
+        }
+        return null;
     }
 
     public List<Complaint> selectComplaint(PagingCustomComplaint pagingCustomComplaint) throws Exception {
@@ -161,7 +180,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     public ItemType selectItemTypeByPrimaryKey(Integer itemTypeId) throws Exception {
         if (itemTypeId != null && itemTypeId != 0) {
             ItemType itemType = itemTypeMapper.selectItemTypeByPrimaryKey(itemTypeId);
-            except(itemTypeId,"查询商品类别为空");
+            except(itemType,"查询商品类别为空");
             return itemType;
         }
         return null;

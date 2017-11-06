@@ -12,7 +12,7 @@ public class ErrorExc {
     }
     protected void except(int line) throws  Exception{
         if(line==0)
-            throw new  Exception();
+            throw new  Exception("影响行为0,操作无效");
     }
     protected void except(Integer former, Integer latter) throws  Exception{
         if (former==null||former==0||latter==null||latter==0)

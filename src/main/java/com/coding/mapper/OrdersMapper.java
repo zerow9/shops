@@ -1,13 +1,13 @@
 package com.coding.mapper;
 
-import com.coding.pojo.Order;
+import com.coding.pojo.Orders;
 import com.coding.pojo.PagingCustomOrder;
 import org.apache.ibatis.annotations.Param;
-import sun.org.mozilla.javascript.internal.EcmaError;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
-public interface OrderMapper {
+@Component
+public interface OrdersMapper {
 
     /**
      * 根据订单ID删除订单信息
@@ -22,28 +22,28 @@ public interface OrderMapper {
      * @return 是否删除成功   非0:成功   0:失败
      * @throws Exception
      */
-    public int deleteOrderByPrimaryKeyArray(@Param("orderIdArray") Integer[] orderIdArray)throws Exception;
+    public int deleteOrderByPrimaryKeyArray(@Param("oderIdArray") Integer[] orderIdArray)throws Exception;
 
     /**
      * 按需更新订单信息
-     * @param order 封装了订单信息的 Order 类对象
+     * @param order 封装了订单信息的 Orders 类对象
      * @return 是否更新成功 非0：成功  0:失败
      */
-    public int updateOrderByPrimaryKeySelective(Order order)throws Exception;
+    public int updateOrderByPrimaryKeySelective(Orders order)throws Exception;
 
     /**
      * 按需插入订单信息
-     * @param order 封装了订单信息的 Order 类对象
+     * @param order 封装了订单信息的 Orders 类对象
      * @return 是否插入成功 非0：成功  0:失败
      */
-    public int insertOrderSelective(Order order)throws Exception;
+    public int insertOrderSelective(Orders order)throws Exception;
 
     /**
      * 根据订单ID查询订单信息
-     * @param pagingCustomOrder 封装了 order、查询信息 的 PagingCustomOrder 类对象
-     * @return 符合查询条件的 Order 类对象
+     * @param orderId 订单ID
+     * @return 符合查询条件的 Orders 类对象
      */
-    public Order selectOrderByPrimaryKey(PagingCustomOrder pagingCustomOrder)throws Exception;
+    public Orders selectOrderByPrimaryKey(@Param("orderId") Integer orderId)throws Exception;
 
     /**
      * 订单表查询功能大集合（传入的时间类型都需要改为 String 类型的）
@@ -52,7 +52,7 @@ public interface OrderMapper {
      * @return
      * @throws Exception
      */
-    public List<Order> selectOrder(PagingCustomOrder pagingCustomOrder)throws Exception;
+    public List<Orders> selectOrder(PagingCustomOrder pagingCustomOrder)throws Exception;
 
     /**
      * 查询商品表中共有多少数据
