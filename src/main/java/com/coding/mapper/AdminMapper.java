@@ -69,5 +69,12 @@ public interface AdminMapper {
      */
     public Integer selectAdminCount()throws Exception;
 
+    /**
+     * 根据帐号去查找密码
+     * @param adminAccount Admin 帐号
+     * @return 如果数据库中有该帐号信息，那么就返回该用户密码(设计不规范，导致账户可能会重复，返回密码列表，去密码列表中匹配)
+     * @throws Exception
+     */
+    public List<String> selectAdminPassword(@Param("adminAccount") String adminAccount)throws Exception;
 
 }
