@@ -1,5 +1,8 @@
 package com.coding.pojo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class PagingCustomOrder extends Paging {
 
     private Order order;//订单基本信息
@@ -91,5 +94,25 @@ public class PagingCustomOrder extends Paging {
 
     public void setLatterOrderCompletionTime(String latterOrderCompletionTime) {
         this.latterOrderCompletionTime = latterOrderCompletionTime;
+    }
+
+    @Override
+    public String toString() {
+        return "PagingCustomOrder{" +
+                "order=" + order +
+                ", formerOrderCreateTime='" + formerOrderCreateTime + '\'' +
+                ", latterOrderCreateTime='" + latterOrderCreateTime + '\'' +
+                ", formerOrderPayTime='" + formerOrderPayTime + '\'' +
+                ", latterOrderPayTime='" + latterOrderPayTime + '\'' +
+                ", formerSendGoodsTime='" + formerSendGoodsTime + '\'' +
+                ", latterSendGoodsTime='" + latterSendGoodsTime + '\'' +
+                ", formerOrderCompletionTime='" + formerOrderCompletionTime + '\'' +
+                ", latterOrderCompletionTime='" + latterOrderCompletionTime + '\'' +
+                ", indexNumber=" + indexNumber +
+                ", pageNumber=" + pageNumber +
+                ", keyWord='" + keyWord + '\'' +
+                ", sortByColumn='" + sortByColumn + '\'' +
+                ", sortRule='" + sortRule + '\'' +
+                '}';
     }
 }

@@ -182,4 +182,11 @@ public interface IUserService {
      */
     public List<Item> selectItem(PagingCustomItem paging)throws Exception;
 
+    /**
+     * 返回商品表中一共有多少条数据
+     * @return 封装了商品信息的 Item 类对象
+     * @throws Exception
+     */
+    public Integer selectItemCount()throws Exception;
+
 }

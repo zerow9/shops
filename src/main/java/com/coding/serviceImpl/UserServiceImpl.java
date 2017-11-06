@@ -238,4 +238,11 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             throw e;
         }
     }
+    public Integer selectItemCount() throws Exception {
+        try {
+            return  itemMapper.selectItemCount();
+        }catch (Exception e){
+            throw new Exception("查询商品总数时出错");
+        }
+    }
 }
