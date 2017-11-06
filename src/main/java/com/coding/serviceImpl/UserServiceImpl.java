@@ -49,7 +49,9 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             except(userMapper.updateUserByPrimaryKey(user));
         }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
             throw new Exception("修改用户信息时出错");
+                throw e;
         }
 
 
@@ -80,7 +82,9 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
                except(addressMapper.deleteAddressByPrimaryKey(addressId));
 //                addressMapper.deleteAddressByPrimaryKey(addressId);
             }catch (Exception e){
-                throw new Exception("删除收获地址时出错");
+                if (!e.getMessage().contains("操作无效"))
+                  throw new Exception("删除收获地址时出错");
+                throw e;
             }
         }
     }
@@ -108,7 +112,9 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             except(addressMapper.updateAddressByPrimaryKey(address));
         }catch (Exception e){
-            throw new Exception("修改收获地址时出错");
+            if (!e.getMessage().contains("操作无效"))
+                 throw new Exception("修改收获地址时出错");
+            throw e;
         }
     }
 
@@ -129,7 +135,9 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
                 except(complaintMapper.deleteComplaintByPrimaryKey(complaintId));
 //                addressMapper.deleteAddressByPrimaryKey(addressId);
             }catch (Exception e){
-                throw new Exception("删除投诉信息时出错");
+                if (!e.getMessage().contains("操作无效"))
+                    throw new Exception("删除投诉信息时出错");
+                throw e;
             }
         }
     }
@@ -146,8 +154,18 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             except(complaintMapper.updateComplaintByPrimaryKeySelective(record));
         }catch (Exception e){
-            throw new Exception("修改投诉信息时出错");
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("修改投诉信息时出错");
+            throw e;
         }
+    }
+
+    public Complaint selectComplaintByPrimaryKey(Integer complaintId) throws Exception {
+        PagingCustomComplaint pagingCustomComplaint = new PagingCustomComplaint();
+        Complaint complaint = new Complaint();
+        complaint.setComplaintId(complaintId);
+        pagingCustomComplaint.setComplaint(complaint);
+        return complaintMapper.selectComplaint(pagingCustomComplaint).get(0);
     }
 
     public List<Complaint> selectComplaint(PagingCustomComplaint pagingCustomComplaint) throws Exception {
