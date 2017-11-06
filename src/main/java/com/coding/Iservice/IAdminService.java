@@ -102,6 +102,13 @@ public interface IAdminService extends IUserService {
     public void deleteGroupsByPrimaryKey(Integer groupId) throws Exception;
 
     /**
+     * 批量删除用户组
+     * @return 是否删除成功 非0:成功 0:不成功
+     * @throws Exception
+     */
+    public void deleteGroupsByPrimaryKeyArray(Integer [] groups_idArray) throws Exception;
+
+    /**
      * 插入分组信息
      * @param groups 封装了分组信息的 Groups 对象
      */
@@ -127,14 +134,28 @@ public interface IAdminService extends IUserService {
     public List<Groups> selectGroupsAll() throws Exception;
 
     /**
-     * 通过分页查询所有用户组信息
-     *
-     * @param nowPage 当前页面
-     * @param number  每页需要查询的用户数量
-     * @return 封装了用户组信息的 Groups 类对象
+     * 用户组查询功能模块（包含主键查询、权限查询、状态查询、组别名查询、分页功能）
+     * 需要查询什么东西，在对象里面封装什么东西即可
+     * @return 封装了用户组信息的 Groups 类对象集合
      * @throws Exception
      */
-    public List<Groups> selectGroupsPaging(Integer nowPage,Integer number) throws Exception;
+    public List<Groups> selectGroups(PagingCustomGroups pagingCustomGroups) throws Exception;
+
+    /**
+     * 查询分组列表，实现分页功能
+     * @param nowPage
+     * @param number
+     * @return
+     * @throws Exception
+     */
+    public List<Groups> selectGroupsPaging(Integer nowPage, Integer number) throws Exception;
+
+    /**
+     * 查询表中共有多少条数据
+     * @return 返回分组表中一共有多少条数据
+     * @throws Exception
+     */
+    public Integer selectGroupsCount()throws Exception;
 
     /*------------------------------------------管理员表------------------------------------------------------------------*/
     /**
@@ -187,12 +208,27 @@ public interface IAdminService extends IUserService {
     public List<Admin> selectAdminAllPaging(Integer nowPage,Integer number) throws Exception;
 
     /**
+     * 返回管理员表中一共有多少条数据
+     * @return 封装了管理员信息的 Groups 类对象
+     * @throws Exception
+     */
+    public Integer selectAdminCount()throws Exception;
+
+    /**
      * 根据帐号去查找密码
      * @param adminAccount Admin 帐号
      * @return 如果数据库中有该帐号信息，那么就返回该用户密码(设计不规范，导致账户可能会重复，返回密码列表，去密码列表中匹配)
      * @throws Exception
      */
     public List<String> selectAdminPassword(@Param("adminAccount") String adminAccount)throws Exception;
+
+   /*------------------------------------------用户投诉表------------------------------------------------------------------*/
+    /**
+     * 查询一共有多少条投诉信息
+     * @return 返回一共有多少条投诉信息
+     * @throws Exception
+     */
+    public Integer selectComplaintCount()throws Exception;
      /*------------------------------------------商品类别表------------------------------------------------------------------*/
 
     /**
@@ -237,6 +273,13 @@ public interface IAdminService extends IUserService {
      * @param item 商品ID
      */
     public void updateItemByPrimaryKey(Item item) throws Exception;
+
+    /**
+     * 返回商品表中一共有多少条数据
+     * @return 封装了商品信息的 Item 类对象
+     * @throws Exception
+     */
+    public Integer selectItemCount()throws Exception;
  /*------------------------------------------库存表------------------------------------------------------------------*/
     /**
      * 根据库存ID删除库存信息
@@ -270,6 +313,13 @@ public interface IAdminService extends IUserService {
      * @throws Exception
      */
     public List<Repertory> selectRepertoryAll() throws Exception;
+
+    /**
+     * 返回库存表中一共有多少条数据
+     * @return 封装了库存信息的 Repertory 类对象
+     * @throws Exception
+     */
+    public Integer selectRepertoryCount()throws Exception;
 
     /*------------------------------------------厂家信息表------------------------------------------------------------------*/
     /**
@@ -312,4 +362,11 @@ public interface IAdminService extends IUserService {
      * @throws Exception
      */
     public List<Vender> selectVenderAll() throws Exception;
+
+    /**
+     * 返回厂家中一共有多少条数据
+     * @return 封装了厂家信息的 Repertory 类对象
+     * @throws Exception
+     */
+    public int selectVenderCount()throws Exception;
 }
