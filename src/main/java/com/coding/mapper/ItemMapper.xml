@@ -314,25 +314,27 @@
                 </if>
             </if>
 
-            <!--排序规则-->
-            <if test="sortByColumn != null and sortByColumn !=''">
-                <if test="sortRule != null and sortRule != ''">
-                    order by ${sortByColumn} ${sortRule}
-                </if>
-            </if>
 
-            <!--分页-->
-            <if test="indexNumber != null">
-                <if test="pageNumber != null and pageNumber != 0">
-                    limit #{indexNumber},#{pageNumber}
-                </if>
-            </if>
-            <if test="indexNumber == null">
-                 <if test="pageNumber != null and pageNumber != 0">
-                limit 0,#{pageNumber}
-                 </if>
-            </if>
         </where>
+
+        <!--排序规则-->
+        <if test="sortByColumn != null and sortByColumn !=''">
+            <if test="sortRule != null and sortRule != ''">
+                order by ${sortByColumn} ${sortRule}
+            </if>
+        </if>
+
+        <!--分页-->
+        <if test="indexNumber != null">
+            <if test="pageNumber != null and pageNumber != 0">
+                limit #{indexNumber},#{pageNumber}
+            </if>
+        </if>
+        <if test="indexNumber == null">
+            <if test="pageNumber != null and pageNumber != 0">
+                limit 0,#{pageNumber}
+            </if>
+        </if>
     </select>
 
     <!--查询商品表中一共有多少条数据-->
