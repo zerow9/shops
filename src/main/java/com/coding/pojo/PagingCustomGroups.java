@@ -13,4 +13,16 @@ public class PagingCustomGroups extends Paging {
     public void setGroups(Groups groups) {
         this.groups = groups;
     }
+
+    @Override
+    public String toString() {
+        return "PagingCustomGroups{" +
+                "groups=" + groups +
+                ", indexNumber=" + indexNumber +
+                ", pageNumber=" + pageNumber +
+                ", keyWord='" + keyWord + '\'' +
+                ", sortByColumn='" + sortByColumn + '\'' +
+                ", sortRule='" + sortRule + '\'' +
+                '}';
+    }
 }

@@ -102,4 +102,12 @@
         select admin_password from admin where admin_account = #{adminAccount}
     </select>
 
+    <!--根据帐号密码匹配管理员信息-->
+    <select id="selectAdminAccountAndPassword" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from admin
+        where admin_account = #{adminAccount} and admin_password= #{adminPassword}
+    </select>
+
 </mapper>

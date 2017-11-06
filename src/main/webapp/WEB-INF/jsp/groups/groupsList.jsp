@@ -59,6 +59,7 @@
 
                         <div class="layui-btn-group user_group_button">
                             <button class="layui-btn" id="add_group_btn">添加用户组</button>
+                            <button class="layui-btn" id="del_group_btn">删除用户组</button>
                         </div>
 
                         <div class="table-responsive">
@@ -90,7 +91,6 @@
     </div>
 </div>
 
-
 <script type="text/html" id="shelve_bar">
     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="shelve_status" id="shelve_status_bar">是</a>
 </script>
@@ -109,8 +109,9 @@
 <script>
     layui.use('table', function () {
         var table = layui.table;
-        //监听表格复选框选择
+        //监听表格复选框选择，输出到控制台
         table.on('checkbox(group_lists_table)', function (obj) {
+//            layer.msg('选中了：'+obj.data.groupName);
             console.log(obj)
         });
 
@@ -135,7 +136,6 @@
                             swal("删除成功！", "您已经永久删除了这条信息。", "success");
                         window.location.reload();
                     });
-
                 })
             } else if (table_tool.event === 'edit') {
                 layer.alert('编辑行：<br>' + JSON.stringify(data))
@@ -161,7 +161,7 @@
 
 //        添加用户组
         $("#add_group_btn").on('click', function () {
-            layer.open({
+            parent.layer.open({
                 type: 2
                 , closeBtn: 1
                 , shade: 0.3  //遮罩
@@ -170,11 +170,78 @@
                 , id: 'add_group_id' //设定一个id，防止重复弹出
                 , move: false
                 , btnAlign: 'c' //按钮居中对齐
-                , content: 'addGroups.action'
+                , content: 'admin/addGroups.action'
                 , shadeClose: true
                 , end: function () {
                     window.location.reload();
                 }
+            })
+        });
+
+        //        删除用户组
+        $("#del_group_btn").on('click', function () {
+            var checkStatus = table.checkStatus('group_container_id')
+                , data = checkStatus.data;
+            var groupids = '';
+            var groupNames = '';
+            var trs = '';
+            $.each(eval("(" + JSON.stringify(data) + ")"), function (i, n) {
+                groupids += n.groupId + ',';
+                groupNames += n.groupName + ',';
+                var tr = "" +
+                    "<tr>" +
+                    "<td>" + n.groupId + "</td>" +
+                    "<td>" + n.groupName + "</td>" +
+                    "</tr>";
+                trs += tr;
+            });
+            var content_body = '' +
+                '<div class="layui-form" id="delete_groups_table" style="color: black;text-align: center">\n' +
+                '<h3>你确定要删除以下用户组吗？</h3>' +
+                '    <table class="layui-table" style="color: black">\n' +
+                '        <colgroup>\n' +
+                '            <col width="100">\n' +
+                '            <col width="200">\n' +
+                '        </colgroup>\n' +
+                '        <thead>\n' +
+                '        <tr>\n' +
+                '            <th>ID</th>\n' +
+                '            <th>用户组名称</th>\n' +
+                '        </tr>\n' +
+                '        </thead>\n' +
+                '        <tbody>\n' + trs +
+                '        </tbody>\n' +
+                '    </table>\n' +
+                '</div>';
+            console.log('要删除的用户组id有：' + groupids);
+            parent.layer.open({
+                type: 1
+                , title: ['删除用户组提示', 'font-size:18px;']
+                , closeBtn: 1
+                , area: ['auto', '300px']
+                , shade: 0.3  //遮罩
+                , id: 'del_group_id' //设定一个id，防止重复弹出
+                , btn: ['删除', '取消']
+                , btn1: function (index, layero) {
+                    parent.layer.close(index);
+                    $.post('deleteUserByUUidArray.action?', groupids, function (result, status) {
+                        console.log('post返回信息：' + '\nresult:' + result + '\nstatus:' + status);
+                        if (result === true) {
+                            layer.msg("删除成功！");
+                            window.location.reload();
+                        } else {
+                            layer.msg("删除失败！");
+                        }
+                    });
+                }
+                , btn2: function (index, layero) {  //取消按钮的操作
+                    layer.close(index);
+                    layer.msg("已取消删除！");
+                }
+                , move: false
+                , btnAlign: 'c' //按钮居中对齐
+                , content: content_body
+                , shadeClose: true
             })
         });
 

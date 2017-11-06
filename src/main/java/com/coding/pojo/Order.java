@@ -1,6 +1,5 @@
 package com.coding.pojo;
 
-import java.util.Date;
 
 public class Order {
     private Integer orderId;
@@ -31,9 +30,9 @@ public class Order {
 
     private Integer payType;
 
-    private Date orderCreateTime;
+    private String orderCreateTime;
 
-    private Date orderPayTime;
+    private String orderPayTime;
 
     private Double orderPaid;
 
@@ -51,11 +50,11 @@ public class Order {
 
     private String takeGoodsCounty;
 
-    private Date sendGoodsTime;
+    private String sendGoodsTime;
 
     private Double orderFreight;
 
-    private Date orderCompletionTime;
+    private String orderCompletionTime;
 
 
     public Integer getOrderId() {
@@ -170,19 +169,19 @@ public class Order {
         this.payType = payType;
     }
 
-    public Date getOrderCreateTime() {
+    public String getOrderCreateTime() {
         return orderCreateTime;
     }
 
-    public void setOrderCreateTime(Date orderCreateTime) {
+    public void setOrderCreateTime(String orderCreateTime) {
         this.orderCreateTime = orderCreateTime;
     }
 
-    public Date getOrderPayTime() {
+    public String getOrderPayTime() {
         return orderPayTime;
     }
 
-    public void setOrderPayTime(Date orderPayTime) {
+    public void setOrderPayTime(String orderPayTime) {
         this.orderPayTime = orderPayTime;
     }
 
@@ -250,11 +249,11 @@ public class Order {
         this.takeGoodsCounty = takeGoodsCounty == null ? null : takeGoodsCounty.trim();
     }
 
-    public Date getSendGoodsTime() {
+    public String getSendGoodsTime() {
         return sendGoodsTime;
     }
 
-    public void setSendGoodsTime(Date sendGoodsTime) {
+    public void setSendGoodsTime(String sendGoodsTime) {
         this.sendGoodsTime = sendGoodsTime;
     }
 
@@ -266,12 +265,44 @@ public class Order {
         this.orderFreight = orderFreight;
     }
 
-    public Date getOrderCompletionTime() {
+    public String getOrderCompletionTime() {
         return orderCompletionTime;
     }
 
-    public void setOrderCompletionTime(Date orderCompletionTime) {
+    public void setOrderCompletionTime(String orderCompletionTime) {
         this.orderCompletionTime = orderCompletionTime;
     }
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId=" + orderId +
+                ", userUuid='" + userUuid + '\'' +
+                ", shopId=" + shopId +
+                ", takeGoodsName='" + takeGoodsName + '\'' +
+                ", takeGoodsPhone='" + takeGoodsPhone + '\'' +
+                ", takeGoodsPost=" + takeGoodsPost +
+                ", orderSumPrice=" + orderSumPrice +
+                ", useScore=" + useScore +
+                ", sendScore=" + sendScore +
+                ", payStatus=" + payStatus +
+                ", sendStatus=" + sendStatus +
+                ", discussStatus=" + discussStatus +
+                ", protectStatus=" + protectStatus +
+                ", payType=" + payType +
+                ", orderCreateTime='" + orderCreateTime + '\'' +
+                ", orderPayTime='" + orderPayTime + '\'' +
+                ", orderPaid=" + orderPaid +
+                ", orderRefund=" + orderRefund +
+                ", sendWay='" + sendWay + '\'' +
+                ", addressId=" + addressId +
+                ", buyMessage='" + buyMessage + '\'' +
+                ", takeGoodsProvince='" + takeGoodsProvince + '\'' +
+                ", takeGoodsCity='" + takeGoodsCity + '\'' +
+                ", takeGoodsCounty='" + takeGoodsCounty + '\'' +
+                ", sendGoodsTime='" + sendGoodsTime + '\'' +
+                ", orderFreight=" + orderFreight +
+                ", orderCompletionTime='" + orderCompletionTime + '\'' +
+                '}';
+    }
 }

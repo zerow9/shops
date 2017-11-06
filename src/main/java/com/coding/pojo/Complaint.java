@@ -74,4 +74,17 @@ public class Complaint {
     public void setComplaintContent(String complaintContent) {
         this.complaintContent = complaintContent == null ? null : complaintContent.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Complaint{" +
+                "complaintId=" + complaintId +
+                ", accuserId='" + accuserId + '\'' +
+                ", accusedId=" + accusedId +
+                ", complaintTittle='" + complaintTittle + '\'' +
+                ", complaintDate=" + complaintDate +
+                ", isDeal=" + isDeal +
+                ", complaintContent='" + complaintContent + '\'' +
+                '}';
+    }
 }
