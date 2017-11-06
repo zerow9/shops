@@ -26,10 +26,10 @@
         <property name="filterChainDefinitions">
             <value>
                 /logout.action=logout
-                /admin/selectUserAll.action=anon
-                /admin/getUserJson.action=anon
+                /shopmanagement/**=anon
+                /admin/deleteAdminByPrimaryKey.action=perms[root]
+                /admin/deleteGroupsByPrimaryKey.action=perms[root]
                 /admin/**=perms[del,add,update]
-                /user/**=perms[add,update]
                 /** = authc
             </value>
         </property>

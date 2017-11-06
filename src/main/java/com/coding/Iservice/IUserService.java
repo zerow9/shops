@@ -26,6 +26,21 @@ public interface IUserService {
      * @param user
      */
     public void  updateUserByPrimaryKey(User user) throws Exception;
+
+    /**
+     * 查询用户表中一共有多少数据
+     * @return 封装了用户信息的 User 类对象集合
+     * @throws Exception
+     */
+    public Integer selectUserCount()throws Exception;
+
+    /**
+     * 根据帐号（电话）去查找密码
+     * @param userPhone 用户帐号
+     * @return 如果数据库中有该帐号信息，那么就返回该用户密码(设计不规范，导致账户可能会重复，返回密码列表，去密码列表中匹配)
+     * @throws Exception
+     */
+    public List<String> selectUserPassword(String userPhone)throws Exception;
     /*------------------------------------------收获地址表------------------------------------------------------------------*/
     /**
      * 根据 addressId 删除地址信息
@@ -58,6 +73,40 @@ public interface IUserService {
      * @throws Exception
      */
     public List<Address> selectAddressByUserID(String userUuid) throws  Exception;
+     /*------------------------------------------用户投诉表------------------------------------------------------------------*/
+    /**
+     * 根据投诉ID删除投诉信息
+     * @param complaintId 投诉表唯一ID
+     * @return 是否删除成功 非0:成功 0:不成功
+     * @throws Exception
+     */
+    public void deleteComplaintByPrimaryKey(Integer complaintId)throws Exception;
+
+    /**
+     * 按需插入投诉信息
+     * @param complaint 封装了投诉信息的 Complaint 类对象
+     * @return 是否插入成功 非0:成功 0:失败
+     * @throws Exception
+     */
+    public void insertComplaintSelective(Complaint complaint)throws Exception;
+
+    /**
+     * 根据投诉表ID按需更新投诉表信息
+     * @param record 封装了投诉信息的 Complaint 类对象
+     * @return 是否更新成功 非0:成功 0:失败
+     * @throws Exception
+     */
+    public void updateComplaintByPrimaryKeySelective(Complaint record)throws Exception;
+
+    /**
+     * 投诉表查询功能大集合（如需查询单个用户所有投诉信息，只需要封装pagingCustomComplaint对象中的complaint对象的accuserId属性）
+     * PagingCustomComplaint中的时间字段是 String 类型 ，格式要和数据库 dateTime 一样  yyyy-MM-dd HH:mm:ss
+     *
+     * @param pagingCustomComplaint 封装了投诉信息的 Complaint 类对象
+     * @return 满足查询条件的封装了投诉信息的 Complaint 类对象集合
+     * @throws Exception
+     */
+    public List<Complaint> selectComplaint(PagingCustomComplaint pagingCustomComplaint)throws Exception;
      /*------------------------------------------商品类别表------------------------------------------------------------------*/
 
     /**
@@ -74,6 +123,13 @@ public interface IUserService {
      * @throws Exception
      */
     public List<ItemType> selectItemTypeAll()throws Exception;
+
+    /**
+     * 返回商品类别表中一共有多少条数据
+     * @return 封装了商品类别信息的 ItemType 类对象
+     * @throws Exception
+     */
+    public Integer selectItemTypeCount()throws Exception;
 
  /*------------------------------------------商品表------------------------------------------------------------------*/
     /**
