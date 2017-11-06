@@ -94,4 +94,24 @@ public class PagingCustomItem extends Paging {
     public void setLatterItemCollectNumber(Integer latterItemCollectNumber) {
         this.latterItemCollectNumber = latterItemCollectNumber;
     }
+
+    @Override
+    public String toString() {
+        return "PagingCustomItem{" +
+                "formerItemMarketPrice=" + formerItemMarketPrice +
+                ", latterItemMarketPrice=" + latterItemMarketPrice +
+                ", formerRepertoryNumber=" + formerRepertoryNumber +
+                ", latterRepertoryNumber=" + latterRepertoryNumber +
+                ", formerItemSaleNumber=" + formerItemSaleNumber +
+                ", latterItemSaleNumber=" + latterItemSaleNumber +
+                ", formerItemCollectNumber=" + formerItemCollectNumber +
+                ", latterItemCollectNumber=" + latterItemCollectNumber +
+                ", item=" + item +
+                ", indexNumber=" + indexNumber +
+                ", pageNumber=" + pageNumber +
+                ", keyWord='" + keyWord + '\'' +
+                ", sortByColumn='" + sortByColumn + '\'' +
+                ", sortRule='" + sortRule + '\'' +
+                '}';
+    }
 }

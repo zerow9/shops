@@ -39,4 +39,18 @@ public class PagingCustomComplaint extends Paging {
     public void setComplaint(Complaint complaint) {
         this.complaint = complaint;
     }
+
+    @Override
+    public String toString() {
+        return "PagingCustomComplaint{" +
+                "complaint=" + complaint +
+                ", formerComplaintDate='" + formerComplaintDate + '\'' +
+                ", latterComplaintDate='" + latterComplaintDate + '\'' +
+                ", indexNumber=" + indexNumber +
+                ", pageNumber=" + pageNumber +
+                ", keyWord='" + keyWord + '\'' +
+                ", sortByColumn='" + sortByColumn + '\'' +
+                ", sortRule='" + sortRule + '\'' +
+                '}';
+    }
 }

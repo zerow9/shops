@@ -273,4 +273,36 @@ public class Order {
         this.orderCompletionTime = orderCompletionTime;
     }
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderId=" + orderId +
+                ", userUuid='" + userUuid + '\'' +
+                ", shopId=" + shopId +
+                ", takeGoodsName='" + takeGoodsName + '\'' +
+                ", takeGoodsPhone='" + takeGoodsPhone + '\'' +
+                ", takeGoodsPost=" + takeGoodsPost +
+                ", orderSumPrice=" + orderSumPrice +
+                ", useScore=" + useScore +
+                ", sendScore=" + sendScore +
+                ", payStatus=" + payStatus +
+                ", sendStatus=" + sendStatus +
+                ", discussStatus=" + discussStatus +
+                ", protectStatus=" + protectStatus +
+                ", payType=" + payType +
+                ", orderCreateTime='" + orderCreateTime + '\'' +
+                ", orderPayTime='" + orderPayTime + '\'' +
+                ", orderPaid=" + orderPaid +
+                ", orderRefund=" + orderRefund +
+                ", sendWay='" + sendWay + '\'' +
+                ", addressId=" + addressId +
+                ", buyMessage='" + buyMessage + '\'' +
+                ", takeGoodsProvince='" + takeGoodsProvince + '\'' +
+                ", takeGoodsCity='" + takeGoodsCity + '\'' +
+                ", takeGoodsCounty='" + takeGoodsCounty + '\'' +
+                ", sendGoodsTime='" + sendGoodsTime + '\'' +
+                ", orderFreight=" + orderFreight +
+                ", orderCompletionTime='" + orderCompletionTime + '\'' +
+                '}';
+    }
 }

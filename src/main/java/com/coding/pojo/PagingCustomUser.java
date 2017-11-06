@@ -66,4 +66,20 @@ public class PagingCustomUser extends Paging{
     public void setLatterScore(Integer latterScore) {
         this.latterScore = latterScore;
     }
+
+    @Override
+    public String toString() {
+        return "PagingCustomUser{" +
+                "formerAge=" + formerAge +
+                ", latterAge=" + latterAge +
+                ", formerScore=" + formerScore +
+                ", latterScore=" + latterScore +
+                ", user=" + user +
+                ", indexNumber=" + indexNumber +
+                ", pageNumber=" + pageNumber +
+                ", keyWord='" + keyWord + '\'' +
+                ", sortByColumn='" + sortByColumn + '\'' +
+                ", sortRule='" + sortRule + '\'' +
+                '}';
+    }
 }

@@ -92,4 +92,24 @@ public class PagingCustomOrder extends Paging {
     public void setLatterOrderCompletionTime(String latterOrderCompletionTime) {
         this.latterOrderCompletionTime = latterOrderCompletionTime;
     }
+
+    @Override
+    public String toString() {
+        return "PagingCustomOrder{" +
+                "order=" + order +
+                ", formerOrderCreateTime='" + formerOrderCreateTime + '\'' +
+                ", latterOrderCreateTime='" + latterOrderCreateTime + '\'' +
+                ", formerOrderPayTime='" + formerOrderPayTime + '\'' +
+                ", latterOrderPayTime='" + latterOrderPayTime + '\'' +
+                ", formerSendGoodsTime='" + formerSendGoodsTime + '\'' +
+                ", latterSendGoodsTime='" + latterSendGoodsTime + '\'' +
+                ", formerOrderCompletionTime='" + formerOrderCompletionTime + '\'' +
+                ", latterOrderCompletionTime='" + latterOrderCompletionTime + '\'' +
+                ", indexNumber=" + indexNumber +
+                ", pageNumber=" + pageNumber +
+                ", keyWord='" + keyWord + '\'' +
+                ", sortByColumn='" + sortByColumn + '\'' +
+                ", sortRule='" + sortRule + '\'' +
+                '}';
+    }
 }
