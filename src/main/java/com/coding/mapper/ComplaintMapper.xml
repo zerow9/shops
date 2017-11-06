@@ -109,6 +109,16 @@
         where complaint_id = #{complaintId,jdbcType=INTEGER}
     </update>
 
+    <!--根据主键查询投诉信息-->
+    <select id="selectComplaintByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs" >
+    select
+    <include refid="Base_Column_List"/>
+    ,
+    <include refid="Blob_Column_List"/>
+    from complaint
+    where complaint_id = #{complaintId,jdbcType=INTEGER}
+    </select>
+
     <!--投诉表的查询大SQL-->
     <select id="selectComplaint" parameterType="com.coding.pojo.PagingCustomComplaint" resultMap="ResultMapWithBLOBs" >
         select
