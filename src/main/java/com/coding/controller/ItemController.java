@@ -104,4 +104,13 @@ public class ItemController {
         return true;
     }
 
+    @RequestMapping("editItem")
+    public String editItem(Integer itemId,Model model) throws Exception{
+        Item item = adminService.selectItemByPrimaryKey(itemId);
+        System.out.println(item);
+        item.setDateToString(DateToString.date(item.getMakeDate()));
+        model.addAttribute("item", item);
+        return "items/editItem";
+    }
+
 }
