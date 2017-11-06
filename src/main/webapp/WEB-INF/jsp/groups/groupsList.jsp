@@ -200,8 +200,8 @@
                 '<h3>你确定要删除以下用户组吗？</h3>' +
                 '    <table class="layui-table" style="color: black">\n' +
                 '        <colgroup>\n' +
-                '            <col width="50">\n' +
                 '            <col width="100">\n' +
+                '            <col width="200">\n' +
                 '        </colgroup>\n' +
                 '        <thead>\n' +
                 '        <tr>\n' +
@@ -218,7 +218,7 @@
                 type: 1
                 , title: ['删除用户组提示', 'font-size:18px;']
                 , closeBtn: 1
-                , area: ['350px', 'auto']
+                , area: ['auto', '300px']
                 , shade: 0.3  //遮罩
                 , id: 'del_group_id' //设定一个id，防止重复弹出
                 , btn: ['删除', '取消']
