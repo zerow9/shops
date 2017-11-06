@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="org.apache.shiro.SecurityUtils" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
@@ -22,7 +23,10 @@
     <nav class="navbar-default navbar-static-side" role="navigation">
         <div class="nav-close"><i class="fa fa-times-circle"></i>
         </div>
-
+        <%
+            String user=SecurityUtils.getSubject().getPrincipal().toString();
+            boolean b=user.equalsIgnoreCase("root");
+        %>
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
 
@@ -32,7 +36,7 @@
                         <span><img alt="image" class="img-circle" src="../../../shopmanagement/img/a0.jpg"/></span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
-                               <span class="block m-t-xs"><strong class="font-bold">欢迎<%=SecurityUtils.getSubject().getPrincipal()%>登陆</strong></span>
+                               <span class="block m-t-xs"><strong class="font-bold">欢迎<%=user%>登陆</strong></span>
                                 <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
                                 </span>
                         </a>
@@ -61,6 +65,7 @@
                     </a>
                 </li>
 
+                <c:if test="<%=b%>">
                 <li>
                     <a href="javascript:;">
                         <i class="fa fa-user"></i>
@@ -72,6 +77,7 @@
                         </li>
                     </ul>
                 </li>
+                </c:if>
 
                 <!--用户管理-->
                 <li>
