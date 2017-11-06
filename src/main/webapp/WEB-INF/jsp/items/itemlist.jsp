@@ -1,4 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://"
+            + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";
+%>
 <html>
 <head>
     <meta charset="utf-8">
@@ -50,25 +56,29 @@
                     <div class="ibox-content">
 
                         <div class="layui-btn-group demoTable">
-                            <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
-                            <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
-                            <button class="layui-btn" data-type="isAll">验证是否全选</button>
+                            <button class="layui-btn" data-type="getCheckLength">批量删除</button>
+                            <button class="layui-btn" data-type="isAll">全选</button>
+                            <button class="layui-btn" data-type="addItem">添加商品</button>
                         </div>
 
                         <div class="table-responsive">
 
-                            <table class="layui-table" lay-data="{url:'/data/goods_lists.json', page:true, id:'idTest'}"
+                            <table class="layui-table" lay-data="{url:'<%=basePath%>admin/getItemsAll.action', page:true, id:'itemId'}"
                                    lay-filter="goods_lists_table">
                                 <thead>
                                 <tr>
                                     <th lay-data="{checkbox:true, fixed: true}"></th>
-                                    <th lay-data="{field:'goods_id', width:100, sort: true, fixed: true}">ID</th>
-                                    <th lay-data="{field:'goods_name', width:200}">商品名称</th>
-                                    <th lay-data="{field:'goods_price', width:100, sort: true}">价格</th>
-                                    <th lay-data="{field:'goods_sales', width:100, sort: true}">销量</th>
-                                    <th lay-data="{field:'goods_shelve', width:200, align:'center', fixed: 'right', toolbar: '#shelve_bar'}">
-                                        上下架
-                                    </th>
+                                    <th lay-data="{field:'itemId', width:100, fixed: true}">ID</th>
+                                    <th lay-data="{field:'itemName', width:200}">商品名称</th>
+                                    <th lay-data="{field:'itemImages', width:200}">商品图片</th>
+                                    <th lay-data="{field:'itemTypeId', width:200}">商品类型</th>
+                                    <th lay-data="{field:'itemScoreType', width:200}">积分兑换类型</th>
+                                    <th lay-data="{field:'scorePrice', width:200}">积分兑换价格</th>
+                                    <th lay-data="{field:'itemPrice', width:100, sort: true}">价格</th>
+                                    <th lay-data="{field:'goodsSales', width:100, sort: true}">销量</th>
+                                    <th lay-data="{field:'postPrice', width:200}">运费</th>
+                                    <th lay-data="{field:'keyWord', width:200}">关键字</th>
+                                    <th lay-data="{field:'makeVender', width:200}">生产厂商</th>
                                     <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#operate_bar'}">
                                         操作
                                     </th>
@@ -100,56 +110,7 @@
 <script src="../../../js/extends/bootstrap/bootstrap.js"></script>
 <script src="../../../shopmanagement/js/content.min.js"></script>
 <script src="../../../common/layui/layui.js"></script>
-
-<script>
-    layui.use('table', function () {
-        var table = layui.table;
-        //监听表格复选框选择
-        table.on('checkbox(goods_lists_table)', function (obj) {
-            console.log(obj)
-        });
-        //监听工具条
-        table.on('tool(goods_lists_table)', function (table_tool) {
-            var data = table_tool.data;
-            if (table_tool.event === 'detail') {
-                layer.msg('ID：' + data.goods_id + ' 的查看操作');
-            } else if (table_tool.event === 'del') {
-                layer.confirm('真的删除行么', function (index) {
-                    table_tool.del();
-                    layer.close(index);
-                });
-            } else if (table_tool.event === 'edit') {
-                layer.alert('编辑行：<br>' + JSON.stringify(data))
-            } else if (table_tool.event === 'shelve_status') {
-                layer.msg("商品：" + data.goods_name + " 已下架。");
-            }
-        });
-
-//        复选框操作
-        var $ = layui.$, active = {
-            getCheckData: function () { //获取选中数据
-                var checkStatus = table.checkStatus('idTest')
-                    , data = checkStatus.data;
-                layer.alert(JSON.stringify(data));
-            }
-            , getCheckLength: function () { //获取选中数目
-                var checkStatus = table.checkStatus('idTest')
-                    , data = checkStatus.data;
-                layer.msg('选中了：' + data.length + ' 个');
-            }
-            , isAll: function () { //验证是否全选
-                var checkStatus = table.checkStatus('idTest');
-                layer.msg(checkStatus.isAll ? '全选' : '未全选')
-            }
-        };
-
-//        测试的顶部功能按钮
-        $('.demoTable .layui-btn').on('click', function () {
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
-        });
-    });
-</script>
+<script src="../../../js/items/itemlist.js"></script>
 
 </body>
 </html>
