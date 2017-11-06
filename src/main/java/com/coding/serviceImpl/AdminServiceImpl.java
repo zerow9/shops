@@ -182,10 +182,15 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     }
 
     public List<Groups> selectGroups(PagingCustomGroups pagingCustomGroups) throws Exception{
-        exceptInitialize(pagingCustomGroups.getIndexNumber(),pagingCustomGroups.getPageNumber());
-        List<Groups> groups = groupsMapper.selectGroups(pagingCustomGroups);
-        if(groups.isEmpty()) throw new Exception("查询到的用户列表为空，或者参数不正确");
-        return groups;
+        try {
+            List<Groups> groups = groupsMapper.selectGroups(pagingCustomGroups);
+            if(groups.isEmpty()) throw new Exception("查询到的用户列表为空");
+            return groups;
+        }catch (Exception e){
+            if(!e.getMessage().contains("用户列表为空"))
+                throw new Exception("查询参数不正确");
+            throw e;
+        }
     }
 
     public List<Groups> selectGroupsPaging(Integer nowPage, Integer number) throws Exception {
@@ -358,13 +363,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         }
     }
 
-    public Integer selectItemCount() throws Exception {
-        try {
-            return  itemMapper.selectItemCount();
-        }catch (Exception e){
-            throw new Exception("查询商品总数时出错");
-        }
-    }
+
 
     /*------------------------------------------库存表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
