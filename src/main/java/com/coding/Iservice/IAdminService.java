@@ -141,7 +141,14 @@ public interface IAdminService extends IUserService {
      */
     public List<Groups> selectGroups(PagingCustomGroups pagingCustomGroups) throws Exception;
 
-    public List<Groups> selectGroupsPaging(Integer indexNumber,Integer pageNumber) throws Exception;
+    /**
+     * 查询分组列表，实现分页功能
+     * @param nowPage
+     * @param number
+     * @return
+     * @throws Exception
+     */
+    public List<Groups> selectGroupsPaging(Integer nowPage, Integer number) throws Exception;
 
     /**
      * 查询表中共有多少条数据
