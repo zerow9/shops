@@ -97,7 +97,6 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         return users;
     }
 
-    @Override
     public List<User> selectUserPagingByKeyWord(PagingCustomUser paging) throws Exception {
        try {
            List<User>  users = userMapper.selectUserPagingByKeyWord(paging);
@@ -116,6 +115,17 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
             if(addresses.isEmpty()) throw new Exception("查询全部收获地址表为空");
             return addresses;
     }
+
+    public Integer selectAddressCount() throws Exception {
+        Integer count ;
+        try {
+            count  = addressMapper.selectAddressCount();
+        }catch (Exception e){
+            throw new Exception("查询收货地址总数是出错");
+        }
+        return count;
+    }
+
     /*------------------------------------------分组表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
     public void deleteGroupsByPrimaryKey(Integer groupId)  throws Exception{
@@ -234,6 +244,15 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         List<Admin> admins = adminMapper.selectAdminAllPaging(nowPage,number);
         if(admins.isEmpty()) throw new Exception("分页查询到的用户列表为空，或者已经是最后一页");
         return admins;
+    }
+
+    public List<String> selectAdminPassword(String adminAccount) throws Exception {
+        if (adminAccount != null && !adminAccount.equals("")){
+            List<String> passwords = adminMapper.selectAdminPassword(adminAccount);
+            if(passwords.isEmpty()) throw new Exception("查询到的密码列表返回为空");
+            return passwords;
+        }
+            return null;
     }
 
     /*------------------------------------------商品类别表------------------------------------------------------------------*/
