@@ -14,7 +14,7 @@ layui.use('table', function () {
                 title:"查看商品",
                 shadeClose: true,
                 shade: 0.3,
-                content: 'seeItemsIdByKey.action?itemId='+data.itemId, //注意，如果str是object，那么需要字符拼接。
+                content: 'detailItemsIdByKey.action?itemId='+data.itemId, //注意，如果str是object，那么需要字符拼接。
                 maxmin: true,
                 area: ['80%', '90%']
             });
@@ -44,7 +44,7 @@ layui.use('table', function () {
                 shade: 0.3,
                 maxmin: true,
                 area: ['80%', '90%'],
-                content: 'updateItem.action?id=' + data.itemId, //注意，如果str是object，那么需要字符拼接。
+                content: 'updateItem.action?itemId=' + data.itemId //注意，如果str是object，那么需要字符拼接。
             });
         }
     });
@@ -101,7 +101,7 @@ layui.use('table', function () {
                     shade: 0.3,
                     maxmin: true,
                     area: ['80%', '90%'],
-                    content: 'addItem.action', //注意，如果str是object，那么需要字符拼接。
+                    content: 'addItem.action' //注意，如果str是object，那么需要字符拼接。
                 });
             }
         };

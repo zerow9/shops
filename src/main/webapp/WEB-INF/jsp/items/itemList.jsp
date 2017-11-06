@@ -63,8 +63,8 @@
 
                         <div class="table-responsive">
 
-                            <table class="layui-table" lay-data="{url:'<%=basePath%>admin/getItemsAll.action', page:true, id:'itemId'}"
-                                   lay-filter="goods_lists_table">
+                            <table class="layui-table" lay-data="{url:'<%=basePath%>item/getItemsAll.action', page:true, id:'itemId'}"
+                                   lay-filter="demo">
                                 <thead>
                                 <tr>
                                     <th lay-data="{checkbox:true, fixed: true}"></th>
@@ -85,9 +85,7 @@
                                 </tr>
                                 </thead>
                             </table>
-
                         </div>
-
                     </div>
                 </div>
 
@@ -101,15 +99,18 @@
 </script>
 
 <script type="text/html" id="operate_bar">
-    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
-    <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail"><i class="fa fa-eye" aria-hidden="true"
+                                                                                title="查看"></i></a>
+    <a class="layui-btn layui-btn-mini" lay-event="edit"><i class="fa fa-edit" aria-hidden="true" title="编辑"></i></a>
+    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del"><i class="fa fa-trash" aria-hidden="true"
+                                                                            title="删除"></i></a>
 </script>
 
 <script src="../../../js/extends/jquery/jquery.min.js"></script>
 <script src="../../../js/extends/bootstrap/bootstrap.js"></script>
 <script src="../../../shopmanagement/js/content.min.js"></script>
 <script src="../../../common/layui/layui.js"></script>
+<script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../../../js/items/itemlist.js"></script>
 
 </body>
