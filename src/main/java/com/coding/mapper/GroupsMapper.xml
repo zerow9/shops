@@ -8,6 +8,14 @@
         where group_id = #{groupId,jdbcType=INTEGER}
     </delete>
 
+    <!---->
+    <delete id="deleteGroupsByPrimaryKeyArray" parameterType="java.lang.Integer">
+        delete from groups where group_id IN
+        <foreach collection="groups_idArray" item="groups" open="(" separator="," close=")">
+            #{groups}
+        </foreach>
+    </delete>
+
     <!--插入分组信息-->
     <insert id="insertGroups" parameterType="com.coding.pojo.Groups">
         insert into groups (group_name, group_jurisdiction,is_start)

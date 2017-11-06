@@ -1,3 +1,4 @@
+<%@ page import="org.apache.shiro.SecurityUtils" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <html>
@@ -7,12 +8,12 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <title>孝和商城管理系统后台</title>
-    <link rel="shortcut icon" href="shopmanagement/favicon.ico">
-    <link rel="stylesheet" href="shopmanagement/common/layui/css/layui.css">
-    <link href="shopmanagement/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
-    <link href="shopmanagement/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-    <link href="shopmanagement/css/animate.min.css" rel="stylesheet">
-    <link href="shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
+    <link rel="shortcut icon" href="../../../shopmanagement/favicon.ico">
+    <link rel="stylesheet" href="../../../shopmanagement/common/layui/css/layui.css">
+    <link href="../../../shopmanagement/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="../../../shopmanagement/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="../../../shopmanagement/css/animate.min.css" rel="stylesheet">
+    <link href="../../../shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
@@ -28,10 +29,10 @@
                 <!--当前登录用户展示-->
                 <li class="nav-header">
                     <div class="dropdown profile-element">
-                        <span><img alt="image" class="img-circle" src="shopmanagement/img/a0.jpg"/></span>
+                        <span><img alt="image" class="img-circle" src="../../../shopmanagement/img/a0.jpg"/></span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
-                               <span class="block m-t-xs"><strong class="font-bold">XH-Admin</strong></span>
+                               <span class="block m-t-xs"><strong class="font-bold">欢迎<%=SecurityUtils.getSubject().getPrincipal()%>登陆</strong></span>
                                 <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
                                 </span>
                         </a>
@@ -45,7 +46,7 @@
                             <li><a class="J_menuItem" href="mailbox.html">信箱</a>
                             </li>
                             <li class="divider"></li>
-                            <li><a href="shopmanagement/html/login.html">安全退出</a>
+                            <li><a href="/logout.action">安全退出</a>
                             </li>
                         </ul>
                     </div>
@@ -54,7 +55,7 @@
 
                 <!--首页-->
                 <li>
-                    <a class="J_menuItem" href="jsp/admin/home.jsp">
+                    <a class="J_menuItem" href="../../../jsp/admin/home.jsp">
                         <i class="fa fa-home"></i>
                         <span class="nav-label">首页</span>
                     </a>
@@ -62,8 +63,9 @@
 
                 <li>
                     <a href="javascript:;">
-                        <i class="fa fa-home"></i>
+                        <i class="fa fa-user"></i>
                         <span class="nav-label">管理员管理</span>
+                        <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="admin/selectAdminAll.action">管理员列表</a>
@@ -81,9 +83,9 @@
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="admin/selectUserAll.action">用户列表</a>
                         </li>
-                        <li><a class="J_menuItem" href="admin/selectGroupsAll.action">用户组列表</a>
+                        <li><a class="J_menuItem" href="../../../jsp/admin/user/user_group_list.jsp">用户组</a>
                         </li>
-                        <li><a class="J_menuItem" href="jsp/admin/user/user_complaints_list.jsp">投诉管理</a>
+                        <li><a class="J_menuItem" href="../../../jsp/admin/user/user_complaints_list.jsp">投诉管理</a>
                         </li>
                     </ul>
                 </li>
@@ -96,11 +98,11 @@
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="jsp/admin/goods/goods_list.jsp">商品列表</a>
+                        <li><a class="J_menuItem" href="../../../jsp/admin/goods/goods_list.jsp">商品列表</a>
                         </li>
-                        <li><a class="J_menuItem" href="jsp/admin/goods/goods_type_list.jsp">商品分类</a>
+                        <li><a class="J_menuItem" href="../../../jsp/admin/goods/goods_type_list.jsp">商品分类</a>
                         </li>
-                        <li><a class="J_menuItem" href="jsp/admin/goods/inventory_list.jsp">库存管理</a>
+                        <li><a class="J_menuItem" href="../../../jsp/admin/goods/inventory_list.jsp">库存管理</a>
                         </li>
                     </ul>
                 </li>
@@ -204,7 +206,7 @@
                             <li>
                                 <div class="dropdown-messages-box">
                                     <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" src="shopmanagement/img/a0.jpg">
+                                        <img alt="image" class="img-circle" src="../../../shopmanagement/img/a0.jpg">
                                     </a>
                                     <div class="media-body ">
                                         <small class="pull-right text-navy">刚刚</small>
@@ -261,7 +263,7 @@
             </button>
             <nav class="page-tabs J_menuTabs">
                 <div class="page-tabs-content">
-                    <a href="javascript:;" class="active J_menuTab" data-id="1">首页</a>
+                    <a href="javascript:;" class="active J_menuTab" data-id="../../../jsp/admin/home.jsp">首页</a>
                 </div>
             </nav>
             <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
@@ -280,13 +282,13 @@
                     </li>
                 </ul>
             </div>
-            <a href="shopmanagement/html/login.html" class="roll-nav roll-right J_tabExit"><i
+            <a href="/logout.action" class="roll-nav roll-right J_tabExit"><i
                     class="fa fa fa-sign-out"></i> 退出</a>
         </div>
         <div class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%"
-                    src="jsp/admin/home.jsp" frameborder="0"
-                    data-id="1" seamless></iframe>
+                    src="../../../jsp/admin/home.jsp" frameborder="0"
+                    data-id="../../../jsp/admin/home.jsp" seamless></iframe>
         </div>
         <div class="footer">
             <div class="pull-right">&copy; 2014-2015 <a href="http://www.zi-han.net/" target="_blank">zihan's blog</a>
@@ -391,14 +393,14 @@
     <!--右侧边栏结束-->
 
 </div>
-<script src="shopmanagement/js/jquery.min.js?v=2.1.4"></script>
-<script src="shopmanagement/js/bootstrap.min.js?v=3.3.5"></script>
-<script src="shopmanagement/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="shopmanagement/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="shopmanagement/common/layui/layui.all.js"></script>
-<script src="shopmanagement/js/hplus.min.js?v=4.0.0"></script>
-<script type="text/javascript" src="shopmanagement/js/contabs.min.js"></script>
-<script src="shopmanagement/js/plugins/pace/pace.min.js"></script>
+<script src="../../../shopmanagement/js/jquery.min.js?v=2.1.4"></script>
+<script src="../../../shopmanagement/js/bootstrap.min.js?v=3.3.5"></script>
+<script src="../../../shopmanagement/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="../../../shopmanagement/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../../../shopmanagement/common/layui/layui.all.js"></script>
+<script src="../../../shopmanagement/js/hplus.min.js?v=4.0.0"></script>
+<script type="text/javascript" src="../../../shopmanagement/js/contabs.min.js"></script>
+<script src="../../../shopmanagement/js/plugins/pace/pace.min.js"></script>
 <script>
     function closeWin() {
         alert(1);

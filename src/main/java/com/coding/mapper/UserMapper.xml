@@ -276,7 +276,7 @@
         </where>
     </select>
 
-    <!--查询用户表中一共有多少条数据-->
+    <!--查询用户表中一共有多少数据-->
     <select id="selectUserCount" resultType="java.lang.Integer">
         select count(*) from user
     </select>

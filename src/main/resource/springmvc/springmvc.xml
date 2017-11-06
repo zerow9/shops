@@ -18,6 +18,7 @@
 
 <!--	<mvc:annotation-driven conversion-service="conversionService" validator="validator" />-->
 	<mvc:annotation-driven />
+	<mvc:resources mapping="/shopmanagement/**" location="shopmanagement/" />
 
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver"

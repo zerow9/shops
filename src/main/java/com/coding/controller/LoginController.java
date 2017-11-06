@@ -24,12 +24,12 @@ public class LoginController {
                 throw new Exception("其他错误");
             }
         }
-        return "login";
+        return "login/login";
     }
 
     @RequestMapping("first")
     public String first() {
-        return "admin/index";
+        return "login/index";
     }
 
 }

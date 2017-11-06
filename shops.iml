@@ -30,7 +30,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: com.github.jsqlparser:jsqlparser:0.9" level="project" />
     <orderEntry type="module-library">
       <library>
         <CLASSES />
@@ -68,12 +67,13 @@
     <orderEntry type="library" name="Maven: org.mybatis:mybatis-spring:1.2.2" level="project" />
     <orderEntry type="library" name="Maven: com.github.miemiedev:mybatis-paginator:1.2.15" level="project" />
     <orderEntry type="library" name="Maven: com.github.pagehelper:pagehelper:3.4.2-fix" level="project" />
+    <orderEntry type="library" name="Maven: com.github.jsqlparser:jsqlparser:0.9" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.32" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba:druid:1.0.9" level="project" />
     <orderEntry type="module-library">
       <library name="Maven: com.alibaba:jconsole:1.8.0">
         <CLASSES>
-          <root url="jar://C:/Program Files/Java/jdk1.7.0_80/lib/jconsole.jar!/" />
+          <root url="jar://D:/Software/JAVA/jdk1.7.0_80/lib/jconsole.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -82,7 +82,7 @@
     <orderEntry type="module-library">
       <library name="Maven: com.alibaba:tools:1.8.0">
         <CLASSES>
-          <root url="jar://C:/Program Files/Java/jdk1.7.0_80/lib/tools.jar!/" />
+          <root url="jar://D:/Software/JAVA/jdk1.7.0_80/lib/tools.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
