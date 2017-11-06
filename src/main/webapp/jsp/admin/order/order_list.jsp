@@ -57,13 +57,11 @@
                     <div class="ibox-content">
 
                         <div class="layui-btn-group demoTable">
-                            <button class="layui-btn" data-type="getCheckData">获取选中行数据</button>
-                            <button class="layui-btn" data-type="getCheckLength">获取选中数目</button>
-                            <button class="layui-btn" data-type="isAll">验证是否全选</button>
+                            <button class="layui-btn">删除订单</button>
                         </div>
 
                         <div class="table-responsive">
-                            <table class="layui-table"
+                            <table class="table layui-table"
                                    lay-data="{url:'/data/order_lists.json', page:true, id:'idTest'}"
                                    lay-filter="demo">
                                 <thead>
@@ -88,9 +86,10 @@
     </div>
 </div>
 
+
+
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
-    <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
     <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
 </script>
 
