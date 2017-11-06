@@ -42,7 +42,7 @@ public class ComplaintController {
     @RequestMapping("getComplaintJson")
     @ResponseBody
     public String getUserAll(Integer page, Integer limit) throws Exception {
-        if ((page == 1 && complaintCount == null) || complaintCount == null)
+        if (page == 1 && complaintCount == null)
             complaintCount = adminService.selectComplaintCount();
         PagingCustomComplaint complaint = new PagingCustomComplaint();
         complaint.setPageNumber(limit);

@@ -38,6 +38,7 @@
 		<property name="providerClass" value="org.hibernate.validator.HibernateValidator" />
 	</bean>-->
 
+
 	<bean class="com.coding.exception.ExceptionResolver" />
 
 	<bean id="multipartResolver"
