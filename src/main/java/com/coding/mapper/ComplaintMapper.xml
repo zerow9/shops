@@ -84,7 +84,7 @@
     </insert>
 
     <!--按需更新投诉信息-->
-    <update id="updateByPrimaryKeySelective" parameterType="com.coding.pojo.Complaint">
+    <update id="updateComplaintByPrimaryKeySelective" parameterType="com.coding.pojo.Complaint">
         update complaint
         <set>
             <if test="accuserId != null">

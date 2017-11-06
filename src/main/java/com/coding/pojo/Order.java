@@ -1,6 +1,8 @@
 package com.coding.pojo;
 
+import org.springframework.stereotype.Component;
 
+@Component
 public class Order {
     private Integer orderId;
 
