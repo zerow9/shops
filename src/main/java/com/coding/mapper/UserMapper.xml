@@ -209,8 +209,13 @@
                 <if test="user.userGroup != null and user.userGroup != 0">
                     and user_group = #{user.userGroup}
                 </if>
-                <if test="user.userName != null userName != ''">
+                <!--姓名查询-->
+                <if test="user.userName != null and user.userName != ''">
                     and user_name = #{user.userName}
+                </if>
+                <!--电话查询-->
+                <if test="user.userPhone != null and user.userPhone != ''">
+                    and  user_phone = #{user.userPhone}
                 </if>
             </if>
             <!--年龄范围查询-->
