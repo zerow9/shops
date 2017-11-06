@@ -42,6 +42,14 @@ public interface ComplaintMapper {
     public List<Complaint> selectComplaint(PagingCustomComplaint pagingCustomComplaint)throws Exception;
 
     /**
+     * 根据投诉ID查询用户投诉信息
+     * @param complaintId
+     * @return
+     * @throws Exception
+     */
+    public Complaint selectComplaintByPrimaryKey(Integer complaintId) throws Exception;
+
+    /**
      * 查询一共有多少条投诉信息
      * @return 返回一共有多少条投诉信息
      * @throws Exception

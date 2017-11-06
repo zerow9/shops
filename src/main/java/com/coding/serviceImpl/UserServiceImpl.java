@@ -161,11 +161,12 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     }
 
     public Complaint selectComplaintByPrimaryKey(Integer complaintId) throws Exception {
-        PagingCustomComplaint pagingCustomComplaint = new PagingCustomComplaint();
-        Complaint complaint = new Complaint();
-        complaint.setComplaintId(complaintId);
-        pagingCustomComplaint.setComplaint(complaint);
-        return complaintMapper.selectComplaint(pagingCustomComplaint).get(0);
+        if (complaintId != null && complaintId != 0) {
+            Complaint complaint = complaintMapper.selectComplaintByPrimaryKey(complaintId);
+            except(complaint,"查询用户投诉信息为空");
+            return complaint;
+        }
+        return null;
     }
 
     public List<Complaint> selectComplaint(PagingCustomComplaint pagingCustomComplaint) throws Exception {
@@ -179,7 +180,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     public ItemType selectItemTypeByPrimaryKey(Integer itemTypeId) throws Exception {
         if (itemTypeId != null && itemTypeId != 0) {
             ItemType itemType = itemTypeMapper.selectItemTypeByPrimaryKey(itemTypeId);
-            except(itemTypeId,"查询商品类别为空");
+            except(itemType,"查询商品类别为空");
             return itemType;
         }
         return null;

@@ -99,7 +99,7 @@ public interface IUserService {
     public void updateComplaintByPrimaryKeySelective(Complaint record)throws Exception;
 
     /**
-     * 根据主键查询用户投诉信息
+     * 根据投诉ID查询用户投诉信息
      * @param complaintId
      * @return
      * @throws Exception
