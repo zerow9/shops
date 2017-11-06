@@ -134,6 +134,14 @@
         where user_phone = #{userPhone}
     </select>
 
+    <!--通过电话查找用户密码-->
+    <select id="selectUserPassword" parameterType="java.lang.String" resultType="java.lang.String">
+        select
+        user_password
+        from user
+        where user_phone = #{userPhone}
+    </select>
+
     <!--根据组别ID查找用户信息-->
     <select id="selectUserByGroupId" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
         select
