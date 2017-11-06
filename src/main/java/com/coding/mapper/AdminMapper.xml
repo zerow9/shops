@@ -97,4 +97,9 @@
         select count(*) from admin
     </select>
 
+    <!--根据帐号去查找密码-->
+    <select id="selectAdminPassword" parameterType="java.lang.String" resultType="java.lang.String">
+        select admin_password from admin where admin_account = #{adminAccount}
+    </select>
+
 </mapper>
