@@ -8,7 +8,6 @@
         where user_uuid = #{userUuid,jdbcType=VARCHAR}
     </delete>
 
-
     <!--增加用户信息-->
     <insert id="insertUser" parameterType="com.coding.pojo.User">
         insert into user (user_uuid, user_phone, user_nickname,
@@ -200,10 +199,6 @@
         <include refid="Blob_Column_List"/>
         from user
         <where>
-            <!--模糊查询-->
-            <if test="keyWord!=null and keyWord!=''">
-                and user_name REGEXP #{keyWord}
-            </if>
             <!--用户属性进行查询，得 user 不为null前提-->
             <if test="user != null">
                 <!--性别查询-->
@@ -213,6 +208,9 @@
                 <!--组别查询-->
                 <if test="user.userGroup != null and user.userGroup != 0">
                     and user_group = #{user.userGroup}
+                </if>
+                <if test="user.userName != null userName != ''">
+                    and user_name = #{user.userName}
                 </if>
             </if>
             <!--年龄范围查询-->
@@ -263,25 +261,24 @@
                     and user_score &lt;= #{latterScore}
                 </if>
             </if>
-
-            <!--排序规则-->
-            <if test="sortByColumn != null and sortByColumn !=''">
-                <if test="sortRule != null and sortRule != ''">
-                    order by ${sortByColumn} ${sortRule}
-                </if>
-            </if>
-            <!--分页-->
-            <if test="indexNumber != null">
-                <if test="pageNumber != null and pageNumber != 0">
-                    limit #{indexNumber},#{pageNumber}
-                </if>
-            </if>
-            <if test="indexNumber == null">
-                <if test="pageNumber != null and pageNumber != 0">
-                    limit 0,#{pageNumber}
-                </if>
-            </if>
         </where>
+        <!--排序规则-->
+        <if test="sortByColumn != null and sortByColumn !=''">
+            <if test="sortRule != null and sortRule != ''">
+                order by ${sortByColumn} ${sortRule}
+            </if>
+        </if>
+        <!--分页-->
+        <if test="indexNumber != null">
+            <if test="pageNumber != null and pageNumber != 0">
+                limit #{indexNumber},#{pageNumber}
+            </if>
+        </if>
+        <if test="indexNumber == null">
+            <if test="pageNumber != null and pageNumber != 0">
+                limit 0,#{pageNumber}
+            </if>
+        </if>
     </select>
 
     <!--查询用户表中一共有多少数据-->
