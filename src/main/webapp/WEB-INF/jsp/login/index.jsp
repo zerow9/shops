@@ -91,7 +91,7 @@
                         </li>
                         <li><a class="J_menuItem" href="admin/selectGroupsAll.action">用户组列表</a>
                         </li>
-                        <li><a class="J_menuItem" href="../../../jsp/admin/user/user_complaints_list.jsp">投诉管理</a>
+                        <li><a class="J_menuItem" href="complaint/selectComplaintAll.action">投诉管理</a>
                         </li>
                     </ul>
                 </li>

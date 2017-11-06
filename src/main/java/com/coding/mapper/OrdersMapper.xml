@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coding.mapper.OrdersMapper" >
+  <!--封装订单表-->
+  <resultMap id="BaseResultMap" type="com.coding.pojo.Orders" >
+    <id column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="user_uuid" property="userUuid" jdbcType="VARCHAR" />
+    <result column="shop_id" property="shopId" jdbcType="INTEGER" />
+    <result column="take_goods_name" property="takeGoodsName" jdbcType="VARCHAR" />
+    <result column="take_goods_phone" property="takeGoodsPhone" jdbcType="VARCHAR" />
+    <result column="take_goods_post" property="takeGoodsPost" jdbcType="INTEGER" />
+    <result column="order_sum_price" property="orderSumPrice" jdbcType="DOUBLE" />
+    <result column="use_score" property="useScore" jdbcType="INTEGER" />
+    <result column="send_score" property="sendScore" jdbcType="INTEGER" />
+    <result column="pay_status" property="payStatus" jdbcType="INTEGER" />
+    <result column="send_status" property="sendStatus" jdbcType="INTEGER" />
+    <result column="discuss_status" property="discussStatus" jdbcType="INTEGER" />
+    <result column="protect_status" property="protectStatus" jdbcType="INTEGER" />
+    <result column="pay_type" property="payType" jdbcType="INTEGER" />
+    <result column="order_create_time" property="orderCreateTime" jdbcType="TIMESTAMP" />
+    <result column="order_pay_time" property="orderPayTime" jdbcType="TIMESTAMP" />
+    <result column="order_paid" property="orderPaid" jdbcType="DOUBLE" />
+    <result column="order_refund" property="orderRefund" jdbcType="DOUBLE" />
+    <result column="send_way" property="sendWay" jdbcType="VARCHAR" />
+    <result column="address_id" property="addressId" jdbcType="INTEGER" />
+    <result column="buy_message" property="buyMessage" jdbcType="VARCHAR" />
+    <result column="take_goods_province" property="takeGoodsProvince" jdbcType="VARCHAR" />
+    <result column="take_goods_city" property="takeGoodsCity" jdbcType="VARCHAR" />
+    <result column="take_goods_county" property="takeGoodsCounty" jdbcType="VARCHAR" />
+    <result column="send_goods_time" property="sendGoodsTime" jdbcType="TIMESTAMP" />
+    <result column="order_freight" property="orderFreight" jdbcType="DOUBLE" />
+    <result column="order_completion_time" property="orderCompletionTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+  <!--订单表现有所有字段-->
+  <sql id="Base_Column_List" >
+    order_id, user_uuid, shop_id, take_goods_name, take_goods_phone, take_goods_post,
+    order_sum_price, use_score, send_score, pay_status, send_status, discuss_status,
+    protect_status, pay_type, order_create_time, order_pay_time, order_paid, order_refund,
+    send_way, address_id, buy_message, take_goods_province, take_goods_city, take_goods_county,
+    send_goods_time, order_freight, order_completion_time
+  </sql>
+  <!--根据订单ID查询订单信息-->
+  <select id="selectOrderByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from orders
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </select>
+  <!--查询商品表中共有多少数据-->
+  <select id="selectOrderCount" resultType="java.lang.Integer">
+    select count(*) from orders
+  </select>
+  <!--按需更新订单信息-->
+  <update id="updateOrderByPrimaryKeySelective" parameterType="com.coding.pojo.Orders" >
+    update orders
+    <set >
+      <if test="userUuid != null" >
+        user_uuid = #{userUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="takeGoodsName != null" >
+        take_goods_name = #{takeGoodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="takeGoodsPhone != null" >
+        take_goods_phone = #{takeGoodsPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="takeGoodsPost != null" >
+        take_goods_post = #{takeGoodsPost,jdbcType=INTEGER},
+      </if>
+      <if test="orderSumPrice != null" >
+        order_sum_price = #{orderSumPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="useScore != null" >
+        use_score = #{useScore,jdbcType=INTEGER},
+      </if>
+      <if test="sendScore != null" >
+        send_score = #{sendScore,jdbcType=INTEGER},
+      </if>
+      <if test="payStatus != null" >
+        pay_status = #{payStatus,jdbcType=INTEGER},
+      </if>
+      <if test="sendStatus != null" >
+        send_status = #{sendStatus,jdbcType=INTEGER},
+      </if>
+      <if test="discussStatus != null" >
+        discuss_status = #{discussStatus,jdbcType=INTEGER},
+      </if>
+      <if test="protectStatus != null" >
+        protect_status = #{protectStatus,jdbcType=INTEGER},
+      </if>
+      <if test="payType != null" >
+        pay_type = #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="orderCreateTime != null" >
+        order_create_time = #{orderCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderPayTime != null" >
+        order_pay_time = #{orderPayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderPaid != null" >
+        order_paid = #{orderPaid,jdbcType=DOUBLE},
+      </if>
+      <if test="orderRefund != null" >
+        order_refund = #{orderRefund,jdbcType=DOUBLE},
+      </if>
+      <if test="sendWay != null" >
+        send_way = #{sendWay,jdbcType=VARCHAR},
+      </if>
+      <if test="addressId != null" >
+        address_id = #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="buyMessage != null" >
+        buy_message = #{buyMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="takeGoodsProvince != null" >
+        take_goods_province = #{takeGoodsProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="takeGoodsCity != null" >
+        take_goods_city = #{takeGoodsCity,jdbcType=VARCHAR},
+      </if>
+      <if test="takeGoodsCounty != null" >
+        take_goods_county = #{takeGoodsCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="sendGoodsTime != null" >
+        send_goods_time = #{sendGoodsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderFreight != null" >
+        order_freight = #{orderFreight,jdbcType=DOUBLE},
+      </if>
+      <if test="orderCompletionTime != null" >
+        order_completion_time = #{orderCompletionTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </update>
+  <!--按需插入订单信息-->
+  <insert id="insertOrderSelective" parameterType="com.coding.pojo.Orders" >
+    insert into orders
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="userUuid != null" >
+        user_uuid,
+      </if>
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="takeGoodsName != null" >
+        take_goods_name,
+      </if>
+      <if test="takeGoodsPhone != null" >
+        take_goods_phone,
+      </if>
+      <if test="takeGoodsPost != null" >
+        take_goods_post,
+      </if>
+      <if test="orderSumPrice != null" >
+        order_sum_price,
+      </if>
+      <if test="useScore != null" >
+        use_score,
+      </if>
+      <if test="sendScore != null" >
+        send_score,
+      </if>
+      <if test="payStatus != null" >
+        pay_status,
+      </if>
+      <if test="sendStatus != null" >
+        send_status,
+      </if>
+      <if test="discussStatus != null" >
+        discuss_status,
+      </if>
+      <if test="protectStatus != null" >
+        protect_status,
+      </if>
+      <if test="payType != null" >
+        pay_type,
+      </if>
+      <if test="orderCreateTime != null" >
+        order_create_time,
+      </if>
+      <if test="orderPayTime != null" >
+        order_pay_time,
+      </if>
+      <if test="orderPaid != null" >
+        order_paid,
+      </if>
+      <if test="orderRefund != null" >
+        order_refund,
+      </if>
+      <if test="sendWay != null" >
+        send_way,
+      </if>
+      <if test="addressId != null" >
+        address_id,
+      </if>
+      <if test="buyMessage != null" >
+        buy_message,
+      </if>
+      <if test="takeGoodsProvince != null" >
+        take_goods_province,
+      </if>
+      <if test="takeGoodsCity != null" >
+        take_goods_city,
+      </if>
+      <if test="takeGoodsCounty != null" >
+        take_goods_county,
+      </if>
+      <if test="sendGoodsTime != null" >
+        send_goods_time,
+      </if>
+      <if test="orderFreight != null" >
+        order_freight,
+      </if>
+      <if test="orderCompletionTime != null" >
+        order_completion_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="userUuid != null" >
+        #{userUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="shopId != null" >
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="takeGoodsName != null" >
+        #{takeGoodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="takeGoodsPhone != null" >
+        #{takeGoodsPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="takeGoodsPost != null" >
+        #{takeGoodsPost,jdbcType=INTEGER},
+      </if>
+      <if test="orderSumPrice != null" >
+        #{orderSumPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="useScore != null" >
+        #{useScore,jdbcType=INTEGER},
+      </if>
+      <if test="sendScore != null" >
+        #{sendScore,jdbcType=INTEGER},
+      </if>
+      <if test="payStatus != null" >
+        #{payStatus,jdbcType=INTEGER},
+      </if>
+      <if test="sendStatus != null" >
+        #{sendStatus,jdbcType=INTEGER},
+      </if>
+      <if test="discussStatus != null" >
+        #{discussStatus,jdbcType=INTEGER},
+      </if>
+      <if test="protectStatus != null" >
+        #{protectStatus,jdbcType=INTEGER},
+      </if>
+      <if test="payType != null" >
+        #{payType,jdbcType=INTEGER},
+      </if>
+      <if test="orderCreateTime != null" >
+        #{orderCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderPayTime != null" >
+        #{orderPayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderPaid != null" >
+        #{orderPaid,jdbcType=DOUBLE},
+      </if>
+      <if test="orderRefund != null" >
+        #{orderRefund,jdbcType=DOUBLE},
+      </if>
+      <if test="sendWay != null" >
+        #{sendWay,jdbcType=VARCHAR},
+      </if>
+      <if test="addressId != null" >
+        #{addressId,jdbcType=INTEGER},
+      </if>
+      <if test="buyMessage != null" >
+        #{buyMessage,jdbcType=VARCHAR},
+      </if>
+      <if test="takeGoodsProvince != null" >
+        #{takeGoodsProvince,jdbcType=VARCHAR},
+      </if>
+      <if test="takeGoodsCity != null" >
+        #{takeGoodsCity,jdbcType=VARCHAR},
+      </if>
+      <if test="takeGoodsCounty != null" >
+        #{takeGoodsCounty,jdbcType=VARCHAR},
+      </if>
+      <if test="sendGoodsTime != null" >
+        #{sendGoodsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderFreight != null" >
+        #{orderFreight,jdbcType=DOUBLE},
+      </if>
+      <if test="orderCompletionTime != null" >
+        #{orderCompletionTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <!--批量删除订单-->
+  <delete id="deleteOrderByPrimaryKeyArray" parameterType="java.lang.Integer">
+    delete from orders where order_id IN
+    <foreach collection="oderIdArray" item="order" open="(" separator="," close=")">
+      #{order}
+    </foreach>
+  </delete>
+  <!--根据订单ID删除订单信息-->
+  <delete id="deleteOrderByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from orders
+    where order_id = #{orderId,jdbcType=INTEGER}
+  </delete>
+  <!--订单表大查询-->
+  <select id="selectOrder" parameterType="com.coding.pojo.PagingCustomOrder" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from orders
+    <where>
+
+      <!--根据order基本信息进行查询-->
+      <if test="order != null and order != ''">
+        <!--根据用户ID查找订单信息-->
+        <if test="order.userUuid != null and order.userUuid != ''">
+          and user_uuid = #{order.userUuid}
+        </if>
+        <!--根据收货人电话查找订单信息-->
+        <if test="order.takeGoodsPhone != null and order.takeGoodsPhone != ''">
+          and take_goods_phone = #{order.takeGoodsPhone}
+        </if>
+        <!--根据支付状态查找订单信息-->
+        <if test="order.payStatus != null ">
+          and pay_status = #{order.payStatus}
+        </if>
+        <!--根据发货状态查找订单信息-->
+        <if test="order.sendStatus != null">
+          and send_status = #{order.sendStatus}
+        </if>
+        <!--根据评论状态状态查找订单信息-->
+        <if test="order.discussStatus != null">
+          and  discuss_status = #{order.discussStatus}
+        </if>
+        <!--根据维权状态状态查找订单信息-->
+        <if test="order.protectStatus != null">
+          and protect_status = #{order.protectStatus}
+        </if>
+      </if>
+
+      <!--根据订单创建时间范围查询订单信息-->
+      <if test="formerOrderCreateTime != null and formerOrderCreateTime != ''">
+        <!--给定了最小值和最大值-->
+        <if test="latterOrderCreateTime != null and latterOrderCreateTime != ''">
+          <!--以下三种情况分别列出-->
+          <if test="formerOrderCreateTime == latterOrderCreateTime">
+            and order_create_time = #{latterOrderCreateTime}
+          </if>
+          <if test="formerOrderCreateTime &lt; latterOrderCreateTime">
+            and order_create_time between #{formerOrderCreateTime} and #{latterOrderCreateTime}
+          </if>
+          <if test="formerOrderCreateTime &gt; latterOrderCreateTime">
+            and order_create_time between #{latterOrderCreateTime} and #{formerOrderCreateTime}
+          </if>
+        </if>
+        <!--只给定了最小值-->
+        <if test="latterOrderCreateTime == null or latterOrderCreateTime == ''">
+          and order_create_time &gt;= #{formerOrderCreateTime}
+        </if>
+      </if>
+      <!--只给定了最大值-->
+      <if test="formerOrderCreateTime == null or formerOrderCreateTime == ''">
+        <if test="latterOrderCreateTime != null and latterOrderCreateTime != ''">
+          and  order_create_time &lt;= #{latterOrderCreateTime}
+        </if>
+      </if>
+
+
+      <!--根据订单支付时间范围查询订单信息-->
+      <if test="formerOrderPayTime != null and formerOrderPayTime != ''">
+        <!--给定了最小值和最大值-->
+        <if test="latterOrderPayTime != null and latterOrderPayTime != ''">
+          <!--以下三种情况分别列出-->
+          <if test="formerOrderPayTime == latterOrderPayTime">
+            and order_pay_time = #{latterOrderPayTime}
+          </if>
+          <if test="formerOrderPayTime &lt; latterOrderPayTime">
+            and order_pay_time between #{formerOrderPayTime} and #{latterOrderPayTime}
+          </if>
+          <if test="formerOrderPayTime &gt; latterOrderPayTime">
+            and order_pay_time between #{latterOrderPayTime} and #{formerOrderPayTime}
+          </if>
+        </if>
+        <!--只给定了最小值-->
+        <if test="latterOrderPayTime == null or latterOrderPayTime == ''">
+          and order_pay_time &gt;= #{formerOrderPayTime}
+        </if>
+      </if>
+      <!--只给定了最大值-->
+      <if test="formerOrderPayTime == null or formerOrderPayTime == ''">
+        <if test="latterOrderPayTime != null and latterOrderPayTime != ''">
+          and  order_pay_time &lt;= #{latterOrderPayTime}
+        </if>
+      </if>
+
+
+      <!--根据发货时间范围查询订单信息-->
+      <if test="formerSendGoodsTime != null and formerSendGoodsTime != ''">
+        <!--给定了最小值和最大值-->
+        <if test="latterSendGoodsTime != null and latterSendGoodsTime != ''">
+          <!--以下三种情况分别列出-->
+          <if test="formerSendGoodsTime == latterSendGoodsTime">
+            and order_pay_time = #{latterSendGoodsTime}
+          </if>
+          <if test="formerSendGoodsTime &lt; latterSendGoodsTime">
+            and order_pay_time between #{formerSendGoodsTime} and #{latterSendGoodsTime}
+          </if>
+          <if test="formerSendGoodsTime &gt; latterSendGoodsTime">
+            and order_pay_time between #{latterSendGoodsTime} and #{formerSendGoodsTime}
+          </if>
+        </if>
+        <!--只给定了最小值-->
+        <if test="latterSendGoodsTime == null or latterSendGoodsTime == ''">
+          and order_pay_time &gt;= #{formerSendGoodsTime}
+        </if>
+      </if>
+      <!--只给定了最大值-->
+      <if test="formerSendGoodsTime == null or formerSendGoodsTime == ''">
+        <if test="latterSendGoodsTime != null and latterSendGoodsTime != ''">
+          and  order_pay_time &lt;= #{latterSendGoodsTime}
+        </if>
+      </if>
+
+      <!--根据订单完成时间范围查询订单信息-->
+      <if test="formerOrderCompletionTime != null and formerOrderCompletionTime != ''">
+        <!--给定了最小值和最大值-->
+        <if test="latterOrderCompletionTime != null and latterOrderCompletionTime != ''">
+          <!--以下三种情况分别列出-->
+          <if test="formerOrderCompletionTime == latterOrderCompletionTime">
+            and order_completion_time = #{latterSendGoodsTime}
+          </if>
+          <if test="formerOrderCompletionTime &lt; latterOrderCompletionTime">
+            and order_completion_time between #{formerOrderCompletionTime} and #{latterOrderCompletionTime}
+          </if>
+          <if test="formerOrderCompletionTime &gt; latterOrderCompletionTime">
+            and order_completion_time between #{latterOrderCompletionTime} and #{formerOrderCompletionTime}
+          </if>
+        </if>
+        <!--只给定了最小值-->
+        <if test="latterOrderCompletionTime == null or latterOrderCompletionTime == ''">
+          and order_completion_time &gt;= #{formerOrderCompletionTime}
+        </if>
+      </if>
+      <!--只给定了最大值-->
+      <if test="formerOrderCompletionTime == null or formerOrderCompletionTime == ''">
+        <if test="latterOrderCompletionTime != null and latterOrderCompletionTime != ''">
+          and  order_completion_time &lt;= #{latterOrderCompletionTime}
+        </if>
+      </if>
+    </where>
+    <!--排序规则-->
+    <if test="sortByColumn != null and sortByColumn !=''">
+      <if test="sortRule != null and sortRule != ''">
+        orders by ${sortByColumn} ${sortRule}
+      </if>
+    </if>
+    <!--分页-->
+    <if test="indexNumber != null">
+      <if test="pageNumber != null and pageNumber != 0">
+        limit #{indexNumber},#{pageNumber}
+      </if>
+    </if>
+    <if test="indexNumber == null">
+      <if test="pageNumber != null and pageNumber != 0">
+        limit 0,#{pageNumber}
+      </if>
+    </if>
+  </select>
+</mapper>

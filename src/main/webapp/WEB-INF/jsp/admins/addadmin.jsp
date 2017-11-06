@@ -30,7 +30,6 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
-
                 <div class="ibox-content">
                     <form class="layui-form" action="">
                         <div class="layui-form-item">
