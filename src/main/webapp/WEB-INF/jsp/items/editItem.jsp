@@ -44,7 +44,7 @@ String basePath = request.getScheme() + "://"
                             <label class="layui-form-label">商品ID</label>
                             <div class="layui-input-block">
                                 <input type="text" name="itemName" lay-verify="itemName" autocomplete="off"
-                                       value="${item.itemId}" class="layui-input" readonly>
+                                       value="${item.itemId}" class="layui-input" >
                             </div>
                         </div>
 
@@ -52,7 +52,7 @@ String basePath = request.getScheme() + "://"
                             <label class="layui-form-label">商品名称</label>
                             <div class="layui-input-block">
                                 <input type="text" name="itemName" lay-verify="itemName" autocomplete="off"
-                                       value="${item.itemName}" class="layui-input" readonly>
+                                       value="${item.itemName}" class="layui-input" >
                             </div>
                         </div>
 
@@ -80,7 +80,7 @@ String basePath = request.getScheme() + "://"
                                 <label class="layui-form-label">市场价格</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="itemMarketPrice" autocomplete="off"
-                                           value="${item.itemMarketPrice}" class="layui-input" lay-verify="required" readonly>
+                                           value="${item.itemMarketPrice}" class="layui-input" lay-verify="required" >
                                 </div>
                             </div>
 
@@ -88,7 +88,7 @@ String basePath = request.getScheme() + "://"
                                 <label class="layui-form-label">积分价格</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="scorePrice" autocomplete="off"
-                                           value="${item.scorePrice}" class="layui-input" readonly>
+                                           value="${item.scorePrice}" class="layui-input">
                                 </div>
                             </div>
                         </div>
@@ -98,7 +98,7 @@ String basePath = request.getScheme() + "://"
                                 <label class="layui-form-label">一级分类</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="itemTypeOne" autocomplete="off"
-                                           value="${item.itemTypeOne}" class="layui-input" lay-verify="itemTypeOne" readonly>
+                                           value="${item.itemTypeOne}" class="layui-input" lay-verify="itemTypeOne">
                                 </div>
                             </div>
 
@@ -106,7 +106,7 @@ String basePath = request.getScheme() + "://"
                                 <label class="layui-form-label">二级分类</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="itemTypeTwo" autocomplete="off"
-                                           value="${item.itemTypeTwo}" class="layui-input" readonly>
+                                           value="${item.itemTypeTwo}" class="layui-input">
                                 </div>
                             </div>
 
@@ -114,7 +114,7 @@ String basePath = request.getScheme() + "://"
                                 <label class="layui-form-label">三级分类</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="itemTypeThree" autocomplete="off"
-                                           value="${item.itemTypeThree}" class="layui-input" readonly>
+                                           value="${item.itemTypeThree}" class="layui-input">
                                 </div>
                             </div>
                         </div>
@@ -125,21 +125,21 @@ String basePath = request.getScheme() + "://"
                                 <label class="layui-form-label">运费</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="postPrice" autocomplete="off"
-                                           value="${item.postPrice}" class="layui-input" readonly>
+                                           value="${item.postPrice}" class="layui-input">
                                 </div>
                             </div>
                             <div class="layui-inline">
                                 <label class="layui-form-label">库存数量</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="repertoryNumber" autocomplete="off"
-                                           value="${item.repertoryNumber}" class="layui-input" lay-verify="required" readonly>
+                                           value="${item.repertoryNumber}" class="layui-input" lay-verify="required">
                                 </div>
                             </div>
                             <div class="layui-inline">
                                 <label class="layui-form-label">销售量</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="itemSaleNumber" autocomplete="off"
-                                           value="${item.itemSaleNumber}" class="layui-input" readonly>
+                                           value="${item.itemSaleNumber}" class="layui-input">
                                 </div>
                             </div>
 
@@ -158,7 +158,7 @@ String basePath = request.getScheme() + "://"
                                 <label class="layui-form-label">关键词</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="keyWord" value="${item.keyWord}" autocomplete="off"
-                                            class="layui-input" lay-verify="required" readonly>
+                                            class="layui-input" lay-verify="required" >
                                 </div>
                             </div>
 
@@ -183,7 +183,7 @@ String basePath = request.getScheme() + "://"
                             <label class="layui-form-label">规格</label>
                             <div class="layui-input-block">
                                 <input type="text" name="itemFormat" autocomplete="off"
-                                       value="${item.itemFormat}" class="layui-input" lay-verify="itemFormat" readonly>
+                                       value="${item.itemFormat}" class="layui-input" lay-verify="itemFormat" >
                             </div>
                         </div>
 

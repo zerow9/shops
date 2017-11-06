@@ -68,7 +68,7 @@
                                 <thead>
                                 <tr>
                                     <th lay-data="{checkbox:true, fixed: true}"></th>
-                                    <th lay-data="{field:'itemId', width:100, fixed: true}">ID</th>
+                                    <th lay-data="{field:'itemId', width:100, fixed: true}">商品编号</th>
                                     <th lay-data="{field:'itemName', width:200}">商品名称</th>
                                     <th lay-data="{field:'itemImages', width:200}">商品图片</th>
                                     <th lay-data="{field:'itemTypeId', width:200}">商品类型</th>
