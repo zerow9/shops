@@ -161,20 +161,16 @@
 
 //        添加用户组
         $("#add_group_btn").on('click', function () {
-            parent.layer.open({
+            layer.open({
                 type: 2
-                , title: ['添加用户组', 'font-size:18px;']
                 , closeBtn: 1
-                , area: ['350px', '256px']
                 , shade: 0.3  //遮罩
+                , title: ['添加用户组', 'font-size:18px;']
+                , area: ['400px', '300px']
                 , id: 'add_group_id' //设定一个id，防止重复弹出
-                , btn: ['添加', '取消']
-                , btn2: function (index, layero) {  //取消按钮的操作
-                    return true
-                }
                 , move: false
                 , btnAlign: 'c' //按钮居中对齐
-                , content: 'admin/addGroups.action'
+                , content: 'addGroups.action'
                 , shadeClose: true
                 , end: function () {
                     window.location.reload();
