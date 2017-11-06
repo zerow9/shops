@@ -112,7 +112,4 @@ layui.use('table', function () {
         active[type] ? active[type].call(this) : '';
     });
 
-    function closeWin() {
-        alert(1);
-    }
 });

@@ -83,7 +83,7 @@
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="admin/selectUserAll.action">用户列表</a>
                         </li>
-                        <li><a class="J_menuItem" href="../../../jsp/admin/user/user_group_list.jsp">用户组</a>
+                        <li><a class="J_menuItem" href="admin/selectGroupsAll.action">用户组列表</a>
                         </li>
                         <li><a class="J_menuItem" href="../../../jsp/admin/user/user_complaints_list.jsp">投诉管理</a>
                         </li>
