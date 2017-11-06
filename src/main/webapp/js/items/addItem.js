@@ -30,9 +30,19 @@ layui.use(['form', 'layedit', 'laydate'], function () {
                 return '请输入商品名称';
             }
         },
-        itemTypeId: function () {
+        itemTypeId: function (value) {
             if (value.length == 0) {
                 return '请输入商品名称'
+            }
+        },
+        itemFormat: function (value) {
+            if (value.length == 0) {
+                return '请输入商品规格'
+            }
+        },
+        itemTypeOne: function (value) {
+            if (value.length == 0) {
+                return '请选择商品分类'
             }
         }
 

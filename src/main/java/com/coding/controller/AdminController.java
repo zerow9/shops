@@ -362,4 +362,24 @@ public class AdminController {
     public String addGroups() {
         return "groups/groupsAdd";
     }
+
+    /**
+     * 批量删除用户组
+     *
+     * @param arrayString 用户组id集合
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("deleteGroupsByIdArray")
+    public boolean deleteGroupsByIdArray(String arrayString) throws Exception {
+        List<Integer> list =new ArrayList<>();
+        for (String uuid : arrayString.split(","))
+            list.add(Integer.parseInt(uuid));
+        adminService.deleteGroupsByPrimaryKeyArray(list.toArray(new Integer[list.size()]));
+        countGroups = null;
+        return true;
+    }
+
+
+
 }

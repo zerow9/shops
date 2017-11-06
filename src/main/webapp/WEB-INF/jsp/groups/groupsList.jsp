@@ -224,9 +224,9 @@
                 , btn: ['删除', '取消']
                 , btn1: function (index, layero) {
                     parent.layer.close(index);
-                    $.post('deleteUserByUUidArray.action?', groupids, function (result, status) {
+                    $.post('deleteGroupsByIdArray.action', {'arrayString': groupids.toString()}, function (result, status) {
                         console.log('post返回信息：' + '\nresult:' + result + '\nstatus:' + status);
-                        if (result === true) {
+                        if (result === false) {
                             layer.msg("删除成功！");
                             window.location.reload();
                         } else {
