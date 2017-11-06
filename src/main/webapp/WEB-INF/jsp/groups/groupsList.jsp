@@ -166,7 +166,7 @@
                 , closeBtn: 1
                 , shade: 0.3  //遮罩
                 , title: ['添加用户组', 'font-size:18px;']
-                , area: ['400px', '300px']
+                , area: ['400px', '260px']
                 , id: 'add_group_id' //设定一个id，防止重复弹出
                 , move: false
                 , btnAlign: 'c' //按钮居中对齐
