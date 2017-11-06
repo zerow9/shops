@@ -77,4 +77,12 @@ public interface AdminMapper {
      */
     public List<String> selectAdminPassword(@Param("adminAccount") String adminAccount)throws Exception;
 
+    /**
+     * 根据帐号密码查询用户信息
+     * @param adminAccount Admin 帐号
+     * @param adminPassword Admin 密码
+     * @return 如果数据库中存在和传入帐号密码匹配的管理员信息，那么就返回该管理员信息
+     * @throws Exception
+     */
+    public Admin selectAdminAccountAndPassword(@Param("adminAccount") String adminAccount,@Param("adminPassword") String adminPassword)throws Exception;
 }
