@@ -1,16 +1,16 @@
 <%--
-  Created by IntelliJ IDEA.
-  User: TongZhou
-  Date: 2017/11/6
-  Time: 14:44
-  To change this template use File | Settings | File Templates.
+Created by IntelliJ IDEA.
+User: TongZhou
+Date: 2017/11/6
+Time: 14:44
+To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    String path = request.getContextPath();
-    String basePath = request.getScheme() + "://"
-            + request.getServerName() + ":" + request.getServerPort()
-            + path + "/";
+String path = request.getContextPath();
+String basePath = request.getScheme() + "://"
++ request.getServerName() + ":" + request.getServerPort()
++ path + "/";
 %>
 
 <html>
@@ -85,27 +85,11 @@
                         </div>
 
                         <div class="layui-form-item">
-                            <label class="layui-form-label">上传商品图片</label>
-                            <div class="layui-input-block">
-                                <input type="file" name="itemImages" autocomplete="off"
-                                       placeholder="请上传图片" class="layui-input">
-                            </div>
-                        </div>
-
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">规格</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="itemFormat" autocomplete="off"
-                                       placeholder="￥" class="layui-input" lay-verify="required">
-                            </div>
-                        </div>
-
-                        <div class="layui-form-item">
                             <div class="layui-inline">
                                 <label class="layui-form-label">一级分类</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="itemTypeOne" autocomplete="off"
-                                           placeholder="请输入一级分类" class="layui-input">
+                                           placeholder="请输入一级分类" class="layui-input" lay-verify="itemTypeOne">
                                 </div>
                             </div>
 
@@ -157,7 +141,7 @@
                                 <label class="layui-form-label">收藏数量</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="itemCollectNumber" value="0" autocomplete="off"
-                                           placeholder="0" class="layui-input" readonly >
+                                           placeholder="0" class="layui-input" readonly>
                                 </div>
                             </div>
 
@@ -165,7 +149,7 @@
                                 <label class="layui-form-label">关键词</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="keyWord" value="" autocomplete="off"
-                                           placeholder="请输入关键词" class="layui-input" >
+                                           placeholder="请输入关键词" class="layui-input" lay-verify="required">
                                 </div>
                             </div>
 
@@ -173,24 +157,40 @@
                                 <label class="layui-form-label">生产厂商</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="makeVender" value="" autocomplete="off"
-                                           placeholder="生产厂商" class="layui-input" >
+                                           placeholder="生产厂商" class="layui-input" lay-verify="required">
                                 </div>
                             </div>
 
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">上传商品图片</label>
+                            <div class="layui-input-block">
+                                <input type="file" name="itemImages" autocomplete="off"
+                                       placeholder="请上传图片" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">规格</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="itemFormat" autocomplete="off"
+                                       placeholder="请输入规格" class="layui-input" lay-verify="itemFormat">
+                            </div>
                         </div>
 
                         <div class="layui-form-item">
                             <label class="layui-form-label">创建时间</label>
                             <div class="layui-input-block">
                                 <input type="text" name="makeDate" value="" autocomplete="off"
-                                       placeholder="创建时间" class="layui-input" >
+                                       placeholder="创建时间" class="layui-input">
                             </div>
                         </div>
 
                         <div class="layui-form-item">
                             <label class="layui-form-label">描述</label>
                             <div class="layui-input-block">
-                                <textarea placeholder="请输入描述" class="layui-textarea" name="itemIntroduce"></textarea>
+                                <textarea placeholder="请输入描述" class="layui-textarea" name="itemIntroduce"
+                                          lay-verify="required"></textarea>
                             </div>
                         </div>
 
