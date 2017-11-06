@@ -10,7 +10,7 @@ public interface ComplaintMapper {
     /**
      * 根据投诉ID删除投诉信息
      * @param complaintId 投诉表唯一ID
-     * @return 是否删除成功 1:成功 0:不成功
+     * @return 是否删除成功 非0:成功 0:不成功
      * @throws Exception
      */
     public int deleteComplaintByPrimaryKey(Integer complaintId)throws Exception;
@@ -18,7 +18,7 @@ public interface ComplaintMapper {
     /**
      * 按需插入投诉信息
      * @param complaint 封装了投诉信息的 Complaint 类对象
-     * @return 是否插入成功 1:成功 0:失败
+     * @return 是否插入成功 非0:成功 0:失败
      * @throws Exception
      */
     public int insertComplaintSelective(Complaint complaint)throws Exception;
@@ -26,7 +26,7 @@ public interface ComplaintMapper {
     /**
      * 根据投诉表ID按需更新投诉表信息
      * @param record 封装了投诉信息的 Complaint 类对象
-     * @return 是否更新成功 1:成功 0:失败
+     * @return 是否更新成功 非0:成功 0:失败
      * @throws Exception
      */
     public int updateComplaintByPrimaryKeySelective(Complaint record)throws Exception;
