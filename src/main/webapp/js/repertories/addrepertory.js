@@ -9,7 +9,7 @@ layui.use(['form', 'layedit', 'laydate'], function () {
 
     //日期
     laydate.render({
-        elem: '#date'
+        elem: '#date2'
     });
     laydate.render({
         elem: '#date1'
@@ -22,29 +22,22 @@ layui.use(['form', 'layedit', 'laydate'], function () {
                 return '标题至少得5个字符啊';
             }
         },
-        content: function (value) {
-            layedit.sync(editIndex);
-        },
-        itemName: function (value) {
-            if (value.length == 0) {
-                return '请输入商品名称';
-            }
-        },
         itemTypeId: function (value) {
             if (value.length == 0) {
-                return '请输入商品名称'
+                return "请选择商品名称";
             }
         },
-        itemFormat: function (value) {
+        shopId: function (value) {
             if (value.length == 0) {
-                return '请输入商品规格'
+                return "请选择商店名称";
             }
         },
-        itemTypeOne: function (value) {
-            if (value.length == 0) {
-                return '请选择商品分类'
+        venderId: function (value) {
+            if (value.length==0) {
+                return '请选择生产商名称'
             }
         }
+
 
     });
 
@@ -53,7 +46,7 @@ layui.use(['form', 'layedit', 'laydate'], function () {
     form.on('submit(demo1)', function (data) {
         var parm = data.field;
         $.ajax({
-            url: 'insertItem.action',
+            url: 'insertRepertory.action',
             data: parm,
             success: function () {
 
@@ -64,7 +57,7 @@ layui.use(['form', 'layedit', 'laydate'], function () {
                     text: "添加数据成功！",
                     type: "success"
                 })
-                window.parent.location.reload();
+                window.location.reload();
             }
         });
         return false;

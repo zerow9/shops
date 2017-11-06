@@ -108,7 +108,7 @@
 <script src="../../../shopmanagement/js/content.min.js"></script>
 <script src="../../../common/layui/layui.js"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../../../js/userlist.js"></script>
+<script src="../../../js/user/userlist.js"></script>
 
 </body>
 
