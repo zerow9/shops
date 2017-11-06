@@ -3,7 +3,7 @@ package com.coding.pojo;
 import org.springframework.stereotype.Component;
 
 @Component
-public class Order {
+public class Orders {
     private Integer orderId;
 
     private String userUuid;
@@ -72,7 +72,7 @@ public class Order {
     }
 
     public void setUserUuid(String userUuid) {
-        this.userUuid = userUuid == null ? null : userUuid.trim();
+        this.userUuid = userUuid;
     }
 
     public Integer getShopId() {
@@ -88,7 +88,7 @@ public class Order {
     }
 
     public void setTakeGoodsName(String takeGoodsName) {
-        this.takeGoodsName = takeGoodsName == null ? null : takeGoodsName.trim();
+        this.takeGoodsName = takeGoodsName;
     }
 
     public String getTakeGoodsPhone() {
@@ -96,7 +96,7 @@ public class Order {
     }
 
     public void setTakeGoodsPhone(String takeGoodsPhone) {
-        this.takeGoodsPhone = takeGoodsPhone == null ? null : takeGoodsPhone.trim();
+        this.takeGoodsPhone = takeGoodsPhone;
     }
 
     public Integer getTakeGoodsPost() {
@@ -208,7 +208,7 @@ public class Order {
     }
 
     public void setSendWay(String sendWay) {
-        this.sendWay = sendWay == null ? null : sendWay.trim();
+        this.sendWay = sendWay;
     }
 
     public Integer getAddressId() {
@@ -224,7 +224,7 @@ public class Order {
     }
 
     public void setBuyMessage(String buyMessage) {
-        this.buyMessage = buyMessage == null ? null : buyMessage.trim();
+        this.buyMessage = buyMessage;
     }
 
     public String getTakeGoodsProvince() {
@@ -232,7 +232,7 @@ public class Order {
     }
 
     public void setTakeGoodsProvince(String takeGoodsProvince) {
-        this.takeGoodsProvince = takeGoodsProvince == null ? null : takeGoodsProvince.trim();
+        this.takeGoodsProvince = takeGoodsProvince;
     }
 
     public String getTakeGoodsCity() {
@@ -240,7 +240,7 @@ public class Order {
     }
 
     public void setTakeGoodsCity(String takeGoodsCity) {
-        this.takeGoodsCity = takeGoodsCity == null ? null : takeGoodsCity.trim();
+        this.takeGoodsCity = takeGoodsCity;
     }
 
     public String getTakeGoodsCounty() {
@@ -248,7 +248,7 @@ public class Order {
     }
 
     public void setTakeGoodsCounty(String takeGoodsCounty) {
-        this.takeGoodsCounty = takeGoodsCounty == null ? null : takeGoodsCounty.trim();
+        this.takeGoodsCounty = takeGoodsCounty;
     }
 
     public String getSendGoodsTime() {
@@ -277,7 +277,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" +
+        return "Orders{" +
                 "orderId=" + orderId +
                 ", userUuid='" + userUuid + '\'' +
                 ", shopId=" + shopId +
