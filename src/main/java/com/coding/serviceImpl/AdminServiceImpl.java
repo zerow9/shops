@@ -27,7 +27,8 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     private RepertoryMapper repertoryMapper;
     @Autowired
     private VenderMapper venderMapper;
-
+    @Autowired
+    private ComplaintMapper complaintMapper;
 
     /*------------------------------------------用户表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
@@ -117,13 +118,11 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     }
 
     public Integer selectAddressCount() throws Exception {
-        Integer count ;
         try {
-            count  = addressMapper.selectAddressCount();
+            return addressMapper.selectAddressCount();
         }catch (Exception e){
-            throw new Exception("查询收货地址总数是出错");
+            throw new Exception("查询收货地址总数时出错");
         }
-        return count;
     }
 
     /*------------------------------------------分组表------------------------------------------------------------------*/
@@ -136,6 +135,16 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
                 throw new Exception("删除分组信息时出错");
             }
         }
+    }
+
+    public void deleteGroupsByPrimaryKeyArray(Integer[] groups_idArray) throws Exception {
+        if(groups_idArray==null||"".equals(groups_idArray))throw new Exception("没有groups数组信息，批量分组删除出错");
+        try {
+            except(groupsMapper.deleteGroupsByPrimaryKeyArray(groups_idArray));
+        }catch (Exception e){
+            throw new Exception("批量删除分组时出错");
+        }
+
     }
 
     @Transactional(rollbackFor =Exception.class )
@@ -172,15 +181,19 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
 
     }
 
-    public List<Groups> selectGroupsPaging(Integer nowPage,Integer number) throws Exception{
-        exceptInitialize(nowPage,number);
-        PagingCustomGroups pagingCustomGroups = new PagingCustomGroups();
-        pagingCustomGroups.setIndexNumber(nowPage);
-        pagingCustomGroups.setPageNumber(number);
-        if(nowPage < 0) nowPage = 0;
+    public List<Groups> selectGroups(PagingCustomGroups pagingCustomGroups) throws Exception{
+        exceptInitialize(pagingCustomGroups.getIndexNumber(),pagingCustomGroups.getPageNumber());
         List<Groups> groups = groupsMapper.selectGroups(pagingCustomGroups);
-        if(groups.isEmpty()) throw new Exception("分页查询到的用户列表为空，或者已经是最后一页");
+        if(groups.isEmpty()) throw new Exception("查询到的用户列表为空，或者参数不正确");
         return groups;
+    }
+
+    public Integer selectGroupsCount() throws Exception {
+        try {
+            return groupsMapper.selectGroupsCount();
+        }catch (Exception e){
+            throw new Exception("查询收货地址总数时出错");
+        }
     }
 
     /*------------------------------------------管理员表------------------------------------------------------------------*/
@@ -246,6 +259,14 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         return admins;
     }
 
+    public Integer selectAdminCount() throws Exception {
+        try {
+            return  adminMapper.selectAdminCount();
+        }catch (Exception e){
+            throw new Exception("查询管理员总数时出错");
+        }
+    }
+
     public List<String> selectAdminPassword(String adminAccount) throws Exception {
         if (adminAccount != null && !adminAccount.equals("")){
             List<String> passwords = adminMapper.selectAdminPassword(adminAccount);
@@ -253,6 +274,17 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
             return passwords;
         }
             return null;
+    }
+
+    /*------------------------------------------用户投诉表------------------------------------------------------------------*/
+
+
+    public Integer selectComplaintCount() throws Exception {
+        try {
+            return  complaintMapper.selectComplaintCount();
+        }catch (Exception e){
+            throw new Exception("查询投诉表总数时出错");
+        }
     }
 
     /*------------------------------------------商品类别表------------------------------------------------------------------*/
@@ -314,6 +346,15 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
             throw new Exception("修改商品信息时出错");
         }
     }
+
+    public Integer selectItemCount() throws Exception {
+        try {
+            return  itemMapper.selectItemCount();
+        }catch (Exception e){
+            throw new Exception("查询商品总数时出错");
+        }
+    }
+
     /*------------------------------------------库存表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
     public void deleteRepertoryByPrimaryKey(Integer repertoryId) throws Exception {
@@ -359,6 +400,15 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
 //        except(repertories,"查询库存列表为空");
         return repertories;
     }
+
+    public Integer selectRepertoryCount() throws Exception {
+        try {
+            return  repertoryMapper.selectRepertoryCount();
+        }catch (Exception e){
+            throw new Exception("查询库存表总数时出错");
+        }
+    }
+
     /*------------------------------------------厂家信息表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
     public void deleteVenderByPrimaryKey(Integer venderId) throws Exception {
@@ -404,6 +454,14 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         if(venders.isEmpty()) throw new Exception("查询厂家列表为空");
 //        except(venders,"查询厂家列表为空");
         return venders;
+    }
+
+    public int selectVenderCount() throws Exception {
+        try {
+            return  venderMapper.selectVenderCount();
+        }catch (Exception e){
+            throw new Exception("查询厂家表总数时出错");
+        }
     }
 
 

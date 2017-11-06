@@ -2,10 +2,7 @@ package com.coding.serviceImpl;
 
 import com.coding.Iservice.IUserService;
 import com.coding.comomInterface.ErrorExc;
-import com.coding.mapper.AddressMapper;
-import com.coding.mapper.ItemMapper;
-import com.coding.mapper.ItemTypeMapper;
-import com.coding.mapper.UserMapper;
+import com.coding.mapper.*;
 import com.coding.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,6 +20,8 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     private ItemTypeMapper itemTypeMapper;
     @Autowired
     private ItemMapper itemMapper;
+    @Autowired
+    private ComplaintMapper complaintMapper;
 
     /*----------------------------------------用户表------------------------------------------------------------------*/
 
@@ -56,7 +55,24 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
 
     }
 
-    /*------------------------------------------收获地址表表------------------------------------------------------------------*/
+    public Integer selectUserCount() throws Exception {
+        try {
+            return  userMapper.selectUserCount();
+        }catch (Exception e){
+            throw new Exception("查询用户总数时出错");
+        }
+    }
+
+    public List<String> selectUserPassword(String userPhone) throws Exception {
+        if (userPhone != null && !userPhone.equals("")){
+            List<String> passwords = userMapper.selectUserPassword(userPhone);
+            if(passwords.isEmpty()) throw new Exception("查询到的密码列表返回为空");
+            return passwords;
+        }
+        return null;
+    }
+
+    /*------------------------------------------收获地址表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
     public void deleteAddressByPrimaryKey(Integer addressId) throws Exception{
         if (addressId != null && addressId != 0) {
@@ -101,11 +117,46 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         if (userUuid != null && !userUuid.equals("")) {
             List<Address> addresses = addressMapper.selectAddressByUserID(userUuid);
             if(addresses.isEmpty()) throw new Exception("用户收获地址查询为空");
-//            exceptlist((List<Object>) addresses,"用户收获地址查询为空");
             return addresses;
         }
         return null;
     }
+    /*------------------------------------------用户投诉表------------------------------------------------------------------*/
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteComplaintByPrimaryKey(Integer complaintId) throws Exception {
+        if (complaintId != null && complaintId != 0) {
+            try {
+                except(complaintMapper.deleteComplaintByPrimaryKey(complaintId));
+//                addressMapper.deleteAddressByPrimaryKey(addressId);
+            }catch (Exception e){
+                throw new Exception("删除投诉信息时出错");
+            }
+        }
+    }
+    @Transactional(rollbackFor =Exception.class )
+    public void insertComplaintSelective(Complaint complaint) throws Exception {
+        try {
+            complaintMapper.insertComplaintSelective(complaint);
+        }catch (Exception e){
+            throw new Exception("添加投诉信息时出错");
+        }
+    }
+    @Transactional(rollbackFor =Exception.class )
+    public void updateComplaintByPrimaryKeySelective(Complaint record) throws Exception {
+        try {
+            except(complaintMapper.updateComplaintByPrimaryKeySelective(record));
+        }catch (Exception e){
+            throw new Exception("修改投诉信息时出错");
+        }
+    }
+
+    public List<Complaint> selectComplaint(PagingCustomComplaint pagingCustomComplaint) throws Exception {
+        List<Complaint> complaints = complaintMapper.selectComplaint(pagingCustomComplaint);
+        if(complaints.isEmpty()) throw new Exception("用户投诉信息查询为空");
+//            exceptlist((List<Object>) addresses,"用户收获地址查询为空");
+        return complaints;
+    }
+
     /*------------------------------------------商品类别表------------------------------------------------------------------*/
     public ItemType selectItemTypeByPrimaryKey(Integer itemTypeId) throws Exception {
         if (itemTypeId != null && itemTypeId != 0) {
@@ -121,6 +172,15 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             if(itemTypes.isEmpty()) throw new Exception("查询所有商品类别为空");
             return itemTypes;
     }
+
+    public Integer selectItemTypeCount() throws Exception {
+        try {
+            return  itemTypeMapper.selectItemTypeCount();
+        }catch (Exception e){
+            throw new Exception("查询商品总数时出错");
+        }
+    }
+
     /*------------------------------------------商品表------------------------------------------------------------------*/
     public Item selectItemByPrimaryKey(Integer itemId) throws Exception {
         if (itemId != null && itemId != 0){
