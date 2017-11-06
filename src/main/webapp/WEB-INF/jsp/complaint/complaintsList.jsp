@@ -16,8 +16,8 @@
     <link href="../../../shopmanagement/common/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet">
     <link href="../../../shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../../common/layui/css/layui.css" media="all">
-    <link rel="stylesheet" href="../../../css/module/my_layui.css" media="all">
+    <link href="../../../shopmanagement/common/layui/css/layui.css" media="all" rel="stylesheet" >
+    <link href="../../../shopmanagement/css/my_layui.css" media="all" rel="stylesheet" >
 </head>
 
 <body>
@@ -54,25 +54,25 @@
 
                     <div class="ibox-content">
 
-                        <div class="layui-btn-group user_group_button">
-                            <button class="layui-btn" id="add_group_btn">添加用户组</button>
+                        <div class="layui-btn-group demoTable">
+                            <button class="layui-btn" id="add_group_btn" data-type="add">添加用户组</button>
                         </div>
 
                         <div class="table-responsive">
 
                             <table class="layui-table"
-                                   lay-data="{url:'/data/user_complaints_list.json', page:true, id:'idTest'}"
+                                   lay-data="{url:'getComplaintJson.action', page:true, id:'idTest'}"
                                    lay-filter="complaints_lists_table">
                                 <thead>
                                 <tr>
                                     <th lay-data="{checkbox:true, fixed: true}"></th>
-                                    <th lay-data="{field:'complaints_id', width:50, sort: true, fixed: true}">ID</th>
-                                    <th lay-data="{field:'complaints_user_id', width:100, sort: true}">投诉人</th>
-                                    <th lay-data="{field:'be_complaints_user_id', width:100, sort: true}">被投诉人</th>
-                                    <th lay-data="{field:'complaints_title', width:200}">投诉标题</th>
-                                    <th lay-data="{field:'complaints_content', width:200}">投诉内容</th>
-                                    <th lay-data="{field:'complaints_time', width:100, sort: true}">投诉时间</th>
-                                    <th lay-data="{field:'complaints_status', width:100, align:'center', fixed: 'right', toolbar: '#status_bar'}">
+                                    <th lay-data="{field:'complaintId', width:50, sort: true, fixed: true}">ID</th>
+                                    <th lay-data="{field:'accuserId', width:100, sort: true}">投诉人</th>
+                                    <th lay-data="{field:'accusedId', width:100, sort: true}">被投诉人</th>
+                                    <th lay-data="{field:'complaintTittle', width:200}">投诉标题</th>
+                                    <th lay-data="{field:'complaintContent', width:200}">投诉内容</th>
+                                    <th lay-data="{field:'dateToString', width:100, sort: true}">投诉时间</th>
+                                    <th lay-data="{field:'status', width:100, align:'center', fixed: 'right', toolbar: '#status_bar'}">
                                         是否已处理
                                     </th>
                                     <th lay-data="{fixed: 'right', width:150, align:'center', toolbar: '#operate_bar'}">操作</th>
@@ -91,18 +91,18 @@
 </div>
 
 <script type="text/html" id="status_bar">
-    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="status_status" id="status_status_bar">是</a>
+    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="status_status" id="status">是</a>
 </script>
 
 <script type="text/html" id="operate_bar">
-    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail"><i class="fa fa-eye" aria-hidden="true" title="查看"></i></a>
+    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del"><i class="fa fa-trash" aria-hidden="true" title="删除"></i></a>
 </script>
 
-<script src="../../../js/extends/jquery/jquery.min.js"></script>
-<script src="../../../js/extends/bootstrap/bootstrap.js"></script>
+<script src="../../../shopmanagement/js/jquery.min.js"></script>
+<script src="../../../shopmanagement/js/bootstrap.min.js"></script>
 <script src="../../../shopmanagement/js/content.min.js"></script>
-<script src="../../../common/layui/layui.js"></script>
+<script src="../../../shopmanagement/common/layui/layui.js"></script>
 
 <script>
     layui.use('table', function () {
@@ -115,15 +115,33 @@
         table.on('tool(complaints_lists_table)', function (table_tool) {
             var data = table_tool.data;
             if (table_tool.event === 'detail') {
-                layer.msg('投诉ID：' + data.complaints_id + ' 的查看操作');
+                var parm = data.complaintId;
+                layer.open({
+                    type: 2,
+                    title:"查看信息",
+                    shadeClose: true,
+                    shade: 0.3,
+                    content: 'seeComplaintIdByKey.action?complaintId='+parm,
+                    maxmin: true,
+                    area: ['80%', '90%']
+                });
             } else if (table_tool.event === 'del') {
                 layer.confirm('确定删除投诉吗？', function (index) {
-                    table_tool.del();
-                    layer.close(index);
+                    var parm = data.complaintId;
+                    $.ajax({
+                        url: 'deleteComplaintId.action',
+                        type:"POST",
+                        data:"complaintId="+ parm,
+                        success: function () {
+                            parent.layer.closeAll();
+                            window.location.reload();
+                        }
+                    });
+                    return false;
                 });
             } else if (table_tool.event === 'status_status') {
                 layer.msg("投诉：" + data.complaints_name + " 已处理。");
-            }
+            } 
         });
 
 //        复选框操作
@@ -141,6 +159,20 @@
             , isAll: function () { //验证是否全选
                 var checkStatus = table.checkStatus('idTest');
                 layer.msg(checkStatus.isAll ? '全选' : '未全选')
+            },
+            add:function () {
+                layer.open({
+                    type: 2,
+                    title:"添加用户",
+                    shadeClose: true,
+                    shade: 0.8,
+                    maxmin: true,
+                    area: ['80%', '90%'],
+                    content: 'addComplaint.action',
+                    btn1:function(){
+                        layer.close();
+                    }
+                });
             }
         };
 
