@@ -24,8 +24,8 @@
         <div class="nav-close"><i class="fa fa-times-circle"></i>
         </div>
         <%
-            String user=SecurityUtils.getSubject().getPrincipal().toString();
-            boolean b=user.equalsIgnoreCase("root");
+            String user = SecurityUtils.getSubject().getPrincipal().toString();
+            boolean b = user.equalsIgnoreCase("root");
         %>
         <div class="sidebar-collapse">
             <ul class="nav" id="side-menu">
@@ -66,17 +66,17 @@
                 </li>
 
                 <c:if test="<%=b%>">
-                <li>
-                    <a href="javascript:;">
-                        <i class="fa fa-user"></i>
-                        <span class="nav-label">管理员管理</span>
-                        <span class="fa arrow"></span>
-                    </a>
-                    <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="admin/selectAdminAll.action">管理员列表</a>
-                        </li>
-                    </ul>
-                </li>
+                    <li>
+                        <a href="javascript:;">
+                            <i class="fa fa-user"></i>
+                            <span class="nav-label">管理员管理</span>
+                            <span class="fa arrow"></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li><a class="J_menuItem" href="admin/selectAdminAll.action">管理员列表</a>
+                            </li>
+                        </ul>
+                    </li>
                 </c:if>
 
                 <!--用户管理-->
@@ -121,7 +121,7 @@
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="#">订单审核</a>
+                        <li><a class="J_menuItem" href="../../../jsp/admin/order/order_list.jsp">订单列表</a>
                         </li>
                         <li><a class="J_menuItem" href="#">未完成订单</a>
                         </li>

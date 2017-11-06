@@ -99,6 +99,13 @@ public interface IUserService {
     public void updateComplaintByPrimaryKeySelective(Complaint record)throws Exception;
 
     /**
+     * 根据主键查询用户投诉信息
+     * @param complaintId
+     * @return
+     * @throws Exception
+     */
+    public Complaint selectComplaintByPrimaryKey(Integer complaintId) throws Exception;
+    /**
      * 投诉表查询功能大集合（如需查询单个用户所有投诉信息，只需要封装pagingCustomComplaint对象中的complaint对象的accuserId属性）
      * PagingCustomComplaint中的时间字段是 String 类型 ，格式要和数据库 dateTime 一样  yyyy-MM-dd HH:mm:ss
      *

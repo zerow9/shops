@@ -109,9 +109,10 @@
 <script>
     layui.use('table', function () {
         var table = layui.table;
+        var check_objs;
         //监听表格复选框选择，输出到控制台
         table.on('checkbox(group_lists_table)', function (obj) {
-//            layer.msg('选中了：'+obj.data.groupName);
+            check_objs = obj;
             console.log(obj)
         });
 
@@ -224,13 +225,13 @@
                 , btn: ['删除', '取消']
                 , btn1: function (index, layero) {
                     parent.layer.close(index);
-                    $.post('deleteUserByUUidArray.action?', groupids, function (result, status) {
+                    $.post('deleteGroupsByIdArray.action', {'arrayString': groupids.toString()}, function (result, status) {
                         console.log('post返回信息：' + '\nresult:' + result + '\nstatus:' + status);
-                        if (result === true) {
-                            layer.msg("删除成功！");
+                        if (result.match('Unknown')) {
+                            parent.layer.msg("删除成功！");
                             window.location.reload();
                         } else {
-                            layer.msg("删除失败！");
+                            parent.layer.alert(result.toString());
                         }
                     });
                 }
