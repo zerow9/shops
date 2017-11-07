@@ -71,11 +71,8 @@ public interface IAdminService extends IUserService {
     public List<User> selectUserAllPaging(Integer nowPage,Integer number)throws Exception;
 
     /**
-     * 通过关键字查询并分页排序显示用户信息，包括年龄范围的限定
-     * 参数绑定如下后面有括号代表可修改，括号内容代表绑定字段名
-     *WHERE user_name REGEXP ?（keyword） and user_sex = ?（user.usersex） and user_group = ?（user.usergroup）
-     *  and user_age BETWEEN ?(formerage) and ?(latterage) and user_score BETWEEN ?(formerscore)
-     *  and ?(latterscore) order by user_age(sortByColumn) ASC(sortRule) limit ?(indexNumber),? (pageNumber)
+     * user综合查询
+     *实现：姓名（模糊），昵称（模糊），性别，组别，电话，健康状态，年龄范围，积分范围，注册时间范围，排序规则，排序字段，分页。
      * @param paging 封装了分页查询需要的字段的 Paging 类对象
      * @return 封装了用户信息的 User 类对象集合
      * @throws Exception
@@ -135,7 +132,7 @@ public interface IAdminService extends IUserService {
 
     /**
      * 用户组查询功能模块（包含主键查询、权限查询、状态查询、组别名查询、分页功能）
-     * 需要查询什么东西，在对象里面封装什么东西即可
+     * 实现：主键，权限，状态，组别名，排序规则，分页
      * @return 封装了用户组信息的 Groups 类对象集合
      * @throws Exception
      */
@@ -259,6 +256,13 @@ public interface IAdminService extends IUserService {
      * @param itemId 商品唯一ID
      */
     public void deleteItemByPrimaryKey(Integer itemId) throws Exception;
+
+    /**
+     * 根据商品ID批量删除商品信息
+     *
+     * @param itemIdArray 商品唯一ID数组
+     */
+    public void deleteAdminByItemIdArray(@Param("itemIdArray") Integer[] itemIdArray) throws Exception;
 
     /**
      * 增加商品信息

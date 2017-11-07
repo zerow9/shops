@@ -108,7 +108,7 @@ public interface IUserService {
     /**
      * 投诉表查询功能大集合（如需查询单个用户所有投诉信息，只需要封装pagingCustomComplaint对象中的complaint对象的accuserId属性）
      * PagingCustomComplaint中的时间字段是 String 类型 ，格式要和数据库 dateTime 一样  yyyy-MM-dd HH:mm:ss
-     *
+     * 实现：主键，被投诉人，投诉人，处理状态，投诉时间范围，排序规则，分页
      * @param pagingCustomComplaint 封装了投诉信息的 Complaint 类对象
      * @return 满足查询条件的封装了投诉信息的 Complaint 类对象集合
      * @throws Exception
@@ -183,6 +183,7 @@ public interface IUserService {
      * 这是一个查询功能模块的集合，包含了众多的查询功能，根据 Paging 对象的封装
      * 需要用到什么参数就将参数封装到 Paging 中，不需要用到的参数切忌不要封装。
      * 该接口通过 Paging 中参数的封装去进行 SQL 语句拼接，参数的封装需要小心。
+     * 名字（模糊）
      * @param paging 包含了所有查询条件的 Paging 类对象
      * @return 封装了商品信息的 Item 类对象集合
      * @throws Exception

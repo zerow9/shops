@@ -368,6 +368,18 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     }
 
     @Transactional(rollbackFor =Exception.class )
+    public void deleteAdminByItemIdArray(Integer[] itemIdArray) throws Exception {
+        if(itemIdArray==null||"".equals(itemIdArray))throw new Exception("没有itemIdArray数组信息，批量商品删除出错");
+        try {
+            except(itemMapper.deleteAdminByItemIdArray(itemIdArray));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("批量删除商品时出错");
+            throw e;
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
     public void insertItem(Item item) throws Exception {
         try {
             itemMapper.insertItem(item);
