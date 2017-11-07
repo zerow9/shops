@@ -1,5 +1,19 @@
-layui.use(['form'], function () {
-    var form = layui.form;
+layui.use(['form', 'layedit', 'laydate'], function () {
+    var form = layui.form,
+        layer = layui.layer,
+        layedit = layui.layedit,
+        laydate = layui.laydate;
+
+    //定义JQuery
+    var $ = layui.$;
+
+    //日期
+    laydate.render({
+        elem: '#date'
+    });
+    laydate.render({
+        elem: '#date1'
+    });
 
     //自定义验证规则
     form.verify({
@@ -29,7 +43,7 @@ layui.use(['form'], function () {
 
         console.log(parm);
         $.ajax({
-            url: 'itemtypesAdd.action',
+            url: 'addItemType.action',
             data: parm,
             type:'POST',
             success: function () {
