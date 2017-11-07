@@ -104,7 +104,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
 
     public List<User> selectUser(PagingCustomUser paging) throws Exception {
        try {
-           List<User>  users = userMapper.selectUserPagingByKeyWord(paging);
+           List<User>  users = userMapper.selectUser(paging);
            if(users.isEmpty()) throw new Exception("查询到的用户列表为空");
            return users;
        }catch (Exception e){
