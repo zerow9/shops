@@ -133,6 +133,7 @@ public interface IUserService {
 
     /**
      * 商品类别综合查询
+     * 主键ID，名字，父类别ID，类别等级，类别关键词，排序规则，分页功能.
      * @param pagingCustomItemType
      * @return
      * @throws Exception
