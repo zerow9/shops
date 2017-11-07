@@ -35,7 +35,6 @@
                             </div>
                         </div>
 
-
                         <div class="layui-form-item">
                             <label class="layui-form-label">父类别</label>
                             <div class="layui-input-block" >

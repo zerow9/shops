@@ -34,11 +34,10 @@
                             </div>
                         </div>
 
-                        <div class="layui-form-item" >
-                            <label class="layui-form-label">父类别</label>
-                            <div class="layui-input-inline" id="f_level">
-                                <select name="fatherTypeId" lay-filter="fatherTypeId" value="${itemtypes.fatherTypeId}" readonly>
-                                    <option value="" selected=""></option>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">父类</label>
+                            <div class="layui-input-block">
+                                <select  lay-filter="${itemtypes.fatherTypeId}" readonly>
                                     <option value="1" >药品</option>
                                     <option value="2">日用品</option>
                                     <option value="3">营养品</option>
@@ -50,11 +49,10 @@
                             </div>
                         </div>
 
-                        <div class="layui-form-item" >
+                        <div class="layui-form-item">
                             <label class="layui-form-label">分类等级</label>
-                            <div class="layui-input-inline" id="t_level">
-                                <select name="typeLevel" lay-filter="typeLevel" value="${itemtypes.typeLevel}" readonly>
-                                    <option value="" selected=""></option>
+                            <div class="layui-input-block">
+                                <select lay-filter="${itemtypes.typeLevel}" readonly>
                                     <option value="1" >一级分类</option>
                                     <option value="2">二级分类</option>
                                     <option value="3">三级分类</option>
@@ -77,8 +75,6 @@
                                        placeholder="请输入分类描述" class="layui-input" value="${itemtypes.typeIntroduce}" readonly>
                             </div>
                         </div>
-
-
                     </form>
                 </div>
             </div>
