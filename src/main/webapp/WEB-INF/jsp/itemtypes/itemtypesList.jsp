@@ -1,0 +1,105 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme() + "://"
++ request.getServerName() + ":" + request.getServerPort()
++ path + "/";
+%>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../../../favicon.ico">
+
+    <link href="../../../shopmanagement/common/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet">
+    <link href="../../../shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
+    <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="../../../common/layui/css/layui.css" rel="stylesheet">
+    <link href="../../../css/module/my_layui.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+
+                <blockquote class="layui-elem-quote">
+                    <h2>操作提示</h2>
+                    在这里，你可以增删改查商品分类具体信息。
+                </blockquote>
+
+                <!--商品分类标题-->
+                <div class="ibox-title">
+                    <h5>商品分类管理</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="table_data_tables.html#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li><a href="#">编辑</a></li>
+                        </ul>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!--商品分类标题-->
+
+                <div class="ibox-content">
+
+                    <div class="layui-btn-group demoTable">
+                        <button class="layui-btn">添加分类</button>
+                    </div>
+
+                    <div class="table-responsive">
+
+                        <table class="layui-table" lay-data="{url:'getitemTypes.action', page:true, id:'typeId'}"
+                               lay-filter="type_lists_table">
+                            <thead>
+                            <tr>
+                                <th lay-data="{checkbox:true, fixed: true}"></th>
+                                <th lay-data="{field:'typeId', width:100, sort: true, fixed: true}">ID</th>
+                                <th lay-data="{field:'typeName', width:200}">分类名称</th>
+                                <th lay-data="{field:'fatherTypeId', width:100}">父类别</th>
+                                <th lay-data="{field:'typeLevel', width:100}">分类等级</th>
+                                <th lay-data="{field:'typeKeyWord', width:100}">关键字</th>
+                                <th lay-data="{field:'typeIntroduce', width:100}">分类描述</th>
+                                <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#operate_bar'}">操作
+                                </th>
+                            </tr>
+                            </thead>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="operate_bar">
+    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+</script>
+
+<script src="../../../js/extends/jquery/jquery.min.js"></script>
+<script src="../../../js/extends/bootstrap/bootstrap.js"></script>
+<script src="../../../shopmanagement/js/content.min.js"></script>
+<script src="../../../common/layui/layui.js"></script>
+
+<script  src="../../../js/itemtypes/itemtypesList.js"></script>
+
+</body>
+
+</html>
