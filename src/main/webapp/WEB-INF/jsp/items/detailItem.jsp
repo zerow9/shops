@@ -7,10 +7,11 @@ To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme() + "://"
-+ request.getServerName() + ":" + request.getServerPort()
-+ path + "/";
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://"
+            + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";
+    String dir = request.getSession().getServletContext().getRealPath("shopmanagement");
 %>
 
 <html>
@@ -80,7 +81,8 @@ String basePath = request.getScheme() + "://"
                                 <label class="layui-form-label">市场价格</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="itemMarketPrice" autocomplete="off"
-                                           value="${item.itemMarketPrice}" class="layui-input" lay-verify="required" readonly>
+                                           value="${item.itemMarketPrice}" class="layui-input" lay-verify="required"
+                                           readonly>
                                 </div>
                             </div>
 
@@ -98,7 +100,8 @@ String basePath = request.getScheme() + "://"
                                 <label class="layui-form-label">一级分类</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="itemTypeOne" autocomplete="off"
-                                           value="${item.itemTypeOne}" class="layui-input" lay-verify="itemTypeOne" readonly>
+                                           value="${item.itemTypeOne}" class="layui-input" lay-verify="itemTypeOne"
+                                           readonly>
                                 </div>
                             </div>
 
@@ -132,7 +135,8 @@ String basePath = request.getScheme() + "://"
                                 <label class="layui-form-label">库存数量</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="repertoryNumber" autocomplete="off"
-                                           value="${item.repertoryNumber}" class="layui-input" lay-verify="required" readonly>
+                                           value="${item.repertoryNumber}" class="layui-input" lay-verify="required"
+                                           readonly>
                                 </div>
                             </div>
                             <div class="layui-inline">
@@ -149,8 +153,9 @@ String basePath = request.getScheme() + "://"
                             <div class="layui-inline">
                                 <label class="layui-form-label">收藏数量</label>
                                 <div class="layui-input-block">
-                                    <input type="text" name="itemCollectNumber" value="${item.itemCollectNumber}" autocomplete="off"
-                                            class="layui-input" readonly>
+                                    <input type="text" name="itemCollectNumber" value="${item.itemCollectNumber}"
+                                           autocomplete="off"
+                                           class="layui-input" readonly>
                                 </div>
                             </div>
 
@@ -158,7 +163,7 @@ String basePath = request.getScheme() + "://"
                                 <label class="layui-form-label">关键词</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="keyWord" value="${item.keyWord}" autocomplete="off"
-                                            class="layui-input" lay-verify="required" readonly>
+                                           class="layui-input" lay-verify="required" readonly>
                                 </div>
                             </div>
 
@@ -166,16 +171,17 @@ String basePath = request.getScheme() + "://"
                                 <label class="layui-form-label">生产厂商</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="makeVender" value="${item.makeVender}" autocomplete="off"
-                                            class="layui-input" lay-verify="required" readonly>
+                                           class="layui-input" lay-verify="required" readonly>
                                 </div>
                             </div>
 
                         </div>
+
                         <div class="layui-form-item">
                             <label class="layui-form-label">商品图片</label>
-                            <div class="layui-input-block">
-                                <input type="file" name="itemImages" autocomplete="off"
-                                       placeholder="请上传图片" class="layui-input">
+                            <div class="layui-input-block"
+                                 style="height: 120px;width: 120px; border: 0.1px solid rgb(243,243,244); ">
+                                <img src="http://localhost:8080/shopmanagement${item.itemImages}" alt="" height="120px" width="120px">
                             </div>
                         </div>
 
@@ -199,7 +205,7 @@ String basePath = request.getScheme() + "://"
                         <div class="layui-form-item">
                             <label class="layui-form-label">描述</label>
                             <div class="layui-input-block">
-                                <textarea  class="layui-textarea" name="itemIntroduce"
+                                <textarea class="layui-textarea" name="itemIntroduce"
                                           lay-verify="required">${item.itemIntroduce}</textarea>
                             </div>
                         </div>

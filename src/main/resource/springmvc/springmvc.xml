@@ -45,10 +45,7 @@
 
     <bean class="com.coding.exception.ExceptionResolver"/>
 
-    <bean id="multipartResolver"
-          class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
-        <property name="maxUploadSize">
-            <value>5242880</value>
-        </property>
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <property name="maxUploadSize" value="524288000" />
     </bean>
 </beans>

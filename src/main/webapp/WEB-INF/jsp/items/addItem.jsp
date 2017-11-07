@@ -38,7 +38,7 @@ String basePath = request.getScheme() + "://"
             <div class="ibox float-e-margins">
 
                 <div class="ibox-content">
-                    <form class="layui-form" action="" enctype="multipart/form-data">
+                    <form class="layui-form" action="" enctype="multipart/form-data" id="uploadForm">
                         <div class="layui-form-item">
                             <label class="layui-form-label">商品名称</label>
                             <div class="layui-input-block">
@@ -160,30 +160,19 @@ String basePath = request.getScheme() + "://"
                                            placeholder="生产厂商" class="layui-input" lay-verify="required">
                                 </div>
                             </div>
-
                         </div>
                         <div class="layui-form-item">
                             <label class="layui-form-label">上传商品图片</label>
                             <div class="layui-input-block">
-                                <input type="file" name="itemImages" autocomplete="off"
+                                <input type="file" name="item_images" autocomplete="off"
                                        placeholder="请上传图片" class="layui-input">
                             </div>
                         </div>
-
                         <div class="layui-form-item">
                             <label class="layui-form-label">规格</label>
                             <div class="layui-input-block">
                                 <input type="text" name="itemFormat" autocomplete="off"
                                        placeholder="请输入规格" class="layui-input" lay-verify="itemFormat">
-                            </div>
-                        </div>
-
-
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">创建时间</label>
-                            <div class="layui-input-block">
-                                <input type="text" name="makeDate" value="" autocomplete="off"
-                                       placeholder="创建时间" class="layui-input">
                             </div>
                         </div>
 

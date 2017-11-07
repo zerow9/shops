@@ -38,12 +38,12 @@ String basePath = request.getScheme() + "://"
             <div class="ibox float-e-margins">
 
                 <div class="ibox-content">
-                    <form class="layui-form" action="" enctype="multipart/form-data">
+                    <form class="layui-form" action="" enctype="multipart/form-data" id="uploadForm">
 
                         <div class="layui-form-item">
                             <label class="layui-form-label">商品ID</label>
                             <div class="layui-input-block">
-                                <input type="text" name="itemName" lay-verify="itemName" autocomplete="off"
+                                <input type="text" name="itemId" lay-verify="itemId" autocomplete="off"
                                        value="${item.itemId}" class="layui-input" >
                             </div>
                         </div>
@@ -172,10 +172,17 @@ String basePath = request.getScheme() + "://"
 
                         </div>
                         <div class="layui-form-item">
-                            <label class="layui-form-label">商品图片</label>
+                            <label class="layui-form-label">点击修改</label>
                             <div class="layui-input-block">
-                                <input type="file" name="itemImages" autocomplete="off"
+                                <input type="file" name="item_images" autocomplete="off"
                                        placeholder="请上传图片" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">图片</label>
+                            <div class="layui-input-block"
+                                 style="height: 120px;width: 120px; border: 0.1px solid rgb(243,243,244); ">
+                                <img src="http://localhost:8080/shopmanagement${item.itemImages}" alt="" height="120px" width="120px">
                             </div>
                         </div>
 
@@ -191,7 +198,7 @@ String basePath = request.getScheme() + "://"
                         <div class="layui-form-item">
                             <label class="layui-form-label">创建时间</label>
                             <div class="layui-input-block">
-                                <input type="text" name="makeDate" value="${item.dateToString}" autocomplete="off"
+                                <input type="text" name="dateToString" value="${item.dateToString}" autocomplete="off"
                                        class="layui-input" readonly>
                             </div>
                         </div>
@@ -203,6 +210,12 @@ String basePath = request.getScheme() + "://"
                                           lay-verify="required">${item.itemIntroduce}</textarea>
                             </div>
                         </div>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
@@ -212,5 +225,5 @@ String basePath = request.getScheme() + "://"
 
 <script src="../../../shopmanagement/common/layui/layui.js" charset="utf-8" type="text/javascript"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../../../js/items/addItem.js"></script>
+<script src="../../../js/items/Item.js"></script>
 </body>

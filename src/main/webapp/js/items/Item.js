@@ -53,7 +53,7 @@ layui.use(['form', 'layedit', 'laydate'], function () {
     form.on('submit(demo1)', function (data) {
         var formData = new FormData($("#uploadForm")[0]);
         $.ajax({
-            url: 'insertItem.action',
+            url: 'updateItem.action',
             data: formData,
             type: "POST",
             async: false,

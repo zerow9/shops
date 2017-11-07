@@ -55,6 +55,7 @@ public class Item {
 
     private String itemIntroduce;
 
+
     public Integer getItemId() {
         return itemId;
     }
