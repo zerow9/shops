@@ -22,60 +22,52 @@
     <link href="../../../common/layui/css/layui.css" rel="stylesheet">
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
 </head>
+
 <body>
 
-<div class="wrapper wrapper-content animated fadeInRight">
-    <div class="row">
-        <div class="layui-col-sm12">
-            <div class="ibox float-e-margins">
+<div class="row">
+    <div class="layui-col-sm12">
+        <div class="ibox float-e-margins">
 
-                <blockquote class="layui-elem-quote">
-                    <h2>操作提示</h2>
-                    在这里，你可以增删改查订单。
-                </blockquote>
+            <div class="ibox-title">
+                <h5 id="hello">订单列表</h5>
+                <div class="ibox-tools">
+                    <%--最大最小化按钮--%>
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <%--自定义操作--%>
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <%--关闭按钮--%>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
 
-                <div class="ibox-title">
-                    <h5>订单列表</h5>
-                    <div class="ibox-tools">
-                        <%--最大最小化按钮--%>
-                        <a class="collapse-link">
-                            <i class="fa fa-chevron-up"></i>
-                        </a>
-                        <%--自定义操作--%>
-                        <a class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="fa fa-wrench"></i>
-                        </a>
-                        <%--关闭按钮--%>
-                        <a class="close-link">
-                            <i class="fa fa-times"></i>
-                        </a>
+                <div class="ibox-content">
+
+                    <div class="layui-btn-group demoTable">
+                        <button id="delete_orders_btn" class="layui-btn">删除订单</button>
                     </div>
 
-                    <div class="ibox-content">
-
-                        <div class="layui-btn-group demoTable">
-                            <button class="layui-btn">删除订单</button>
-                        </div>
-
-                        <div class="table-responsive">
-                            <table class="table layui-table"
-                                   lay-data="{url:'/data/order_lists.json', page:true, id:'idTest'}"
-                                   lay-filter="demo">
-                                <thead>
-                                <tr>
-                                    <th lay-data="{checkbox:true, fixed: true}"></th>
-                                    <th lay-data="{field:'order_id', width:100, sort: true, fixed: true}">订单编号</th>
-                                    <th lay-data="{field:'take_goods_name', width:100}">收货人</th>
-                                    <th lay-data="{field:'shop_name', width:200}">分店</th>
-                                    <th lay-data="{field:'order_sum_price', width:100, sort: true}">订单总额</th>
-                                    <th lay-data="{field:'pay_status', width:100}">支付状态</th>
-                                    <th lay-data="{field:'send_status', width:100}">发货状态</th>
-                                    <th lay-data="{field:'order_create_time', width:200, sort: true}">下单时间</th>
-                                    <th lay-data="{fixed: 'right', width:160, align:'center', toolbar: '#barDemo'}"></th>
-                                </tr>
-                                </thead>
-                            </table>
-                        </div>
+                    <div class="table-responsive">
+                        <table id="layui_table" lay-filter="demo">
+                            <%--<thead>--%>
+                            <%--<tr>--%>
+                            <%--<th lay-data="{checkbox:true, fixed: true}"></th>--%>
+                            <%--<th lay-data="{field:'order_id', width:100, sort: true, fixed: true}">订单编号</th>--%>
+                            <%--<th lay-data="{field:'take_goods_name', width:100}">收货人</th>--%>
+                            <%--<th lay-data="{field:'shop_name', width:200}">分店</th>--%>
+                            <%--<th lay-data="{field:'order_sum_price', width:100, sort: true}">订单总额</th>--%>
+                            <%--<th lay-data="{field:'pay_status', width:100}">支付状态</th>--%>
+                            <%--<th lay-data="{field:'send_status', width:100}">发货状态</th>--%>
+                            <%--<th lay-data="{field:'order_create_time', width:200, sort: true}">下单时间</th>--%>
+                            <%--<th lay-data="{fixed: 'right', width:160, align:'center', toolbar: '#barDemo'}"></th>--%>
+                            <%--</tr>--%>
+                            <%--</thead>--%>
+                        </table>
                     </div>
                 </div>
             </div>
