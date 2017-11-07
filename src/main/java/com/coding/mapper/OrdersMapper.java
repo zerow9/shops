@@ -55,7 +55,7 @@ public interface OrdersMapper {
     public List<Orders> selectOrder(PagingCustomOrder pagingCustomOrder)throws Exception;
 
     /**
-     * 查询商品表中共有多少数据
+     * 查询订单表中共有多少数据
      * @return 返回商品表中共有多少数据
      * @throws Exception
      */

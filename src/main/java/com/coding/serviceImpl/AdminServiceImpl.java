@@ -29,6 +29,8 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     private VenderMapper venderMapper;
     @Autowired
     private ComplaintMapper complaintMapper;
+    @Autowired
+    private OrdersMapper ordersMapper;
 
     /*------------------------------------------用户表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
@@ -368,10 +370,10 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     }
 
     @Transactional(rollbackFor =Exception.class )
-    public void deleteAdminByItemIdArray(Integer[] itemIdArray) throws Exception {
+    public void deleteItemByItemIdArray(Integer[] itemIdArray) throws Exception {
         if(itemIdArray==null||"".equals(itemIdArray))throw new Exception("没有itemIdArray数组信息，批量商品删除出错");
         try {
-            except(itemMapper.deleteAdminByItemIdArray(itemIdArray));
+            except(itemMapper.deleteItemByItemIdArray(itemIdArray));
         }catch (Exception e){
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("批量删除商品时出错");
@@ -515,6 +517,25 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
             return  venderMapper.selectVenderCount();
         }catch (Exception e){
             throw new Exception("查询厂家表总数时出错");
+        }
+    }
+    /*------------------------------------------订单表------------------------------------------------------------------*/
+    @Transactional(rollbackFor =Exception.class )
+    public void updateOrderByPrimaryKeySelective(Orders order) throws Exception {
+        try {
+            except(ordersMapper.updateOrderByPrimaryKeySelective(order));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("修改订单信息时出错");
+            throw e;
+        }
+    }
+
+    public Integer selectOrderCount() throws Exception {
+        try {
+            return  ordersMapper.selectOrderCount();
+        }catch (Exception e){
+            throw new Exception("查询订单表总数时出错");
         }
     }
 

@@ -197,4 +197,44 @@ public interface IUserService {
      */
     public Integer selectItemCount()throws Exception;
 
+    /*------------------------------------------订单表------------------------------------------------------------------*/
+    /**
+     * 根据订单ID删除订单信息
+     * @param orderId 订单ID
+     * @return 是否删除成功 非0：成功  0:失败
+     */
+    public void deleteOrderByPrimaryKey(Integer orderId)throws Exception;
+
+    /**
+     * 批量删除订单信息
+     * @param orderIdArray 待删除订单ID数组
+     * @return 是否删除成功   非0:成功   0:失败
+     * @throws Exception
+     */
+    public void deleteOrderByPrimaryKeyArray(@Param("oderIdArray") Integer[] orderIdArray)throws Exception;
+
+    /**
+     * 按需插入订单信息
+     * @param order 封装了订单信息的 Orders 类对象
+     * @return 是否插入成功 非0：成功  0:失败
+     */
+    public void insertOrderSelective(Orders order)throws Exception;
+
+    /**
+     * 根据订单ID查询订单信息
+     * @param orderId 订单ID
+     * @return 符合查询条件的 Orders 类对象
+     */
+    public Orders selectOrderByPrimaryKey(@Param("orderId") Integer orderId)throws Exception;
+
+    /**
+     * 订单表查询功能大集合（传入的时间类型都需要改为 String 类型的）
+     * 实现：用户ID，收货人电话，支付状态，发货状态，评论状态，维权状态，订单创建时间范围，订单支付时间范围，
+     *       发货时间范围，订单完成时间范围，排序规则，分页功能.
+     * @param pagingCustomOrder
+     * @return
+     * @throws Exception
+     */
+    public List<Orders> selectOrder(PagingCustomOrder pagingCustomOrder)throws Exception;
+
 }

@@ -21,7 +21,7 @@ public interface ItemMapper {
      *
      * @param itemIdArray 商品唯一ID数组
      */
-    public int deleteAdminByItemIdArray(@Param("itemIdArray") Integer[] itemIdArray) throws Exception;
+    public int deleteItemByItemIdArray(@Param("itemIdArray") Integer[] itemIdArray) throws Exception;
 
     /**
      * 增加商品信息

@@ -262,7 +262,7 @@ public interface IAdminService extends IUserService {
      *
      * @param itemIdArray 商品唯一ID数组
      */
-    public void deleteAdminByItemIdArray(@Param("itemIdArray") Integer[] itemIdArray) throws Exception;
+    public void deleteItemByItemIdArray(@Param("itemIdArray") Integer[] itemIdArray) throws Exception;
 
     /**
      * 增加商品信息
@@ -367,4 +367,20 @@ public interface IAdminService extends IUserService {
      * @throws Exception
      */
     public int selectVenderCount()throws Exception;
+
+    /*------------------------------------------订单表------------------------------------------------------------------*/
+
+    /**
+     * 按需更新订单信息
+     * @param order 封装了订单信息的 Orders 类对象
+     * @return 是否更新成功 非0：成功  0:失败
+     */
+    public void updateOrderByPrimaryKeySelective(Orders order)throws Exception;
+
+    /**
+     * 查询订单表中共有多少数据
+     * @return 返回商品表中共有多少数据
+     * @throws Exception
+     */
+    public Integer selectOrderCount()throws Exception;
 }

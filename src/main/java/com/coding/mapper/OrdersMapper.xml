@@ -47,6 +47,7 @@
     from orders
     where order_id = #{orderId,jdbcType=INTEGER}
   </select>
+
   <!--查询商品表中共有多少数据-->
   <select id="selectOrderCount" resultType="java.lang.Integer">
     select count(*) from orders
