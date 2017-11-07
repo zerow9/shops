@@ -29,6 +29,8 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     private VenderMapper venderMapper;
     @Autowired
     private ComplaintMapper complaintMapper;
+    @Autowired
+    private OrdersMapper ordersMapper;
 
     /*------------------------------------------用户表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
@@ -102,9 +104,9 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         return users;
     }
 
-    public List<User> selectUserPagingByKeyWord(PagingCustomUser paging) throws Exception {
+    public List<User> selectUser(PagingCustomUser paging) throws Exception {
        try {
-           List<User>  users = userMapper.selectUserPagingByKeyWord(paging);
+           List<User>  users = userMapper.selectUser(paging);
            if(users.isEmpty()) throw new Exception("查询到的用户列表为空");
            return users;
        }catch (Exception e){
@@ -368,6 +370,18 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     }
 
     @Transactional(rollbackFor =Exception.class )
+    public void deleteItemByItemIdArray(Integer[] itemIdArray) throws Exception {
+        if(itemIdArray==null||"".equals(itemIdArray))throw new Exception("没有itemIdArray数组信息，批量商品删除出错");
+        try {
+            except(itemMapper.deleteItemByItemIdArray(itemIdArray));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("批量删除商品时出错");
+            throw e;
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
     public void insertItem(Item item) throws Exception {
         try {
             itemMapper.insertItem(item);
@@ -503,6 +517,25 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
             return  venderMapper.selectVenderCount();
         }catch (Exception e){
             throw new Exception("查询厂家表总数时出错");
+        }
+    }
+    /*------------------------------------------订单表------------------------------------------------------------------*/
+    @Transactional(rollbackFor =Exception.class )
+    public void updateOrderByPrimaryKeySelective(Orders order) throws Exception {
+        try {
+            except(ordersMapper.updateOrderByPrimaryKeySelective(order));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("修改订单信息时出错");
+            throw e;
+        }
+    }
+
+    public Integer selectOrderCount() throws Exception {
+        try {
+            return  ordersMapper.selectOrderCount();
+        }catch (Exception e){
+            throw new Exception("查询订单表总数时出错");
         }
     }
 

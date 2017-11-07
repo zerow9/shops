@@ -3,13 +3,14 @@ package com.coding.pojo;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+
 @Component
 public class Complaint {
     private Integer complaintId;
 
-    private String accuserId;// 用户 uuid
+    private String accuserId;
 
-    private Integer accusedId;// 管理员 id
+    private Integer accusedId;
 
     private String complaintTittle;
 
@@ -18,6 +19,26 @@ public class Complaint {
     private Integer isDeal;
 
     private String complaintContent;
+
+    private boolean status;
+
+    private String dateToString;
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public void setDateToString(String dateToString) {
+        this.dateToString = dateToString;
+    }
+
+    public String getDateToString() {
+        return dateToString;
+    }
+
+    public boolean getStatus() {
+        return status;
+    }
 
     public Integer getComplaintId() {
         return complaintId;

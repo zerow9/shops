@@ -22,6 +22,8 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     private ItemMapper itemMapper;
     @Autowired
     private ComplaintMapper complaintMapper;
+    @Autowired
+    private OrdersMapper ordersMapper;
 
     /*----------------------------------------用户表------------------------------------------------------------------*/
 
@@ -161,11 +163,12 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     }
 
     public Complaint selectComplaintByPrimaryKey(Integer complaintId) throws Exception {
-        PagingCustomComplaint pagingCustomComplaint = new PagingCustomComplaint();
-        Complaint complaint = new Complaint();
-        complaint.setComplaintId(complaintId);
-        pagingCustomComplaint.setComplaint(complaint);
-        return complaintMapper.selectComplaint(pagingCustomComplaint).get(0);
+        if (complaintId != null && complaintId != 0) {
+            Complaint complaint = complaintMapper.selectComplaintByPrimaryKey(complaintId);
+            except(complaint,"查询用户投诉信息为空");
+            return complaint;
+        }
+        return null;
     }
 
     public List<Complaint> selectComplaint(PagingCustomComplaint pagingCustomComplaint) throws Exception {
@@ -179,7 +182,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     public ItemType selectItemTypeByPrimaryKey(Integer itemTypeId) throws Exception {
         if (itemTypeId != null && itemTypeId != 0) {
             ItemType itemType = itemTypeMapper.selectItemTypeByPrimaryKey(itemTypeId);
-            except(itemTypeId,"查询商品类别为空");
+            except(itemType,"查询商品类别为空");
             return itemType;
         }
         return null;
@@ -263,4 +266,61 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             throw new Exception("查询商品总数时出错");
         }
     }
+
+    /*------------------------------------------订单表------------------------------------------------------------------*/
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteOrderByPrimaryKey(Integer orderId) throws Exception {
+        if(orderId != null && orderId != 0){
+            try {
+                except(ordersMapper.deleteOrderByPrimaryKey(orderId));
+            }catch (Exception e){
+                if (!e.getMessage().contains("操作无效"))
+                    throw new Exception("删除订单信息时出错");
+                throw e;
+            }
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteOrderByPrimaryKeyArray(Integer[] orderIdArray) throws Exception {
+        if(orderIdArray==null||"".equals(orderIdArray))throw new Exception("没有orderIdArray数组信息，批量订单删除出错");
+        try {
+            except(ordersMapper.deleteOrderByPrimaryKeyArray(orderIdArray));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("批量删除订单时出错");
+            throw e;
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void insertOrderSelective(Orders order) throws Exception {
+        try {
+            ordersMapper.insertOrderSelective(order);
+        }catch (Exception e){
+            throw new Exception("添加订单时出错");
+        }
+    }
+
+    public Orders selectOrderByPrimaryKey(Integer orderId) throws Exception {
+        if (orderId != null && orderId != 0){
+            Orders orders = ordersMapper.selectOrderByPrimaryKey(orderId);
+            except(orders,"根据订单ID查询订单为空");
+            return orders;
+        }
+        return null;
+    }
+
+    public List<Orders> selectOrder(PagingCustomOrder pagingCustomOrder) throws Exception {
+        try {
+            List<Orders>  orders = ordersMapper.selectOrder(pagingCustomOrder);
+            if(orders.isEmpty()) throw new Exception("查询到的商品列表为空");
+            return orders;
+        }catch (Exception e){
+            if (!e.getMessage().contains("商品列表为空"))
+                throw new Exception("参数查询商品列表出错，请检查参数");
+            throw e;
+        }
+    }
+
 }

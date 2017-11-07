@@ -8,7 +8,6 @@
         where user_uuid = #{userUuid,jdbcType=VARCHAR}
     </delete>
 
-
     <!--增加用户信息-->
     <insert id="insertUser" parameterType="com.coding.pojo.User">
         insert into user (user_uuid, user_phone, user_nickname,
@@ -191,7 +190,7 @@
 
 
     <!--根据关键字查询用户信息并按照字段排序-->
-    <select id="selectUserPagingByKeyWord" parameterType="com.coding.pojo.PagingCustomUser"
+    <select id="selectUser" parameterType="com.coding.pojo.PagingCustomUser"
             resultMap="ResultMapWithBLOBs">
 
         select
@@ -200,10 +199,6 @@
         <include refid="Blob_Column_List"/>
         from user
         <where>
-            <!--模糊查询-->
-            <if test="keyWord!=null and keyWord!=''">
-                and user_name REGEXP #{keyWord}
-            </if>
             <!--用户属性进行查询，得 user 不为null前提-->
             <if test="user != null">
                 <!--性别查询-->
@@ -213,6 +208,22 @@
                 <!--组别查询-->
                 <if test="user.userGroup != null and user.userGroup != 0">
                     and user_group = #{user.userGroup}
+                </if>
+                <!--姓名查询-->
+                <if test="user.userName != null and user.userName != ''">
+                    and user_name REGEXP #{user.userName}
+                </if>
+                <!--昵称查询-->
+                <if test="user.userNickname != null and user.userNickname != ''">
+                    and user_nickname REGEXP #{user.userNickname}
+                </if>
+                <!--电话查询-->
+                <if test="user.userPhone != null and user.userPhone != ''">
+                    and  user_phone = #{user.userPhone}
+                </if>
+                <!--健康状况查询-->
+                <if test="user.userHealthy != null and user.userHealthy != ''">
+                    and  user_healthy = #{user.userHealthy}
                 </if>
             </if>
             <!--年龄范围查询-->
@@ -264,24 +275,50 @@
                 </if>
             </if>
 
-            <!--排序规则-->
-            <if test="sortByColumn != null and sortByColumn !=''">
-                <if test="sortRule != null and sortRule != ''">
-                    order by ${sortByColumn} ${sortRule}
+            <!--根据用户注册时间范围查询用户信息-->
+            <if test="formerUserCreateTime != null and formerUserCreateTime != ''">
+                <!--给定了最小值和最大值-->
+                <if test="latterUserCreateTime != null and latterUserCreateTime != ''">
+                    <!--以下三种情况分别列出-->
+                    <if test="formerUserCreateTime == latterUserCreateTime">
+                        and user_current_time = #{latterUserCreateTime}
+                    </if>
+                    <if test="formerUserCreateTime &lt; latterUserCreateTime">
+                        and user_current_time between #{formerUserCreateTime} and #{latterUserCreateTime}
+                    </if>
+                    <if test="formerUserCreateTime &gt; latterUserCreateTime">
+                        and user_current_time between #{latterUserCreateTime} and #{formerUserCreateTime}
+                    </if>
+                </if>
+                <!--只给定了最小值-->
+                <if test="latterUserCreateTime == null or latterUserCreateTime == ''">
+                    and user_current_time &gt;= #{formerUserCreateTime}
                 </if>
             </if>
-            <!--分页-->
-            <if test="indexNumber != null">
-                <if test="pageNumber != null and pageNumber != 0">
-                    limit #{indexNumber},#{pageNumber}
-                </if>
-            </if>
-            <if test="indexNumber == null">
-                <if test="pageNumber != null and pageNumber != 0">
-                    limit 0,#{pageNumber}
+            <!--只给定了最大值-->
+            <if test="formerUserCreateTime == null or formerUserCreateTime == ''">
+                <if test="latterUserCreateTime != null and latterUserCreateTime != ''">
+                    and  user_current_time &lt;= #{latterUserCreateTime}
                 </if>
             </if>
         </where>
+        <!--排序规则-->
+        <if test="sortByColumn != null and sortByColumn !=''">
+            <if test="sortRule != null and sortRule != ''">
+                order by ${sortByColumn} ${sortRule}
+            </if>
+        </if>
+        <!--分页-->
+        <if test="indexNumber != null">
+            <if test="pageNumber != null and pageNumber != 0">
+                limit #{indexNumber},#{pageNumber}
+            </if>
+        </if>
+        <if test="indexNumber == null">
+            <if test="pageNumber != null and pageNumber != 0">
+                limit 0,#{pageNumber}
+            </if>
+        </if>
     </select>
 
     <!--查询用户表中一共有多少数据-->

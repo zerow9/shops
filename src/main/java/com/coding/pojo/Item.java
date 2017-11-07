@@ -43,8 +43,18 @@ public class Item {
 
     private Date makeDate;
 
+    private String dateToString;
+
+    public String getDateToString() {
+        return dateToString;
+    }
+
+    public void setDateToString(String dateToString) {
+        this.dateToString = dateToString;
+    }
 
     private String itemIntroduce;
+
 
     public Integer getItemId() {
         return itemId;

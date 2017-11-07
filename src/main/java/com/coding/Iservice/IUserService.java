@@ -99,7 +99,7 @@ public interface IUserService {
     public void updateComplaintByPrimaryKeySelective(Complaint record)throws Exception;
 
     /**
-     * 根据主键查询用户投诉信息
+     * 根据投诉ID查询用户投诉信息
      * @param complaintId
      * @return
      * @throws Exception
@@ -108,7 +108,7 @@ public interface IUserService {
     /**
      * 投诉表查询功能大集合（如需查询单个用户所有投诉信息，只需要封装pagingCustomComplaint对象中的complaint对象的accuserId属性）
      * PagingCustomComplaint中的时间字段是 String 类型 ，格式要和数据库 dateTime 一样  yyyy-MM-dd HH:mm:ss
-     *
+     * 实现：主键，被投诉人，投诉人，处理状态，投诉时间范围，排序规则，分页
      * @param pagingCustomComplaint 封装了投诉信息的 Complaint 类对象
      * @return 满足查询条件的封装了投诉信息的 Complaint 类对象集合
      * @throws Exception
@@ -183,6 +183,7 @@ public interface IUserService {
      * 这是一个查询功能模块的集合，包含了众多的查询功能，根据 Paging 对象的封装
      * 需要用到什么参数就将参数封装到 Paging 中，不需要用到的参数切忌不要封装。
      * 该接口通过 Paging 中参数的封装去进行 SQL 语句拼接，参数的封装需要小心。
+     * 实现：名字（模糊），关键词（模糊），厂家，是否积分商品，库存范围，销量范围，收藏量范围，价格范围，排序规则，分页
      * @param paging 包含了所有查询条件的 Paging 类对象
      * @return 封装了商品信息的 Item 类对象集合
      * @throws Exception
@@ -195,5 +196,45 @@ public interface IUserService {
      * @throws Exception
      */
     public Integer selectItemCount()throws Exception;
+
+    /*------------------------------------------订单表------------------------------------------------------------------*/
+    /**
+     * 根据订单ID删除订单信息
+     * @param orderId 订单ID
+     * @return 是否删除成功 非0：成功  0:失败
+     */
+    public void deleteOrderByPrimaryKey(Integer orderId)throws Exception;
+
+    /**
+     * 批量删除订单信息
+     * @param orderIdArray 待删除订单ID数组
+     * @return 是否删除成功   非0:成功   0:失败
+     * @throws Exception
+     */
+    public void deleteOrderByPrimaryKeyArray(@Param("oderIdArray") Integer[] orderIdArray)throws Exception;
+
+    /**
+     * 按需插入订单信息
+     * @param order 封装了订单信息的 Orders 类对象
+     * @return 是否插入成功 非0：成功  0:失败
+     */
+    public void insertOrderSelective(Orders order)throws Exception;
+
+    /**
+     * 根据订单ID查询订单信息
+     * @param orderId 订单ID
+     * @return 符合查询条件的 Orders 类对象
+     */
+    public Orders selectOrderByPrimaryKey(@Param("orderId") Integer orderId)throws Exception;
+
+    /**
+     * 订单表查询功能大集合（传入的时间类型都需要改为 String 类型的）
+     * 实现：用户ID，收货人姓名，收货人电话，支付状态，发货状态，评论状态，维权状态，订单创建时间范围，订单支付时间范围，
+     *       发货时间范围，订单完成时间范围，排序规则，分页功能.
+     * @param pagingCustomOrder
+     * @return
+     * @throws Exception
+     */
+    public List<Orders> selectOrder(PagingCustomOrder pagingCustomOrder)throws Exception;
 
 }

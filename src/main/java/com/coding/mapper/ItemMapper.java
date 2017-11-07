@@ -17,6 +17,13 @@ public interface ItemMapper {
     public int deleteItemByPrimaryKey(@Param("itemId") Integer itemId) throws Exception;
 
     /**
+     * 根据商品ID批量删除商品信息
+     *
+     * @param itemIdArray 商品唯一ID数组
+     */
+    public int deleteItemByItemIdArray(@Param("itemIdArray") Integer[] itemIdArray) throws Exception;
+
+    /**
      * 增加商品信息
      *
      * @param item 封装了商品信息的 Item 类对象

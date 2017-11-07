@@ -7,7 +7,6 @@
         delete from address
         where address_id = #{addressId,jdbcType=INTEGER}
     </delete>
-
     <!-- 插入一条地址信息，不用传入 addressId，字段自增 -->
     <insert id="insertAddress" parameterType="com.coding.pojo.Address">
         insert into address (user_uuid, addressee_phone,
@@ -19,7 +18,6 @@
       #{takeGoodsCity,jdbcType=VARCHAR}, #{takeGoodsCounty,jdbcType=VARCHAR}, #{takeGoodsName,jdbcType=VARCHAR},
       #{addressX,jdbcType=DOUBLE}, #{addressY,jdbcType=DOUBLE})
     </insert>
-
     <!-- Address表的所有字段  sql片段 增加冗余字段后需在此添加冗余字段名 -->
     <sql id="Base_Column_List">
         address_id addressId, user_uuid userUuid, addressee_phone addresseePhone, address address, is_default_Address isDefaultAddress, take_goods_Province takeGoodsProvince,
@@ -37,7 +35,6 @@
             where address_id = #{addressId,jdbcType=INTEGER}
         </if>
     </select>
-
     <!-- 根据用户唯一 ID 进行信息修改（注释的是 冗余字段 ，当进行冗余字段添加时 可以修改） -->
     <update id="updateAddressByPrimaryKey" parameterType="com.coding.pojo.Address">
         update address
@@ -63,14 +60,12 @@
         add10 = #{add10,jdbcType=VARCHAR} -->
         where address_id = #{addressId,jdbcType=INTEGER}
     </update>
-
     <!-- 查询所有地址信息 （需要将数据库字段名修改为 pojo 指定的属性名） -->
     <select id="selectAddressAll" resultType="com.coding.pojo.Address">
         SELECT
         <include refid="Base_Column_List"/>
         FROM address
     </select>
-
     <!--根据用户ID查询地址信息-->
     <select id="selectAddressByUserID" parameterType="java.lang.String" resultType="com.coding.pojo.Address">
         <if test="user_uuid!=null and user_uuid!=''">
@@ -83,10 +78,8 @@
             SELECT add10 from address where address_id =1
         </if>
     </select>
-
     <!--查询地址表中一共有多少条数据-->
     <select id="selectAddressCount" resultType="java.lang.Integer">
         select COUNT(*) from address
     </select>
-
 </mapper>

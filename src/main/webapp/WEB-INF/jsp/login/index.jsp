@@ -91,7 +91,7 @@
                         </li>
                         <li><a class="J_menuItem" href="admin/selectGroupsAll.action">用户组列表</a>
                         </li>
-                        <li><a class="J_menuItem" href="../../../jsp/admin/user/user_complaints_list.jsp">投诉管理</a>
+                        <li><a class="J_menuItem" href="complaint/selectComplaintAll.action">投诉管理</a>
                         </li>
                     </ul>
                 </li>
@@ -104,7 +104,7 @@
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="../../../jsp/admin/goods/goods_list.jsp">商品列表</a>
+                        <li><a class="J_menuItem" href="/item/forwardItemList.action">商品列表</a>
                         </li>
                         <li><a class="J_menuItem" href="../../../jsp/admin/goods/goods_type_list.jsp">商品分类</a>
                         </li>

@@ -1,4 +1,3 @@
-<%@ page import="org.apache.shiro.SecurityUtils" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <html lang="en">
@@ -34,6 +33,7 @@
                 <p class="m-t-md">欢迎访问孝和管理后台</p>
                 <input type="text" class="form-control uname" placeholder="用户名" name="username"/>
                 <input type="password" class="form-control pword m-b" placeholder="密码" name="password"/>
+                <input type="checkbox" name="rememberMe" >记住密码
                 <div id="drag"></div>
                 <button class="btn btn-success btn-block">登录</button>
             </form>
