@@ -141,9 +141,9 @@
   <insert id="insertOrderSelective" parameterType="com.coding.pojo.Orders" >
     insert into orders
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="orderId != null" >
+<!--      <if test="orderId != null" >
         order_id,
-      </if>
+      </if>-->
       <if test="userUuid != null" >
         user_uuid,
       </if>
@@ -224,9 +224,9 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="orderId != null" >
+<!--      <if test="orderId != null" >
         #{orderId,jdbcType=INTEGER},
-      </if>
+      </if>-->
       <if test="userUuid != null" >
         #{userUuid,jdbcType=VARCHAR},
       </if>
@@ -331,6 +331,10 @@
         <!--根据用户ID查找订单信息-->
         <if test="order.userUuid != null and order.userUuid != ''">
           and user_uuid = #{order.userUuid}
+        </if>
+        <!--根据收货人姓名查找订单信息-->
+        <if test="order.takeGoodsName != null and order.takeGoodsName != ''">
+          and take_goods_name REGEXP #{order.takeGoodsName}
         </if>
         <!--根据收货人电话查找订单信息-->
         <if test="order.takeGoodsPhone != null and order.takeGoodsPhone != ''">
