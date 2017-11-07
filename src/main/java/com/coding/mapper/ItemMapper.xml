@@ -122,6 +122,13 @@
         delete from item
     where item_id = #{itemId,jdbcType=INTEGER}
     </delete>
+    <!--批量删除商品信息-->
+    <delete id="deleteAdminByItemIdArray" parameterType="java.lang.Integer">
+        delete from item where item_id IN
+        <foreach collection="itemIdArray" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
 
     <!--查询所有商品信息-->
     <select id="selectItemAll" resultMap="ResultMapWithBLOBs">
