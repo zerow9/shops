@@ -246,4 +246,45 @@ public interface IUserService {
      */
     public List<Orders> selectOrder(PagingCustomOrder pagingCustomOrder)throws Exception;
 
+     /*------------------------------------------订单表------------------------------------------------------------------*/
+    /**
+     * 根据订单详情主键进行查询
+     * @param orderDetailId
+     * @return
+     * @throws Exception
+     */
+    public OrderDetail selectOrderDetailByPrimaryKey (Integer orderDetailId) throws Exception;
+
+    /**
+     * 根据订单详情主键删除
+     * @param orderDetailId
+     * @return
+     * @throws Exception
+     */
+    public void deleteOrderDetailByPrimaryKey(Integer orderDetailId)throws Exception;
+
+    /**
+     * 订单详情批量删除
+     * @param oderDetailIdArray
+     * @return
+     * @throws Exception
+     */
+    public void deleteOrderDetailByPrimaryKeyArray(Integer[] oderDetailIdArray)throws Exception;
+
+    /**
+     * 插入新的订单详情
+     * @param orderDetail
+     * @return
+     * @throws Exception
+     */
+    public void insertOrderDetailSelective(OrderDetail orderDetail)throws Exception;
+
+
+    /**
+     * 订单详情综合大查询
+     * @param pagingCustomOrderDetail
+     * @return
+     * @throws Exception
+     */
+    public List<OrderDetail> selectOrderDetail (PagingCustomOrderDetail pagingCustomOrderDetail)throws Exception;
 }
