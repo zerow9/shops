@@ -132,6 +132,15 @@ public interface IUserService {
     public List<ItemType> selectItemTypeAll()throws Exception;
 
     /**
+     * 商品类别综合查询
+     * 主键ID，名字，父类别ID，类别等级，类别关键词，排序规则，分页功能.
+     * @param pagingCustomItemType
+     * @return
+     * @throws Exception
+     */
+    public List<ItemType> selectItemType(PagingCustomItemType pagingCustomItemType) throws Exception;
+
+    /**
      * 返回商品类别表中一共有多少条数据
      * @return 封装了商品类别信息的 ItemType 类对象
      * @throws Exception
@@ -229,7 +238,7 @@ public interface IUserService {
 
     /**
      * 订单表查询功能大集合（传入的时间类型都需要改为 String 类型的）
-     * 实现：用户ID，收货人电话，支付状态，发货状态，评论状态，维权状态，订单创建时间范围，订单支付时间范围，
+     * 实现：用户ID，收货人姓名，收货人电话，支付状态，发货状态，评论状态，维权状态，订单创建时间范围，订单支付时间范围，
      *       发货时间范围，订单完成时间范围，排序规则，分页功能.
      * @param pagingCustomOrder
      * @return
