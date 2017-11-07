@@ -132,6 +132,14 @@ public interface IUserService {
     public List<ItemType> selectItemTypeAll()throws Exception;
 
     /**
+     * 商品类别综合查询
+     * @param pagingCustomItemType
+     * @return
+     * @throws Exception
+     */
+    public List<ItemType> selectItemType(PagingCustomItemType pagingCustomItemType) throws Exception;
+
+    /**
      * 返回商品类别表中一共有多少条数据
      * @return 封装了商品类别信息的 ItemType 类对象
      * @throws Exception

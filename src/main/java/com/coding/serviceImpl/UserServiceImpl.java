@@ -172,10 +172,15 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     }
 
     public List<Complaint> selectComplaint(PagingCustomComplaint pagingCustomComplaint) throws Exception {
-        List<Complaint> complaints = complaintMapper.selectComplaint(pagingCustomComplaint);
-        if(complaints.isEmpty()) throw new Exception("用户投诉信息查询为空");
-//            exceptlist((List<Object>) addresses,"用户收获地址查询为空");
-        return complaints;
+       try {
+            List<Complaint> complaints = complaintMapper.selectComplaint(pagingCustomComplaint);
+            if(complaints.isEmpty()) throw new Exception("用户投诉信息查询为空");
+            return complaints;
+       }catch (Exception e){
+            if (!e.getMessage().contains("投诉信息查询为空"))
+                throw new Exception("参数查询用户投诉列表出错，请检查参数");
+            throw e;
+    }
     }
 
     /*------------------------------------------商品类别表------------------------------------------------------------------*/
@@ -192,6 +197,18 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             List<ItemType> itemTypes = itemTypeMapper.selectItemTypeAll();
             if(itemTypes.isEmpty()) throw new Exception("查询所有商品类别为空");
             return itemTypes;
+    }
+
+    public List<ItemType> selectItemType(PagingCustomItemType pagingCustomItemType) throws Exception {
+        try {
+            List<ItemType>  itemTypes = itemTypeMapper.selectItemType(pagingCustomItemType);
+            if(itemTypes.isEmpty()) throw new Exception("查询到的商品类别列表为空");
+            return itemTypes;
+        }catch (Exception e){
+            if (!e.getMessage().contains("商品类别列表为空"))
+                throw new Exception("参数查询商品类别列表出错，请检查参数");
+            throw e;
+        }
     }
 
     public Integer selectItemTypeCount() throws Exception {
