@@ -25,11 +25,8 @@
 <body>
 
 <div class="wrapper wrapper-content animated fadeInRight">
-
     <div class="row">
-
         <div class="layui-col-sm12">
-
             <div class="ibox float-e-margins">
 
                 <blockquote class="layui-elem-quote">
@@ -67,7 +64,7 @@
                                 <thead>
                                 <tr>
                                     <th lay-data="{checkbox:true, fixed: true}"></th>
-                                    <th lay-data="{field:'order_id', width:80, sort: true, fixed: true}">订单编号</th>
+                                    <th lay-data="{field:'order_id', width:100, sort: true, fixed: true}">订单编号</th>
                                     <th lay-data="{field:'take_goods_name', width:100}">收货人</th>
                                     <th lay-data="{field:'shop_name', width:200}">分店</th>
                                     <th lay-data="{field:'order_sum_price', width:100, sort: true}">订单总额</th>
@@ -87,64 +84,17 @@
 </div>
 
 
-
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
     <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
 </script>
-
 
 <script src="../../../js/extends/jquery/jquery.min.js"></script>
 <script src="../../../js/extends/bootstrap/bootstrap.js"></script>
 <script src="../../../shopmanagement/js/content.min.js"></script>
 <script src="../../../common/layui/layui.js"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
-
-<script>
-    layui.use('table', function () {
-        var table = layui.table;
-        //监听表格复选框选择
-        table.on('checkbox(demo)', function (obj) {
-            console.log(obj)
-        });
-        //监听工具条
-        table.on('tool(demo)', function (obj) {
-            var data = obj.data;
-            if (obj.event === 'detail') {
-                layer.msg('ID：' + data.id + ' 的查看操作');
-            } else if (obj.event === 'del') {
-                layer.confirm('真的删除行么', function (index) {
-                    obj.del();
-                    layer.close(index);
-                });
-            } else if (obj.event === 'edit') {
-                layer.alert('编辑行：<br>' + JSON.stringify(data))
-            }
-        });
-
-        var $ = layui.$, active = {
-            getCheckData: function () { //获取选中数据
-                var checkStatus = table.checkStatus('idTest')
-                    , data = checkStatus.data;
-                layer.alert(JSON.stringify(data));
-            }
-            , getCheckLength: function () { //获取选中数目
-                var checkStatus = table.checkStatus('idTest')
-                    , data = checkStatus.data;
-                layer.msg('选中了：' + data.length + ' 个');
-            }
-            , isAll: function () { //验证是否全选
-                var checkStatus = table.checkStatus('idTest');
-                layer.msg(checkStatus.isAll ? '全选' : '未全选')
-            }
-        };
-
-        $('.demoTable .layui-btn').on('click', function () {
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
-        });
-    });
-</script>
+<script src="../../../js/order/order_list.js"></script>
 
 </body>
 </html>
