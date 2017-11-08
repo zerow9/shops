@@ -33,11 +33,11 @@
 
                 <blockquote class="layui-elem-quote">
                     <h2>操作提示</h2>
-                    在这里，你可以增删改查厂商信息。
+                    在这里，你可以增删改查公告。
                 </blockquote>
 
                 <div class="ibox-title">
-                    <h5>厂商列表</h5>
+                    <h5>公告列表</h5>
                     <div class="ibox-tools">
                         <%--最大最小化按钮--%>
                         <a class="collapse-link">
@@ -58,24 +58,20 @@
                         <div class="layui-btn-group demoTable">
                             <button class="layui-btn" data-type="getCheckLength">批量删除</button>
                             <button class="layui-btn" data-type="isAll">全选</button>
-                            <button class="layui-btn" data-type="addInfo">添加厂商</button>
+                            <button class="layui-btn" data-type="addInfo">添加公告</button>
                         </div>
 
                         <div class="table-responsive">
 
-                            <table class="layui-table" lay-data="{url:'../../../data/testVender.json', page:true, id:'venderId'}"
+                            <table class="layui-table" lay-data="{url:'../../../data/testNotice.json', page:true, id:'noticeId'}"
                                    lay-filter="demo">
                                 <thead>
                                 <tr>
                                     <th lay-data="{checkbox:true, fixed: true}"></th>
-                                    <th lay-data="{field:'venderId', width:100，fixed='true'}">编号</th>
-                                    <th lay-data="{field:'venderName', width:100}">名称</th>
-                                    <th lay-data="{field:'venderAddress', width:200}">地址</th>
-                                    <th lay-data="{field:'venderPhone', width:200}">电话</th>
-                                    <th lay-data="{field:'icId', width:200}">工商编号</th>
-                                    <th lay-data="{field:'businessRange', width:200}">经营范围</th>
-                                    <th lay-data="{field:'venderEmail', width:200}">邮箱</th>
-                                    <th lay-data="{field:'venderPost', width:100,}">邮编</th>
+                                    <th lay-data="{field:'noticeId', width:100，fixed='true'}">编号</th>
+                                    <th lay-data="{field:'noiceTime', width:100}">公告发布时间</th>
+                                    <th lay-data="{field:'isUse', width:200}">是否使用</th>
+                                    <th lay-data="{field:'noticeContent', width:200}">内容</th>
                                     <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#operate_bar'}">
                                         操作
                                     </th>
@@ -108,7 +104,7 @@
 <script src="../../../shopmanagement/js/content.min.js"></script>
 <script src="../../../common/layui/layui.js"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../../../js/venders/listVender.js"></script>
+<script src="../../../js/notices/listNotice.js"></script>
 
 </body>
 </html>
