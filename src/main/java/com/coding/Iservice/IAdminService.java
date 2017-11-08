@@ -383,4 +383,20 @@ public interface IAdminService extends IUserService {
      * @throws Exception
      */
     public Integer selectOrderCount()throws Exception;
+
+     /*------------------------------------------订单表------------------------------------------------------------------*/
+    /**
+     * 根据订单详情主键修改订单详情
+     * @param orderDetail
+     * @return
+     * @throws Exception
+     */
+    public void updateOrderDetailByPrimaryKeySelective(OrderDetail orderDetail)throws Exception;
+
+    /**
+     * 查询订单详情中有多少条数据
+     * @return
+     * @throws Exception
+     */
+    public Integer selectOrderDetailCount()throws Exception;
 }

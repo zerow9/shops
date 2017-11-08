@@ -31,6 +31,8 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     private ComplaintMapper complaintMapper;
     @Autowired
     private OrdersMapper ordersMapper;
+    @Autowired
+    private OrderDetailMapper orderDetailMapper;
 
     /*------------------------------------------用户表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
@@ -536,6 +538,26 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
             return  ordersMapper.selectOrderCount();
         }catch (Exception e){
             throw new Exception("查询订单表总数时出错");
+        }
+    }
+
+    /*------------------------------------------订单详情表------------------------------------------------------------------*/
+    @Transactional(rollbackFor =Exception.class )
+    public void updateOrderDetailByPrimaryKeySelective(OrderDetail orderDetail) throws Exception {
+        try {
+            except(orderDetailMapper.updateOrderDetailByPrimaryKeySelective(orderDetail));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("修改订单详情信息时出错");
+            throw e;
+        }
+    }
+
+    public Integer selectOrderDetailCount() throws Exception {
+        try {
+            return  orderDetailMapper.selectOrderDetailCount();
+        }catch (Exception e){
+            throw new Exception("查询订单详情表总数时出错");
         }
     }
 
