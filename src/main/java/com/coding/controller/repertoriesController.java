@@ -48,8 +48,14 @@ public class repertoriesController {
     }
 
     @RequestMapping("deleteRepertoryByIdArray")
-    public boolean deleteRepertoryByIdArray(String arrayString) {
-        // adminService.deleteRepertoryByPrimaryKey();
+    public boolean deleteRepertoryByIdArray(String arrayString) throws Exception {
+        String[] strings = arrayString.split(",");
+        Integer integer[] = new Integer[strings.length];
+        for (int i = 0; i < strings.length; i++) {
+            integer[i] = Integer.valueOf(strings[i]);
+        }
+        adminService.deleteRepertoryByPrimaryKeyArray(integer);
+        counts -= strings.length;
         return true;
     }
 

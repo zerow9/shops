@@ -59,7 +59,7 @@ layui.use('table', function () {
             var checkStatus = table.checkStatus('repertoryId'),
                 data = checkStatus.data;
             for (var i = 0; i < data.length; i++) {//遍历数组
-                array[i] = data[i].itemId;
+                array[i] = data[i].repertoryId;
             }
 
             //判断数据是否选中
