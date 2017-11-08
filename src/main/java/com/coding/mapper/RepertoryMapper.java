@@ -40,6 +40,13 @@ public interface RepertoryMapper {
     public List<Repertory> selectRepertoryAll() throws Exception;
 
     /**
+     * 库存信息表的综合查询
+     * @return
+     * @throws Exception
+     */
+    public List<Repertory> selectRepertory() throws Exception;
+
+    /**
      * 返回库存表中一共有多少条数据
      * @return 封装了库存信息的 Repertory 类对象
      * @throws Exception

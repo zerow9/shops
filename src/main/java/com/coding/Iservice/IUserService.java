@@ -246,7 +246,7 @@ public interface IUserService {
      */
     public List<Orders> selectOrder(PagingCustomOrder pagingCustomOrder)throws Exception;
 
-     /*------------------------------------------订单表------------------------------------------------------------------*/
+     /*------------------------------------------订单详情表------------------------------------------------------------------*/
     /**
      * 根据订单详情主键进行查询
      * @param orderDetailId

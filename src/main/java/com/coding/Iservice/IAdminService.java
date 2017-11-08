@@ -313,6 +313,14 @@ public interface IAdminService extends IUserService {
     public List<Repertory> selectRepertoryAll() throws Exception;
 
     /**
+     * 库存信息表的综合查询
+     * 实现：库存ID，商品ID，商店ID，排序规则，分页功能
+     * @return
+     * @throws Exception
+     */
+    public List<Repertory> selectRepertory() throws Exception;
+
+    /**
      * 返回库存表中一共有多少条数据
      * @return 封装了库存信息的 Repertory 类对象
      * @throws Exception
@@ -384,7 +392,7 @@ public interface IAdminService extends IUserService {
      */
     public Integer selectOrderCount()throws Exception;
 
-     /*------------------------------------------订单表------------------------------------------------------------------*/
+     /*------------------------------------------订单详情表------------------------------------------------------------------*/
     /**
      * 根据订单详情主键修改订单详情
      * @param orderDetail
