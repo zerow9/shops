@@ -129,7 +129,7 @@
   </update>
 
   <!--订单详情表大查询-->
-  <select id="selectOrderDetail" parameterType="com.coding.pojo.PagingCustomOrderDetail" resultMap="BaseResultMap">
+  <select id="selectOrderDetail" parameterType="com.coding.paging.PagingCustomOrderDetail" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from order_detail

@@ -190,7 +190,7 @@
 
 
     <!--根据关键字查询用户信息并按照字段排序-->
-    <select id="selectUser" parameterType="com.coding.pojo.PagingCustomUser"
+    <select id="selectUser" parameterType="com.coding.paging.PagingCustomUser"
             resultMap="ResultMapWithBLOBs">
 
         select

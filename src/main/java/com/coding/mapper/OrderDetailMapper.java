@@ -3,7 +3,7 @@ package com.coding.mapper;
 import com.coding.pojo.OrderDetail;
 import java.util.List;
 
-import com.coding.pojo.PagingCustomOrderDetail;
+import com.coding.paging.PagingCustomOrderDetail;
 import org.apache.ibatis.annotations.Param;
 
 public interface OrderDetailMapper {

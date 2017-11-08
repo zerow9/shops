@@ -1,6 +1,6 @@
 package com.coding.mapper;
 
-import com.coding.pojo.PagingCustomRepertory;
+import com.coding.paging.PagingCustomRepertory;
 import com.coding.pojo.Repertory;
 import org.apache.ibatis.annotations.Param;
 

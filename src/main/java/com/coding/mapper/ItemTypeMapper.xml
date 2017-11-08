@@ -101,7 +101,7 @@
     </select>
 
     <!--商品类品综合查询信息-->
-    <select id="selectItemType" parameterType="com.coding.pojo.PagingCustomItemType" resultMap="ResultMapWithBLOBs">
+    <select id="selectItemType" parameterType="com.coding.paging.PagingCustomItemType" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List" />
         ,

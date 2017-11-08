@@ -1,6 +1,10 @@
-package com.coding.pojo;
+package com.coding.paging;
+
+import com.coding.pojo.OrderDetail;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class PagingCustomOrderDetail extends Paging {
+    @Autowired
     private OrderDetail orderDetail;
 
     private Double formerOrderDetailitemSumPrice;//一些功能需要订单详情的总价范围内查询，这是左侧较小值

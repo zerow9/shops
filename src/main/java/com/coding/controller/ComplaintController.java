@@ -4,7 +4,7 @@ import com.coding.Iservice.IAdminService;
 import com.coding.Iservice.IUserService;
 import com.coding.comomInterface.DateToString;
 import com.coding.pojo.Complaint;
-import com.coding.pojo.PagingCustomComplaint;
+import com.coding.paging.PagingCustomComplaint;
 import com.coding.pojo.templet.JsonFormat;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;

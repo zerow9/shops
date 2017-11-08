@@ -120,7 +120,7 @@
     </select>
 
     <!--投诉表的查询大SQL-->
-    <select id="selectComplaint" parameterType="com.coding.pojo.PagingCustomComplaint" resultMap="ResultMapWithBLOBs" >
+    <select id="selectComplaint" parameterType="com.coding.paging.PagingCustomComplaint" resultMap="ResultMapWithBLOBs" >
         select
         <include refid="Base_Column_List"/>
         ,

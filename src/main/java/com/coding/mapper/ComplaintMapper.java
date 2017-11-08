@@ -1,7 +1,7 @@
 package com.coding.mapper;
 
 import com.coding.pojo.Complaint;
-import com.coding.pojo.PagingCustomComplaint;
+import com.coding.paging.PagingCustomComplaint;
 
 import java.util.List;
 

@@ -186,7 +186,7 @@
      * 需要用到什么参数就将参数封装到 Paging 中，不需要用到的参数切忌不要封装。
      * 该接口通过 Paging 中参数的封装去进行 SQL 语句拼接，参数的封装需要小心。
      -->
-    <select id="selectItem" parameterType="com.coding.pojo.Paging" resultMap="ResultMapWithBLOBs">
+    <select id="selectItem" parameterType="com.coding.paging.Paging" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
         ,

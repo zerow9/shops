@@ -1,6 +1,10 @@
-package com.coding.pojo;
+package com.coding.paging;
+
+import com.coding.pojo.Repertory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 public class PagingCustomRepertory extends Paging {
+    @Autowired
     private Repertory repertory;
 
     public Repertory getRepertory() {

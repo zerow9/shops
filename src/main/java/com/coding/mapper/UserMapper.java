@@ -1,7 +1,6 @@
 package com.coding.mapper;
 
-import com.coding.pojo.Paging;
-import com.coding.pojo.PagingCustomUser;
+import com.coding.paging.PagingCustomUser;
 import com.coding.pojo.User;
 import org.apache.ibatis.annotations.Param;
 

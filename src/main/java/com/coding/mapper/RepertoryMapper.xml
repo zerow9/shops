@@ -100,7 +100,7 @@
     </select>
 
     <!--库存表的查询大SQL-->
-    <select id="selectRepertory" parameterType="com.coding.pojo.PagingCustomRepertory" resultMap="BaseResultMap" >
+    <select id="selectRepertory" parameterType="com.coding.paging.PagingCustomRepertory" resultMap="BaseResultMap" >
         select
         <include refid="Base_Column_List"/>
         from repertory

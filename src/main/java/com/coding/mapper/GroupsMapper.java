@@ -1,7 +1,7 @@
 package com.coding.mapper;
 
 import com.coding.pojo.Groups;
-import com.coding.pojo.PagingCustomGroups;
+import com.coding.paging.PagingCustomGroups;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
