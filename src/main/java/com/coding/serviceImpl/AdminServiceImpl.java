@@ -3,7 +3,6 @@ package com.coding.serviceImpl;
 import com.coding.Iservice.IAdminService;
 import com.coding.mapper.*;
 import com.coding.paging.PagingCustomGroups;
-import com.coding.paging.PagingCustomNotice;
 import com.coding.paging.PagingCustomRepertory;
 import com.coding.paging.PagingCustomUser;
 import com.coding.pojo.*;
@@ -37,8 +36,6 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     private OrdersMapper ordersMapper;
     @Autowired
     private OrderDetailMapper orderDetailMapper;
-    @Autowired
-    private NoticeMapper noticeMapper;
 
     /*------------------------------------------用户表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
@@ -587,80 +584,6 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
             return  orderDetailMapper.selectOrderDetailCount();
         }catch (Exception e){
             throw new Exception("查询订单详情表总数时出错");
-        }
-    }
-    /*------------------------------------------公告表------------------------------------------------------------------*/
-    public Notice selectNoticeByPrimaryKey(Integer noticeId) throws Exception {
-        if (noticeId != null && noticeId != 0){
-            Notice notice = noticeMapper.selectNoticeByPrimaryKey(noticeId);
-            except(notice,"根据公告ID查询公告为空");
-            return notice;
-        }
-        return null;
-    }
-
-    @Transactional(rollbackFor =Exception.class )
-    public void deleteNoticeByPrimaryKey(Integer noticeId) throws Exception {
-        if(noticeId != null && noticeId != 0){
-            try {
-                except(noticeMapper.deleteNoticeByPrimaryKey(noticeId));
-            }catch (Exception e){
-                if (!e.getMessage().contains("操作无效"))
-                    throw new Exception("删除公告信息时出错");
-                throw e;
-            }
-        }
-    }
-
-    @Transactional(rollbackFor =Exception.class )
-    public void deleteNoticeByPrimaryKeyArray(Integer[] noticeIdArrary) throws Exception {
-        if(noticeIdArrary==null||"".equals(noticeIdArrary))throw new Exception("没有noticeIdArrary数组信息，批量公告删除出错");
-        try {
-            except(noticeMapper.deleteNoticeByPrimaryKeyArray(noticeIdArrary));
-        }catch (Exception e){
-            if (!e.getMessage().contains("操作无效"))
-                throw new Exception("批量删除公告时出错");
-            throw e;
-        }
-    }
-
-    @Transactional(rollbackFor =Exception.class )
-    public void insertNoticeSelective(Notice notice) throws Exception {
-        try {
-            noticeMapper.insertNoticeSelective(notice);
-        }catch (Exception e){
-            throw new Exception("添加公告时出错");
-        }
-    }
-
-    @Transactional(rollbackFor =Exception.class )
-    public void updateNoticeByPrimaryKeySelective(Notice notice) throws Exception {
-        try {
-            except(noticeMapper.updateNoticeByPrimaryKeySelective(notice));
-        }catch (Exception e){
-            if (!e.getMessage().contains("操作无效"))
-                throw new Exception("修改公告信息时出错");
-            throw e;
-        }
-    }
-
-    public List<Notice> selectNotice(PagingCustomNotice pagingCustomNotice) throws Exception {
-        try {
-            List<Notice>  notices = noticeMapper.selectNotice(pagingCustomNotice);
-            if(notices.isEmpty()) throw new Exception("查询到的公告列表为空");
-            return notices;
-        }catch (Exception e){
-            if (!e.getMessage().contains("公告列表为空"))
-                throw e;
-            throw e;
-        }
-    }
-
-    public int selectNoticeCount() throws Exception {
-        try {
-            return  noticeMapper.selectNoticeCount();
-        }catch (Exception e){
-            throw new Exception("查询公告信息总数时出错");
         }
     }
 
