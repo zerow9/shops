@@ -1,6 +1,7 @@
 package com.coding.Iservice;
 
 import com.coding.paging.PagingCustomGroups;
+import com.coding.paging.PagingCustomNotice;
 import com.coding.paging.PagingCustomRepertory;
 import com.coding.paging.PagingCustomUser;
 import com.coding.pojo.*;
@@ -417,4 +418,61 @@ public interface IAdminService extends IUserService {
      * @throws Exception
      */
     public Integer selectOrderDetailCount()throws Exception;
+
+     /*------------------------------------------公告表------------------------------------------------------------------*/
+    /**
+     * 根据主键查询公告信息
+     * @param noticeId
+     * @return
+     * @throws Exception
+     */
+    public Notice selectNoticeByPrimaryKey (Integer noticeId)throws Exception;
+
+    /**
+     * 根据主键删除公告信息
+     * @param noticeId
+     * @return
+     * @throws Exception
+     */
+    public void deleteNoticeByPrimaryKey (Integer noticeId)throws Exception;
+
+    /**
+     * 根据主键批量删除公告信息
+     * @param noticeIdArrary
+     * @return
+     * @throws Exception
+     */
+    public void deleteNoticeByPrimaryKeyArray (Integer[] noticeIdArrary)throws Exception;
+
+    /**
+     * 按需添加公告信息
+     * @param notice
+     * @return
+     * @throws Exception
+     */
+    public void insertNoticeSelective (Notice notice)throws Exception;
+
+    /**
+     * 按需修改公告信息
+     * @param notice
+     * @return
+     * @throws Exception
+     */
+    public void updateNoticeByPrimaryKeySelective (Notice notice)throws Exception;
+
+    /**
+     * 公告表综合查询
+     * 实现：主键ID，是否启用，发布时间范围，排序规则，分页功能.
+     * @param pagingCustomNotice
+     * @return
+     * @throws Exception
+     */
+    public List<Notice> selectNotice (PagingCustomNotice pagingCustomNotice)throws Exception;
+
+    /**
+     * 查询公告信息总数
+     * @return
+     * @throws Exception
+     */
+    public int selectNoticeCount ()throws Exception;
 }
