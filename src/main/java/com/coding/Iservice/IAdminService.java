@@ -345,6 +345,13 @@ public interface IAdminService extends IUserService {
     public void deleteVenderByPrimaryKey(Integer venderId) throws Exception;
 
     /**
+     * 批量删除厂家信息
+     * @param venderIdArrary
+     * @return
+     * @throws Exception
+     */
+    public void deleteVenderByPrimaryKeyArray(@Param("venderIdArrary") Integer[] venderIdArrary)throws Exception;
+    /**
      * 增加厂家信息
      *
      * @param vender 封装了厂家信息的 Vender 类对象
@@ -376,6 +383,15 @@ public interface IAdminService extends IUserService {
      * @throws Exception
      */
     public List<Vender> selectVenderAll() throws Exception;
+
+    /**
+     * 厂家表综合查询
+     * 所用字段均可查询，厂商名字和经营范围为模糊查询
+     * @param pagingCustomVender
+     * @return
+     * @throws Exception
+     */
+    public List<Vender> selectVender(PagingCustomVender pagingCustomVender)throws Exception;
 
     /**
      * 返回厂家中一共有多少条数据

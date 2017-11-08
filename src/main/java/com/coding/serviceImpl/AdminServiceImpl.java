@@ -504,6 +504,17 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         }
         }
     }
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteVenderByPrimaryKeyArray(Integer[] venderIdArrary) throws Exception {
+        if(venderIdArrary==null||"".equals(venderIdArrary))throw new Exception("没有venderIdArrary组信息，批量厂家删除出错");
+        try {
+            except(venderMapper.deleteVenderByPrimaryKeyArray(venderIdArrary));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("批量删除厂家时出错");
+            throw e;
+        }
+    }
 
     @Transactional(rollbackFor =Exception.class )
     public void insertVender(Vender vender) throws Exception {
@@ -540,6 +551,18 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         if(venders.isEmpty()) throw new Exception("查询厂家列表为空");
 //        except(venders,"查询厂家列表为空");
         return venders;
+    }
+
+    public List<Vender> selectVender(PagingCustomVender pagingCustomVender) throws Exception {
+        try {
+            List<Vender>  venders = venderMapper.selectVender(pagingCustomVender);
+            if(venders.isEmpty()) throw new Exception("查询到的厂商列表为空");
+            return venders;
+        }catch (Exception e){
+            if (!e.getMessage().contains("厂商列表为空"))
+                throw new Exception("参数查询厂商列表出错，请检查参数");
+            throw e;
+        }
     }
 
     public int selectVenderCount() throws Exception {
@@ -725,8 +748,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
             return logs;
         }catch (Exception e){
             if (!e.getMessage().contains("日志列表为空"))
-//                throw new Exception("参数查询日志列表出错，请检查参数");
-                throw e;
+                throw new Exception("参数查询日志列表出错，请检查参数");
             throw e;
         }
     }

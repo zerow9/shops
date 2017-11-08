@@ -7,7 +7,13 @@
       delete from vender
     where vender_id = #{venderId,jdbcType=INTEGER}
     </delete>
-
+    <!--根据厂家ID批量删除厂家信息-->
+    <delete id="deleteVenderByPrimaryKeyArray" parameterType="java.lang.Integer">
+        delete from vender where vender_id IN
+        <foreach collection="venderIdArrary" item="vender" open="(" separator="," close=")">
+            #{vender}
+        </foreach>
+    </delete>
     <!--插入厂家信息-->
     <insert id="insertVender" parameterType="com.coding.pojo.Vender">
         insert into vender (vender_name, vender_address,
@@ -100,6 +106,62 @@
         <include refid="Base_Column_List"/>
         from vender
     </select>
+
+    <!--厂家表的查询大SQL-->
+    <select id="selectVender" parameterType="com.coding.paging.PagingCustomVender" resultMap="BaseResultMap" >
+        select
+        <include refid="Base_Column_List"/>
+        from vender
+        <where>
+            <!--根据投诉基本信息进行查询-->
+            <if test="vender != null">
+                <if test="vender.venderId != null and vender.venderId != 0">
+                    and vender_id = #{vender.venderId}
+                </if>
+                <!--根据用户 uuid 查询投诉信息-->
+                <if test="vender.venderName != null and vender.venderName != ''">
+                    and vender_name REGEXP #{vender.venderName}
+                </if>
+                <!--根据用户 AdminId 查询投诉信息-->
+                <if test="vender.venderAddress != null and vender.venderAddress != ''">
+                    and vender_address = #{vender.venderAddress}
+                </if>
+                <if test="vender.venderPhone != null and vender.venderPhone != ''">
+                    and vender_phone = #{vender.venderPhone}
+                </if>
+                <if test="vender.icId != null and vender.icId != 0">
+                    and ic_id = #{vender.icId}
+                </if>
+                <if test="vender.businessRange != null and vender.businessRange != ''">
+                    and business_range REGEXP #{vender.businessRange}
+                </if>
+                <if test="vender.venderEmail != null and vender.venderEmail != ''">
+                    and vender_email = #{vender.venderEmail}
+                </if>
+                <if test="vender.venderPost != null and vender.venderPost != 0">
+                    and vender_post = #{vender.venderPost}
+                </if>
+            </if>
+        </where>
+        <!--排序规则-->
+        <if test="sortByColumn != null and sortByColumn !=''">
+            <if test="sortRule != null and sortRule != ''">
+                order by ${sortByColumn} ${sortRule}
+            </if>
+        </if>
+        <!--分页-->
+        <if test="indexNumber != null">
+            <if test="pageNumber != null and pageNumber != 0">
+                limit #{indexNumber},#{pageNumber}
+            </if>
+        </if>
+        <if test="indexNumber == null">
+            <if test="pageNumber != null and pageNumber != 0">
+                limit 0,#{pageNumber}
+            </if>
+        </if>
+    </select>
+
 
     <!--查询厂家表中一共有多少条数据-->
     <select id="selectVenderCount" resultType="java.lang.Integer">

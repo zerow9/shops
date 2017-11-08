@@ -99,7 +99,7 @@
           and notice_id = #{notice.noticeId}
         </if>
         <!--根据是否启用 查询公告信息-->
-        <if test="notice.isUse != null and notice.isUse != 0">
+        <if test="notice.isUse != null">
           and is_use = #{notice.isUse}
         </if>
       </if>
