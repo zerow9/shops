@@ -145,5 +145,5 @@ String basePath = request.getScheme() + "://"
 
 <script src="../../../shopmanagement/common/layui/layui.js" charset="utf-8" type="text/javascript"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../../../js/repertories/addrepertory.js"></script>
+<script src="../../../js/repertories/addRepertory.js"></script>
 </body>

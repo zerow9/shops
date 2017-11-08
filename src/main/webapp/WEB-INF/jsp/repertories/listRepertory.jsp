@@ -63,7 +63,7 @@
 
                         <div class="table-responsive">
 
-                            <table class="layui-table" lay-data="{url:'<%=basePath%>admin/getRepertoryAll.action', page:true, id:'repertoryId'}"
+                            <table class="layui-table" lay-data="{url:'<%=basePath%>repertory/getRepertoryAll.action', page:true, id:'repertoryId'}"
                                    lay-filter="goods_lists_table">
                                 <thead>
                                 <tr>
@@ -109,7 +109,7 @@
 <script src="../../../shopmanagement/js/content.min.js"></script>
 <script src="../../../common/layui/layui.js"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../../../js/repertories/repertorylist.js"></script>
+<script src="../../../js/repertories/listRepertory.js"></script>
 
 </body>
 </html>
