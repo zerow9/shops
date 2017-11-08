@@ -1,7 +1,7 @@
 package com.coding.mapper;
 
 import com.coding.pojo.Orders;
-import com.coding.pojo.PagingCustomOrder;
+import com.coding.paging.PagingCustomOrder;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Component;
 

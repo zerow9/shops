@@ -1,6 +1,7 @@
 package com.coding.mapper;
 
 import com.coding.pojo.ItemType;
+import com.coding.paging.PagingCustomItemType;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -44,6 +45,14 @@ public interface ItemTypeMapper {
      * @throws Exception
      */
     public List<ItemType> selectItemTypeAll() throws Exception;
+
+    /**
+     * 商品类别综合查询
+     * @param pagingCustomItemType
+     * @return
+     * @throws Exception
+     */
+    public List<ItemType> selectItemType(PagingCustomItemType pagingCustomItemType) throws Exception;
 
     /**
      * 返回商品类别表中一共有多少条数据

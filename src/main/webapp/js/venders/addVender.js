@@ -45,9 +45,15 @@ layui.use(['form', 'layedit', 'laydate'], function () {
     //监听提交
     form.on('submit(demo1)', function (data) {
         var parm = data.field;
+        console.log(parm)
         $.ajax({
             url: 'insertyVenderaction',
             data: parm,
+            type: "POST",
+            async: false,
+            cache: false,
+            contentType: false,
+            processData: false,
             success: function () {
 
                 //关闭弹出的窗口

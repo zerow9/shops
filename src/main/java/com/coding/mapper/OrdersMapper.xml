@@ -48,7 +48,7 @@
     where order_id = #{orderId,jdbcType=INTEGER}
   </select>
 
-  <!--查询商品表中共有多少数据-->
+  <!--查询订单表中共有多少数据-->
   <select id="selectOrderCount" resultType="java.lang.Integer">
     select count(*) from orders
   </select>
@@ -320,7 +320,7 @@
     where order_id = #{orderId,jdbcType=INTEGER}
   </delete>
   <!--订单表大查询-->
-  <select id="selectOrder" parameterType="com.coding.pojo.PagingCustomOrder" resultMap="BaseResultMap">
+  <select id="selectOrder" parameterType="com.coding.paging.PagingCustomOrder" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
     from orders
@@ -471,7 +471,7 @@
     <!--排序规则-->
     <if test="sortByColumn != null and sortByColumn !=''">
       <if test="sortRule != null and sortRule != ''">
-        orders by ${sortByColumn} ${sortRule}
+          order by ${sortByColumn} ${sortRule}
       </if>
     </if>
     <!--分页-->

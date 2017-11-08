@@ -3,6 +3,7 @@ package com.coding.serviceImpl;
 import com.coding.Iservice.IUserService;
 import com.coding.comomInterface.ErrorExc;
 import com.coding.mapper.*;
+import com.coding.paging.*;
 import com.coding.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,8 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     private ComplaintMapper complaintMapper;
     @Autowired
     private OrdersMapper ordersMapper;
+    @Autowired
+    private OrderDetailMapper orderDetailMapper;
 
     /*----------------------------------------用户表------------------------------------------------------------------*/
 
@@ -172,10 +175,15 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     }
 
     public List<Complaint> selectComplaint(PagingCustomComplaint pagingCustomComplaint) throws Exception {
-        List<Complaint> complaints = complaintMapper.selectComplaint(pagingCustomComplaint);
-        if(complaints.isEmpty()) throw new Exception("用户投诉信息查询为空");
-//            exceptlist((List<Object>) addresses,"用户收获地址查询为空");
-        return complaints;
+       try {
+            List<Complaint> complaints = complaintMapper.selectComplaint(pagingCustomComplaint);
+            if(complaints.isEmpty()) throw new Exception("用户投诉信息查询为空");
+            return complaints;
+       }catch (Exception e){
+            if (!e.getMessage().contains("投诉信息查询为空"))
+                throw new Exception("参数查询用户投诉列表出错，请检查参数");
+            throw e;
+    }
     }
 
     /*------------------------------------------商品类别表------------------------------------------------------------------*/
@@ -192,6 +200,18 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             List<ItemType> itemTypes = itemTypeMapper.selectItemTypeAll();
             if(itemTypes.isEmpty()) throw new Exception("查询所有商品类别为空");
             return itemTypes;
+    }
+
+    public List<ItemType> selectItemType(PagingCustomItemType pagingCustomItemType) throws Exception {
+        try {
+            List<ItemType>  itemTypes = itemTypeMapper.selectItemType(pagingCustomItemType);
+            if(itemTypes.isEmpty()) throw new Exception("查询到的商品类别列表为空");
+            return itemTypes;
+        }catch (Exception e){
+            if (!e.getMessage().contains("商品类别列表为空"))
+                throw new Exception("参数查询商品类别列表出错，请检查参数");
+            throw e;
+        }
     }
 
     public Integer selectItemTypeCount() throws Exception {
@@ -319,6 +339,62 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         }catch (Exception e){
             if (!e.getMessage().contains("商品列表为空"))
                 throw new Exception("参数查询商品列表出错，请检查参数");
+            throw e;
+        }
+    }
+
+    /*------------------------------------------订单详情表------------------------------------------------------------------*/
+    public OrderDetail selectOrderDetailByPrimaryKey(Integer orderDetailId) throws Exception {
+        if (orderDetailId != null && orderDetailId != 0){
+            OrderDetail orderDetail = orderDetailMapper.selectOrderDetailByPrimaryKey(orderDetailId);
+            except(orderDetail,"根据订单ID查询订单为空");
+            return orderDetail;
+        }
+        return null;
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteOrderDetailByPrimaryKey(Integer orderDetailId) throws Exception {
+        if(orderDetailId != null && orderDetailId != 0){
+            try {
+                except(orderDetailMapper.deleteOrderDetailByPrimaryKey(orderDetailId));
+            }catch (Exception e){
+                if (!e.getMessage().contains("操作无效"))
+                    throw new Exception("删除订单详情信息时出错");
+                throw e;
+            }
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteOrderDetailByPrimaryKeyArray(Integer[] oderDetailIdArray) throws Exception {
+        if(oderDetailIdArray==null||"".equals(oderDetailIdArray))throw new Exception("没有oderDetailIdArray数组信息，批量订单详情删除出错");
+        try {
+            except(orderDetailMapper.deleteOrderDetailByPrimaryKeyArray(oderDetailIdArray));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("批量删除订单详情时出错");
+            throw e;
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void insertOrderDetailSelective(OrderDetail orderDetail) throws Exception {
+        try {
+            orderDetailMapper.insertOrderDetailSelective(orderDetail);
+        }catch (Exception e){
+            throw new Exception("添加订单详情时出错");
+        }
+    }
+
+    public List<OrderDetail> selectOrderDetail(PagingCustomOrderDetail pagingCustomOrderDetail) throws Exception {
+        try {
+            List<OrderDetail>  orderDetails = orderDetailMapper.selectOrderDetail(pagingCustomOrderDetail);
+            if(orderDetails.isEmpty()) throw new Exception("查询到的商品详情列表为空");
+            return orderDetails;
+        }catch (Exception e){
+            if (!e.getMessage().contains("商品详情列表为空"))
+                throw e;
             throw e;
         }
     }

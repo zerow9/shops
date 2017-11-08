@@ -100,6 +100,50 @@
         from item_type
     </select>
 
+    <!--商品类品综合查询信息-->
+    <select id="selectItemType" parameterType="com.coding.paging.PagingCustomItemType" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List" />
+        ,
+        <include refid="Blob_Column_List" />
+        from item_type
+      <where>
+          <if test="itemType!=null">
+            <if test="itemType.typeId!=null and itemType.typeId!=0">
+              and type_id = #{itemType.typeId}
+            </if>
+              <if test="itemType.typeName!=null and itemType.typeName!=''">
+                  and type_name = #{itemType.typeName}
+              </if>
+              <if test="itemType.fatherTypeId!=null and itemType.fatherTypeId!=0">
+                  and father_type_id = #{itemType.fatherTypeId}
+              </if>
+              <if test="itemType.typeLevel!=null and itemType.typeLevel!=0">
+                  and type_level = #{itemType.typeLevel}
+              </if>
+              <if test="itemType.typeKeyWord!=null and itemType.typeKeyWord!=''">
+                  and type_key_word REGEXP #{itemType.typeKeyWord}
+              </if>
+          </if>
+      </where>
+        <!--排序规则-->
+        <if test="sortByColumn != null and sortByColumn !=''">
+            <if test="sortRule != null and sortRule != ''">
+                order by ${sortByColumn} ${sortRule}
+            </if>
+        </if>
+        <!--分页-->
+        <if test="indexNumber != null">
+            <if test="pageNumber != null and pageNumber != 0">
+                limit #{indexNumber},#{pageNumber}
+            </if>
+        </if>
+        <if test="indexNumber == null">
+            <if test="pageNumber != null and pageNumber != 0">
+                limit 0,#{pageNumber}
+            </if>
+        </if>
+    </select>
     <!---->
     <select id="selectItemTypeCount" resultType="java.lang.Integer">
         select count(*) from item_type

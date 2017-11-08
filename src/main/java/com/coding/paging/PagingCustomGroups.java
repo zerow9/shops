@@ -1,9 +1,12 @@
-package com.coding.pojo;
+package com.coding.paging;
 
+import com.coding.pojo.Groups;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class PagingCustomGroups extends Paging {
+    @Autowired
     private Groups groups;
 
     public Groups getGroups() {

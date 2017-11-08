@@ -1,4 +1,4 @@
-package com.coding.pojo;
+package com.coding.paging;
 
 public class Paging {
     // x是当前页数，y是每页显示的个数

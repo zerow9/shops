@@ -76,7 +76,7 @@
     </select>
 
     <!--用户组查询功能模块-->
-    <select id="selectGroups" parameterType="com.coding.pojo.PagingCustomGroups" resultMap="BaseResultMap">
+    <select id="selectGroups" parameterType="com.coding.paging.PagingCustomGroups" resultMap="BaseResultMap">
         SELECT
         <include refid="Base_Column_List" />
         FROM  groups

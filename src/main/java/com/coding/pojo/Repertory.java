@@ -1,7 +1,9 @@
 package com.coding.pojo;
 
+import org.springframework.stereotype.Component;
 import java.util.Date;
 
+@Component
 public class Repertory {
     private Integer repertoryId;
 
@@ -19,8 +21,26 @@ public class Repertory {
 
     private Date updateTime;
 
+    private String puttimeToString;
+    private String updateToString;
+
     private Integer venderId;
 
+    public void setPuttimeToString(String puttimeToString) {
+        this.puttimeToString = puttimeToString;
+    }
+
+    public void setUpdateToString(String updateToString) {
+        this.updateToString = updateToString;
+    }
+
+    public String getPuttimeToString() {
+        return puttimeToString;
+    }
+
+    public String getUpdateToString() {
+        return updateToString;
+    }
 
     public Integer getRepertoryId() {
         return repertoryId;

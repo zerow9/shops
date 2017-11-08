@@ -32,8 +32,7 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">分类名称</label>
                             <div class="layui-input-block">
-                                <input type="text" name="typeName" lay-verify="required" autocomplete="off" placeholder="请输入类别名称"
-                                       class="layui-input">
+                                <input type="text" name="typeName" value="${itemtypes.typeName}" lay-verify="required" autocomplete="off" placeholder="请输入类别名称" class="layui-input">
                             </div>
                         </div>
 
@@ -41,8 +40,7 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">父类</label>
                             <div class="layui-input-block">
-                                <select name="fatherTypeId" lay-filter="fatherTypeId">
-                                    <option value="" selected=""></option>
+                                <select name="fatherTypeId" lay-filter="${itemtypes.fatherTypeId}">
                                     <option value="1" >药品</option>
                                     <option value="2">日用品</option>
                                     <option value="3">营养品</option>
@@ -57,8 +55,7 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">分类等级</label>
                             <div class="layui-input-block">
-                                <select name="typeLevel" lay-filter="typeLevel">
-                                    <option value="" selected=""></option>
+                                <select lay-filter="${itemtypes.typeLevel}" name="typeLevel">
                                     <option value="1" >一级分类</option>
                                     <option value="2">二级分类</option>
                                     <option value="3">三级分类</option>
@@ -69,7 +66,7 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">关键字</label>
                             <div class="layui-input-block">
-                                <input type="text" name="typeKeyWord" lay-verify="required" autocomplete="off" placeholder="请输入类别关键字"
+                                <input type="text" value="${itemtypes.typeKeyWord}" name="typeKeyWord" lay-verify="required" autocomplete="off" placeholder="请输入类别关键字"
                                        class="layui-input">
                             </div>
                         </div>
@@ -77,7 +74,7 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">分类描述</label>
                             <div class="layui-input-block">
-                                <input type="text" name="typeIntroduce" lay-verify="required" autocomplete="off" placeholder="请输入类别描述"
+                                <input type="text" name="typeIntroduce" value="${itemtypes.typeIntroduce}" lay-verify="required" autocomplete="off" placeholder="请输入类别描述"
                                        class="layui-input">
                             </div>
                         </div>

@@ -1,6 +1,7 @@
 package com.coding.Iservice;
 
 
+import com.coding.paging.*;
 import com.coding.pojo.*;
 import org.apache.ibatis.annotations.Param;
 
@@ -132,6 +133,15 @@ public interface IUserService {
     public List<ItemType> selectItemTypeAll()throws Exception;
 
     /**
+     * 商品类别综合查询
+     * 主键ID，名字，父类别ID，类别等级，类别关键词，排序规则，分页功能.
+     * @param pagingCustomItemType
+     * @return
+     * @throws Exception
+     */
+    public List<ItemType> selectItemType(PagingCustomItemType pagingCustomItemType) throws Exception;
+
+    /**
      * 返回商品类别表中一共有多少条数据
      * @return 封装了商品类别信息的 ItemType 类对象
      * @throws Exception
@@ -237,4 +247,45 @@ public interface IUserService {
      */
     public List<Orders> selectOrder(PagingCustomOrder pagingCustomOrder)throws Exception;
 
+     /*------------------------------------------订单详情表------------------------------------------------------------------*/
+    /**
+     * 根据订单详情主键进行查询
+     * @param orderDetailId
+     * @return
+     * @throws Exception
+     */
+    public OrderDetail selectOrderDetailByPrimaryKey (Integer orderDetailId) throws Exception;
+
+    /**
+     * 根据订单详情主键删除
+     * @param orderDetailId
+     * @return
+     * @throws Exception
+     */
+    public void deleteOrderDetailByPrimaryKey(Integer orderDetailId)throws Exception;
+
+    /**
+     * 订单详情批量删除
+     * @param oderDetailIdArray
+     * @return
+     * @throws Exception
+     */
+    public void deleteOrderDetailByPrimaryKeyArray(Integer[] oderDetailIdArray)throws Exception;
+
+    /**
+     * 插入新的订单详情
+     * @param orderDetail
+     * @return
+     * @throws Exception
+     */
+    public void insertOrderDetailSelective(OrderDetail orderDetail)throws Exception;
+
+
+    /**
+     * 订单详情综合大查询
+     * @param pagingCustomOrderDetail
+     * @return
+     * @throws Exception
+     */
+    public List<OrderDetail> selectOrderDetail (PagingCustomOrderDetail pagingCustomOrderDetail)throws Exception;
 }

@@ -1,5 +1,9 @@
 package com.coding.Iservice;
 
+import com.coding.paging.PagingCustomGroups;
+import com.coding.paging.PagingCustomNotice;
+import com.coding.paging.PagingCustomRepertory;
+import com.coding.paging.PagingCustomUser;
 import com.coding.pojo.*;
 import org.apache.ibatis.annotations.Param;
 
@@ -288,6 +292,13 @@ public interface IAdminService extends IUserService {
     public void deleteRepertoryByPrimaryKey(Integer repertoryId) throws Exception;
 
     /**
+     * 批量删除库存信息
+     * @param repertoryIdArrary
+     * @return
+     */
+    public void deleteRepertoryByPrimaryKeyArray(Integer[] repertoryIdArrary)throws Exception;
+
+    /**
      * @param repertory 封装了库存信息的 Repertory 类对象
      * @throws Exception
      */
@@ -311,6 +322,14 @@ public interface IAdminService extends IUserService {
      * @throws Exception
      */
     public List<Repertory> selectRepertoryAll() throws Exception;
+
+    /**
+     * 库存信息表的综合查询
+     * 实现：库存ID，商品ID，商店ID，排序规则，分页功能
+     * @return
+     * @throws Exception
+     */
+    public List<Repertory> selectRepertory(PagingCustomRepertory pagingCustomRepertory) throws Exception;
 
     /**
      * 返回库存表中一共有多少条数据
@@ -383,4 +402,77 @@ public interface IAdminService extends IUserService {
      * @throws Exception
      */
     public Integer selectOrderCount()throws Exception;
+
+     /*------------------------------------------订单详情表------------------------------------------------------------------*/
+    /**
+     * 根据订单详情主键修改订单详情
+     * @param orderDetail
+     * @return
+     * @throws Exception
+     */
+    public void updateOrderDetailByPrimaryKeySelective(OrderDetail orderDetail)throws Exception;
+
+    /**
+     * 查询订单详情中有多少条数据
+     * @return
+     * @throws Exception
+     */
+    public Integer selectOrderDetailCount()throws Exception;
+
+     /*------------------------------------------公告表------------------------------------------------------------------*/
+    /**
+     * 根据主键查询公告信息
+     * @param noticeId
+     * @return
+     * @throws Exception
+     */
+    public Notice selectNoticeByPrimaryKey (Integer noticeId)throws Exception;
+
+    /**
+     * 根据主键删除公告信息
+     * @param noticeId
+     * @return
+     * @throws Exception
+     */
+    public void deleteNoticeByPrimaryKey (Integer noticeId)throws Exception;
+
+    /**
+     * 根据主键批量删除公告信息
+     * @param noticeIdArrary
+     * @return
+     * @throws Exception
+     */
+    public void deleteNoticeByPrimaryKeyArray (Integer[] noticeIdArrary)throws Exception;
+
+    /**
+     * 按需添加公告信息
+     * @param notice
+     * @return
+     * @throws Exception
+     */
+    public void insertNoticeSelective (Notice notice)throws Exception;
+
+    /**
+     * 按需修改公告信息
+     * @param notice
+     * @return
+     * @throws Exception
+     */
+    public void updateNoticeByPrimaryKeySelective (Notice notice)throws Exception;
+
+    /**
+     * 公告表综合查询
+     * 实现：主键ID，是否启用，发布时间范围，排序规则，分页功能.
+     * @param pagingCustomNotice
+     * @return
+     * @throws Exception
+     */
+    public List<Notice> selectNotice (PagingCustomNotice pagingCustomNotice)throws Exception;
+
+    /**
+     * 查询公告信息总数
+     * @return
+     * @throws Exception
+     */
+    public int selectNoticeCount ()throws Exception;
 }

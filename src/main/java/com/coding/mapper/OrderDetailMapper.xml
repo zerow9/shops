@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coding.mapper.OrderDetailMapper" >
+  <!--分装订单详情表-->
+  <resultMap id="BaseResultMap" type="com.coding.pojo.OrderDetail" >
+    <id column="order_detail_id" property="orderDetailId" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="item_id" property="itemId" jdbcType="INTEGER" />
+    <result column="item_price" property="itemPrice" jdbcType="DOUBLE" />
+    <result column="item_number" property="itemNumber" jdbcType="INTEGER" />
+    <result column="item_sum_price" property="itemSumPrice" jdbcType="DOUBLE" />
+    <result column="use_score" property="useScore" jdbcType="INTEGER" />
+    <result column="send_score" property="sendScore" jdbcType="INTEGER" />
+    <result column="user_uuid" property="userUuid" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    order_detail_id, order_id, item_id, item_price, item_number, item_sum_price, use_score,
+    send_score, user_uuid
+  </sql>
+
+
+  <!--根据订单详情ID查询-->
+  <select id="selectOrderDetailByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from order_detail
+    where order_detail_id = #{orderDetailId,jdbcType=INTEGER}
+  </select>
+  <!--根据订单详情主键删除-->
+  <delete id="deleteOrderDetailByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from order_detail
+    where order_detail_id = #{orderDetailId,jdbcType=INTEGER}
+  </delete>
+
+  <!--批量删除订单详情-->
+  <delete id="deleteOrderDetailByPrimaryKeyArray" parameterType="java.lang.Integer">
+    delete from order_detail where order_detail_id IN
+    <foreach collection="oderDetailIdArray" item="orderDetail" open="(" separator="," close=")">
+      #{orderDetail}
+    </foreach>
+  </delete>
+
+  <!--按需插入-->
+  <insert id="insertOrderDetailSelective" parameterType="com.coding.pojo.OrderDetail" >
+    insert into order_detail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="itemId != null" >
+        item_id,
+      </if>
+      <if test="itemPrice != null" >
+        item_price,
+      </if>
+      <if test="itemNumber != null" >
+        item_number,
+      </if>
+      <if test="itemSumPrice != null" >
+        item_sum_price,
+      </if>
+      <if test="useScore != null" >
+        use_score,
+      </if>
+      <if test="sendScore != null" >
+        send_score,
+      </if>
+      <if test="userUuid != null" >
+        user_uuid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null" >
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemPrice != null" >
+        #{itemPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="itemNumber != null" >
+        #{itemNumber,jdbcType=INTEGER},
+      </if>
+      <if test="itemSumPrice != null" >
+        #{itemSumPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="useScore != null" >
+        #{useScore,jdbcType=INTEGER},
+      </if>
+      <if test="sendScore != null" >
+        #{sendScore,jdbcType=INTEGER},
+      </if>
+      <if test="userUuid != null" >
+        #{userUuid,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!--按需修改-->
+  <update id="updateOrderDetailByPrimaryKeySelective" parameterType="com.coding.pojo.OrderDetail" >
+    update order_detail
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null" >
+        item_id = #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemPrice != null" >
+        item_price = #{itemPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="itemNumber != null" >
+        item_number = #{itemNumber,jdbcType=INTEGER},
+      </if>
+      <if test="itemSumPrice != null" >
+        item_sum_price = #{itemSumPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="useScore != null" >
+        use_score = #{useScore,jdbcType=INTEGER},
+      </if>
+      <if test="sendScore != null" >
+        send_score = #{sendScore,jdbcType=INTEGER},
+      </if>
+      <if test="userUuid != null" >
+        user_uuid = #{userUuid,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where order_detail_id = #{orderDetailId,jdbcType=INTEGER}
+  </update>
+
+  <!--订单详情表大查询-->
+  <select id="selectOrderDetail" parameterType="com.coding.paging.PagingCustomOrderDetail" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from order_detail
+    <where>
+
+      <!--根据order基本信息进行查询-->
+      <if test="orderDetail != null and orderDetail != ''">
+        <!--根据主键ID查找订单详情信息-->
+        <if test="orderDetail.orderDetailId != null and orderDetail.orderDetailId != 0">
+          and order_detail_id = #{orderDetail.orderDetailId}
+        </if>
+      <!--根据订单ID查找订单详情信息-->
+      <if test="orderDetail.orderId != null and orderDetail.orderId != 0">
+        and order_id = #{orderDetail.orderId}
+      </if>
+      <!--根据商品ID查找订单详情信息-->
+      <if test="orderDetail.itemId != null and orderDetail.itemId != 0">
+        and item_id = #{orderDetail.itemId}
+      </if>
+      <!--根据用户ID查找订单详情信息-->
+      <if test="orderDetail.userUuid != null and orderDetail.userUuid != ''">
+        and user_uuid = #{orderDetail.userUuid}
+      </if>
+      </if>
+
+      <!--根据订单详情的总价范围查询订单详情信息-->
+      <if test="formerOrderDetailitemSumPrice != null and formerOrderDetailitemSumPrice != 0">
+        <!--给定了最小值和最大值-->
+        <if test="latterOrderDetailitemSumPrice != null and latterOrderDetailitemSumPrice != 0">
+          <!--以下三种情况分别列出-->
+          <if test="formerOrderDetailitemSumPrice == latterOrderDetailitemSumPrice">
+            and item_sum_price = #{latterOrderDetailitemSumPrice}
+          </if>
+          <if test="formerOrderDetailitemSumPrice &lt; latterOrderDetailitemSumPrice">
+            and item_sum_price between #{formerOrderDetailitemSumPrice} and #{latterOrderDetailitemSumPrice}
+          </if>
+          <if test="formerOrderDetailitemSumPrice &gt; latterOrderDetailitemSumPrice">
+            and item_sum_price between #{latterOrderDetailitemSumPrice} and #{formerOrderDetailitemSumPrice}
+          </if>
+        </if>
+        <!--只给定了最小值-->
+        <if test="latterOrderDetailitemSumPrice == null or latterOrderDetailitemSumPrice == 0">
+          and item_sum_price &gt;= #{formerOrderDetailitemSumPrice}
+        </if>
+      <!--只给定了最大值-->
+      <if test="formerOrderDetailitemSumPrice == null or formerOrderDetailitemSumPrice == 0">
+        <if test="latterOrderDetailitemSumPrice != null and latterOrderDetailitemSumPrice != 0">
+          and  item_sum_price &lt;= #{latterOrderDetailitemSumPrice}
+        </if>
+      </if>
+      </if>
+    </where>
+    <!--排序规则-->
+    <if test="sortByColumn != null and sortByColumn !=''">
+      <if test="sortRule != null and sortRule != ''">
+        order by ${sortByColumn} ${sortRule}
+      </if>
+    </if>
+    <!--分页-->
+    <if test="indexNumber != null">
+      <if test="pageNumber != null and pageNumber != 0">
+        limit #{indexNumber},#{pageNumber}
+      </if>
+    </if>
+    <if test="indexNumber == null">
+      <if test="pageNumber != null and pageNumber != 0">
+        limit 0,#{pageNumber}
+      </if>
+    </if>
+  </select>
+
+  <!--查询订单表中共有多少数据-->
+  <select id="selectOrderDetailCount" resultType="java.lang.Integer">
+    select count(*) from order_detail
+  </select>
+</mapper>

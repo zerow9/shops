@@ -29,12 +29,16 @@
     <div class="row" style="padding-bottom: 10%;" >
         <div class="col-sm-5" style="text-align: center;" >
             <form method="post" action="/login.action">
-                <h4 class="no-margins">登录：</h4>
+                <h4 class="no-margins">登录</h4>
                 <p class="m-t-md">欢迎访问孝和管理后台</p>
                 <input type="text" class="form-control uname" placeholder="用户名" name="username"/>
                 <input type="password" class="form-control pword m-b" placeholder="密码" name="password"/>
-                <input type="checkbox" name="rememberMe" >记住密码
                 <div id="drag"></div>
+                <div  class="h-h-y">
+
+                <div class="h-h-y-1"><input type="checkbox" name="rememberMe" >记住密码</div>
+                <div class="h-h-y-2"><input type="checkbox" name="rememberMe" >自动登录</div>
+                </div>
                 <button class="btn btn-success btn-block">登录</button>
             </form>
         </div>

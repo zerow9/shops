@@ -6,7 +6,7 @@ import com.coding.comomInterface.MyUUID;
 import com.coding.pojo.Admin;
 import com.coding.pojo.Groups;
 import com.coding.pojo.User;
-import com.coding.pojo.templet.JsonFormat;
+import com.coding.json.JsonFormat;
 
 import net.sf.json.JSONObject;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
