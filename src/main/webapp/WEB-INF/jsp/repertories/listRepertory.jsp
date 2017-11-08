@@ -54,7 +54,6 @@
                     </div>
 
                     <div class="ibox-content">
-
                         <div class="layui-btn-group demoTable">
                             <button class="layui-btn" data-type="getCheckLength">批量删除</button>
                             <button class="layui-btn" data-type="isAll">全选</button>
@@ -63,19 +62,19 @@
 
                         <div class="table-responsive">
 
-                            <table class="layui-table" lay-data="{url:'<%=basePath%>repertory/getRepertoryAll.action', page:true, id:'repertoryId'}"
-                                   lay-filter="goods_lists_table">
+                            <table class="layui-table" lay-data="{url:'getRepertoryAll.action', page:true, id:'repertoryId'}"
+                                   lay-filter="demo">
                                 <thead>
                                 <tr>
                                     <th lay-data="{checkbox:true, fixed: true}"></th>
-                                    <th lay-data="{field:'repertoryId', width:100，fixed='true'}">库存编号</th>
+                                    <th lay-data="{field:'repertoryId', width:100, fixed:true}">库存编号</th>
                                     <th lay-data="{field:'itemId', width:100}">商品编号</th>
                                     <th lay-data="{field:'itemMarketPrice', width:200}">商品市场价格</th>
                                     <th lay-data="{field:'itemOriginalPrice', width:200}">商品原始价格</th>
                                     <th lay-data="{field:'shopId', width:200}">商店</th>
                                     <th lay-data="{field:'repertoryNumber', width:200}">库存量</th>
-                                    <th lay-data="{field:'repertoryPuttime', width:200}">入库时间</th>
-                                    <th lay-data="{field:'updateTime', width:100,}">修改时间</th>
+                                    <th lay-data="{field:'puttimeToString', width:200}">入库时间</th>
+                                    <th lay-data="{field:'updateToString', width:100,}">修改时间</th>
                                     <th lay-data="{field:'venderId', width:100}">商家编号</th>
                                     <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#operate_bar'}">
                                         操作
@@ -99,9 +98,9 @@
 </script>
 
 <script type="text/html" id="operate_bar">
-    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
-    <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail"><i class="fa fa-eye" aria-hidden="true" title="查看"></i></a>
+    <a class="layui-btn layui-btn-mini" lay-event="edit"><i class="fa fa-edit" aria-hidden="true" title="编辑"></i></a>
+    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del"><i class="fa fa-trash" aria-hidden="true" title="删除"></i></a>
 </script>
 
 <script src="../../../js/extends/jquery/jquery.min.js"></script>

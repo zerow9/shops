@@ -7,10 +7,10 @@ To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme() + "://"
-+ request.getServerName() + ":" + request.getServerPort()
-+ path + "/";
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://"
+            + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";
 %>
 
 <html>
@@ -39,6 +39,15 @@ String basePath = request.getScheme() + "://"
 
                 <div class="ibox-content">
                     <form class="layui-form" action="">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">商品编号</label>
+                                <div class="layui-input-block">
+                                    <input type="text" name="itemId" autocomplete="off" placeholder="0" class="layui-input" lay-verify="required">
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="layui-form-item">
                             <div class="layui-inline">
                                 <label class="layui-form-label">商品名称</label>
@@ -73,6 +82,7 @@ String basePath = request.getScheme() + "://"
                                            placeholder="￥" class="layui-input" lay-verify="required">
                                 </div>
                             </div>
+
                             <div class="layui-inline">
                                 <label class="layui-form-label">原始价格</label>
                                 <div class="layui-input-block">
@@ -89,7 +99,7 @@ String basePath = request.getScheme() + "://"
                                 <label class="layui-form-label">入库时间</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="repertoryPuttime" id="date1" lay-verify="date"
-                                           placeholder="yyyy-MM-dd" autocomplete="off"
+                                           placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off"
                                            placeholder="入库时间" class="layui-input">
                                 </div>
                             </div>
@@ -97,7 +107,7 @@ String basePath = request.getScheme() + "://"
                                 <label class="layui-form-label">修改时间</label>
                                 <div class="layui-input-block">
                                     <input type="text" name="updateTime" id="date2" lay-verify="date"
-                                           placeholder="yyyy-MM-dd" autocomplete="off"
+                                           placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off"
                                            placeholder="修改时间" class="layui-input">
                                 </div>
                             </div>

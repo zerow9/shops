@@ -54,7 +54,6 @@
                     </div>
 
                     <div class="ibox-content">
-
                         <div class="layui-btn-group demoTable">
                             <button class="layui-btn" data-type="getCheckLength">批量删除</button>
                             <button class="layui-btn" data-type="isAll">全选</button>

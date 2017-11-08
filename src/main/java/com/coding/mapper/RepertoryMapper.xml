@@ -7,6 +7,14 @@
     where repertory_id = #{repertoryId,jdbcType=INTEGER}
     </delete>
 
+    <!--批量删除库存-->
+    <delete id="deleteRepertoryByPrimaryKeyArray" parameterType="java.lang.Integer">
+        delete from repertory where repertory_id IN
+        <foreach collection="repertoryIdArrary" item="repertory" open="(" separator="," close=")">
+            #{repertory}
+        </foreach>
+    </delete>
+
     <!--增加库存信息-->
     <insert id="insertRepertory" parameterType="com.coding.pojo.Repertory">
         insert into repertory (item_id, item_market_price,

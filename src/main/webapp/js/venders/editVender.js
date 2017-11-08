@@ -47,7 +47,7 @@ layui.use(['form', 'layedit', 'laydate'], function () {
         var parm = data.field;
         console.log(parm)
         $.ajax({
-            url: 'insertyVenderaction',
+            url: 'updateVenderaction',
             data: parm,
             type: "POST",
             async: false,
