@@ -39,6 +39,15 @@ To change this template use File | Settings | File Templates.
 
                 <div class="ibox-content">
                     <form class="layui-form" action="">
+
+                        <div class="layui-inline">
+                            <label class="layui-form-label">厂商编号</label>
+                            <div class="layui-input-inline">
+                                <input type="text" name="venderId" autocomplete="off"
+                                       class="layui-input" value="${vender.venderId}" readonly>
+                            </div>
+                        </div>
+
                         <div class="layui-form-item">
                             <label class="layui-form-label">厂商名称</label>
                             <div class="layui-input-block">
@@ -51,7 +60,7 @@ To change this template use File | Settings | File Templates.
                             <label class="layui-form-label">厂商地址</label>
                             <div class="layui-input-block">
                                 <input type="text" name="venderAddress" lay-verify="required" autocomplete="off"
-                                       placeholder="请输入厂商地址" class="layui-input" value="${vender.venderAddress}" >
+                                       placeholder="请输入厂商地址" class="layui-input" value="${vender.venderAddress}">
                             </div>
                         </div>
 
@@ -60,14 +69,14 @@ To change this template use File | Settings | File Templates.
                                 <label class="layui-form-label">电话号码</label>
                                 <div class="layui-input-inline">
                                     <input type="tel" name="venderPhone" lay-verify="phone" autocomplete="off"
-                                           placeholder="请输入电话号码" class="layui-input" value="${vender.venderPhone}" >
+                                           placeholder="请输入电话号码" class="layui-input" value="${vender.venderPhone}">
                                 </div>
                             </div>
                             <div class="layui-inline">
                                 <label class="layui-form-label">工商编号</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" name="icId"  autocomplete="off"
-                                           class="layui-input" value="${vender.icId}" >
+                                    <input type="text" name="icId" autocomplete="off"
+                                           class="layui-input" value="${vender.icId}">
                                 </div>
                             </div>
                         </div>
@@ -77,14 +86,14 @@ To change this template use File | Settings | File Templates.
                                 <label class="layui-form-label">邮箱</label>
                                 <div class="layui-input-inline">
                                     <input type="text" name="venderEmail" lay-verify="email" autocomplete="off"
-                                           class="layui-input" value="${vender.venderEmail}" >
+                                           class="layui-input" value="${vender.venderEmail}">
                                 </div>
                             </div>
                             <div class="layui-inline">
                                 <label class="layui-form-label">邮编</label>
                                 <div class="layui-input-inline">
                                     <input type="text" name="venderPost" lay-verify="required" autocomplete="off"
-                                           class="layui-input" value="${vender.venderPost}" >
+                                           class="layui-input" value="${vender.venderPost}">
                                 </div>
                             </div>
                         </div>
@@ -93,7 +102,7 @@ To change this template use File | Settings | File Templates.
                             <label class="layui-form-label">经营范围</label>
                             <div class="layui-input-block">
                                 <input type="text" name="businessRange" lay-verify="required" autocomplete="off"
-                                       placeholder="请输入经营范围" class="layui-input" value="${vender.businessRange}" >
+                                       placeholder="请输入经营范围" class="layui-input" value="${vender.businessRange}">
                             </div>
                         </div>
 

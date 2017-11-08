@@ -14,7 +14,7 @@ layui.use('table', function () {
                 title:"查看用户",
                 shadeClose: true,
                 shade: 0.3,
-                content: 'seeVenderIdByKey.action?adminId='+data.venderId, //注意，如果str是object，那么需要字符拼接。
+                content: 'seeVenderIdByKey.action?venderId='+data.venderId, //注意，如果str是object，那么需要字符拼接。
                 maxmin: true,
                 area: ['80%', '90%']
             });
@@ -39,12 +39,12 @@ layui.use('table', function () {
         } else if (obj.event === 'edit') {
             layer.open({
                 type: 2,
-                title: "修改管理员",
+                title: "修改厂商",
                 shadeClose: true,
                 shade: 0.3,
                 maxmin: true,
                 area: ['80%', '90%'],
-                content: 'updateVender.action?id=' + data.venderId, //注意，如果str是object，那么需要字符拼接。
+                content: 'updateVender.action?venderId=' + data.venderId, //注意，如果str是object，那么需要字符拼接。
             });
         }
     });

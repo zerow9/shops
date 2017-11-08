@@ -108,12 +108,11 @@
                         </li>
                         <li><a class="J_menuItem" href="/itemType/forwardItemTypeList.action">商品分类</a>
                         </li>
-                        <li><a class="J_menuItem" href="/repertories/forwardRepertories.action">库存管理</a>
-                        </li>
+                        <li><a class="J_menuItem" href="/repertories/forwardRepertories.action">库存管理</a></li>
+                        <li><a class="J_menuItem" href="/venders/forwardVenders.action">厂商管理</a></li>
                     </ul>
                 </li>
 
-                <!--订单管理-->
                 <li>
                     <a href="#">
                         <i class="fa fa-first-order"></i>
