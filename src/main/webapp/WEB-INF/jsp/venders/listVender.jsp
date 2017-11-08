@@ -63,8 +63,8 @@
 
                         <div class="table-responsive">
 
-                            <table class="layui-table" lay-data="{url:'<%=basePath%>admin/getVenderAll.action', page:true, id:'venderId'}"
-                                   lay-filter="goods_lists_table">
+                            <table class="layui-table" lay-data="{url:'../../../data/testVender.json', page:true, id:'venderId'}"
+                                   lay-filter="demo">
                                 <thead>
                                 <tr>
                                     <th lay-data="{checkbox:true, fixed: true}"></th>

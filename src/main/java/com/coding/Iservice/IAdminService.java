@@ -291,6 +291,13 @@ public interface IAdminService extends IUserService {
     public void deleteRepertoryByPrimaryKey(Integer repertoryId) throws Exception;
 
     /**
+     * 批量删除库存信息
+     * @param repertoryIdArrary
+     * @return
+     */
+    public void deleteRepertoryByPrimaryKeyArray(Integer[] repertoryIdArrary)throws Exception;
+
+    /**
      * @param repertory 封装了库存信息的 Repertory 类对象
      * @throws Exception
      */
