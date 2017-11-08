@@ -14,7 +14,7 @@
         <img src="../../shopmanagement/img/404/404-1.png"/>
         <div class="sub">
             <br><br>
-            <p><a href="#">返回首页 </a></p></div>
+            <p><a href="#">返回 </a></p></div>
     </div>
 </div>
 

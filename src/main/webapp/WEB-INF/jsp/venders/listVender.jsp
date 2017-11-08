@@ -68,7 +68,7 @@
                                 <thead>
                                 <tr>
                                     <th lay-data="{checkbox:true, fixed: true}"></th>
-                                    <th lay-data="{field:'venderId', width:100，fixed='true'}">编号</th>
+                                    <th lay-data="{field:'venderId', width:100, fixed:true}">编号</th>
                                     <th lay-data="{field:'venderName', width:100}">名称</th>
                                     <th lay-data="{field:'venderAddress', width:200}">地址</th>
                                     <th lay-data="{field:'venderPhone', width:200}">电话</th>

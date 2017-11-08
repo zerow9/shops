@@ -2,9 +2,7 @@ package com.coding.paging;
 
 import com.coding.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
 public class PagingCustomUser extends Paging{
 
     private Integer formerAge;//一些功能需要年龄范围内查询，这是左侧较小值
