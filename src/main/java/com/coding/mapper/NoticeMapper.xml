@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coding.mapper.NoticeMapper" >
+  <resultMap id="BaseResultMap" type="com.coding.pojo.Notice" >
+    <id column="notice_id" property="noticeId" jdbcType="INTEGER" />
+    <result column="noice_time" property="noiceTime" jdbcType="TIMESTAMP" />
+    <result column="is_use" property="isUse" jdbcType="INTEGER" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.coding.pojo.Notice" extends="BaseResultMap" >
+    <result column="notice_content" property="noticeContent" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    notice_id, noice_time, is_use
+  </sql>
+  <sql id="Blob_Column_List" >
+    notice_content
+  </sql>
+ <!--根据主键查询公告信息-->
+  <select id="selectNoticeByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from notice
+    where notice_id = #{noticeId,jdbcType=INTEGER}
+  </select>
+  <!--根据主键删除公告信息-->
+  <delete id="deleteNoticeByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from notice
+    where notice_id = #{noticeId,jdbcType=INTEGER}
+  </delete>
+
+  <!--批量删除库存-->
+  <delete id="deleteNoticeByPrimaryKeyArray" parameterType="java.lang.Integer">
+    delete from notice where notice_id IN
+    <foreach collection="noticeIdArrary" item="noticeId" open="(" separator="," close=")">
+      #{noticeId}
+    </foreach>
+  </delete>
+
+<!--按需插入-->
+  <insert id="insertNoticeSelective" parameterType="com.coding.pojo.Notice" >
+    insert into notice
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="noiceTime != null" >
+        noice_time,
+      </if>
+      <if test="isUse != null" >
+        is_use,
+      </if>
+      <if test="noticeContent != null" >
+        notice_content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="noiceTime != null" >
+        #{noiceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isUse != null" >
+        #{isUse,jdbcType=INTEGER},
+      </if>
+      <if test="noticeContent != null" >
+        #{noticeContent,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+<!--按需修改-->
+  <update id="updateNoticeByPrimaryKeySelective" parameterType="com.coding.pojo.Notice" >
+    update notice
+    <set >
+      <if test="noiceTime != null" >
+        noice_time = #{noiceTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isUse != null" >
+        is_use = #{isUse,jdbcType=INTEGER},
+      </if>
+
+      <if test="noticeContent != null" >
+        notice_content = #{noticeContent,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where notice_id = #{noticeId,jdbcType=INTEGER}
+  </update>
+
+  <!--公布表的查询大SQL-->
+  <select id="selectNotice" parameterType="com.coding.paging.PagingCustomNotice" resultMap="ResultMapWithBLOBs" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from notice
+    <where>
+      <!--根据公告基本信息进行查询-->
+      <if test="notice != null">
+        <!--根据主键查询公告信息-->
+        <if test="notice.noticeId != null and notice.noticeId != 0">
+          and notice_id = #{notice.noticeId}
+        </if>
+        <!--根据是否启用 查询公告信息-->
+        <if test="notice.isUse != null and notice.isUse != 0">
+          and is_use = #{notice.isUse}
+        </if>
+      </if>
+
+      <!--根据公告发布时间范围查询公告信息-->
+      <if test="formerNoiceTime != null and formerNoiceTime != ''">
+        <!--给定了最小值和最大值-->
+        <if test="latterNoiceTime != null and latterNoiceTime != ''">
+          <!--以下三种情况分别列出-->
+          <if test="formerNoiceTime == latterNoiceTime">
+            and noice_time = #{latterNoiceTime}
+          </if>
+          <if test="formerNoiceTime &lt; latterNoiceTime">
+            and noice_time between #{formerNoiceTime} and #{latterNoiceTime}
+          </if>
+          <if test="formerNoiceTime &gt; latterNoiceTime">
+            and noice_time between #{latterNoiceTime} and #{formerNoiceTime}
+          </if>
+        </if>
+        <!--只给定了最小值-->
+        <if test="latterNoiceTime == null or latterNoiceTime == ''">
+          and noice_time &gt;= #{formerNoiceTime}
+        </if>
+      </if>
+      <!--只给定了最大值-->
+      <if test="formerNoiceTime == null or formerNoiceTime == ''">
+        <if test="latterNoiceTime != null and latterNoiceTime != ''">
+          and  noice_time &lt;= #{latterNoiceTime}
+        </if>
+      </if>
+
+    </where>
+    <!--排序规则-->
+    <if test="sortByColumn != null and sortByColumn !=''">
+      <if test="sortRule != null and sortRule != ''">
+        order by ${sortByColumn} ${sortRule}
+      </if>
+    </if>
+    <!--分页-->
+    <if test="indexNumber != null">
+      <if test="pageNumber != null and pageNumber != 0">
+        limit #{indexNumber},#{pageNumber}
+      </if>
+    </if>
+    <if test="indexNumber == null">
+      <if test="pageNumber != null and pageNumber != 0">
+        limit 0,#{pageNumber}
+      </if>
+    </if>
+  </select>
+
+  <!--查询库存表中一共有多少数据-->
+  <select id="selectNoticeCount" resultType="java.lang.Integer">
+    select count(*) from notice
+  </select>
+</mapper>
