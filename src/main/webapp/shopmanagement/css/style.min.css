@@ -15,9 +15,10 @@ h3 {
 }
 
 h4 {
-    font-size: 14px
+    font-size: 16px;
+    font-weight: bold;
+    color: snow;
 }
-
 h5 {
     font-size: 12px
 }
@@ -3954,8 +3955,9 @@ a.close-canvas-menu:hover {
 
 .m-t-md {
     margin-top: 20px;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: bold;
+    color: snow;
 }
 
 .m-t-lg {
