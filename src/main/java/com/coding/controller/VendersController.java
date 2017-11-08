@@ -44,6 +44,7 @@ public class VendersController {
     @RequestMapping("deleteVenderByPrimaryKey")
     public boolean deleteVenderByPrimaryKey(Integer venderId) throws Exception {
         adminService.deleteVenderByPrimaryKey(venderId);
+        counts--;
         return true;
     }
 
@@ -70,6 +71,7 @@ public class VendersController {
     @RequestMapping("insertyVenderaction")
     public boolean insertyVenderaction(Vender vender) throws Exception {
         adminService.insertVender(vender);
+        counts++;
         return true;
     }
 
@@ -85,6 +87,7 @@ public class VendersController {
         for (int i = 0; i < strings.length; i++) {
             integer[i] = Integer.valueOf(strings[i]);
         }
+        counts-=strings.length;
         adminService.deleteVenderByPrimaryKeyArray(integer);
         return true;
     }
