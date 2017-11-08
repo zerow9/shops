@@ -1,6 +1,9 @@
 layui.use('table', function () {
     var table = layui.table;
 
+    //定义JQuery
+    var $ = layui.$;
+
     //监听表格复选框选择
     table.on('checkbox(demo)', function (obj) {
         console.log(obj)

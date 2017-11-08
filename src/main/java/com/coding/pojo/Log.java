@@ -2,6 +2,8 @@ package com.coding.pojo;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 public class Log {
     private Integer logId;
@@ -10,7 +12,7 @@ public class Log {
 
     private String logHistoryIp;
 
-    private String logLandTime;
+    private Date logLandTime;
 
     private String logSpace;
 
@@ -21,6 +23,16 @@ public class Log {
     private String itemTypeStatus;
 
     private String logKeyWord;
+
+    private String dateToString;
+
+    public String getDateToString() {
+        return dateToString;
+    }
+
+    public void setDateToString(String dateToString) {
+        this.dateToString = dateToString;
+    }
 
     public Integer getLogId() {
         return logId;
@@ -46,11 +58,11 @@ public class Log {
         this.logHistoryIp = logHistoryIp ;
     }
 
-    public String getLogLandTime() {
+    public Date getLogLandTime() {
         return logLandTime;
     }
 
-    public void setLogLandTime(String logLandTime) {
+    public void setLogLandTime(Date logLandTime) {
         this.logLandTime = logLandTime;
     }
 
