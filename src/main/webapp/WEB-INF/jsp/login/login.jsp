@@ -35,6 +35,7 @@
                 <input type="password" class="form-control pword m-b" placeholder="密码" name="password"/>
                 <div id="drag"></div>
                 <div  class="h-h-y">
+
                 <div class="h-h-y-1"><input type="checkbox" name="rememberMe" >记住密码</div>
                 <div class="h-h-y-2"><input type="checkbox" name="rememberMe" >自动登录</div>
                 </div>
