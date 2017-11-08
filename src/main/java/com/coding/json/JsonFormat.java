@@ -1,4 +1,4 @@
-package com.coding.pojo.templet;
+package com.coding.json;
 
 
 import java.util.List;

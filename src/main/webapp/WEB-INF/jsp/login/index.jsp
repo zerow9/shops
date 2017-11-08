@@ -108,7 +108,7 @@
                         </li>
                         <li><a class="J_menuItem" href="/itemType/forwardItemTypeList.action">商品分类</a>
                         </li>
-                        <li><a class="J_menuItem" href="../../../jsp/admin/goods/inventory_list.jsp">库存管理</a>
+                        <li><a class="J_menuItem" href="/repertories/forwardRepertories.action">库存管理</a>
                         </li>
                     </ul>
                 </li>

@@ -1,9 +1,9 @@
 package com.coding.controller;
 
 import com.coding.Iservice.IAdminService;
-import com.coding.Iservice.IUserService;
 import com.coding.pojo.ItemType;
-import com.coding.pojo.templet.JsonFormat;
+import com.coding.paging.PagingCustomItemType;
+import com.coding.json.JsonFormat;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,9 +29,14 @@ public class ItemTypeController {
 
     @RequestMapping("getitemTypes")
     @ResponseBody
-    public String getitemTypes() throws Exception {
-        List<ItemType> itemType = adminService.selectItemTypeAll();
-        JsonFormat<ItemType> json = new JsonFormat<>(itemType, itemType.size(), null, null);
+    public String getitemTypes(Integer page, Integer limit) throws Exception {
+        PagingCustomItemType pagingCustomItemType = new PagingCustomItemType();
+        pagingCustomItemType.setIndexNumber((page - 1) * limit);
+        pagingCustomItemType.setPageNumber(limit);
+        if ((page == 1 && counts == null) || counts == null)
+            counts = adminService.selectItemTypeCount();
+        List<ItemType> items = adminService.selectItemType(pagingCustomItemType);
+        JsonFormat<ItemType> json = new JsonFormat<>(items, counts, null, null);
         JSONObject jsonObject = JSONObject.fromObject(json);
         return jsonObject.toString();
     }

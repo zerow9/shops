@@ -57,7 +57,6 @@ layui.use('table', function () {
                 layer.alert(JSON.stringify(data));
             },
             getCheckLength: function () { //获取选中数目
-
                 var array = new Array();//定义数组
                 var checkStatus = table.checkStatus('itemId'),
                     data = checkStatus.data;

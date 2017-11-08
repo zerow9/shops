@@ -2,11 +2,7 @@ package com.coding.comomInterface;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
-
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-import java.util.UUID;
 
 public class DateToString {
 
