@@ -421,6 +421,17 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         }
     }
     }
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteRepertoryByPrimaryKeyArray(Integer[] repertoryIdArrary) throws Exception {
+        if(repertoryIdArrary==null||"".equals(repertoryIdArrary))throw new Exception("没有repertoryIdArrary数组信息，批量库存删除出错");
+        try {
+            except(repertoryMapper.deleteRepertoryByPrimaryKeyArray(repertoryIdArrary));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("批量删除库存时出错");
+            throw e;
+        }
+    }
 
     @Transactional(rollbackFor =Exception.class )
     public void insertRepertory(Repertory repertory) throws Exception {
