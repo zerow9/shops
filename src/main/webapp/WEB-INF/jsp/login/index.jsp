@@ -121,7 +121,7 @@
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="../../../jsp/admin/order/order_list.jsp">订单列表</a>
+                        <li><a class="J_menuItem" href="order/orderList.action">订单列表</a>
                         </li>
                         <li><a class="J_menuItem" href="#">未完成订单</a>
                         </li>

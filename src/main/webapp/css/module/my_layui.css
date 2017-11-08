@@ -19,6 +19,10 @@
     font-size: 18px;
 }
 
-#hello {
+.ibox-title h5 {
+    padding-left: 20px;
+}
+
+.detail_info {
     background-color: #0d8ddb;
 }
