@@ -2,10 +2,7 @@ package com.coding.serviceImpl;
 
 import com.coding.Iservice.IAdminService;
 import com.coding.mapper.*;
-import com.coding.paging.PagingCustomGroups;
-import com.coding.paging.PagingCustomNotice;
-import com.coding.paging.PagingCustomRepertory;
-import com.coding.paging.PagingCustomUser;
+import com.coding.paging.*;
 import com.coding.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -39,6 +36,8 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     private OrderDetailMapper orderDetailMapper;
     @Autowired
     private NoticeMapper noticeMapper;
+    @Autowired
+    private LogMapper logMapper;
 
     /*------------------------------------------用户表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
@@ -651,7 +650,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
             return notices;
         }catch (Exception e){
             if (!e.getMessage().contains("公告列表为空"))
-                throw e;
+                throw new Exception("参数公告列表出错，请检查参数");
             throw e;
         }
     }
@@ -661,6 +660,82 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
             return  noticeMapper.selectNoticeCount();
         }catch (Exception e){
             throw new Exception("查询公告信息总数时出错");
+        }
+    }
+
+    /*------------------------------------------公告表------------------------------------------------------------------*/
+    public Log selectLogByPrimaryKey(Integer logId) throws Exception {
+        if (logId != null && logId != 0){
+            Log log = logMapper.selectLogByPrimaryKey(logId);
+            except(log,"根据日志ID查询日志为空");
+            return log;
+        }
+        return null;
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteLogByPrimaryKey(Integer logId) throws Exception {
+        if(logId != null && logId != 0){
+            try {
+                except(logMapper.deleteLogByPrimaryKey(logId));
+            }catch (Exception e){
+                if (!e.getMessage().contains("操作无效"))
+                    throw new Exception("删除日志信息时出错");
+                throw e;
+            }
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteLogByPrimaryKeyArray(Integer[] logIdArrary) throws Exception {
+        if(logIdArrary==null||"".equals(logIdArrary))throw new Exception("没有logIdArrary数组信息，批量日志删除出错");
+        try {
+            except(logMapper.deleteLogByPrimaryKeyArray(logIdArrary));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("批量删除日志时出错");
+            throw e;
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void insertLogSelective(Log log) throws Exception {
+        try {
+            logMapper.insertLogSelective(log);
+        }catch (Exception e){
+            throw new Exception("添加日志时出错");
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void updateLogByPrimaryKeySelective(Log log) throws Exception {
+        try {
+            except(logMapper.updateLogByPrimaryKeySelective(log));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("修改日志信息时出错");
+            throw e;
+        }
+    }
+
+    public List<Log> selectLog(PagingCustomLog pagingCustomLog) throws Exception {
+        try {
+            List<Log>  logs = logMapper.selectLog(pagingCustomLog);
+            if(logs.isEmpty()) throw new Exception("查询到的日志列表为空");
+            return logs;
+        }catch (Exception e){
+            if (!e.getMessage().contains("日志列表为空"))
+//                throw new Exception("参数查询日志列表出错，请检查参数");
+                throw e;
+            throw e;
+        }
+    }
+
+    public int selectLogCount() throws Exception {
+        try {
+            return  logMapper.selectLogCount();
+        }catch (Exception e){
+            throw new Exception("查询日志信息总数时出错");
         }
     }
 

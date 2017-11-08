@@ -1,9 +1,6 @@
 package com.coding.Iservice;
 
-import com.coding.paging.PagingCustomGroups;
-import com.coding.paging.PagingCustomNotice;
-import com.coding.paging.PagingCustomRepertory;
-import com.coding.paging.PagingCustomUser;
+import com.coding.paging.*;
 import com.coding.pojo.*;
 import org.apache.ibatis.annotations.Param;
 
@@ -475,4 +472,62 @@ public interface IAdminService extends IUserService {
      * @throws Exception
      */
     public int selectNoticeCount ()throws Exception;
+
+    /*------------------------------------------日志表------------------------------------------------------------------*/
+    /**
+     * 根据ID主键查询日志信息
+     * @param logId
+     * @return
+     * @throws Exception
+     */
+    public Log selectLogByPrimaryKey (Integer logId)throws Exception;
+
+    /**
+     * 根据ID主键删除日志信息
+     * @param logId
+     * @return
+     * @throws Exception
+     */
+    public void deleteLogByPrimaryKey (Integer logId)throws Exception;
+
+    /**
+     * 根据ID主键数组批量删除日志信息
+     * @param logIdArrary
+     * @return
+     * @throws Exception
+     */
+    public void deleteLogByPrimaryKeyArray (Integer[] logIdArrary)throws Exception;
+
+    /**
+     * 按需插入日志信息
+     * @param log
+     * @return
+     * @throws Exception
+     */
+    public void insertLogSelective (Log log) throws Exception;
+
+    /**
+     * 按需修改日志信息
+     * @param log
+     * @return
+     * @throws Exception
+     */
+    public void updateLogByPrimaryKeySelective (Log log)throws Exception;
+
+    /**
+     * 日志表综合查询
+     * 实现：主键ID，用户ID，历史登录IP，商品key-value，商品类别key-value，
+     * 关键词（模糊），历史登录时间范围，间隔时间范围，排序规则，分页功能
+     * @param pagingCustomLog
+     * @return
+     * @throws Exception
+     */
+    public List<Log> selectLog (PagingCustomLog pagingCustomLog)throws Exception;
+
+    /**
+     * 日志信息总数查询
+     * @return
+     * @throws Exception
+     */
+    public int selectLogCount () throws Exception;
 }
