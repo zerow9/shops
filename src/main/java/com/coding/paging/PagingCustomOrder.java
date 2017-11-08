@@ -1,13 +1,10 @@
 package com.coding.paging;
 
 import com.coding.pojo.Orders;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 
 public class PagingCustomOrder extends Paging {
-
+    @Autowired
     private Orders order;//订单基本信息
 
     private String formerOrderCreateTime;//一些功能需要订单创建时间范围内查询，这是左侧较小值
