@@ -318,7 +318,7 @@ public interface IAdminService extends IUserService {
      * @return
      * @throws Exception
      */
-    public List<Repertory> selectRepertory() throws Exception;
+    public List<Repertory> selectRepertory(PagingCustomRepertory pagingCustomRepertory) throws Exception;
 
     /**
      * 返回库存表中一共有多少条数据

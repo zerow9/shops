@@ -1,5 +1,6 @@
 package com.coding.mapper;
 
+import com.coding.pojo.PagingCustomRepertory;
 import com.coding.pojo.Repertory;
 import org.apache.ibatis.annotations.Param;
 
@@ -44,7 +45,7 @@ public interface RepertoryMapper {
      * @return
      * @throws Exception
      */
-    public List<Repertory> selectRepertory() throws Exception;
+    public List<Repertory> selectRepertory(PagingCustomRepertory pagingCustomRepertory) throws Exception;
 
     /**
      * 返回库存表中一共有多少条数据

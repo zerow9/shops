@@ -455,6 +455,18 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         return repertories;
     }
 
+    public List<Repertory> selectRepertory(PagingCustomRepertory pagingCustomRepertory) throws Exception {
+        try {
+            List<Repertory>  repertories = repertoryMapper.selectRepertory(pagingCustomRepertory);
+            if(repertories.isEmpty()) throw new Exception("查询到的库存列表为空");
+            return repertories;
+        }catch (Exception e){
+            if (!e.getMessage().contains("库存列表为空"))
+                throw new Exception("参数查库存品列表出错，请检查参数");
+            throw e;
+        }
+    }
+
     public Integer selectRepertoryCount() throws Exception {
         try {
             return  repertoryMapper.selectRepertoryCount();
