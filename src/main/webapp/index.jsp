@@ -142,8 +142,7 @@
                         </li>
                         <li><a class="J_menuItem" href="#">文章管理</a>
                         </li>
-                        <li><a class="J_menuItem" href="#">公告管理</a>
-                        </li>
+                        <li><a class="J_menuItem" href="/notices/noticesList.action">公告管理</a>
                         <li><a class="J_menuItem" href="#">导航栏管理</a>
                         </li>
                         <li><a class="J_menuItem" href="#">页面布局管理</a>
@@ -172,6 +171,8 @@
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="log/forwordLog.action">日志管理</a>
+                        </li>
                         <li><a class="J_menuItem" href="#">系统设置</a>
                         </li>
                         <li><a class="J_menuItem" href="#">权限管理</a>
@@ -295,7 +296,7 @@
                     data-id="../../../jsp/admin/home.jsp" seamless></iframe>
         </div>
         <div class="footer">
-            <div class="pull-right">&copy; 2014-2015 <a href="http://www.zi-han.net/" target="_blank">zihan's blog</a>
+            <div class="pull-right">&copy; 2017-2020 <a href="javascript:;" target="_blank">Yang Coding</a>
             </div>
         </div>
     </div>

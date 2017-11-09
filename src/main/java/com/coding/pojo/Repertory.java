@@ -18,11 +18,12 @@ public class Repertory {
     private Integer repertoryNumber;
 
     private Date repertoryPuttime;
+    private String puttimeToString;
 
     private Date updateTime;
-
-    private String puttimeToString;
     private String updateToString;
+
+
 
     private Integer venderId;
 
@@ -124,7 +125,9 @@ public class Repertory {
                 ", shopId=" + shopId +
                 ", repertoryNumber=" + repertoryNumber +
                 ", repertoryPuttime=" + repertoryPuttime +
+                ", puttimeToString='" + puttimeToString + '\'' +
                 ", updateTime=" + updateTime +
+                ", updateToString='" + updateToString + '\'' +
                 ", venderId=" + venderId +
                 '}';
     }

@@ -1,6 +1,9 @@
 layui.use('table', function () {
     var table = layui.table;
 
+    //定义JQuery
+    var $ = layui.$;
+
     //监听表格复选框选择
     table.on('checkbox(demo)', function (obj) {
         console.log(obj)
@@ -44,7 +47,7 @@ layui.use('table', function () {
                 shade: 0.3,
                 maxmin: true,
                 area: ['80%', '90%'],
-                content: 'updateNotice.action?id=' + data.noticeId, //注意，如果str是object，那么需要字符拼接。
+                content: 'editNotice.action?noticeId=' + data.noticeId, //注意，如果str是object，那么需要字符拼接。
             });
         }
     });

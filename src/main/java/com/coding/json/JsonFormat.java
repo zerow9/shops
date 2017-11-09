@@ -1,27 +1,28 @@
 package com.coding.json;
 
 
-import java.util.List;
+import net.sf.json.JsonConfig;
+import net.sf.json.processors.JsonValueProcessor;
 
-public class JsonFormat<E> extends JSONTemplet {
-    private List<E> data;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
-    public JsonFormat() {
+public class JsonFormat implements JsonValueProcessor {
+    private String pattern = "yyyy-MM-dd HH:mm:ss";
+
+    public Object processArrayValue(Object value, JsonConfig config) {
+        return process(value);
     }
 
-    public JsonFormat(List<E> data, int count, String code, String msg) {
-        this.data = data;
-        setCount(count);
-        setMsg(msg);
-        setCode(code);
+    public Object processObjectValue(String key, Object value, JsonConfig config) {
+        return process(value);
     }
 
-    public List<E> getData() {
-        return data;
+    private Object process(Object value) {
+        if (value instanceof Date) {
+            SimpleDateFormat format = new SimpleDateFormat(pattern);
+            return format.format(value);
+        }
+        return value;
     }
-
-    public void setData(List<E> data) {
-        this.data = data;
-    }
-
 }

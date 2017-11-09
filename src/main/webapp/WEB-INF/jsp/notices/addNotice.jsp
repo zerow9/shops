@@ -50,16 +50,11 @@ To change this template use File | Settings | File Templates.
                         <div class="layui-form-item">
                             <label class="layui-form-label">是否启用</label>
                             <div class="layui-input-block">
-                                <input type="checkbox" name="isUse" lay-skin="switch" lay-text="启用|关闭">
+                                <input type="checkbox" name="use" lay-skin="switch" lay-text="启用|关闭">
                             </div>
                         </div>
 
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">创建时间</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="noiceTime" id="date" autocomplete="off" class="layui-input" disabled>
-                            </div>
-                        </div>
+
 
                         <div class="layui-form-item">
                             <div class="layui-input-block">
@@ -77,5 +72,5 @@ To change this template use File | Settings | File Templates.
 
 <script src="../../../shopmanagement/common/layui/layui.js" charset="utf-8" type="text/javascript"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../../../js/notices/editNotice.js"></script>
+<script src="../../../js/notices/addNotice.js"></script>
 </body>

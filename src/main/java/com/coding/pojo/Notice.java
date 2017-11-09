@@ -7,7 +7,8 @@ import java.util.Date;
 public class Notice {
     private Integer noticeId;
 
-    private String noiceTime;
+    private Date noiceTime;
+    private String noiceTimeToString;
 
     private Integer isUse;
 
@@ -21,11 +22,20 @@ public class Notice {
         this.noticeId = noticeId;
     }
 
-    public String getNoiceTime() {
+    public Date getNoiceTime() {
         return noiceTime;
     }
 
-    public void setNoiceTime(String noiceTime) {
+    public void setNoiceTimeToString(String noiceTimeToString) {
+        this.noiceTimeToString = noiceTimeToString;
+    }
+
+    public String getNoiceTimeToString() {
+
+        return noiceTimeToString;
+    }
+
+    public void setNoiceTime(Date noiceTime) {
         this.noiceTime = noiceTime;
     }
 
@@ -51,6 +61,7 @@ public class Notice {
         return "Notice{" +
                 "noticeId=" + noticeId +
                 ", noiceTime=" + noiceTime +
+                ", noiceTimeToString='" + noiceTimeToString + '\'' +
                 ", isUse=" + isUse +
                 ", noticeContent='" + noticeContent + '\'' +
                 '}';

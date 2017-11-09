@@ -2,6 +2,7 @@ package com.coding.controller;
 
 import com.coding.Iservice.IAdminService;
 import com.coding.comomInterface.DateToString;
+import com.coding.json.MyJsonConfig;
 import com.coding.paging.PagingCustomRepertory;
 import com.coding.pojo.ItemType;
 import com.coding.pojo.Repertory;
@@ -35,16 +36,11 @@ public class repertoriesController {
         PagingCustomRepertory pagingCustomItemType = new PagingCustomRepertory();
         pagingCustomItemType.setIndexNumber((page - 1) * limit);
         pagingCustomItemType.setPageNumber(limit);
-        if ((page == 1 && counts == null) || counts == null)
+        if (counts == null)
             counts = adminService.selectRepertoryCount();
         List<Repertory> items = adminService.selectRepertory(pagingCustomItemType);
-        for (Repertory repertory : items) {
-            repertory.setUpdateToString(DateToString.date(repertory.getUpdateTime()));
-            repertory.setPuttimeToString(DateToString.date(repertory.getRepertoryPuttime()));
-        }
-        JsonFormat<Repertory> json = new JsonFormat<>(items, counts, null, null);
-        JSONObject jsonObject = JSONObject.fromObject(json);
-        return jsonObject.toString();
+        MyJsonConfig myJsonConfig = new MyJsonConfig();
+        return myJsonConfig.start(items, counts);
     }
 
     @RequestMapping("deleteRepertoryByIdArray")

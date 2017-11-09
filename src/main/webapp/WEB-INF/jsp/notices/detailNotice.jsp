@@ -42,7 +42,7 @@ To change this template use File | Settings | File Templates.
                         <div class="layui-form-item">
                             <label class="layui-form-label">公告内容</label>
                             <div class="layui-input-block">
-                                <textarea name="noticeContent" value="${notice.noticeContent}" placeholder="请输入公告内容" class="layui-textarea" disabled></textarea>
+                                <input name="noticeContent" type="text"  value="${notice.noticeContent}" placeholder="请输入公告内容" class="layui-textarea" disabled />
 
                             </div>
                         </div>
@@ -57,7 +57,7 @@ To change this template use File | Settings | File Templates.
                         <div class="layui-form-item">
                             <label class="layui-form-label">创建时间</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="noiceTime" value="${notice.noiceTime}" autocomplete="off" class="layui-input" disabled>
+                                <input type="text" name="noiceTime" value="${notice.noiceTimeToString}" autocomplete="off" class="layui-input" disabled>
                             </div>
                         </div>
 

@@ -318,6 +318,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             ordersMapper.insertOrderSelective(order);
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("添加订单时出错");
         }
     }
@@ -334,11 +335,11 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     public List<Orders> selectOrder(PagingCustomOrder pagingCustomOrder) throws Exception {
         try {
             List<Orders>  orders = ordersMapper.selectOrder(pagingCustomOrder);
-            if(orders.isEmpty()) throw new Exception("查询到的商品列表为空");
+            if(orders.isEmpty()) throw new Exception("查询到的订单列表为空");
             return orders;
         }catch (Exception e){
-            if (!e.getMessage().contains("商品列表为空"))
-                throw new Exception("参数查询商品列表出错，请检查参数");
+            if (!e.getMessage().contains("订单列表为空"))
+                throw new Exception("参数查询订单列表出错，请检查参数");
             throw e;
         }
     }

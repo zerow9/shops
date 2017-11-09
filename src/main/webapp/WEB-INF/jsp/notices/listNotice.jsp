@@ -63,7 +63,7 @@
 
                         <div class="table-responsive">
 
-                            <table class="layui-table" lay-data="{url:'../../../data/testNotice.json', page:true, id:'noticeId'}"
+                            <table class="layui-table" lay-data="{url:'getNotice.action', page:true, id:'noticeId'}"
                                    lay-filter="demo">
                                 <thead>
                                 <tr>
@@ -94,9 +94,11 @@
 </script>
 
 <script type="text/html" id="operate_bar">
-    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
-    <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail"><i class="fa fa-eye" aria-hidden="true"
+                                                                                title="查看"></i></a>
+    <a class="layui-btn layui-btn-mini" lay-event="edit"><i class="fa fa-edit" aria-hidden="true" title="编辑"></i></a>
+    <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del"><i class="fa fa-trash" aria-hidden="true"
+                                                                            title="删除"></i></a>
 </script>
 
 <script src="../../../js/extends/jquery/jquery.min.js"></script>
