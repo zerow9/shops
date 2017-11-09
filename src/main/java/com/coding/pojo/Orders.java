@@ -2,6 +2,8 @@ package com.coding.pojo;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 public class Orders {
     private Integer orderId;
@@ -32,9 +34,11 @@ public class Orders {
 
     private Integer payType;
 
-    private String orderCreateTime;
+    private Date orderCreateTime;
+    private String orderCreateTimeToString;
 
-    private String orderPayTime;
+    private Date orderPayTime;
+    private String orderPayTimeToString;
 
     private Double orderPaid;
 
@@ -52,11 +56,14 @@ public class Orders {
 
     private String takeGoodsCounty;
 
-    private String sendGoodsTime;
+    private Date sendGoodsTime;
+    private String sendGoodsTimeToString;
+
 
     private Double orderFreight;
 
-    private String orderCompletionTime;
+    private Date orderCompletionTime;
+    private String orderCompletionTimeToString;
 
 
     public Integer getOrderId() {
@@ -171,21 +178,6 @@ public class Orders {
         this.payType = payType;
     }
 
-    public String getOrderCreateTime() {
-        return orderCreateTime;
-    }
-
-    public void setOrderCreateTime(String orderCreateTime) {
-        this.orderCreateTime = orderCreateTime;
-    }
-
-    public String getOrderPayTime() {
-        return orderPayTime;
-    }
-
-    public void setOrderPayTime(String orderPayTime) {
-        this.orderPayTime = orderPayTime;
-    }
 
     public Double getOrderPaid() {
         return orderPaid;
@@ -251,13 +243,6 @@ public class Orders {
         this.takeGoodsCounty = takeGoodsCounty;
     }
 
-    public String getSendGoodsTime() {
-        return sendGoodsTime;
-    }
-
-    public void setSendGoodsTime(String sendGoodsTime) {
-        this.sendGoodsTime = sendGoodsTime;
-    }
 
     public Double getOrderFreight() {
         return orderFreight;
@@ -267,12 +252,69 @@ public class Orders {
         this.orderFreight = orderFreight;
     }
 
-    public String getOrderCompletionTime() {
+    public void setOrderCreateTime(Date orderCreateTime) {
+        this.orderCreateTime = orderCreateTime;
+    }
+
+    public void setOrderCreateTimeToString(String orderCreateTimeToString) {
+        this.orderCreateTimeToString = orderCreateTimeToString;
+    }
+
+    public void setOrderPayTime(Date orderPayTime) {
+        this.orderPayTime = orderPayTime;
+    }
+
+    public void setOrderPayTimeToString(String orderPayTimeToString) {
+        this.orderPayTimeToString = orderPayTimeToString;
+    }
+
+    public void setSendGoodsTime(Date sendGoodsTime) {
+        this.sendGoodsTime = sendGoodsTime;
+    }
+
+    public void setSendGoodsTimeToString(String sendGoodsTimeToString) {
+        this.sendGoodsTimeToString = sendGoodsTimeToString;
+    }
+
+    public void setOrderCompletionTime(Date orderCompletionTime) {
+        this.orderCompletionTime = orderCompletionTime;
+    }
+
+    public void setOrderCompletionTimeToString(String orderCompletionTimeToString) {
+        this.orderCompletionTimeToString = orderCompletionTimeToString;
+    }
+
+    public Date getOrderCreateTime() {
+
+        return orderCreateTime;
+    }
+
+    public String getOrderCreateTimeToString() {
+        return orderCreateTimeToString;
+    }
+
+    public Date getOrderPayTime() {
+        return orderPayTime;
+    }
+
+    public String getOrderPayTimeToString() {
+        return orderPayTimeToString;
+    }
+
+    public Date getSendGoodsTime() {
+        return sendGoodsTime;
+    }
+
+    public String getSendGoodsTimeToString() {
+        return sendGoodsTimeToString;
+    }
+
+    public Date getOrderCompletionTime() {
         return orderCompletionTime;
     }
 
-    public void setOrderCompletionTime(String orderCompletionTime) {
-        this.orderCompletionTime = orderCompletionTime;
+    public String getOrderCompletionTimeToString() {
+        return orderCompletionTimeToString;
     }
 
     @Override
@@ -292,8 +334,10 @@ public class Orders {
                 ", discussStatus=" + discussStatus +
                 ", protectStatus=" + protectStatus +
                 ", payType=" + payType +
-                ", orderCreateTime='" + orderCreateTime + '\'' +
-                ", orderPayTime='" + orderPayTime + '\'' +
+                ", orderCreateTime=" + orderCreateTime +
+                ", orderCreateTimeToString='" + orderCreateTimeToString + '\'' +
+                ", orderPayTime=" + orderPayTime +
+                ", orderPayTimeToString='" + orderPayTimeToString + '\'' +
                 ", orderPaid=" + orderPaid +
                 ", orderRefund=" + orderRefund +
                 ", sendWay='" + sendWay + '\'' +
@@ -302,9 +346,11 @@ public class Orders {
                 ", takeGoodsProvince='" + takeGoodsProvince + '\'' +
                 ", takeGoodsCity='" + takeGoodsCity + '\'' +
                 ", takeGoodsCounty='" + takeGoodsCounty + '\'' +
-                ", sendGoodsTime='" + sendGoodsTime + '\'' +
+                ", sendGoodsTime=" + sendGoodsTime +
+                ", sendGoodsTimeToString='" + sendGoodsTimeToString + '\'' +
                 ", orderFreight=" + orderFreight +
-                ", orderCompletionTime='" + orderCompletionTime + '\'' +
+                ", orderCompletionTime=" + orderCompletionTime +
+                ", orderCompletionTimeToString='" + orderCompletionTimeToString + '\'' +
                 '}';
     }
 }

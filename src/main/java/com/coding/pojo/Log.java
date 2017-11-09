@@ -13,8 +13,10 @@ public class Log {
     private String logHistoryIp;
 
     private Date logLandTime;
+    private String dateToString;  //logLandTime 时间存字符串类型
 
-    private String logSpace;
+    private Date logSpace;
+    private String logSpaceToString;  //logSpace 时间存字符串类型
 
     private String logWeighting;
 
@@ -24,7 +26,7 @@ public class Log {
 
     private String logKeyWord;
 
-    private String dateToString;
+
 
     public String getDateToString() {
         return dateToString;
@@ -66,11 +68,20 @@ public class Log {
         this.logLandTime = logLandTime;
     }
 
-    public String getLogSpace() {
+    public Date getLogSpace() {
         return logSpace;
     }
 
-    public void setLogSpace(String logSpace) {
+    public void setLogSpaceToString(String logSpaceToString) {
+        this.logSpaceToString = logSpaceToString;
+    }
+
+    public String getLogSpaceToString() {
+
+        return logSpaceToString;
+    }
+
+    public void setLogSpace(Date logSpace) {
         this.logSpace = logSpace;
     }
 
@@ -112,8 +123,10 @@ public class Log {
                 "logId=" + logId +
                 ", userUuid='" + userUuid + '\'' +
                 ", logHistoryIp='" + logHistoryIp + '\'' +
-                ", logLandTime='" + logLandTime + '\'' +
-                ", logSpace='" + logSpace + '\'' +
+                ", logLandTime=" + logLandTime +
+                ", dateToString='" + dateToString + '\'' +
+                ", logSpace=" + logSpace +
+                ", logSpaceToString='" + logSpaceToString + '\'' +
                 ", logWeighting='" + logWeighting + '\'' +
                 ", itemStatus='" + itemStatus + '\'' +
                 ", itemTypeStatus='" + itemTypeStatus + '\'' +
