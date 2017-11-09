@@ -22,6 +22,7 @@ public class User {
     private String userSex;
 
     private Date userRegisterDateTime;
+    private String userRegisterDateTimeToString;
 
     private Integer userScore;
 
@@ -29,15 +30,33 @@ public class User {
 
     private Integer userLandNumber;
 
+    public void setUserRegisterDateTimeToString(String userRegisterDateTimeToString) {
+        this.userRegisterDateTimeToString = userRegisterDateTimeToString;
+    }
+
+    public void setUserCurrentTimeToString(String userCurrentTimeToString) {
+        this.userCurrentTimeToString = userCurrentTimeToString;
+    }
+
+    public String getUserRegisterDateTimeToString() {
+
+        return userRegisterDateTimeToString;
+    }
+
+    public String getUserCurrentTimeToString() {
+        return userCurrentTimeToString;
+    }
+
     private Date userCurrentTime;
+    private String userCurrentTimeToString;
 
     private String userLandIp;
 
     private Integer userAddress;
 
-    private String dateToString;
     private String userHealthy;
 
+    private String dateToString;
     public String getUserUuid() {
         return userUuid;
     }
@@ -186,10 +205,12 @@ public class User {
                 ", userAge=" + userAge +
                 ", userSex='" + userSex + '\'' +
                 ", userRegisterDateTime=" + userRegisterDateTime +
+                ", userRegisterDateTimeToString='" + userRegisterDateTimeToString + '\'' +
                 ", userScore=" + userScore +
                 ", userGroup=" + userGroup +
                 ", userLandNumber=" + userLandNumber +
                 ", userCurrentTime=" + userCurrentTime +
+                ", userCurrentTimeToString='" + userCurrentTimeToString + '\'' +
                 ", userLandIp='" + userLandIp + '\'' +
                 ", userAddress=" + userAddress +
                 ", userHealthy='" + userHealthy + '\'' +

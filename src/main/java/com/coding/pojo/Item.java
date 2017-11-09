@@ -238,6 +238,7 @@ public class Item {
                 ", keyWord='" + keyWord + '\'' +
                 ", makeVender=" + makeVender +
                 ", makeDate=" + makeDate +
+                ", dateToString='" + dateToString + '\'' +
                 ", itemIntroduce='" + itemIntroduce + '\'' +
                 '}';
     }
