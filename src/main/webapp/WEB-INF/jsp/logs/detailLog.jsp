@@ -54,7 +54,7 @@
                         </tr>
                         <tr>
                             <td style="text-align: center;">间隔时间</td>
-                            <td>${log.logSpace}</td>
+                            <td>${log.logSpaceToString}</td>
                         </tr>
                         <tr>
                             <td style="text-align: center;">加权时间</td>

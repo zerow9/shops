@@ -47,7 +47,7 @@ layui.use('table', function () {
                 shade: 0.3,
                 maxmin: true,
                 area: ['80%', '90%'],
-                content: 'updateNotice.action?id=' + data.noticeId, //注意，如果str是object，那么需要字符拼接。
+                content: 'editNotice.action?noticeId=' + data.noticeId, //注意，如果str是object，那么需要字符拼接。
             });
         }
     });

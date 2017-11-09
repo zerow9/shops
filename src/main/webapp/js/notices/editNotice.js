@@ -18,18 +18,11 @@ layui.use(['form', 'layedit', 'laydate'], function () {
     //监听提交
     form.on('submit(demo1)', function (data) {
         var parm = data.field;
-        console.log(parm)
         $.ajax({
-            url: 'updateNotice',
+            url: 'updateNotice.action',
             data: parm,
             type: "POST",
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
             success: function () {
-
-                //关闭弹出的窗口
                 parent.layer.closeAll();
                 swal({
                     title: "太帅了",
@@ -39,6 +32,7 @@ layui.use(['form', 'layedit', 'laydate'], function () {
                 window.location.reload();
             }
         });
+        window.parent.location.reload();
         return false;
     });
 

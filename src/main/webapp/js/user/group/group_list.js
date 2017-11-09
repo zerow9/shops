@@ -11,8 +11,17 @@ layui.use('table', function () {
     table.on('tool(group_lists_table)', function (table_tool) {
         var data = table_tool.data;
         if (table_tool.event === 'detail') {
-            layer.msg('用户组ID：' + data.group_id + ' 的查看操作');
-        } else if (table_tool.event === 'del') {
+            layer.open({
+                type: 2,
+                title:"查看用户组",
+                shadeClose: true,
+                shade: 0.3,
+                content: 'detailGroupsIdByKey.action?groupId='+data.groupId, //注意，如果str是object，那么需要字符拼接。
+                maxmin: true,
+                area: ['400px', '260px']
+            });
+        }
+        else if (table_tool.event === 'del') {
             //强势弹窗效果
             swal({
                 title: "您确定要删除'ID：=" + data.groupId + "信息吗",
@@ -29,8 +38,17 @@ layui.use('table', function () {
                     window.location.reload();
                 });
             })
-        } else if (table_tool.event === 'edit') {
-            layer.alert('编辑行：<br>' + JSON.stringify(data))
+        }
+        else if (table_tool.event === 'edit') {
+            layer.open({
+                type: 2,
+                title:"修改用户组",
+                shadeClose: true,
+                shade: 0.3,
+                content: 'updateGroups.action?groupId='+data.groupId, //注意，如果str是object，那么需要字符拼接。
+                maxmin: true,
+                area: ['400px', '260px']
+            });
         } else if (table_tool.event === 'shelve_status') {
             layer.msg("用户组：" + data.group_name + " 已禁用。");
         }

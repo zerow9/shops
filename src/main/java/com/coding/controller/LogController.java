@@ -65,6 +65,7 @@ public class LogController {
     public String detileLog(Integer logId, Model model){
         try {
             Log log=adminService.selectLogByPrimaryKey(logId);
+            log.setLogSpaceToString(DateToString.date(log.getLogSpace()));
             model.addAttribute("log",log);
         } catch (Exception e) {
             e.printStackTrace();

@@ -40,24 +40,31 @@ To change this template use File | Settings | File Templates.
                 <div class="ibox-content">
                     <form class="layui-form" action="">
                         <div class="layui-form-item">
+                            <label class="layui-form-label">ID</label>
+                            <div class="layui-input-block">
+                                <input name="noticeId"  type="text" value="${notice.noticeId}"  readonly />
+                            </div>
+                        </div>
+
+
+                        <div class="layui-form-item">
                             <label class="layui-form-label">公告内容</label>
                             <div class="layui-input-block">
-                                <textarea name="noticeContent" value="${notice.noticeContent}" placeholder="请输入公告内容" class="layui-textarea"></textarea>
-
+                                <input name="noticeContent"  type="text" value="${notice.noticeContent}" placeholder="请输入公告内容" class="layui-textarea" />
                             </div>
                         </div>
 
                         <div class="layui-form-item">
                             <label class="layui-form-label">是否启用</label>
                             <div class="layui-input-block">
-                                <input type="checkbox" name="isUse" value="${notice.isUse}" lay-skin="switch" lay-text="启用|关闭">
+                                <input type="checkbox" name="use" value="${notice.isUse}" lay-skin="switch" lay-text="启用|关闭">
                             </div>
                         </div>
 
                         <div class="layui-form-item">
                             <label class="layui-form-label">创建时间</label>
                             <div class="layui-input-inline">
-                                <input type="text" name="noiceTime" value="${notice.noiceTime}" autocomplete="off" class="layui-input" disabled>
+                                <input type="text" name="noiceTime" value="${notice.noiceTimeToString}" autocomplete="off" class="layui-input" disabled>
                             </div>
                         </div>
 

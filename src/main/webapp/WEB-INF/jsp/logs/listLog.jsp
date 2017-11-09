@@ -64,7 +64,7 @@
                                     <th lay-data="{field:'logId', width:80, fixed: true}">编号</th>
                                     <th lay-data="{field:'userUuid', width:100}">用户ID</th>
                                     <th lay-data="{field:'logHistoryIp', width:200}">登陆IP</th>
-                                    <th lay-data="{field:'dateToString', width:200}">登陆时间</th>
+                                    <th lay-data="{field:'logLandTime', width:200}">登陆时间</th>
                                     <th lay-data="{field:'logSpace', width:200}">间隔时间</th>
                                     <th lay-data="{field:'logWeighting', width:200}">加权时间</th>
                                     <th lay-data="{field:'itemStatus', width:200}">商品状态码</th>
@@ -88,7 +88,8 @@
 </div>
 
 <script type="text/html" id="operate_bar">
-    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
+    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail"><i class="fa fa-eye" aria-hidden="true"
+                                                                                title="查看"></i></a>
 </script>
 
 <script src="../../../js/extends/jquery/jquery.min.js"></script>

@@ -22,10 +22,18 @@
 <form class="layui-form" action="">
 
     <div class="layui-form-item">
+        <label class="layui-form-label">用户组ID</label>
+        <div class="layui-input-block">
+            <input type="text" name="groupId" lay-verify="group_name" autocomplete="off" placeholder="请输入用户组名称"
+                   value="${groups.groupId}" readonly class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
         <label class="layui-form-label">用户组名称</label>
         <div class="layui-input-block">
             <input type="text" name="groupName" lay-verify="group_name" autocomplete="off" placeholder="请输入用户组名称"
-                   class="layui-input">
+                   value="${groups.groupName}" class="layui-input">
         </div>
     </div>
 
@@ -33,7 +41,7 @@
         <label class="layui-form-label">用户组描述</label>
         <div class="layui-input-block">
             <input type="text" name="groupJurisdiction" lay-verify="group_description" autocomplete="off" placeholder="请输入用户组描述"
-                   class="layui-input">
+                  value="${groups.groupJurisdiction}" class="layui-input">
         </div>
     </div>
 
@@ -47,7 +55,7 @@
 
     <div class="layui-form-item">
         <div class="layui-input-block">
-            <button class="layui-btn" lay-submit="" lay-filter="demo1">添加</button>
+            <button class="layui-btn" lay-submit="" lay-filter="demo1">提交</button>
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>
         </div>
     </div>
@@ -55,6 +63,7 @@
 </form>
 
 <script src="../../../common/layui/layui.js" charset="utf-8"></script>
+<script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../../../js/extends/jquery/jquery.min.js"></script>
 <script>
     layui.use(['form'], function () {
@@ -71,7 +80,7 @@
             var parm = data.field;
             console.log(parm);
             $.ajax({
-                url: 'insertGroups.action',
+                url: 'updateGroupsByPrimaryKey.action',
                 data: parm,
                 type:'POST',
                 success: function () {
