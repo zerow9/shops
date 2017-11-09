@@ -14,13 +14,13 @@
         <img src="../../shopmanagement/img/404/404-1.png"/>
         <div class="sub">
             <br><br>
-            <p><a href="#">返回 </a></p></div>
+            <p><a href="/logout.action">返回 </a></p></div>
     </div>
 </div>
 
 <br><br><br><br><br>
 <div class="footer">
-    Design by-<a href="#">Young Coding 孝和购物系统</a>
+    Design by-Young Coding 孝和购物系统
 </div>
 
 

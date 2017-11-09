@@ -38,12 +38,9 @@ body{
 
 
 .footer{
-    color:black;
+    color:#009900;
     position: inherit;
     right:10px;
     bottom:30px;
     text-align: center;
-}
-.footer a{
-    color:rgb(114, 173, 38);
 }

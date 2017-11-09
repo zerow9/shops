@@ -188,6 +188,7 @@
 }
 .fa-search:before {
   content: "\f002";
+  margin-right: 4px;
 }
 .fa-envelope-o:before {
   content: "\f003";
@@ -2334,4 +2335,7 @@
   margin: 0;
   overflow: visible;
   clip: auto;
+}
+.icon-sousuo:before {
+  content: "\e6ae";
 }
