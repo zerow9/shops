@@ -2,6 +2,8 @@ package com.coding.pojo;
 
 import org.springframework.stereotype.Component;
 
+import java.util.Date;
+
 @Component
 public class Log {
     private Integer logId;
@@ -10,9 +12,11 @@ public class Log {
 
     private String logHistoryIp;
 
-    private String logLandTime;
+    private Date logLandTime;
+    private String dateToString;  //logLandTime 时间存字符串类型
 
-    private String logSpace;
+    private Date logSpace;
+    private String logSpaceToString;  //logSpace 时间存字符串类型
 
     private String logWeighting;
 
@@ -21,6 +25,16 @@ public class Log {
     private String itemTypeStatus;
 
     private String logKeyWord;
+
+
+
+    public String getDateToString() {
+        return dateToString;
+    }
+
+    public void setDateToString(String dateToString) {
+        this.dateToString = dateToString;
+    }
 
     public Integer getLogId() {
         return logId;
@@ -46,19 +60,28 @@ public class Log {
         this.logHistoryIp = logHistoryIp ;
     }
 
-    public String getLogLandTime() {
+    public Date getLogLandTime() {
         return logLandTime;
     }
 
-    public void setLogLandTime(String logLandTime) {
+    public void setLogLandTime(Date logLandTime) {
         this.logLandTime = logLandTime;
     }
 
-    public String getLogSpace() {
+    public Date getLogSpace() {
         return logSpace;
     }
 
-    public void setLogSpace(String logSpace) {
+    public void setLogSpaceToString(String logSpaceToString) {
+        this.logSpaceToString = logSpaceToString;
+    }
+
+    public String getLogSpaceToString() {
+
+        return logSpaceToString;
+    }
+
+    public void setLogSpace(Date logSpace) {
         this.logSpace = logSpace;
     }
 
@@ -100,8 +123,10 @@ public class Log {
                 "logId=" + logId +
                 ", userUuid='" + userUuid + '\'' +
                 ", logHistoryIp='" + logHistoryIp + '\'' +
-                ", logLandTime='" + logLandTime + '\'' +
-                ", logSpace='" + logSpace + '\'' +
+                ", logLandTime=" + logLandTime +
+                ", dateToString='" + dateToString + '\'' +
+                ", logSpace=" + logSpace +
+                ", logSpaceToString='" + logSpaceToString + '\'' +
                 ", logWeighting='" + logWeighting + '\'' +
                 ", itemStatus='" + itemStatus + '\'' +
                 ", itemTypeStatus='" + itemTypeStatus + '\'' +

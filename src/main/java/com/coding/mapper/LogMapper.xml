@@ -161,6 +161,10 @@
         <if test="log.logHistoryIp != null and log.logHistoryIp != ''">
           and log_history_ip = #{log.logHistoryIp}
         </if>
+        <!--根据历史登录时间查询日志信息-->
+        <if test="log.logLandTime != null and log.logLandTime != ''">
+          and log_land_time = #{log.logLandTime}
+        </if>
         <!--根据商品key-value查询日志信息-->
         <if test="log.itemStatus != null and log.itemStatus != ''">
           and item_status = #{log.itemStatus}

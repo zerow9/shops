@@ -18,3 +18,11 @@
     color: #4fc0e8;
     font-size: 18px;
 }
+
+.ibox-title h5 {
+    padding-left: 20px;
+}
+
+.detail_info {
+    background-color: #0d8ddb;
+}
