@@ -341,4 +341,44 @@ public class AdminController {
         countGroups -= list.size();
         return true;
     }
+
+    /**
+     * 查看用户组
+     * @param groupId 用户组ID
+     * @return 用户组详情页
+     */
+    @RequestMapping("detailGroupsIdByKey")
+    public String detailGroupsIdByKey(Integer groupId,Model model)throws Exception{
+        Groups groups = adminService.selectGroupsByPrimaryKey(groupId);
+        model.addAttribute("groups", groups);
+        return "groups/groupsDetail";
+    }
+
+    /**
+     * 更改用户组
+     * @param groupId
+     * @param model
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("updateGroups")
+    public String updateGroups(Integer groupId, Model model) throws Exception {
+        Groups groups=adminService.selectGroupsByPrimaryKey(groupId);
+        model.addAttribute("groups", groups);
+        return "groups/groupsUpdate";
+    }
+
+
+    /**
+     * 更改是否成功
+     * @param groups
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("updateGroupsByPrimaryKey")
+    public boolean updateGroupsByPrimaryKey(Groups groups) throws Exception {
+        System.out.println(groups);
+        adminService.updateGroupsByPrimaryKey(groups);
+        return true;
+    }
 }
