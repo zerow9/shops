@@ -122,12 +122,6 @@
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="/order/orderList.action">订单列表</a>
                         </li>
-                        <li><a class="J_menuItem" href="#">未完成订单</a>
-                        </li>
-                        <li><a class="J_menuItem" href="#">订单派送</a>
-                        </li>
-                        <li><a class="J_menuItem" href="#">已完成订单</a>
-                        </li>
                     </ul>
                 </li>
 
