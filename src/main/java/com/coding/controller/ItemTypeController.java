@@ -33,7 +33,7 @@ public class ItemTypeController {
         PagingCustomItemType pagingCustomItemType = new PagingCustomItemType();
         pagingCustomItemType.setIndexNumber((page - 1) * limit);
         pagingCustomItemType.setPageNumber(limit);
-        if ((page == 1 && counts == null) || counts == null)
+        if (counts == null)
             counts = adminService.selectItemTypeCount();
         List<ItemType> items = adminService.selectItemType(pagingCustomItemType);
         JsonFormat<ItemType> json = new JsonFormat<>(items, counts, null, null);
@@ -44,6 +44,7 @@ public class ItemTypeController {
     @RequestMapping("deleteGroupsByPrimaryKey")
     public boolean deleteGroupsByPrimaryKey(Integer typeId) throws Exception {
         adminService.deleteItemTypeByPrimaryKey(typeId);
+        counts--;
         return true;
     }
 
@@ -75,6 +76,7 @@ public class ItemTypeController {
     @RequestMapping("insertItemtypesAdd")
     public boolean insertItemtypesAdd(ItemType itemType) throws Exception {
         adminService.insertItemType(itemType);
+        counts++;
         return true;
     }
 

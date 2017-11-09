@@ -106,7 +106,8 @@
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="/item/forwardItemList.action">商品列表</a></li>
                         <li><a class="J_menuItem" href="/itemType/forwardItemTypeList.action">商品分类</a></li>
-                        <li><a class="J_menuItem" href="/repertories/forwardRepertories.action">库存管理</a>
+                        <li><a class="J_menuItem" href="/repertories/forwardRepertories.action">库存管理</a></li>
+                        <li><a class="J_menuItem" href="/venders/forwardVenders.action">厂商管理</a></li>
                     </ul>
                 </li>
 
@@ -171,6 +172,8 @@
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
+                        <li><a class="J_menuItem" href="log/forwordLog.action">日志管理</a>
+                        </li>
                         <li><a class="J_menuItem" href="#">系统设置</a>
                         </li>
                         <li><a class="J_menuItem" href="#">权限管理</a>
@@ -294,7 +297,7 @@
                     data-id="../../../jsp/admin/home.jsp" seamless></iframe>
         </div>
         <div class="footer">
-            <div class="pull-right">&copy; 2014-2015 <a href="http://www.zi-han.net/" target="_blank">zihan's blog</a>
+            <div class="pull-right">&copy; 2017-2020 <a href="javascript:;" target="_blank">Yang Coding</a>
             </div>
         </div>
     </div>

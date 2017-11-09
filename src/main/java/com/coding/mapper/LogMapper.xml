@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coding.mapper.LogMapper" >
+  <resultMap id="BaseResultMap" type="com.coding.pojo.Log" >
+    <id column="log_id" property="logId" jdbcType="INTEGER" />
+    <result column="user_uuid" property="userUuid" jdbcType="VARCHAR" />
+    <result column="log_history_ip" property="logHistoryIp" jdbcType="VARCHAR" />
+    <result column="log_land_time" property="logLandTime" jdbcType="TIMESTAMP" />
+    <result column="log_space" property="logSpace" jdbcType="TIMESTAMP" />
+    <result column="log_weighting" property="logWeighting" jdbcType="VARCHAR" />
+    <result column="item_status" property="itemStatus" jdbcType="VARCHAR" />
+    <result column="item_type_status" property="itemTypeStatus" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.coding.pojo.Log" extends="BaseResultMap" >
+    <result column="log_key_word" property="logKeyWord" jdbcType="LONGVARCHAR" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    log_id, user_uuid, log_history_ip, log_land_time, log_space, "log_weighting", item_status,
+    item_type_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    "log_key_word"
+  </sql>
+ <!--根据主键ID查询日志信息-->
+  <select id="selectLogByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </select>
+  <!--根据主键ID删除日志信息-->
+  <delete id="deleteLogByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from log
+    where log_id = #{logId,jdbcType=INTEGER}
+  </delete>
+
+  <!--批量删除日志-->
+  <delete id="deleteLogByPrimaryKeyArray" parameterType="java.lang.Integer">
+    delete from log where log_id IN
+    <foreach collection="logIdArrary" item="logId" open="(" separator="," close=")">
+      #{logId}
+    </foreach>
+  </delete>
+
+  <!--按需插入-->
+  <insert id="insertLogSelective" parameterType="com.coding.pojo.Log" >
+    insert into log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userUuid != null" >
+        user_uuid,
+      </if>
+      <if test="logHistoryIp != null" >
+        log_history_ip,
+      </if>
+      <if test="logLandTime != null" >
+        log_land_time,
+      </if>
+      <if test="logSpace != null" >
+        log_space,
+      </if>
+      <if test="logWeighting != null" >
+        log_weighting,
+      </if>
+      <if test="itemStatus != null" >
+        item_status,
+      </if>
+      <if test="itemTypeStatus != null" >
+        item_type_status,
+      </if>
+      <if test="logKeyWord != null" >
+        log_key_word,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userUuid != null" >
+        #{userUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="logHistoryIp != null" >
+        #{logHistoryIp,jdbcType=VARCHAR},
+      </if>
+      <if test="logLandTime != null" >
+        #{logLandTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logSpace != null" >
+        #{logSpace,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logWeighting != null" >
+        #{logWeighting,jdbcType=VARCHAR},
+      </if>
+      <if test="itemStatus != null" >
+        #{itemStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="itemTypeStatus != null" >
+        #{itemTypeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="logKeyWord != null" >
+        #{logKeyWord,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+
+ <!--按需修改-->
+  <update id="updateLogByPrimaryKeySelective" parameterType="com.coding.pojo.Log" >
+    update log
+    <set >
+      <if test="userUuid != null" >
+        user_uuid = #{userUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="logHistoryIp != null" >
+        log_history_ip = #{logHistoryIp,jdbcType=VARCHAR},
+      </if>
+      <if test="logLandTime != null" >
+        log_land_time = #{logLandTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logSpace != null" >
+        log_space = #{logSpace,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logWeighting != null" >
+        log_weighting = #{logWeighting,jdbcType=VARCHAR},
+      </if>
+      <if test="itemStatus != null" >
+        item_status = #{itemStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="itemTypeStatus != null" >
+        item_type_status = #{itemTypeStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="logKeyWord != null" >
+        log_key_word = #{logKeyWord,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where log_id = #{logId,jdbcType=INTEGER}
+  </update>
+
+  <!--日志表的查询大SQL-->
+  <select id="selectLog" parameterType="com.coding.paging.PagingCustomLog" resultMap="ResultMapWithBLOBs" >
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from log
+    <where>
+      <!--关键字模糊查询（日志关键词组）-->
+      <if test="keyWord != null and keyWord != ''">
+        and log_key_word REGEXP #{keyWord}
+      </if>
+      <!--根据公告基本信息进行查询-->
+      <if test="log != null">
+        <!--根据主键查询日志信息-->
+        <if test="log.logId != null and log.logId != 0">
+          and log_id = #{log.logId}
+        </if>
+        <!--根据用户ID查询日志信息-->
+        <if test="log.userUuid != null and log.userUuid != ''">
+          and user_uuid = #{log.userUuid}
+        </if>
+        <!--根据历史登录IP查询日志信息-->
+        <if test="log.logHistoryIp != null and log.logHistoryIp != ''">
+          and log_history_ip = #{log.logHistoryIp}
+        </if>
+        <!--根据历史登录时间查询日志信息-->
+        <if test="log.logLandTime != null and log.logLandTime != ''">
+          and log_land_time = #{log.logLandTime}
+        </if>
+        <!--根据商品key-value查询日志信息-->
+        <if test="log.itemStatus != null and log.itemStatus != ''">
+          and item_status = #{log.itemStatus}
+        </if>
+        <!--根据商品类别key-value查询日志信息-->
+        <if test="log.itemTypeStatus != null and log.itemTypeStatus != ''">
+          and item_type_status = #{log.itemTypeStatus}
+        </if>
+        <!--根据关键词查询日志信息-->
+        <if test="log.logKeyWord != null and log.logKeyWord != ''">
+          and log_key_word REGEXP #{log.logKeyWord}
+        </if>
+      </if>
+
+      <!--根据历史登录时间范围查询日志信息-->
+      <if test="formerLogLandTime != null and formerLogLandTime != ''">
+        <!--给定了最小值和最大值-->
+        <if test="latterLogLandTime != null and latterLogLandTime != ''">
+          <!--以下三种情况分别列出-->
+          <if test="formerLogLandTime == latterLogLandTime">
+            and log_land_time = #{latterLogLandTime}
+          </if>
+          <if test="formerLogLandTime &lt; latterLogLandTime">
+            and log_land_time between #{formerLogLandTime} and #{latterLogLandTime}
+          </if>
+          <if test="formerLogLandTime &gt; latterLogLandTime">
+            and log_land_time between #{latterLogLandTime} and #{formerLogLandTime}
+          </if>
+        </if>
+        <!--只给定了最小值-->
+        <if test="latterLogLandTime == null or latterLogLandTime == ''">
+          and log_land_time &gt;= #{formerLogLandTime}
+        </if>
+      </if>
+      <!--只给定了最大值-->
+      <if test="formerLogLandTime == null or formerLogLandTime == ''">
+        <if test="latterLogLandTime != null and latterLogLandTime != ''">
+          and  log_land_time &lt;= #{latterLogLandTime}
+        </if>
+      </if>
+
+      <!--根据登录间隔时间范围查询日志信息-->
+      <if test="formerSpaceTime != null and formerSpaceTime != ''">
+        <!--给定了最小值和最大值-->
+        <if test="latterSpaceTime != null and latterSpaceTime != ''">
+          <!--以下三种情况分别列出-->
+          <if test="formerSpaceTime == latterSpaceTime">
+            and log_space = #{latterSpaceTime}
+          </if>
+          <if test="formerSpaceTime &lt; latterSpaceTime">
+            and log_space between #{formerSpaceTime} and #{latterSpaceTime}
+          </if>
+          <if test="formerSpaceTime &gt; latterSpaceTime">
+            and log_space between #{latterSpaceTime} and #{formerSpaceTime}
+          </if>
+        </if>
+        <!--只给定了最小值-->
+        <if test="latterSpaceTime == null or latterSpaceTime == ''">
+          and log_space &gt;= #{formerSpaceTime}
+        </if>
+      </if>
+      <!--只给定了最大值-->
+      <if test="formerSpaceTime == null or formerSpaceTime == ''">
+        <if test="latterSpaceTime != null and latterSpaceTime != ''">
+          and  log_space &lt;= #{latterSpaceTime}
+        </if>
+      </if>
+
+    </where>
+    <!--排序规则-->
+    <if test="sortByColumn != null and sortByColumn !=''">
+      <if test="sortRule != null and sortRule != ''">
+        order by ${sortByColumn} ${sortRule}
+      </if>
+    </if>
+    <!--分页-->
+    <if test="indexNumber != null">
+      <if test="pageNumber != null and pageNumber != 0">
+        limit #{indexNumber},#{pageNumber}
+      </if>
+    </if>
+    <if test="indexNumber == null">
+      <if test="pageNumber != null and pageNumber != 0">
+        limit 0,#{pageNumber}
+      </if>
+    </if>
+  </select>
+
+  <!--日志信息总数-->
+  <select id="selectLogCount" resultType="java.lang.Integer" >
+    select count(*) from log
+  </select>
+
+</mapper>

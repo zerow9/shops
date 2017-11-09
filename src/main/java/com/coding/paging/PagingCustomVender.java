@@ -1,24 +1,24 @@
 package com.coding.paging;
 
-import com.coding.pojo.Groups;
+import com.coding.pojo.Vender;
 import org.springframework.beans.factory.annotation.Autowired;
 
-public class PagingCustomGroups extends Paging {
+public class PagingCustomVender extends Paging{
     @Autowired
-    private Groups groups;
+    private Vender vender;
 
-    public Groups getGroups() {
-        return groups;
+    public Vender getVender() {
+        return vender;
     }
 
-    public void setGroups(Groups groups) {
-        this.groups = groups;
+    public void setVender(Vender vender) {
+        this.vender = vender;
     }
 
     @Override
     public String toString() {
-        return "PagingCustomGroups{" +
-                "groups=" + groups +
+        return "PagingCustomVender{" +
+                "vender=" + vender +
                 ", indexNumber=" + indexNumber +
                 ", pageNumber=" + pageNumber +
                 ", keyWord='" + keyWord + '\'' +

@@ -395,7 +395,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             return orderDetails;
         }catch (Exception e){
             if (!e.getMessage().contains("商品详情列表为空"))
-                throw e;
+                throw new Exception("参数查询商品详情列表出错，请检查参数");
             throw e;
         }
     }

@@ -1,5 +1,6 @@
 package com.coding.mapper;
 
+import com.coding.paging.PagingCustomVender;
 import com.coding.pojo.Vender;
 import org.apache.ibatis.annotations.Param;
 
@@ -14,6 +15,13 @@ public interface VenderMapper {
      */
     public int deleteVenderByPrimaryKey(Integer venderId) throws Exception;
 
+    /**
+     * 批量删除厂家信息
+     * @param venderIdArrary
+     * @return
+     * @throws Exception
+     */
+    public int deleteVenderByPrimaryKeyArray(@Param("venderIdArrary") Integer[] venderIdArrary)throws Exception;
     /**
      * 增加厂家信息
      *
@@ -47,6 +55,13 @@ public interface VenderMapper {
      */
     public List<Vender> selectVenderAll() throws Exception;
 
+    /**
+     * 厂家表综合查询
+     * @param pagingCustomVender
+     * @return
+     * @throws Exception
+     */
+    public List<Vender> selectVender(PagingCustomVender pagingCustomVender)throws Exception;
     /**
      * 返回厂家中一共有多少条数据
      * @return 封装了厂家信息的 Repertory 类对象
