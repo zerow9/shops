@@ -4,22 +4,23 @@ layui.use('table', function () {
     // 方法级渲染表格
     var tableObj = table.render({
         elem: '#layui_table'    //绑定元素
-        , url: 'order/selectOrderList.action' //资源地址
+        , url: 'http://localhost:8080/order/selectOrder.action'   //资源地址
         , id: 'idTest'   //设定容器唯一ID
-        , height: '480'
+        , height: '500'
         , page: true    //开启分页
         , cols: [[ //设置表头
             {checkbox: true, fixed: 'left'}
-            , {field: 'order_id', title: '订单编号', width: 100, sort: true}
-            , {field: 'take_goods_name', title: '收货人', width: 100}
-            , {field: 'shop_name', title: '分店', width: 200}
-            , {field: 'order_sum_price', title: '订单总额（元）', width: 150, sort: true}
-            , {field: 'pay_status', title: '支付状态', width: 100}
-            , {field: 'send_status', title: '发货状态', width: 100}
-            , {field: 'order_create_time', title: '下单时间', width: 200, sort: true}
+            , {field: 'orderId', title: '订单编号', width: 100, sort: true}
+            , {field: 'takeGoodsName', title: '收货人', width: 100}
+            // , {field: 'shop_name', title: '分店', width: 200}
+            , {field: 'orderPaid', title: '订单总额（元）', width: 150, sort: true}
+            , {field: 'sendStatus', title: '支付状态', width: 100}
+            , {field: 'sendStatus', title: '发货状态', width: 100}
+            , {field: 'orderCreateTime', title: '下单时间', width: 200, sort: true}
             , {field: 'operate', title: '操作', width: 150, fixed: 'right', align: 'center', toolbar: '#barDemo'}
         ]]
         , done: function (res, curr, count) {   //数据渲染完的回调
+            console.log('订单列表读取完成');
             console.log('res：' + res);     //接口返回信息
             console.log('当前页码：' + curr);    //当前页码
             console.log('数据总量：' + count);     //数据总量

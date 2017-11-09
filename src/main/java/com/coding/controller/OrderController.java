@@ -1,16 +1,20 @@
 package com.coding.controller;
 
+import com.coding.Iservice.IAdminService;
 import com.coding.Iservice.IUserService;
 import com.coding.comomInterface.DateToString;
+import com.coding.json.JsonFormat;
 import com.coding.pojo.Address;
 import com.coding.pojo.Orders;
-import com.coding.pojo.PagingCustomOrder;
+import com.coding.paging.PagingCustomOrder;
 import com.coding.pojo.User;
+import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -18,23 +22,31 @@ import java.util.List;
 @RequestMapping("order")
 public class OrderController {
 
+    private Integer counts = null;
+
     @Autowired
-    @Qualifier("userService")
     private IUserService userService;
+
+    @Autowired
+    private IAdminService adminService;
 
     @RequestMapping("orderList")
     public String orderList() {
         return "order/order_list";
     }
 
-    @RequestMapping("selectOrderList")
-    public String selectOrder(PagingCustomOrder pagingCustomOrder) {
-        try {
-            List<Orders> orders = userService.selectOrder(pagingCustomOrder);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return "";
+    @ResponseBody
+    @RequestMapping("selectOrder")
+    public String selectOrder(Integer page, Integer limit) throws Exception {
+        PagingCustomOrder pagingCustomOrder = new PagingCustomOrder();
+        pagingCustomOrder.setPageNumber(limit);
+        pagingCustomOrder.setIndexNumber((page - 1) * limit);
+        if (counts == null)
+            counts = adminService.selectOrderCount();
+        List<Orders> orders = userService.selectOrder(pagingCustomOrder);
+        JsonFormat<Orders> json = new JsonFormat<>(orders, counts, null, null);
+        JSONObject jsonObject = JSONObject.fromObject(json);
+        return jsonObject.toString();
     }
 
     /**
