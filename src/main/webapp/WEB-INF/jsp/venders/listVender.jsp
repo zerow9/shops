@@ -99,7 +99,7 @@
                                                                                 title="查看"></i></a>
     <a class="layui-btn layui-btn-mini" lay-event="edit"><i class="fa fa-edit" aria-hidden="true" title="编辑"></i></a>
     <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del"><i class="fa fa-trash" aria-hidden="true"
-                                                                            title="删除"></i></a>=
+                                                                            title="删除"></i></a>
 </script>
 
 <script src="../../../js/extends/jquery/jquery.min.js"></script>
