@@ -4,6 +4,7 @@ import com.coding.Iservice.IAdminService;
 import com.coding.Iservice.IUserService;
 import com.coding.comomInterface.DateToString;
 import com.coding.json.JsonFormat;
+import com.coding.json.MyJsonConfig;
 import com.coding.pojo.Address;
 import com.coding.pojo.Orders;
 import com.coding.paging.PagingCustomOrder;
@@ -44,9 +45,8 @@ public class OrderController {
         if (counts == null)
             counts = adminService.selectOrderCount();
         List<Orders> orders = userService.selectOrder(pagingCustomOrder);
-        JsonFormat<Orders> json = new JsonFormat<>(orders, counts, null, null);
-        JSONObject jsonObject = JSONObject.fromObject(json);
-        return jsonObject.toString();
+        MyJsonConfig<Orders> myJsonConfig = new MyJsonConfig<>();
+        return myJsonConfig.start(orders, counts);
     }
 
     @ResponseBody

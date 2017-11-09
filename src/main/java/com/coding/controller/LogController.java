@@ -3,6 +3,7 @@ package com.coding.controller;
 import com.coding.Iservice.IAdminService;
 import com.coding.comomInterface.DateToString;
 import com.coding.json.JsonFormat;
+import com.coding.json.MyJsonConfig;
 import com.coding.paging.PagingCustomLog;
 import com.coding.pojo.Admin;
 import com.coding.pojo.Log;
@@ -56,9 +57,8 @@ public class LogController {
         for (Log log:logs) {
                 log.setDateToString(DateToString.date(log.getLogLandTime()));
         }
-        JsonFormat<Log> json = new JsonFormat<>(logs, counts, null, null);
-        JSONObject jsonObject = JSONObject.fromObject(json);
-        return jsonObject.toString();
+        MyJsonConfig<Log> myJsonConfig = new MyJsonConfig<>();
+        return myJsonConfig.start(logs, counts);
     }
 
     @RequestMapping("detail")
