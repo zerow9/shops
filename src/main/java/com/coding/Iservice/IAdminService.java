@@ -433,13 +433,7 @@ public interface IAdminService extends IUserService {
     public Integer selectOrderDetailCount()throws Exception;
 
      /*------------------------------------------公告表------------------------------------------------------------------*/
-    /**
-     * 根据主键查询公告信息
-     * @param noticeId
-     * @return
-     * @throws Exception
-     */
-    public Notice selectNoticeByPrimaryKey (Integer noticeId)throws Exception;
+
 
     /**
      * 根据主键删除公告信息
@@ -472,22 +466,6 @@ public interface IAdminService extends IUserService {
      * @throws Exception
      */
     public void updateNoticeByPrimaryKeySelective (Notice notice)throws Exception;
-
-    /**
-     * 公告表综合查询
-     * 实现：主键ID，是否启用，发布时间范围，排序规则，分页功能.
-     * @param pagingCustomNotice
-     * @return
-     * @throws Exception
-     */
-    public List<Notice> selectNotice (PagingCustomNotice pagingCustomNotice)throws Exception;
-
-    /**
-     * 查询公告信息总数
-     * @return
-     * @throws Exception
-     */
-    public int selectNoticeCount ()throws Exception;
 
     /*------------------------------------------日志表------------------------------------------------------------------*/
     /**
@@ -546,4 +524,37 @@ public interface IAdminService extends IUserService {
      * @throws Exception
      */
     public int selectLogCount () throws Exception;
+
+     /*------------------------------------------商店表------------------------------------------------------------------*/
+    /**
+     * 根据主键ID删除商店信息
+     * @param shopId
+     * @return
+     * @throws Exception
+     */
+    public void deleteShopByPrimaryKey (Integer shopId)throws Exception;
+
+    /**
+     * 根据主键ID数组批量删除商店信息
+     * @param shopIdArrary
+     * @return
+     * @throws Exception
+     */
+    public void deleteShopByPrimaryKeyArray (@Param("shopIdArrary") Integer[] shopIdArrary)throws Exception;
+
+    /**
+     * 按需插入商店信息
+     * @param shop
+     * @return
+     * @throws Exception
+     */
+    public void insertShopSelective (Shop shop)throws Exception;
+
+    /**
+     * 按需修改商店信息
+     * @param shop
+     * @return
+     * @throws Exception
+     */
+    public void updateShopByPrimaryKeySelective (Shop shop)throws Exception;
 }
