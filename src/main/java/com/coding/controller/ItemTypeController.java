@@ -62,8 +62,8 @@ public class ItemTypeController {
         return "itemtypes/updateitemTypes";
     }
 
-    @RequestMapping("updateitemTypes")
-    public boolean updateitemTypes(ItemType itemType) throws Exception {
+    @RequestMapping("updateItemTypeById")
+    public boolean updateItemTypeById(ItemType itemType) throws Exception {
         adminService.updateItemTypeByPrimaryKey(itemType);
         return true;
     }

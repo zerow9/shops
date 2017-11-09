@@ -139,12 +139,11 @@
 
                         <div class="layui-form-item">
                             <label class="layui-form-label">归属组</label>
-                            <div class="layui-input-block">
-                                <select name="userGroup" lay-filter="aihao">
-                                    <option value=""></option>
-                                    <option value="0" selected="">普通用户组</option>
-                                    <option value="1">商家组</option>
-                                    <option value="2">管理员组</option>
+                            <div class="layui-input-inline">
+                                <select name="userGroup" lay-filter="aihao" id="group">
+                                    <option value="3" >普通用户组</option>
+                                    <option value="1" >商家组</option>
+                                    <option value="2"  >管理员组</option>
                                 </select>
                             </div>
                         </div>
@@ -165,6 +164,11 @@
 
 <script src="../../../shopmanagement/common/layui/layui.all.js" charset="utf-8" type="text/javascript"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="../../../shopmanagement/js/jquery-1.7.2.min.js"></script>
+<script >
+    $(function(){
+        $("#group").find("option[value = '${user.userGroup}']").attr("selected","selected");
+    })
+</script>
 </body>
-
 </html>
