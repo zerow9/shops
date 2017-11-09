@@ -38,6 +38,9 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     private NoticeMapper noticeMapper;
     @Autowired
     private LogMapper logMapper;
+    @Autowired
+    private ShopMapper shopMapper;
+
 
     /*------------------------------------------用户表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
@@ -612,14 +615,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         }
     }
     /*------------------------------------------公告表------------------------------------------------------------------*/
-    public Notice selectNoticeByPrimaryKey(Integer noticeId) throws Exception {
-        if (noticeId != null && noticeId != 0){
-            Notice notice = noticeMapper.selectNoticeByPrimaryKey(noticeId);
-            except(notice,"根据公告ID查询公告为空");
-            return notice;
-        }
-        return null;
-    }
+
 
     @Transactional(rollbackFor =Exception.class )
     public void deleteNoticeByPrimaryKey(Integer noticeId) throws Exception {
@@ -666,27 +662,9 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         }
     }
 
-    public List<Notice> selectNotice(PagingCustomNotice pagingCustomNotice) throws Exception {
-        try {
-            List<Notice>  notices = noticeMapper.selectNotice(pagingCustomNotice);
-            if(notices.isEmpty()) throw new Exception("查询到的公告列表为空");
-            return notices;
-        }catch (Exception e){
-            if (!e.getMessage().contains("公告列表为空"))
-                throw new Exception("参数公告列表出错，请检查参数");
-            throw e;
-        }
-    }
 
-    public int selectNoticeCount() throws Exception {
-        try {
-            return  noticeMapper.selectNoticeCount();
-        }catch (Exception e){
-            throw new Exception("查询公告信息总数时出错");
-        }
-    }
 
-    /*------------------------------------------公告表------------------------------------------------------------------*/
+    /*------------------------------------------日志表------------------------------------------------------------------*/
     public Log selectLogByPrimaryKey(Integer logId) throws Exception {
         if (logId != null && logId != 0){
             Log log = logMapper.selectLogByPrimaryKey(logId);
@@ -758,6 +736,52 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
             return  logMapper.selectLogCount();
         }catch (Exception e){
             throw new Exception("查询日志信息总数时出错");
+        }
+    }
+
+    /*------------------------------------------商店表------------------------------------------------------------------*/
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteShopByPrimaryKey(Integer shopId) throws Exception {
+        if(shopId != null && shopId != 0){
+            try {
+                except(shopMapper.deleteShopByPrimaryKey(shopId));
+            }catch (Exception e){
+                if (!e.getMessage().contains("操作无效"))
+                    throw new Exception("删除商店信息时出错");
+                throw e;
+            }
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteShopByPrimaryKeyArray(Integer[] shopIdArrary) throws Exception {
+        if(shopIdArrary==null||"".equals(shopIdArrary))throw new Exception("没有shopIdArrary数组信息，批量商店删除出错");
+        try {
+            except(shopMapper.deleteShopByPrimaryKeyArray(shopIdArrary));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("批量删除商店时出错");
+            throw e;
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void insertShopSelective(Shop shop) throws Exception {
+        try {
+            shopMapper.insertShopSelective(shop);
+        }catch (Exception e){
+            throw new Exception("添加商店时出错");
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void updateShopByPrimaryKeySelective(Shop shop) throws Exception {
+        try {
+            except(shopMapper.updateShopByPrimaryKeySelective(shop));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("修改商店信息时出错");
+            throw e;
         }
     }
 

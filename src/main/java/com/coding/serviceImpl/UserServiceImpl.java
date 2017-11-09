@@ -27,6 +27,10 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     private OrdersMapper ordersMapper;
     @Autowired
     private OrderDetailMapper orderDetailMapper;
+    @Autowired
+    private NoticeMapper noticeMapper;
+    @Autowired
+    private ShopMapper shopMapper;
 
     /*----------------------------------------用户表------------------------------------------------------------------*/
 
@@ -397,6 +401,67 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             if (!e.getMessage().contains("商品详情列表为空"))
                 throw new Exception("参数查询商品详情列表出错，请检查参数");
             throw e;
+        }
+    }
+
+    /*------------------------------------------公告表------------------------------------------------------------------*/
+
+    public Notice selectNoticeByPrimaryKey(Integer noticeId) throws Exception {
+        if (noticeId != null && noticeId != 0){
+            Notice notice = noticeMapper.selectNoticeByPrimaryKey(noticeId);
+            except(notice,"根据公告ID查询公告为空");
+            return notice;
+        }
+        return null;
+    }
+
+    public List<Notice> selectNotice(PagingCustomNotice pagingCustomNotice) throws Exception {
+        try {
+            List<Notice>  notices = noticeMapper.selectNotice(pagingCustomNotice);
+            if(notices.isEmpty()) throw new Exception("查询到的公告列表为空");
+            return notices;
+        }catch (Exception e){
+            if (!e.getMessage().contains("公告列表为空"))
+                throw new Exception("参数公告列表出错，请检查参数");
+            throw e;
+        }
+    }
+
+    public int selectNoticeCount() throws Exception {
+        try {
+            return  noticeMapper.selectNoticeCount();
+        }catch (Exception e){
+            throw new Exception("查询公告信息总数时出错");
+        }
+    }
+
+    /*------------------------------------------商店表------------------------------------------------------------------*/
+    public Shop selectShopByPrimaryKey(Integer shopId) throws Exception {
+        if (shopId != null && shopId != 0){
+            Shop shop = shopMapper.selectShopByPrimaryKey(shopId);
+            except(shop,"根据商店ID查询商店为空");
+            return shop;
+        }
+        return null;
+}
+
+    public List<Shop> selectShop(PagingCustomShop pagingCustomShop) throws Exception {
+        try {
+            List<Shop>  shops = shopMapper.selectShop(pagingCustomShop);
+            if(shops.isEmpty()) throw new Exception("查询到的商店列表为空");
+            return shops;
+        }catch (Exception e){
+            if (!e.getMessage().contains("商店列表为空"))
+                throw new Exception("参数商店列表出错，请检查参数");
+            throw e;
+        }
+    }
+
+    public int selectShopCount() throws Exception {
+        try {
+            return  shopMapper.selectShopCount();
+        }catch (Exception e){
+            throw new Exception("查询商店信息总数时出错");
         }
     }
 
