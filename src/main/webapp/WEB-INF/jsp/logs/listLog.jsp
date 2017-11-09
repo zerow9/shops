@@ -65,7 +65,7 @@
                                     <th lay-data="{field:'logId', width:80, fixed: true}">编号</th>
                                     <th lay-data="{field:'userUuid', width:100}">用户ID</th>
                                     <th lay-data="{field:'logHistoryIp', width:200}">登陆IP</th>
-                                    <th lay-data="{field:'dateToString', width:200}">登陆时间</th>
+                                    <th lay-data="{field:'logLandTime', width:200}">登陆时间</th>
                                     <th lay-data="{field:'logSpace', width:200}">间隔时间</th>
                                     <th lay-data="{field:'logWeighting', width:200}">加权时间</th>
                                     <th lay-data="{field:'itemStatus', width:200}">商品状态码</th>

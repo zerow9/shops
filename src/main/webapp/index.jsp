@@ -142,8 +142,7 @@
                         </li>
                         <li><a class="J_menuItem" href="#">文章管理</a>
                         </li>
-                        <li><a class="J_menuItem" href="#">公告管理</a>
-                        </li>
+                        <li><a class="J_menuItem" href="/notices/noticesList.action">公告管理</a>
                         <li><a class="J_menuItem" href="#">导航栏管理</a>
                         </li>
                         <li><a class="J_menuItem" href="#">页面布局管理</a>

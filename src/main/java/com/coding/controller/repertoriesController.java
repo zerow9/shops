@@ -36,13 +36,9 @@ public class repertoriesController {
         PagingCustomRepertory pagingCustomItemType = new PagingCustomRepertory();
         pagingCustomItemType.setIndexNumber((page - 1) * limit);
         pagingCustomItemType.setPageNumber(limit);
-        if ((page == 1 && counts == null) || counts == null)
+        if (counts == null)
             counts = adminService.selectRepertoryCount();
         List<Repertory> items = adminService.selectRepertory(pagingCustomItemType);
-        for (Repertory repertory : items) {
-            repertory.setUpdateToString(DateToString.date(repertory.getUpdateTime()));
-            repertory.setPuttimeToString(DateToString.date(repertory.getRepertoryPuttime()));
-        }
         MyJsonConfig myJsonConfig = new MyJsonConfig();
         return myJsonConfig.start(items, counts);
     }

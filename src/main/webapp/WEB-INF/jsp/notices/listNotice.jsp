@@ -63,7 +63,7 @@
 
                         <div class="table-responsive">
 
-                            <table class="layui-table" lay-data="{url:'../../../data/testNotice.json', page:true, id:'noticeId'}"
+                            <table class="layui-table" lay-data="{url:'getNotice.action', page:true, id:'noticeId'}"
                                    lay-filter="demo">
                                 <thead>
                                 <tr>
