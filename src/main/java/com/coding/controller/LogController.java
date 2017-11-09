@@ -11,6 +11,7 @@ import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -48,7 +49,7 @@ public class LogController {
     @ResponseBody
     public String  getLogInformation(Integer page, Integer limit) throws Exception {
         PagingCustomLog pagingCustomLog=new PagingCustomLog();
-        pagingCustomLog.setIndexNumber(page);
+        pagingCustomLog.setIndexNumber((page-1)*limit);
         pagingCustomLog.setPageNumber(limit);
         int counts =adminService.selectLogCount();
         List<Log> logs=adminService.selectLog(pagingCustomLog);
@@ -58,5 +59,16 @@ public class LogController {
         JsonFormat<Log> json = new JsonFormat<>(logs, counts, null, null);
         JSONObject jsonObject = JSONObject.fromObject(json);
         return jsonObject.toString();
+    }
+
+    @RequestMapping("detail")
+    public String detileLog(Integer logId, Model model){
+        try {
+            Log log=adminService.selectLogByPrimaryKey(logId);
+            model.addAttribute("log",log);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "logs/detailLog";
     }
 }

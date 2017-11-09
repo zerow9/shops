@@ -61,7 +61,6 @@
                                    lay-filter="demo">
                                 <thead>
                                 <tr>
-                                    <th lay-data="{checkbox:true, fixed: true}"></th>
                                     <th lay-data="{field:'logId', width:80, fixed: true}">编号</th>
                                     <th lay-data="{field:'userUuid', width:100}">用户ID</th>
                                     <th lay-data="{field:'logHistoryIp', width:200}">登陆IP</th>
@@ -71,14 +70,14 @@
                                     <th lay-data="{field:'itemStatus', width:200}">商品状态码</th>
                                     <th lay-data="{field:'itemTypeStatus', width:100,}">商品类型</th>
                                     <th lay-data="{field:'logKeyWord', width:100,}">搜索关键词</th>
-                                    <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#operate_bar'}">
+                                    <th lay-data="{fixed: 'right', width:80, align:'center', toolbar: '#operate_bar'}">
                                         操作
                                     </th>
                                 </tr>
                                 </thead>
                             </table>
 
-                        </div>
+                    </div>
 
                     </div>
                 </div>
@@ -97,7 +96,7 @@
 <script src="../../../shopmanagement/js/content.min.js"></script>
 <script src="../../../common/layui/layui.js"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../../../js/venders/listVender.js"></script>
+<script src="../../../js/logs/listlog.js"></script>
 
 </body>
 </html>
