@@ -73,8 +73,8 @@
                                     <th lay-data="{field:'itemOriginalPrice', width:200}">商品原始价格</th>
                                     <th lay-data="{field:'shopId', width:200}">商店</th>
                                     <th lay-data="{field:'repertoryNumber', width:200}">库存量</th>
-                                    <th lay-data="{field:'puttimeToString', width:200}">入库时间</th>
-                                    <th lay-data="{field:'updateToString', width:100,}">修改时间</th>
+                                    <th lay-data="{field:'repertoryPuttime', width:200}">入库时间</th>
+                                    <th lay-data="{field:'updateTime', width:100,}">修改时间</th>
                                     <th lay-data="{field:'venderId', width:100}">商家编号</th>
                                     <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#operate_bar'}">
                                         操作

@@ -3,12 +3,10 @@ package com.coding.controller;
 import com.coding.Iservice.IAdminService;
 import com.coding.comomInterface.DateToString;
 import com.coding.comomInterface.MyUUID;
+import com.coding.json.MyJsonConfig;
 import com.coding.pojo.Admin;
 import com.coding.pojo.Groups;
 import com.coding.pojo.User;
-import com.coding.json.JsonFormat;
-
-import net.sf.json.JSONObject;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -100,34 +98,10 @@ public class AdminController {
         for (String uuid : arrayString.split(","))
             list.add(Integer.parseInt(uuid));
         adminService.deleteAdminByAdminIdArray(list.toArray(new Integer[list.size()]));
-        counts = null;
+        counts -= list.size();
         return true;
     }
 
-
-    /**
-     * 根据分组ID查询分组信息
-     *
-     * @param groupId 分组id
-     * @return 查找一组id的信息页面
-     */
-    @RequestMapping("selectGroupsByPrimaryKey")
-    public String selectGroupsByPrimaryKey(Integer groupId) throws Exception {
-        Groups groups = adminService.selectGroupsByPrimaryKey(groupId);
-        return "";
-    }
-
-    /**
-     * 根据分组ID更新分组信息
-     *
-     * @param groups 更新的分组信息
-     * @return 更新成功之后的页面
-     */
-    @RequestMapping("updateGroupsByPrimaryKey")
-    public String updateGroupsByPrimaryKey(Groups groups) throws Exception {
-        adminService.updateGroupsByPrimaryKey(groups);
-        return "";
-    }
 
     /**
      * 查询所有分组信息
@@ -162,25 +136,12 @@ public class AdminController {
      */
     @RequestMapping("insertAdmin")
     public boolean insertAdmin(Admin admin) throws Exception {
-        if (admin == null)
-            throw new Exception("插入数据为空");
         admin.setAdminRegisterTime(new Date());
         adminService.insertAdmin(admin);
         counts++;
         return true;
     }
 
-    /**
-     * 通过超级管理员的权限查询分组管理员信息
-     *
-     * @param adminId 分组管理员id
-     * @return 查询分组管理员信息跳转的页面
-     */
-    @RequestMapping("selectAdminByPrimaryKey")
-    public String selectAdminByPrimaryKey(Integer adminId) throws Exception {
-        Admin admin = adminService.selectAdminByPrimaryKey(adminId);
-        return "";
-    }
 
     /**
      * 通过超级管理员权限来修改管理员信息
@@ -208,14 +169,13 @@ public class AdminController {
     @RequestMapping("getAdminAll")
     @ResponseBody
     public String getAdminAll(Integer page, Integer limit) throws Exception {
-        if ((page == 1 && counts == null) || counts == null)
+        if (counts == null)
             counts = adminService.selectAdminCount();
         List<Admin> admins = adminService.selectAdminAllPaging((page - 1) * limit, limit);
         for (Admin admin : admins)
             admin.setDateToString(DateToString.date(admin.getAdminRegisterTime()));
-        JsonFormat<Admin> json = new JsonFormat<>(admins, counts, null, null);
-        JSONObject jsonObject = JSONObject.fromObject(json);
-        return jsonObject.toString();
+        MyJsonConfig myJsonConfig = new MyJsonConfig();
+        return myJsonConfig.start(admins, counts);
     }
 
     /**
@@ -238,25 +198,23 @@ public class AdminController {
     @RequestMapping("getUserJson")
     @ResponseBody
     public String getUserAll(Integer page, Integer limit) throws Exception {
-        if ((page == 1 && count == null) || count == null)
+        if (count == null)
             count = adminService.selectUserCount();
         List<User> users = adminService.selectUserAllPaging((page - 1) * limit, limit);
         for (User user : users)
             user.setDateToString(DateToString.date(user.getUserRegisterDateTime()));
-        JsonFormat<User> json = new JsonFormat<>(users, count, null, null);
-        JSONObject result = JSONObject.fromObject(json);
-        return result.toString();
+        MyJsonConfig myJsonConfig = new MyJsonConfig();
+        return myJsonConfig.start(users, count);
     }
 
     @RequestMapping("getGroupsJson")
     @ResponseBody
     public String getGroupsJson(Integer page, Integer limit) throws Exception {
-        if ((page == 1 && countGroups == null) || countGroups == null)
+        if (countGroups == null)
             countGroups = adminService.selectGroupsCount();
         List<Groups> groups = adminService.selectGroupsPaging((page - 1) * limit, limit);
-        JsonFormat<Groups> json = new JsonFormat<>(groups, countGroups, null, null);
-        JSONObject result = JSONObject.fromObject(json);
-        return result.toString();
+        MyJsonConfig myJsonConfig = new MyJsonConfig();
+        return myJsonConfig.start(groups, countGroups);
     }
 
     @RequestMapping("addAdmin")
@@ -318,8 +276,9 @@ public class AdminController {
 
     @RequestMapping("deleteUserByUUidArray")
     public boolean deleteUserByUUidArray(String arrayString) throws Exception {
-        adminService.deleteUsersByUuidArray(arrayString.split(","));
-        count = null;
+        String[] strings = arrayString.split(",");
+        adminService.deleteUsersByUuidArray(strings);
+        count -= strings.length;
         return true;
     }
 
@@ -375,14 +334,11 @@ public class AdminController {
     @RequestMapping("deleteGroupsByIdArray")
     @RequiresPermissions("root")
     public boolean deleteGroupsByIdArray(String arrayString) throws Exception {
-        List<Integer> list =new ArrayList<>();
+        List<Integer> list = new ArrayList<>();
         for (String uuid : arrayString.split(","))
             list.add(Integer.parseInt(uuid));
         adminService.deleteGroupsByPrimaryKeyArray(list.toArray(new Integer[list.size()]));
-        countGroups = null;
+        countGroups -= list.size();
         return true;
     }
-
-
-
 }

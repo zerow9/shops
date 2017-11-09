@@ -3,10 +3,13 @@ package com.coding.controller;
 import com.coding.Iservice.IAdminService;
 import com.coding.Iservice.IUserService;
 import com.coding.comomInterface.DateToString;
+import com.coding.json.MyJsonConfig;
 import com.coding.pojo.Complaint;
 import com.coding.paging.PagingCustomComplaint;
 import com.coding.json.JsonFormat;
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,13 +51,8 @@ public class ComplaintController {
         complaint.setPageNumber(limit);
         complaint.setIndexNumber((page - 1) * limit);
         List<Complaint> complaints = adminService.selectComplaint(complaint);
-        for (Complaint comp : complaints) {
-            comp.setStatus(false);
-            comp.setDateToString(DateToString.date(comp.getComplaintDate()));
-        }
-        JsonFormat<Complaint> json = new JsonFormat<>(complaints, complaintCount, null, null);
-        JSONObject result = JSONObject.fromObject(json);
-        return result.toString();
+        MyJsonConfig myJsonConfig = new MyJsonConfig();
+        return myJsonConfig.start(complaints, complaintCount);
     }
 
     @RequestMapping("seeComplaintIdByKey")

@@ -106,6 +106,8 @@ public class Complaint {
                 ", complaintDate=" + complaintDate +
                 ", isDeal=" + isDeal +
                 ", complaintContent='" + complaintContent + '\'' +
+                ", status=" + status +
+                ", dateToString='" + dateToString + '\'' +
                 '}';
     }
 }
