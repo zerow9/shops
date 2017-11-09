@@ -3,6 +3,7 @@ package com.coding.controller;
 import com.coding.Iservice.IAdminService;
 import com.coding.comomInterface.DateToString;
 import com.coding.comomInterface.MyUUID;
+import com.coding.json.MyJsonConfig;
 import com.coding.pojo.Item;
 import com.coding.paging.PagingCustomItem;
 import com.coding.json.JsonFormat;
@@ -50,9 +51,8 @@ public class ItemController {
         List<Item> items = adminService.selectItem(pagingCustomItem);
         for (Item item : items)
             item.setDateToString(DateToString.date(item.getMakeDate()));
-        JsonFormat<Item> json = new JsonFormat<>(items, counts, null, null);
-        JSONObject jsonObject = JSONObject.fromObject(json);
-        return jsonObject.toString();
+        MyJsonConfig myJsonConfig = new MyJsonConfig();
+        return myJsonConfig.start(items, counts);
     }
 
     /**
