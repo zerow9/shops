@@ -2,6 +2,7 @@ package com.coding.controller;
 
 import com.coding.Iservice.IAdminService;
 import com.coding.json.JsonFormat;
+import com.coding.json.MyJsonConfig;
 import com.coding.paging.PagingCustomVender;
 import com.coding.pojo.Vender;
 import net.sf.json.JSONObject;
@@ -36,9 +37,8 @@ public class VendersController {
         if (page == 1 && counts == null)
             counts = adminService.selectVenderCount();
         List<Vender> venders = adminService.selectVender(pagingCustom);
-        JsonFormat<Vender> json = new JsonFormat<>(venders, counts, null, null);
-        JSONObject jsonObject = JSONObject.fromObject(json);
-        return jsonObject.toString();
+        MyJsonConfig<Vender> myJsonConfig = new MyJsonConfig();
+        return myJsonConfig.start(venders, counts);
     }
 
     @RequestMapping("deleteVenderByPrimaryKey")

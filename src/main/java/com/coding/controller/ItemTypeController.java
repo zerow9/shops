@@ -1,6 +1,7 @@
 package com.coding.controller;
 
 import com.coding.Iservice.IAdminService;
+import com.coding.json.MyJsonConfig;
 import com.coding.pojo.ItemType;
 import com.coding.paging.PagingCustomItemType;
 import com.coding.json.JsonFormat;
@@ -36,9 +37,8 @@ public class ItemTypeController {
         if (counts == null)
             counts = adminService.selectItemTypeCount();
         List<ItemType> items = adminService.selectItemType(pagingCustomItemType);
-        JsonFormat<ItemType> json = new JsonFormat<>(items, counts, null, null);
-        JSONObject jsonObject = JSONObject.fromObject(json);
-        return jsonObject.toString();
+        MyJsonConfig myJsonConfig = new MyJsonConfig();
+        return myJsonConfig.start(items, counts);
     }
 
     @RequestMapping("deleteGroupsByPrimaryKey")

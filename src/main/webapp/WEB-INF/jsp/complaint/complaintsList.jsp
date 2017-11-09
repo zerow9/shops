@@ -71,7 +71,7 @@
                                     <th lay-data="{field:'accusedId', width:100, sort: true}">被投诉人</th>
                                     <th lay-data="{field:'complaintTittle', width:200}">投诉标题</th>
                                     <th lay-data="{field:'complaintContent', width:200}">投诉内容</th>
-                                    <th lay-data="{field:'dateToString', width:100, sort: true}">投诉时间</th>
+                                    <th lay-data="{field:'complaintDate', width:100, sort: true}">投诉时间</th>
                                     <th lay-data="{field:'status', width:100, align:'center', fixed: 'right', toolbar: '#status_bar'}">
                                         是否已处理
                                     </th>
