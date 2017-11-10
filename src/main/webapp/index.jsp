@@ -112,6 +112,7 @@
                         </li>
                         <li><a class="J_menuItem" href="/repertories/forwardRepertories.action">库存管理</a></li>
                         <li><a class="J_menuItem" href="/venders/forwardVenders.action">厂商管理</a></li>
+                        <li><a class="J_menuItem" href="/shop/forwordShop.action">商店管理</a></li>
                     </ul>
                 </li>
 
