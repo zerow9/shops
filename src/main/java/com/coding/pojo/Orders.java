@@ -1,11 +1,16 @@
 package com.coding.pojo;
 
+import com.coding.converter.DateFormatTool;
+import com.coding.json.JsonFormat;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 @Component
 public class Orders {
+
+    private DateFormatTool dateFormatTool = new DateFormatTool();
+
     private Integer orderId;
 
     private String userUuid;
@@ -58,7 +63,6 @@ public class Orders {
 
     private Date sendGoodsTime;
     private String sendGoodsTimeToString;
-
 
     private Double orderFreight;
 
@@ -290,7 +294,7 @@ public class Orders {
     }
 
     public String getOrderCreateTimeToString() {
-        return orderCreateTimeToString;
+        return dateFormatTool.dateToString(orderCreateTime, "FULL_TIME");
     }
 
     public Date getOrderPayTime() {
@@ -298,7 +302,7 @@ public class Orders {
     }
 
     public String getOrderPayTimeToString() {
-        return orderPayTimeToString;
+        return dateFormatTool.dateToString(orderPayTime, "FULL_TIME");
     }
 
     public Date getSendGoodsTime() {
@@ -306,7 +310,7 @@ public class Orders {
     }
 
     public String getSendGoodsTimeToString() {
-        return sendGoodsTimeToString;
+        return dateFormatTool.dateToString(sendGoodsTime, "FULL_TIME");
     }
 
     public Date getOrderCompletionTime() {
@@ -314,7 +318,7 @@ public class Orders {
     }
 
     public String getOrderCompletionTimeToString() {
-        return orderCompletionTimeToString;
+        return dateFormatTool.dateToString(orderCompletionTime, "FULL_TIME");
     }
 
     @Override
@@ -335,9 +339,10 @@ public class Orders {
                 ", protectStatus=" + protectStatus +
                 ", payType=" + payType +
                 ", orderCreateTime=" + orderCreateTime +
-                ", orderCreateTimeToString='" + orderCreateTimeToString + '\'' +
+                ", orderCreateTimeToString='" + dateFormatTool.dateToString(orderCreateTime, "FULL_TIME") + '\'' +
+                +'\'' +
                 ", orderPayTime=" + orderPayTime +
-                ", orderPayTimeToString='" + orderPayTimeToString + '\'' +
+                ", orderPayTimeToString='" + dateFormatTool.dateToString(orderPayTime, "FULL_TIME") + '\'' +
                 ", orderPaid=" + orderPaid +
                 ", orderRefund=" + orderRefund +
                 ", sendWay='" + sendWay + '\'' +
@@ -347,10 +352,10 @@ public class Orders {
                 ", takeGoodsCity='" + takeGoodsCity + '\'' +
                 ", takeGoodsCounty='" + takeGoodsCounty + '\'' +
                 ", sendGoodsTime=" + sendGoodsTime +
-                ", sendGoodsTimeToString='" + sendGoodsTimeToString + '\'' +
+                ", sendGoodsTimeToString='" + dateFormatTool.dateToString(sendGoodsTime, "FULL_TIME") + '\'' +
                 ", orderFreight=" + orderFreight +
                 ", orderCompletionTime=" + orderCompletionTime +
-                ", orderCompletionTimeToString='" + orderCompletionTimeToString + '\'' +
+                ", orderCompletionTimeToString='" + dateFormatTool.dateToString(orderCompletionTime, "FULL_TIME") + '\'' +
                 '}';
     }
 }
