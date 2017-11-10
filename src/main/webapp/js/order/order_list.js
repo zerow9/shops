@@ -16,12 +16,11 @@ layui.use('table', function () {
             , {field: 'orderPaid', title: '订单总额（元）', width: 150, sort: true}
             , {field: 'sendStatus', title: '支付状态', width: 100}
             , {field: 'sendStatus', title: '发货状态', width: 100}
-            , {field: 'orderCreateTime', title: '下单时间', width: 200, sort: true}
+            , {field: 'orderCreateTimeToString', title: '下单时间', width: 200, sort: true}
             , {field: 'operate', title: '操作', width: 150, fixed: 'right', align: 'center', toolbar: '#barDemo'}
         ]]
         , done: function (res, curr, count) {   //数据渲染完的回调
-            console.log('订单列表读取完成');
-            console.log('res：' + res);     //接口返回信息
+            console.log('返回信息：' + res.msg);     //接口返回信息
             console.log('当前页码：' + curr);    //当前页码
             console.log('数据总量：' + count);     //数据总量
         }
@@ -31,7 +30,7 @@ layui.use('table', function () {
         }
         // 每页数据量可选项
         , limits: [10, 20, 30, 50, 100, 200, 500]
-        , limit: 7 //每页默认显示的数量
+        , limit: 8 //每页默认显示的数量
         , skin: 'line' //行边框风格
         , even: true //开启隔行背景
         , size: 'lg'  //设定表格尺寸
@@ -46,9 +45,8 @@ layui.use('table', function () {
                 url: "/order/selectOrderByPrimaryKey.action",
                 data: {'orderId': data.orderId},
                 timeout: 10000, //超时时间：10秒
-                success: function (result) {
-                    console.log(result);
-                    if (result === 'true') {
+                success: function (json_data) {
+                    if (json_data.msg === 'true') {
                         var order_items = '' +
                             '<div class="detail_info">' +
                             '<table class="layui-table" lay-skin="nob" style="color: black">' +
@@ -57,13 +55,13 @@ layui.use('table', function () {
                             '<col width="200">' +
                             '</colgroup>' +
                             '<tbody>' +
-                            '<tr><td style="text-align: right;font-weight: bold">订单编号：</td>' + '<td>' + data.order_id + '</td></tr>' +
-                            '<tr><td style="text-align: right;font-weight: bold">收件人：</td>' + '<td>' + data.take_goods_name + '</td></tr>' +
-                            '<tr><td style="text-align: right;font-weight: bold">分店：</td>' + '<td>' + data.shop_name + '</td></tr>' +
-                            '<tr><td style="text-align: right;font-weight: bold">订单总额：</td>' + '<td>' + data.order_sum_price + '</td></tr>' +
-                            '<tr><td style="text-align: right;font-weight: bold">支付状态：</td>' + '<td>' + data.pay_status + '</td></tr>' +
-                            '<tr><td style="text-align: right;font-weight: bold">发货状态：</td>' + '<td>' + data.send_status + '</td></tr>' +
-                            '<tr><td style="text-align: right;font-weight: bold">下单时间：</td>' + '<td>' + data.order_create_time + '</td></tr>' +
+                            '<tr><td style="text-align: right;font-weight: bold">订单编号：</td>' + '<td>' + json_data.order.orderId + '</td></tr>' +
+                            '<tr><td style="text-align: right;font-weight: bold">收件人：</td>' + '<td>' + json_data.order.takeGoodsName + '</td></tr>' +
+                            // '<tr><td style="text-align: right;font-weight: bold">分店：</td>' + '<td>' + json_data.order.shopName + '</td></tr>' +
+                            '<tr><td style="text-align: right;font-weight: bold">订单总额：</td>' + '<td>' + json_data.order.orderSumPrice + '</td></tr>' +
+                            '<tr><td style="text-align: right;font-weight: bold">支付状态：</td>' + '<td>' + json_data.order.payStatus + '</td></tr>' +
+                            '<tr><td style="text-align: right;font-weight: bold">发货状态：</td>' + '<td>' + json_data.order.sendStatus + '</td></tr>' +
+                            '<tr><td style="text-align: right;font-weight: bold">下单时间：</td>' + '<td>' + json_data.order.orderCreateTimeToString + '</td></tr>' +
                             '</tbody>' +
                             '</table>' +
                             '</div>';
@@ -84,7 +82,7 @@ layui.use('table', function () {
                             , shadeClose: true
                         });
                     } else {
-                        parent.layer.alert(result.toString());
+                        parent.layer.alert(json_data.msg);
                     }
                 },
                 error: function (e) {
@@ -107,15 +105,15 @@ layui.use('table', function () {
                 , btn1: function (index, layero) {      //按钮一：确认批量删除
                     $.ajax({
                         type: "POST",
-                        url: "deleteOrderByPrimaryKey.action",
+                        url: "/order/deleteOrderByPrimaryKey.action",
                         data: {'orderId': data.orderId},
                         timeout: 10000, //超时时间：10秒
-                        success: function (result) {
-                            if (result.match('Unknown')) {
-                                parent.layer.msg("删除成功！");
-                                obj.del();
+                        success: function (json_data) {
+                            if (json_data.msg === 'true') {
+                                layer.msg("删除成功！");
+                                tableObj.reload();
                             } else {
-                                parent.layer.alert(result.toString());
+                                parent.layer.alert(json_data.msg);
                             }
                         },
                         error: function (jqXHR) {
@@ -144,9 +142,9 @@ layui.use('table', function () {
         var data = checkStatus.data;    // 选中的数据集
         var order_ids = '';     //选中的id集合
         $.each(eval("(" + JSON.stringify(data) + ")"), function (i, n) {    //循环获取每个选中的id
-            order_ids += n.order_id + ',';
+            order_ids += n.orderId + ',';
         });
-        console.log('选择的数据集：' + order_ids);
+        console.log('选中的数据集：' + order_ids);
         if (order_ids !== '') {
             parent.layer.open({     // 弹出确认删除对话框
                 type: 1
@@ -163,22 +161,16 @@ layui.use('table', function () {
                 , btn1: function (index, layero) {      //按钮一：确认批量删除
                     $.ajax({
                         type: "POST",
-                        url: "deleteGroupsByIdArray.action",
-                        data: {'arrayString': order_ids.toString()},
+                        url: "/order/deleteOrderByPrimaryKeyArray.action",
+                        data: {'orderId': order_ids},
                         timeout: 10000, //超时时间：10秒
-                        success: function (result) {
-                            if (result.match('Unknown')) {
-                                // 批量删除本地选中的行
-                                var layFilterIndex = 'LAY-table-' + tableObj.config.index;
-                                var tableContainer = $('div[lay-filter="' + layFilterIndex + '"]');//找到table filter的索引
-                                tableContainer.find('input[name="layTableCheckbox"]:checked').each(function () {//查找选中的checkbox
-                                    var tr = $(this).parents('tr');
-                                    console.log(tr);
-                                    tr.remove();
-                                });
-                                parent.layer.msg("删除成功！");
+                        success: function (json_data) {
+                            console.log("信息："+json_data);
+                            if (json_data.msg === 'true') {
+                                layer.msg("删除成功！");
+                                tableObj.reload();
                             } else {
-                                parent.layer.alert(result.toString());
+                                parent.layer.alert(json_data.msg);
                             }
                         },
                         error: function (jqXHR) {

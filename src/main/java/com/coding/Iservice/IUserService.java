@@ -288,4 +288,55 @@ public interface IUserService {
      * @throws Exception
      */
     public List<OrderDetail> selectOrderDetail (PagingCustomOrderDetail pagingCustomOrderDetail)throws Exception;
+    /*------------------------------------------公告表------------------------------------------------------------------*/
+
+    /**
+     * 根据主键查询公告信息
+     * @param noticeId
+     * @return
+     * @throws Exception
+     */
+    public Notice selectNoticeByPrimaryKey (Integer noticeId)throws Exception;
+
+    /**
+     * 公告表综合查询
+     * 实现：主键ID，是否启用，发布时间范围，排序规则，分页功能.
+     * @param pagingCustomNotice
+     * @return
+     * @throws Exception
+     */
+    public List<Notice> selectNotice (PagingCustomNotice pagingCustomNotice)throws Exception;
+
+    /**
+     * 查询公告信息总数
+     * @return
+     * @throws Exception
+     */
+    public int selectNoticeCount ()throws Exception;
+
+    /*------------------------------------------商店表------------------------------------------------------------------*/
+    /**
+     * 根据主键ID查询商店信息
+     * @param shopId
+     * @return
+     * @throws Exception
+     */
+    public Shop selectShopByPrimaryKey (Integer shopId)throws Exception;
+
+    /**
+     * 商店表综合查询
+     * 实现：所有Sshop属性.
+     * 主键ID，商店地址（模糊），商店名字（模糊），商店经度，商店纬度，排序规则，分页功能
+     * @param pagingCustomShop
+     * @return
+     * @throws Exception
+     */
+    public List<Shop> selectShop (PagingCustomShop pagingCustomShop)throws Exception;
+
+    /**
+     * 商店总数查询
+     * @return
+     * @throws Exception
+     */
+    public int selectShopCount()throws Exception;
 }

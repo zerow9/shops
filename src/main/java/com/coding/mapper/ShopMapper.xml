@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coding.mapper.ShopMapper" >
+  <resultMap id="BaseResultMap" type="com.coding.pojo.Shop" >
+    <id column="shop_id" property="shopId" jdbcType="INTEGER" />
+    <result column="shop_address" property="shopAddress" jdbcType="VARCHAR" />
+    <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+    <result column="shop_x" property="shopX" jdbcType="DOUBLE" />
+    <result column="shop_y" property="shopY" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    shop_id, shop_address, shop_name, shop_x, shop_y
+  </sql>
+ <!--根据主键ID查询商店信息-->
+  <select id="selectShopByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from shop
+    where shop_id = #{shopId,jdbcType=INTEGER}
+  </select>
+  <!--根据主键ID删除查询商店信息-->
+  <delete id="deleteShopByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from shop
+    where shop_id = #{shopId,jdbcType=INTEGER}
+  </delete>
+
+  <!--批量删除商店-->
+  <delete id="deleteShopByPrimaryKeyArray" parameterType="java.lang.Integer">
+    delete from shop where shop_id IN
+    <foreach collection="shopIdArrary" item="shop" open="(" separator="," close=")">
+      #{shop}
+    </foreach>
+  </delete>
+
+  <!--按需插入-->
+  <insert id="insertShopSelective" parameterType="com.coding.pojo.Shop" >
+    insert into shop
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="shopAddress != null" >
+        shop_address,
+      </if>
+      <if test="shopName != null" >
+        shop_name,
+      </if>
+      <if test="shopX != null" >
+        shop_x,
+      </if>
+      <if test="shopY != null" >
+        shop_y,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+
+      <if test="shopAddress != null" >
+        #{shopAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null" >
+        #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopX != null" >
+        #{shopX,jdbcType=DOUBLE},
+      </if>
+      <if test="shopY != null" >
+        #{shopY,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+
+
+  <!--按需修改-->
+  <update id="updateShopByPrimaryKeySelective" parameterType="com.coding.pojo.Shop" >
+    update shop
+    <set >
+      <if test="shopAddress != null" >
+        shop_address = #{shopAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="shopName != null" >
+        shop_name = #{shopName,jdbcType=VARCHAR},
+      </if>
+      <if test="shopX != null" >
+        shop_x = #{shopX,jdbcType=DOUBLE},
+      </if>
+      <if test="shopY != null" >
+        shop_y = #{shopY,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where shop_id = #{shopId,jdbcType=INTEGER}
+  </update>
+
+  <!--商店表的查询大SQL-->
+  <select id="selectShop" parameterType="com.coding.paging.PagingCustomShop" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List"/>
+    from shop
+    <where>
+      <!--根据投诉基本信息进行查询-->
+      <if test="shop != null">
+        <!--根据主键查询商店信息-->
+        <if test="shop.shopId != null and shop.shopId != 0">
+          and shop_id = #{shop.shopId}
+        </if>
+        <!--根据商店地址查询信息-->
+        <if test="shop.shopAddress != null and shop.shopAddress != ''">
+          and shop_address REGEXP #{shop.shopAddress}
+        </if>
+        <!--根据商店名字查询商店信息-->
+        <if test="shop.shopName != null and shop.shopName != ''">
+          and shop_name REGEXP #{shop.shopName}
+        </if>
+        <!--根据商店经度查询商店信息-->
+        <if test="shop.shopX != null and shop.shopX != 0">
+          and shop_x = #{shop.shopX}
+        </if>
+        <!--根据商店Id 查询库存信息-->
+        <if test="shop.shopY != null and shop.shopY != 0">
+          and shop_y = #{shop.shopY}
+        </if>
+      </if>
+
+    </where>
+    <!--排序规则-->
+    <if test="sortByColumn != null and sortByColumn !=''">
+      <if test="sortRule != null and sortRule != ''">
+        order by ${sortByColumn} ${sortRule}
+      </if>
+    </if>
+    <!--分页-->
+    <if test="indexNumber != null">
+      <if test="pageNumber != null and pageNumber != 0">
+        limit #{indexNumber},#{pageNumber}
+      </if>
+    </if>
+    <if test="indexNumber == null">
+      <if test="pageNumber != null and pageNumber != 0">
+        limit 0,#{pageNumber}
+      </if>
+    </if>
+  </select>
+
+<!--商店总数查询-->
+  <select id="selectShopCount"  resultType="java.lang.Integer" >
+    select count(*) from shop
+  </select>
+
+</mapper>

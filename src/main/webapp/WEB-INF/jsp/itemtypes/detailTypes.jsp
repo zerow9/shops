@@ -37,7 +37,7 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">父类</label>
                             <div class="layui-input-block">
-                                <select  lay-filter="${itemtypes.fatherTypeId}" readonly>
+                                <select  lay-filter="${itemtypes.fatherTypeId}" id="selectId" readonly>
                                     <option value="1" >药品</option>
                                     <option value="2">日用品</option>
                                     <option value="3">营养品</option>
@@ -52,7 +52,7 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">分类等级</label>
                             <div class="layui-input-block">
-                                <select lay-filter="${itemtypes.typeLevel}" readonly>
+                                <select lay-filter="${itemtypes.typeLevel}" id="selectId1" readonly>
                                     <option value="1" >一级分类</option>
                                     <option value="2">二级分类</option>
                                     <option value="3">三级分类</option>
@@ -85,4 +85,11 @@
 <script src="../../../shopmanagement/common/layui/layui.js" charset="utf-8" type="text/javascript"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script  src="../../../js/itemtypes/detailTypes.js"></script>
+<script src="../../../shopmanagement/js/jquery-1.7.2.min.js"></script>
+<script>
+    $(function(){
+        $("#selectId").find("option[value = '${itemtypes.fatherTypeId}']").attr("selected","selected");
+        $("#selectId1").find("option[value = '${itemtypes.typeLevel}']").attr("selected","selected");
+    })
+</script>
 </body>
