@@ -1,10 +1,10 @@
 package com.coding.converter;
 
+import org.springframework.core.convert.converter.Converter;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import org.springframework.core.convert.converter.Converter;
 
 public class DateConverter implements Converter<String, Date> {
 

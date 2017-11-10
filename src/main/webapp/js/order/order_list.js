@@ -16,7 +16,7 @@ layui.use('table', function () {
             , {field: 'orderPaid', title: '订单总额（元）', width: 150, sort: true}
             , {field: 'sendStatus', title: '支付状态', width: 100}
             , {field: 'sendStatus', title: '发货状态', width: 100}
-            , {field: 'orderCreateTime', title: '下单时间', width: 200, sort: true}
+            , {field: 'orderCreateTimeToString', title: '下单时间', width: 200, sort: true}
             , {field: 'operate', title: '操作', width: 150, fixed: 'right', align: 'center', toolbar: '#barDemo'}
         ]]
         , done: function (res, curr, count) {   //数据渲染完的回调
@@ -61,7 +61,7 @@ layui.use('table', function () {
                             '<tr><td style="text-align: right;font-weight: bold">订单总额：</td>' + '<td>' + json_data.order.orderSumPrice + '</td></tr>' +
                             '<tr><td style="text-align: right;font-weight: bold">支付状态：</td>' + '<td>' + json_data.order.payStatus + '</td></tr>' +
                             '<tr><td style="text-align: right;font-weight: bold">发货状态：</td>' + '<td>' + json_data.order.sendStatus + '</td></tr>' +
-                            '<tr><td style="text-align: right;font-weight: bold">下单时间：</td>' + '<td>' + json_data.order.orderCreateTime + '</td></tr>' +
+                            '<tr><td style="text-align: right;font-weight: bold">下单时间：</td>' + '<td>' + json_data.order.orderCreateTimeToString + '</td></tr>' +
                             '</tbody>' +
                             '</table>' +
                             '</div>';
