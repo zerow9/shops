@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -110,10 +111,9 @@
                             <label class="layui-form-label">归属组</label>
                             <div class="layui-input-block">
                                 <select name="userGroup" lay-filter="aihao">
-                                    <option value=""></option>
-                                    <option value="0" selected="">普通用户组</option>
-                                    <option value="1">商家组</option>
-                                    <option value="2">管理员组</option>
+                                    <c:forEach items="${groups}" var="groupss" varStatus="s">
+                                        <option value="${s.index+1}">${groupss.groupName}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </div>

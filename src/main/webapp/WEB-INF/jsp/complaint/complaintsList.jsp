@@ -54,9 +54,6 @@
 
                     <div class="ibox-content">
 
-                        <div class="layui-btn-group demoTable">
-                            <button class="layui-btn" id="add_group_btn" data-type="add">添加用户组</button>
-                        </div>
 
                         <div class="table-responsive">
 
