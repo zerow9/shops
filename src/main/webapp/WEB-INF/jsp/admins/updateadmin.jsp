@@ -80,18 +80,6 @@
                         </div>
 
                         <div class="layui-form-item">
-                            <label class="layui-form-label">归属组</label>
-                            <div class="layui-input-inline">
-                                <select name="groupId" lay-filter="aihao" id="selectId">
-                                    <option value=""></option>
-                                    <option value="3" selected="">普通用户组</option>
-                                    <option value="1">商家组</option>
-                                    <option value="2">管理员组</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div class="layui-form-item">
                             <label class="layui-form-label">注册时间</label>
                             <div class="layui-input-block">
                                 <input type="text" name="adminRegisterTime1"  autocomplete="off"
@@ -118,9 +106,4 @@
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../../../js/admins/updateadmin.js"></script>
 <script src="../../../shopmanagement/js/jquery-1.7.2.min.js"></script>
-<script>
-    $(function(){
-        $("#selectId").find("option[value = '${admin.groupId}']").attr("selected","selected");
-    })
-</script>
 </body>

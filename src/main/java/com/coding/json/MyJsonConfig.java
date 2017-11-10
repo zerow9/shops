@@ -10,7 +10,7 @@ public class MyJsonConfig<E> {
 
     private String config(List<E> list, int count, String msg) {
         if (msg == null)
-            msg = "";
+            msg = "\"\"";
         JsonConfig config = new JsonConfig();
         JsonFormat json = new JsonFormat();
         config.registerJsonValueProcessor(Date.class, json);

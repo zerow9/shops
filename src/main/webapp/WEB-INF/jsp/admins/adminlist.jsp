@@ -65,12 +65,11 @@
                             <thead>
                             <tr>
                                 <th lay-data="{checkbox:true, fixed: true}"></th>
-                                <th lay-data="{field:'adminId', width:50, sort: true, fixed: true}">用户编号</th>
+                                <th lay-data="{field:'adminId', width:100, sort: true, fixed: true}">管理员编号</th>
                                 <th lay-data="{field:'adminAccount', width:100}">账号</th>
                                 <th lay-data="{field:'adminPhone', width:150}">电话号码</th>
                                 <th lay-data="{field:'adminEmail', width:200}">邮箱</th>
-                                <th lay-data="{field:'adminRegisterTime', width:200, sort: true}">注册时间</th>
-                                <th lay-data="{field:'groupId', width:100}">分配规则组</th>
+                                <th lay-data="{field:'adminRegisterTime', width:300, sort: true}">注册时间</th>
                                 <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#barDemo'}">操作</th>
                             </tr>
                             </thead>
