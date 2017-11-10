@@ -74,8 +74,6 @@
                         </button>
                     </div>
 
-
-
                     <div class="table-responsive">
 
                         <%--表格数据--%>
@@ -92,11 +90,11 @@
                                 <th lay-data="{field:'dateToString', width:177}">注册日期</th>
                                 <th lay-data="{field:'userScore', width:80, sort: true}">积分</th>
                                 <th lay-data="{field:'userGroup', width:80}">分组</th>
+                                <th lay-data="{field:'userAddress', width:80}">地址</th>
                                 <th lay-data="{fixed: 'right', width:180, align:'center', toolbar: '#barDemo'}">操作</th>
                             </tr>
                             </thead>
                         </table>
-
                     </div>
                 </div>
             </div>
