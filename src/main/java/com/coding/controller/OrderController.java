@@ -31,6 +31,7 @@ public class OrderController {
     @Autowired
     private IAdminService adminService;
 
+    private Integer count=null;
     /**
      * 订单列表页
      *
@@ -50,12 +51,13 @@ public class OrderController {
      */
     @ResponseBody
     @RequestMapping("selectOrder")
-    public String selectOrder(Integer page, Integer limit) {
+    public String selectOrder(Integer page, Integer limit)throws  Exception {
         Map<String, Object> resultMap = new HashMap<>();
         //分页设置
         PagingCustomOrder pagingCustomOrder = new PagingCustomOrder();
         pagingCustomOrder.setPageNumber(limit);
         pagingCustomOrder.setIndexNumber((page - 1) * limit);
+        count = adminService.selectOrderCount();
         //封装json数据
         try {
             resultMap.put("count", adminService.selectOrderCount());
@@ -66,7 +68,9 @@ public class OrderController {
             resultMap.put("code", 1);
             resultMap.put("msg", e.getMessage());
         }
-        return JSONObject.fromObject(resultMap).toString();
+        MyJsonConfig myJsonConfig=new MyJsonConfig();
+        return myJsonConfig.start(userService.selectOrder(pagingCustomOrder),count);
+        //return JSONObject.fromObject(resultMap).toString();
     }
 
     /**
@@ -82,12 +86,14 @@ public class OrderController {
         Map<String, Object> resultMap = new HashMap<>();
         try {
             Orders orders = userService.selectOrderByPrimaryKey(Integer.parseInt(orderId));
+            orders.setOrderCreateTimeToString(DateToString.date(orders.getOrderCreateTime()));
             JSONObject jsonObject = JSONObject.fromObject(orders);
             resultMap.put("msg", "true");
             resultMap.put("order", jsonObject);
         } catch (Exception e) {
             resultMap.put("msg", e.getMessage());
         }
+
         return JSONObject.fromObject(resultMap).toString();
     }
 
@@ -108,6 +114,7 @@ public class OrderController {
         } catch (Exception e) {
             resultMap.put("msg", e.getMessage());
         }
+        count--;
         return JSONObject.fromObject(resultMap).toString();
     }
 
@@ -136,6 +143,8 @@ public class OrderController {
         } catch (Exception e) {
             resultMap.put("msg", e.getMessage());
         }
+
+        count -= i;
         return JSONObject.fromObject(resultMap).toString();
     }
 }

@@ -61,7 +61,7 @@ layui.use('table', function () {
                             '<tr><td style="text-align: right;font-weight: bold">订单总额：</td>' + '<td>' + json_data.order.orderSumPrice + '</td></tr>' +
                             '<tr><td style="text-align: right;font-weight: bold">支付状态：</td>' + '<td>' + json_data.order.payStatus + '</td></tr>' +
                             '<tr><td style="text-align: right;font-weight: bold">发货状态：</td>' + '<td>' + json_data.order.sendStatus + '</td></tr>' +
-                            '<tr><td style="text-align: right;font-weight: bold">下单时间：</td>' + '<td>' + json_data.order.orderCreateTime + '</td></tr>' +
+                            '<tr><td style="text-align: right;font-weight: bold">下单时间：</td>' + '<td>' + json_data.order.orderCreateTimeToString.toString() + '</td></tr>' +
                             '</tbody>' +
                             '</table>' +
                             '</div>';
@@ -165,7 +165,7 @@ layui.use('table', function () {
                         data: {'orderId': order_ids},
                         timeout: 10000, //超时时间：10秒
                         success: function (json_data) {
-                            console.log("信息："+json_data);
+                            console.log("信息：" + json_data);
                             if (json_data.msg === 'true') {
                                 layer.msg("删除成功！");
                                 tableObj.reload();
