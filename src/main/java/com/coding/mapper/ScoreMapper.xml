@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coding.mapper.ScoreMapper" >
+  <resultMap id="BaseResultMap" type="com.coding.pojo.Score" >
+    <id column="score_id" property="scoreId" jdbcType="INTEGER" />
+    <result column="user_uuid" property="userUuid" jdbcType="VARCHAR" />
+    <result column="core_detail" property="coreDetail" jdbcType="INTEGER" />
+    <result column="score_create_time" property="scoreCreateTime" jdbcType="TIMESTAMP" />
+    <result column="score_current" property="scoreCurrent" jdbcType="INTEGER" />
+    <result column="score_tatol" property="scoreTatol" jdbcType="INTEGER" />
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    score_id, user_uuid, core_detail, score_create_time, score_current, score_tatol
+  </sql>
+  <!--根据主键查询积分详情-->
+  <select id="selectScoreByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from score
+    where score_id = #{scoreId,jdbcType=INTEGER}
+  </select>
+  <!--根据主键删除删除积分详情信息-->
+  <delete id="deleteScoreByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from score
+    where score_id = #{scoreId,jdbcType=INTEGER}
+  </delete>
+  <!--批量删除积分详情-->
+  <delete id="deleteScoreByPrimaryKeyArray" parameterType="java.lang.Integer">
+    delete from score where score_id IN
+    <foreach collection="scoreIdArrary" item="scoreId" open="(" separator="," close=")">
+      #{scoreId}
+    </foreach>
+  </delete>
+
+<!--按需插入积分详情-->
+  <insert id="insertScoreSelective" parameterType="com.coding.pojo.Score" >
+    insert into score
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userUuid != null" >
+        user_uuid,
+      </if>
+      <if test="coreDetail != null" >
+        core_detail,
+      </if>
+      <if test="scoreCreateTime != null" >
+        score_create_time,
+      </if>
+      <if test="scoreCurrent != null" >
+        score_current,
+      </if>
+      <if test="scoreTatol != null" >
+        score_tatol,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userUuid != null" >
+        #{userUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="coreDetail != null" >
+        #{coreDetail,jdbcType=INTEGER},
+      </if>
+      <if test="scoreCreateTime != null" >
+        #{scoreCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="scoreCurrent != null" >
+        #{scoreCurrent,jdbcType=INTEGER},
+      </if>
+      <if test="scoreTatol != null" >
+        #{scoreTatol,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+ <!--按需修改积分详情信息-->
+  <update id="updateScoreByPrimaryKeySelective" parameterType="com.coding.pojo.Score" >
+    update score
+    <set >
+      <if test="userUuid != null" >
+        user_uuid = #{userUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="coreDetail != null" >
+        core_detail = #{coreDetail,jdbcType=INTEGER},
+      </if>
+      <if test="scoreCreateTime != null" >
+        score_create_time = #{scoreCreateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="scoreCurrent != null" >
+        score_current = #{scoreCurrent,jdbcType=INTEGER},
+      </if>
+      <if test="scoreTatol != null" >
+        score_tatol = #{scoreTatol,jdbcType=INTEGER},
+      </if>
+    </set>
+    where score_id = #{scoreId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectScoreRecentChange" parameterType="com.coding.pojo.Score" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from score where user_uuid = #{userUuid} ORDER BY score_create_time DESC
+  </select>
+
+  <!--积分表的查询大SQL-->
+  <select id="selectScore" parameterType="com.coding.paging.PagingCustomScore" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from score
+    <where>
+      <!--根据积分详情基本信息进行查询-->
+      <if test="score != null">
+        <!--根据主键查询积分详情信息-->
+        <if test="score.scoreId != null and score.scoreId != 0">
+          and score_id = #{score.scoreId}
+        </if>
+        <!--根据用户id 查询积分详情信息-->
+        <if test="score.userUuid != null and score.userUuid != ''">
+          and user_uuid = #{score.userUuid}
+        </if>
+        <!--根据积分明细 查询积分详情信息-->
+        <if test="score.coreDetail != null">
+          and core_detail = #{score.coreDetail}
+        </if>
+      </if>
+
+      <!--根据积分详情创建时间范围查询积分详情信息-->
+      <if test="formerScoreCreateTime != null and formerScoreCreateTime != ''">
+        <!--给定了最小值和最大值-->
+        <if test="latterScoreCreateTime != null and latterScoreCreateTime != ''">
+          <!--以下三种情况分别列出-->
+          <if test="formerScoreCreateTime == latterScoreCreateTime">
+            and score_create_time = #{latterScoreCreateTime}
+          </if>
+          <if test="formerScoreCreateTime &lt; latterScoreCreateTime">
+            and score_create_time between #{formerScoreCreateTime} and #{latterScoreCreateTime}
+          </if>
+          <if test="formerScoreCreateTime &gt; latterScoreCreateTime">
+            and score_create_time between #{latterScoreCreateTime} and #{formerScoreCreateTime}
+          </if>
+        </if>
+        <!--只给定了最小值-->
+        <if test="latterScoreCreateTime == null or latterScoreCreateTime == ''">
+          and score_create_time &gt;= #{formerScoreCreateTime}
+        </if>
+      </if>
+      <!--只给定了最大值-->
+      <if test="formerScoreCreateTime == null or formerScoreCreateTime == ''">
+        <if test="latterScoreCreateTime != null and latterScoreCreateTime != ''">
+          and  order_create_time &lt;= #{latterScoreCreateTime}
+        </if>
+      </if>
+    </where>
+    <!--排序规则-->
+    <if test="sortByColumn != null and sortByColumn !=''">
+      <if test="sortRule != null and sortRule != ''">
+        order by ${sortByColumn} ${sortRule}
+      </if>
+    </if>
+    <!--分页-->
+    <if test="indexNumber != null">
+      <if test="pageNumber != null and pageNumber != 0">
+        limit #{indexNumber},#{pageNumber}
+      </if>
+    </if>
+    <if test="indexNumber == null">
+      <if test="pageNumber != null and pageNumber != 0">
+        limit 0,#{pageNumber}
+      </if>
+    </if>
+  </select>
+  <!--计算积分详情总数-->
+  <select id="selectScoreCount"  resultType="java.lang.Integer" >
+    select count(*) from score
+  </select>
+
+</mapper>

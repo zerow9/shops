@@ -31,6 +31,8 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     private NoticeMapper noticeMapper;
     @Autowired
     private ShopMapper shopMapper;
+    @Autowired
+    private ScoreMapper scoreMapper;
 
     /*----------------------------------------用户表------------------------------------------------------------------*/
 
@@ -462,6 +464,92 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             return  shopMapper.selectShopCount();
         }catch (Exception e){
             throw new Exception("查询商店信息总数时出错");
+        }
+    }
+
+    /*------------------------------------------积分明细表------------------------------------------------------------------*/
+    public Score selectScoreByPrimaryKey(Integer scoreId) throws Exception {
+        if (scoreId != null && scoreId != 0){
+            Score score = scoreMapper.selectScoreByPrimaryKey(scoreId);
+            except(score,"根据积分明细ID查询积分明细为空");
+            return score;
+        }
+        return null;
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteScoreByPrimaryKey(Integer scoreId) throws Exception {
+        if(scoreId != null && scoreId != 0){
+            try {
+                except(scoreMapper.deleteScoreByPrimaryKey(scoreId));
+            }catch (Exception e){
+                if (!e.getMessage().contains("操作无效"))
+                    throw new Exception("删除积分明细时出错");
+                throw e;
+            }
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteScoreByPrimaryKeyArray(Integer[] scoreIdArrary) throws Exception {
+        if(scoreIdArrary==null||"".equals(scoreIdArrary))throw new Exception("没有scoreIdArrary数组信息，批量积分明细删除出错");
+        try {
+            except(scoreMapper.deleteScoreByPrimaryKeyArray(scoreIdArrary));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("批量删除积分明细时出错");
+            throw e;
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void insertScoreSelective(Score score) throws Exception {
+        try {
+            List<Score> scores = scoreMapper.selectScoreRecentChange(score);
+            if(!scores.isEmpty()){
+            Score scoreNow = scores.get(0);
+            score.setScoreCurrent(scoreNow.getScoreCurrent()+score.getCoreDetail());
+            if(score.getCoreDetail()>0) score.setScoreTatol(scoreNow.getScoreTatol()+score.getCoreDetail());
+            else score.setScoreTatol((scoreNow.getScoreTatol()));
+                scoreMapper.insertScoreSelective(score);
+            }else {
+                score.setScoreCurrent(score.getCoreDetail());
+                score.setScoreTatol(score.getCoreDetail());
+                scoreMapper.insertScoreSelective(score);
+            }
+        }catch (Exception e){
+            throw new Exception("添加积分明细时出错");
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void updateScoreByPrimaryKeySelective(Score score) throws Exception {
+        try {
+            except(scoreMapper.updateScoreByPrimaryKeySelective(score));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("修改积分明细时出错");
+            throw e;
+        }
+    }
+
+    public List<Score> selectScore(PagingCustomScore pagingCustomScore) throws Exception {
+        try {
+            List<Score>  scores = scoreMapper.selectScore(pagingCustomScore);
+            if(scores.isEmpty()) throw new Exception("查询到的积分明细列表为空");
+            return scores;
+        }catch (Exception e){
+            if (!e.getMessage().contains("积分明细列表为空"))
+                throw new Exception("参数查询积分明细列表出错，请检查参数");
+            throw e;
+        }
+    }
+
+    public int selectScoreCount() throws Exception {
+        try {
+            return  scoreMapper.selectScoreCount();
+        }catch (Exception e){
+            throw new Exception("查询积分明细总数时出错");
         }
     }
 
