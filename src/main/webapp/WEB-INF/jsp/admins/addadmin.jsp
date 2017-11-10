@@ -78,9 +78,9 @@
                         <div class="layui-form-item">
                             <label class="layui-form-label">归属组</label>
                             <div class="layui-input-block">
-                                <select name="groupId" lay-filter="aihao">
+                                <select name="groupId" lay-filter="aihao" id="selectId">
                                     <option value=""></option>
-                                    <option value="3" selected="">普通用户组</option>
+                                    <option value="3" >普通用户组</option>
                                     <option value="1">商家组</option>
                                     <option value="2">管理员组</option>
                                 </select>

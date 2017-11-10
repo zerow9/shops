@@ -60,7 +60,7 @@ To change this template use File | Settings | File Templates.
                         <div class="layui-form-item">
                             <label class="layui-form-label">商品分类</label>
                             <div class="layui-input-block">
-                                <select name="itemTypeId" lay-filter="aihao" lay-verify="itemTypeId">
+                                <select name="itemTypeId" lay-filter="aihao" lay-verify="itemTypeId" id="selectId1">
                                     <option value=""></option>
                                     <option value="3" selected="">家电</option>
                                     <option value="1">营养品</option>
@@ -219,4 +219,10 @@ To change this template use File | Settings | File Templates.
 <script src="../../../shopmanagement/common/layui/layui.js" charset="utf-8" type="text/javascript"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../../../js/items/addItem.js"></script>
+<script src="../../../shopmanagement/js/jquery-1.7.2.min.js"></script>
+<script>
+    $(function(){
+        $("#selectId1").find("option[value = '${item.itemTypeId}']").attr("selected","selected");
+    })
+</script>
 </body>
