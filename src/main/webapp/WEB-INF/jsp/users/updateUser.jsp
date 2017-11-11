@@ -142,16 +142,16 @@
                             </div>
                         </div>
 
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">归属组</label>
-                            <div class="layui-input-inline">
-                                <select name="userGroup" lay-filter="aihao" id="selectId">
-                                    <c:forEach items="${groups}" var="groupss" varStatus="s">
-                                        <option value="${s.index+1}">${groupss.groupName}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </div>
+                        <%--<div class="layui-form-item">--%>
+                            <%--<label class="layui-form-label">归属组</label>--%>
+                            <%--<div class="layui-input-inline">--%>
+                                <%--<select name="userGroup" lay-filter="aihao" id="selectId">--%>
+                                    <%--<c:forEach items="${groups}" var="groupss" varStatus="s">--%>
+                                        <%--<option value="${s.index+1}">${groupss.groupName}</option>--%>
+                                    <%--</c:forEach>--%>
+                                <%--</select>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
 
                         <div class="layui-form-item">
                             <label class="layui-form-label">地址</label>
@@ -246,12 +246,12 @@
 
     });
 </script>
-<script src="../../../shopmanagement/js/jquery-1.7.2.min.js"></script>
-<script>
-    $(function () {
-        $("#selectId").find("option[value ='${user.userGroup}']").attr("selected", "selected");
-    })
-</script>
+<%--<script src="../../../shopmanagement/js/jquery-1.7.2.min.js"></script>--%>
+<%--<script>--%>
+    <%--$(function () {--%>
+        <%--$("#selectId").find("option[value ='${user.userGroup}']").attr("selected", "selected");--%>
+    <%--})--%>
+<%--</script>--%>
 </body>
 
 </html>
