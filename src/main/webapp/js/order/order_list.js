@@ -1,6 +1,11 @@
 layui.use('table', function () {
     var table = layui.table;
 
+    $('.table-responsive').loading({
+        stoppable: false,
+        message: '数据加载中。。。'
+    });
+
     // 方法级渲染表格
     var tableObj = table.render({
         elem: '#layui_table'    //绑定元素
@@ -23,6 +28,7 @@ layui.use('table', function () {
             console.log('返回信息：' + res.msg);     //接口返回信息
             console.log('当前页码：' + curr);    //当前页码
             console.log('数据总量：' + count);     //数据总量
+            $('.table-responsive').loading('stop');
         }
         , initSort: {   //初始排序
             field: 'orderId' //排序字段，对应 cols 设定的各字段名
@@ -44,7 +50,7 @@ layui.use('table', function () {
                 type: "POST",
                 url: "/order/selectOrderByPrimaryKey.action",
                 data: {'orderId': data.orderId},
-                timeout: 10000, //超时时间：10秒
+                timeout: 30000, //超时时间：30秒
                 success: function (json_data) {
                     if (json_data.msg === 'true') {
                         var order_items = '' +
