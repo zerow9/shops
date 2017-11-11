@@ -136,6 +136,7 @@ public class AdminController {
      */
     @RequestMapping("insertAdmin")
     public boolean insertAdmin(Admin admin) throws Exception {
+        admin.setGroupId(1);
         admin.setAdminRegisterTime(new Date());
         adminService.insertAdmin(admin);
         counts++;
@@ -151,6 +152,7 @@ public class AdminController {
      */
     @RequestMapping("updateAdminByPrimaryKey")
     public boolean updateAdminByPrimaryKey(Admin admin, String adminRegisterTime1) throws Exception {
+        admin.setGroupId(1);
         admin.setAdminRegisterTime(DateToString.date(adminRegisterTime1));
         adminService.updateAdminByPrimaryKey(admin);
         return true;
@@ -239,6 +241,7 @@ public class AdminController {
     @RequestMapping("insertUser")
     public boolean insertUser(User user) throws Exception {
         user.setUserRegisterDateTime(new Date());
+        user.setUserGroup(2);
         user.setUserAge(111);
         user.setUserLandNumber(11);
         user.setUserCurrentTime(new Date());
@@ -290,6 +293,7 @@ public class AdminController {
     @RequestMapping("updateUserByPrimaryKey")
     public boolean updateUserByPrimaryKey(User user) throws Exception {
         user.setUserCurrentTime(new Date());
+        user.setUserGroup(2);
         user.setUserLandIp(InetAddress.getLocalHost().getHostAddress());
         int landNumber = user.getUserLandNumber();
         user.setUserLandNumber(landNumber + 1);

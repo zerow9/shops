@@ -24,7 +24,7 @@
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="../../../common/layui/css/layui.css" rel="stylesheet" >
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
-
+    <link href="../../../css/useQuery.css" rel="stylesheet">
 </head>
 
 <body>
@@ -33,10 +33,36 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
+                <!--筛选查询-->
+                <blockquote class="layui-elem-quote" style="height: 80px">
+                    <div class="hang-1" >
+                        <p>用户编号：<input type="text" name="userUuid"  style="height: 20px;"></p><br>
+                        <p>用户姓名：<input type="text" name="userName" style="height: 20px;"></p>
+                        <br>
+                    </div>
+                    <div class="hang-2">
+                        <p>积分范围：<input type="text" name="userScore"  style="width:73px;height: 20px;" />&ensp;<em>—</em>&ensp;<input type="text" name="userScore" style="width:73px;height: 20px;"/></p>
+                        <br>
+                        <p>年龄范围：<input type="text" name="userAge"  style="width:73px;height: 20px;" />&ensp;<em>—</em>&ensp;<input type="text" name="userAge1" style="width:73px;height: 20px;"/></p>
+                        <br>
+                    </div>
 
-                <blockquote class="layui-elem-quote">
-                    <h2>操作提示</h2>
-                    在这里，你可以增删改查用户。
+                    <div class="hang-3" >
+                        <p >用户性别：
+                            <select name="userSex">
+                                <option value="1" selected="">男</option>
+                                <option value="2">女</option>
+                                <option value="3">保密</option>
+                            </select></p><br>
+                        <p>注册时间：<input type="date" name="userRegisterDateTimeToString" style="width:120px;height: 20px;" >至<input type="date" name="userRegisterDateTimeToString1" style="width:120px;height: 20px;" ></p>
+                        <br>
+
+                    </div>
+                    <div class="hang-butt">
+                    <button type="submit" class="btn btn-primary" style=" width:60px;height: 35px;border: none;background-color:#1ab394;">
+                        <i class="fa fa-search" ></i>查询
+                    </button>
+                    </div>
                 </blockquote>
 
                 <div class="ibox-title">
@@ -65,14 +91,15 @@
                         <button class="layui-btn" data-type="getCheckLength">批量删除</button>
                         <button class="layui-btn" data-type="isAll">验证是否全选</button>
                         <button class="layui-btn" data-type="addUser">添加用户</button>
+                        <button class="layui-btn" data-type="askQuery">条件筛选</button>
                     </div>
-                    <!--搜索查询-->
+                    <!--搜索框查询
                     <div class="form-group" style="float: right;margin-right: 80px;height:40px;border: 2px solid #009688;position:relative">
                         <input  type="text"  placeholder="请输入查询内容..." style="width:400px;line-height: 36px;height: 36px;border: hidden" >
                         <button type="submit" class="btn btn-primary" style="height: 40px;border-radius: 2px;">
                             <i class="fa fa-search" ></i>查询
                         </button>
-                    </div>
+                    </div>-->
 
                     <div class="table-responsive">
 
@@ -89,7 +116,7 @@
                                 <th lay-data="{field:'userAge', width:80}">年龄</th>
                                 <th lay-data="{field:'dateToString', width:177}">注册日期</th>
                                 <th lay-data="{field:'userScore', width:80, sort: true}">积分</th>
-                                <th lay-data="{field:'userGroup', width:80}">分组</th>
+                                <%--<th lay-data="{field:'userGroup', width:80}">分组</th>--%>
                                 <th lay-data="{field:'userAddress', width:80}">地址</th>
                                 <th lay-data="{fixed: 'right', width:180, align:'center', toolbar: '#barDemo'}">操作</th>
                             </tr>
@@ -115,7 +142,7 @@
 <script src="../../../shopmanagement/js/content.min.js"></script>
 <script src="../../../common/layui/layui.js"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../../../js/user/userlist.js"></script>
+<script src="../../../js/users/userlist.js"></script>
 
 </body>
 

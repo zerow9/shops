@@ -107,16 +107,17 @@
                                 <input type="text" name="userScore" value="0" autocomplete="off" class="layui-input" readonly="readonly">
                             </div>
                         </div>
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">归属组</label>
-                            <div class="layui-input-block">
-                                <select name="userGroup" lay-filter="aihao">
-                                    <c:forEach items="${groups}" var="groupss" varStatus="s">
-                                        <option value="${s.index+1}">${groupss.groupName}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </div>
+
+                        <%--<div class="layui-form-item">--%>
+                            <%--<label class="layui-form-label">归属组</label>--%>
+                            <%--<div class="layui-input-block">--%>
+                                <%--<select name="userGroup" lay-filter="aihao">--%>
+                                    <%--<c:forEach items="${groups}" var="groupss" varStatus="s">--%>
+                                        <%--<option value="${s.index+1}">${groupss.groupName}</option>--%>
+                                    <%--</c:forEach>--%>
+                                <%--</select>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
 
                         <%--<div class="layui-form-item" pane="">--%>
                             <%--<label class="layui-form-label">爱好</label>--%>

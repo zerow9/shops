@@ -138,16 +138,16 @@
                             </div>
                         </div>
 
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">归属组</label>
-                            <div class="layui-input-inline">
-                                <select name="userGroup" lay-filter="aihao" id="group" readonly>
-                                    <c:forEach items="${groups}" var="groupss" varStatus="s">
-                                        <option value="${s.index+1}" disabled>${groupss.groupName}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </div>
+                        <%--<div class="layui-form-item">--%>
+                            <%--<label class="layui-form-label">归属组</label>--%>
+                            <%--<div class="layui-input-inline">--%>
+                                <%--<select name="userGroup" lay-filter="aihao" id="group" readonly>--%>
+                                    <%--<c:forEach items="${groups}" var="groupss" varStatus="s">--%>
+                                        <%--<option value="${s.index+1}" disabled>${groupss.groupName}</option>--%>
+                                    <%--</c:forEach>--%>
+                                <%--</select>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
 
                         <div class="layui-form-item">
                             <label class="layui-form-label">地址</label>
@@ -166,12 +166,12 @@
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script  src="../../../js/itemtypes/detailTypes.js"></script>
 <script src="../../../js/user/updateUser.js"></script>
-<script src="../../../shopmanagement/js/jquery-1.7.2.min.js"></script>
+<%--<script src="../../../shopmanagement/js/jquery-1.7.2.min.js"></script>--%>
 
-<script >
-    $(function(){
-        $("#group").find("option[value = '${user.userGroup}']").attr("selected","selected");
-    })
-</script>
+<%--<script >--%>
+    <%--$(function(){--%>
+        <%--$("#group").find("option[value = '${user.userGroup}']").attr("selected","selected");--%>
+    <%--})--%>
+<%--</script>--%>
 </body>
 </html>
