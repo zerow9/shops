@@ -12,8 +12,6 @@ public class Paging {
 
     protected String sortRule;//排序规则 ASC:升序  DESC：降序
 
-
-
     public Integer getIndexNumber() {
         return indexNumber;
     }
@@ -53,6 +51,12 @@ public class Paging {
     public void setSortRule(String sortRule) {
         this.sortRule = sortRule;
     }
+
+    public void addIndex(int page, int limit) {
+        this.setPageNumber(limit);
+        this.setIndexNumber((page - 1) * limit);
+    }
+
 
     @Override
     public String toString() {

@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ page import="org.apache.shiro.SecurityUtils" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
@@ -36,8 +37,10 @@
                         <span><img alt="image" class="img-circle" src="../../../shopmanagement/img/a0.jpg"/></span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
-                               <span class="block m-t-xs"><strong class="font-bold">欢迎<%=user%>登陆</strong></span>
-                                <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+                                <span class="block m-t-xs"><strong class="font-bold">欢迎<%=user%>登陆</strong></span>
+                                    <shiro:hasPermission name="root">
+                                        <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+                                    </shiro:hasPermission>
                                 </span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">

@@ -252,7 +252,9 @@ public class AdminController {
     }
 
     @RequestMapping("addUser")
-    public String addUser() {
+    public String addUser(Model model)throws  Exception {
+        List<Groups> groups = adminService.selectGroupsAll();
+        model.addAttribute("groups", groups);
         return "users/adduser";
     }
 
@@ -269,6 +271,8 @@ public class AdminController {
     public String selectUserIdByKey(String userUuid, Model model) throws Exception {
         User user = adminService.selectUserByPrimaryKey(userUuid);
         user.setDateToString(DateToString.date(user.getUserRegisterDateTime()));
+        List<Groups> groups = adminService.selectGroupsAll();
+        model.addAttribute("groups", groups);
         model.addAttribute("user", user);
         return "users/updateUser";
     }
@@ -284,8 +288,7 @@ public class AdminController {
 
 
     @RequestMapping("updateUserByPrimaryKey")
-    public boolean updateUserByPrimaryKey(String userRegisterDateTime1, User user) throws Exception {
-        user.setUserRegisterDateTime(DateToString.date(userRegisterDateTime1));
+    public boolean updateUserByPrimaryKey(User user) throws Exception {
         user.setUserCurrentTime(new Date());
         user.setUserLandIp(InetAddress.getLocalHost().getHostAddress());
         int landNumber = user.getUserLandNumber();
@@ -294,19 +297,12 @@ public class AdminController {
         return true;
     }
 
-    @RequestMapping("updateUser")
-    public String updateUser(String userUuid, Model model) throws Exception {
-        User user = adminService.selectUserByPrimaryKey(userUuid);
-        user.setDateToString(DateToString.date(user.getUserRegisterDateTime()));
-        model.addAttribute("user", user);
-        return "users/updateUser";
-
-    }
-
     @RequestMapping("seeUserIdByKey")
     public String seeUserIdByKey(String userUuid, Model model) throws Exception {
         User user = adminService.selectUserByPrimaryKey(userUuid);
         user.setDateToString(DateToString.date(user.getUserRegisterDateTime()));
+        List<Groups> groups = adminService.selectGroupsAll();
+        model.addAttribute("groups", groups);
         model.addAttribute("user", user);
         return "users/detailUser";
     }
@@ -344,11 +340,12 @@ public class AdminController {
 
     /**
      * 查看用户组
+     *
      * @param groupId 用户组ID
      * @return 用户组详情页
      */
     @RequestMapping("detailGroupsIdByKey")
-    public String detailGroupsIdByKey(Integer groupId,Model model)throws Exception{
+    public String detailGroupsIdByKey(Integer groupId, Model model) throws Exception {
         Groups groups = adminService.selectGroupsByPrimaryKey(groupId);
         model.addAttribute("groups", groups);
         return "groups/groupsDetail";
@@ -356,6 +353,7 @@ public class AdminController {
 
     /**
      * 更改用户组
+     *
      * @param groupId
      * @param model
      * @return
@@ -363,7 +361,7 @@ public class AdminController {
      */
     @RequestMapping("updateGroups")
     public String updateGroups(Integer groupId, Model model) throws Exception {
-        Groups groups=adminService.selectGroupsByPrimaryKey(groupId);
+        Groups groups = adminService.selectGroupsByPrimaryKey(groupId);
         model.addAttribute("groups", groups);
         return "groups/groupsUpdate";
     }
@@ -371,6 +369,7 @@ public class AdminController {
 
     /**
      * 更改是否成功
+     *
      * @param groups
      * @return
      * @throws Exception

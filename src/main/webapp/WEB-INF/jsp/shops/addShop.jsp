@@ -1,3 +1,10 @@
+<%--
+Created by IntelliJ IDEA.
+User: TongZhou
+Date: 2017/11/6
+Time: 14:44
+To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     String path = request.getContextPath();
@@ -6,7 +13,6 @@
             + path + "/";
 %>
 
-
 <html>
 
 <head>
@@ -14,7 +20,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>添加用户</title>
+    <title>添加商店</title>
 
     <link rel="shortcut icon" href="../../../shopmanagement/favicon.ico">
     <link href="../../../shopmanagement/common/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet">
@@ -33,48 +39,45 @@
 
                 <div class="ibox-content">
                     <form class="layui-form" action="">
-
                         <div class="layui-form-item">
-                            <label class="layui-form-label">账号</label>
+                            <label class="layui-form-label">商店名称</label>
                             <div class="layui-input-block">
-                                <input type="text" name="adminAccount" lay-verify="required" autocomplete="off"
-                                       placeholder="请输入账号" class="layui-input" value="${admin.adminId}" readonly>
+                                <input type="text" name="shopName" lay-verify="required" autocomplete="off"
+                                       placeholder="请输入商店名称" class="layui-input">
                             </div>
                         </div>
 
                         <div class="layui-form-item">
-                            <label class="layui-form-label">账号</label>
+                            <label class="layui-form-label">商店地址</label>
                             <div class="layui-input-block">
-                                <input type="text" name="adminAccount" lay-verify="required" autocomplete="off"
-                                       placeholder="请输入账号" class="layui-input" value="${admin.adminAccount}" readonly>
+                                <input type="text" name="shopAddress" lay-verify="required" autocomplete="off"
+                                       placeholder="请输入商店地址" class="layui-input">
                             </div>
                         </div>
 
                         <div class="layui-form-item">
-                            <div class="layui-inline">
-                                <label class="layui-form-label">电话号码</label>
-                                <div class="layui-input-inline">
-                                    <input type="tel" name="adminPhone" lay-verify="phone" autocomplete="off" readonly
-                                           placeholder="请输入电话号码" class="layui-input" value="${admin.adminPhone}">
-                                </div>
-                            </div>
-                            <div class="layui-inline">
-                                <label class="layui-form-label">验证邮箱</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" name="adminEmail" lay-verify="email" autocomplete="off"
-                                           class="layui-input" value="${admin.adminEmail}" readonly>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">注册时间</label>
+                            <label class="layui-form-label">经度</label>
                             <div class="layui-input-block">
-                                <input type="text" name="adminRegisterTime1"  autocomplete="off"
-                                       class="layui-input" value="${admin.dateToString}" readonly>
+                                <input type="text" name="shopX" lay-verify="required" autocomplete="off"
+                                       placeholder="请输入商店经度" class="layui-input">
                             </div>
                         </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">纬度</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="shopY" lay-verify="required" autocomplete="off"
+                                       placeholder="请输入商店纬度" class="layui-input">
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                        </div>
+
                     </form>
                 </div>
             </div>
@@ -84,6 +87,5 @@
 
 <script src="../../../shopmanagement/common/layui/layui.js" charset="utf-8" type="text/javascript"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../../../shopmanagement/js/jquery-1.7.2.min.js"></script>
-<script src="../../../js/admins/updateadmin.js"></script>
+<script src="../../../js/shops/addShop.js"></script>
 </body>

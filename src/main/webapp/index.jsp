@@ -37,7 +37,9 @@
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
                                <span class="block m-t-xs"><strong class="font-bold">欢迎<%=user%>登陆</strong></span>
-                                <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+                              <shiro:hasPermission name="root">
+                                  <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
+                              </shiro:hasPermission>
                                 </span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
@@ -104,13 +106,15 @@
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="/item/forwardItemList.action">商品列表</a></li>
-                        <li><a class="J_menuItem" href="/itemType/forwardItemTypeList.action">商品分类</a></li>
+                        <li><a class="J_menuItem" href="/item/forwardItemList.action">商品列表</a>
+                        </li>
+                        <li><a class="J_menuItem" href="/itemType/forwardItemTypeList.action">商品分类</a>
+                        </li>
                         <li><a class="J_menuItem" href="/repertories/forwardRepertories.action">库存管理</a></li>
                         <li><a class="J_menuItem" href="/venders/forwardVenders.action">厂商管理</a></li>
+                        <li><a class="J_menuItem" href="/shop/forwordShop.action">商店管理</a></li>
                     </ul>
                 </li>
-
 
                 <li>
                     <a href="#">
@@ -119,13 +123,7 @@
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="../../../jsp/admin/order/order_list.jsp">订单列表</a>
-                        </li>
-                        <li><a class="J_menuItem" href="#">未完成订单</a>
-                        </li>
-                        <li><a class="J_menuItem" href="#">订单派送</a>
-                        </li>
-                        <li><a class="J_menuItem" href="#">已完成订单</a>
+                        <li><a class="J_menuItem" href="/order/orderList.action">订单列表</a>
                         </li>
                     </ul>
                 </li>
@@ -143,6 +141,7 @@
                         <li><a class="J_menuItem" href="#">文章管理</a>
                         </li>
                         <li><a class="J_menuItem" href="/notices/noticesList.action">公告管理</a>
+                        </li>
                         <li><a class="J_menuItem" href="#">导航栏管理</a>
                         </li>
                         <li><a class="J_menuItem" href="#">页面布局管理</a>
@@ -404,7 +403,7 @@
 <script src="shopmanagement/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 <script src="shopmanagement/common/layui/layui.all.js"></script>
 <script src="shopmanagement/js/hplus.min.js?v=4.0.0"></script>
-<script src="shopmanagement/js/contabs.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="shopmanagement/js/contabs.min.js"></script>
 <script src="shopmanagement/js/plugins/pace/pace.min.js"></script>
 <script>
     function closeWin() {

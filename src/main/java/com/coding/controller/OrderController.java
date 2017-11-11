@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,8 @@ public class OrderController {
 
     @Autowired
     private IAdminService adminService;
+
+    private Integer count = null;
 
     /**
      * 订单列表页
@@ -50,23 +53,19 @@ public class OrderController {
      */
     @ResponseBody
     @RequestMapping("selectOrder")
-    public String selectOrder(Integer page, Integer limit) {
-        Map<String, Object> resultMap = new HashMap<>();
-        //分页设置
+    public String selectOrder(Integer page, Integer limit, HttpSession session) throws Exception {
         PagingCustomOrder pagingCustomOrder = new PagingCustomOrder();
-        pagingCustomOrder.setPageNumber(limit);
-        pagingCustomOrder.setIndexNumber((page - 1) * limit);
-        //封装json数据
+        pagingCustomOrder.addIndex(page, limit);
+        if (count == null)
+            count = adminService.selectOrderCount();
+        MyJsonConfig myJsonConfig = new MyJsonConfig();
         try {
-            resultMap.put("count", adminService.selectOrderCount());
-            resultMap.put("data", userService.selectOrder(pagingCustomOrder));
-            resultMap.put("code", 0);
-            resultMap.put("msg", "true");
+            List<Orders> orders = userService.selectOrder(pagingCustomOrder);
+            return myJsonConfig.start(orders, count, "true");
         } catch (Exception e) {
-            resultMap.put("code", 1);
-            resultMap.put("msg", e.getMessage());
+            return myJsonConfig.start(null, count, session.getAttribute("message").toString());
         }
-        return JSONObject.fromObject(resultMap).toString();
+
     }
 
     /**
@@ -82,6 +81,7 @@ public class OrderController {
         Map<String, Object> resultMap = new HashMap<>();
         try {
             Orders orders = userService.selectOrderByPrimaryKey(Integer.parseInt(orderId));
+            orders.setOrderCreateTimeToString(DateToString.date(orders.getOrderCreateTime()));
             JSONObject jsonObject = JSONObject.fromObject(orders);
             resultMap.put("msg", "true");
             resultMap.put("order", jsonObject);
@@ -108,6 +108,7 @@ public class OrderController {
         } catch (Exception e) {
             resultMap.put("msg", e.getMessage());
         }
+        count--;
         return JSONObject.fromObject(resultMap).toString();
     }
 
@@ -126,7 +127,6 @@ public class OrderController {
         Integer[] orderId_int = new Integer[orderIds.length];
         int i = 0;
         for (String each : orderIds) {
-            System.out.println("Order ID：" + each);
             orderId_int[i] = Integer.parseInt(each);
             i++;
         }
@@ -136,6 +136,7 @@ public class OrderController {
         } catch (Exception e) {
             resultMap.put("msg", e.getMessage());
         }
+        count -= i;
         return JSONObject.fromObject(resultMap).toString();
     }
 }
