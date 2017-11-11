@@ -14,6 +14,7 @@ public class Notice {
 
     private String noticeContent;
 
+
     public Integer getNoticeId() {
         return noticeId;
     }
