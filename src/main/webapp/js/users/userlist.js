@@ -123,4 +123,5 @@ layui.use('table', function() {
         var type = $(this).data('type');
         active[type] ? active[type].call(this) : '';
     });
+
 });
