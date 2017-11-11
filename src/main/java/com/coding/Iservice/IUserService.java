@@ -339,4 +339,61 @@ public interface IUserService {
      * @throws Exception
      */
     public int selectShopCount()throws Exception;
+
+    /*------------------------------------------积分明细表------------------------------------------------------------------*/
+    /**
+     * 根据主键信息查询积分明细信息
+     * @param scoreId
+     * @return
+     * @throws Exception
+     */
+    public Score selectScoreByPrimaryKey (Integer scoreId)throws Exception;
+
+    /**
+     * 根据主键删除积分明细
+     * @param scoreId
+     * @return
+     * @throws Exception
+     */
+    public void deleteScoreByPrimaryKey(Integer scoreId)throws Exception;
+
+    /**
+     * 根据主键ID数组批量删除积分明细
+     * @param scoreIdArrary
+     * @return
+     * @throws Exception
+     */
+    public void deleteScoreByPrimaryKeyArray(@Param("scoreIdArrary") Integer [] scoreIdArrary)throws Exception;
+
+    /**
+     * 按需插入积分明细,只需给定用户ID,和积分情况(如，100，或者-50),当前积分和累积积分和自动计算.
+     * @param score
+     * @return
+     * @throws Exception
+     */
+    public void insertScoreSelective(Score score)throws Exception;
+
+    /**
+     * 按需修改积分明细
+     * @param score
+     * @return
+     * @throws Exception
+     */
+    public void updateScoreByPrimaryKeySelective(Score score)throws Exception;
+
+    /**
+     * 积分明细表综合查询
+     * 实现:主键ID，用户ID，积分详细，积分明细创建时间范围
+     * @param pagingCustomScore
+     * @return
+     * @throws Exception
+     */
+    public List<Score> selectScore (PagingCustomScore pagingCustomScore)throws Exception;
+
+    /**
+     * 查询积分明细总数
+     * @return
+     * @throws Exception
+     */
+    public int selectScoreCount ()throws Exception;
 }
