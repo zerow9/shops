@@ -82,11 +82,39 @@
     </div>
 </div>
 
-</div>
 
+</body>
+
+<%--工具条模板--%>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
     <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
+</script>
+
+<script type="text/html" id="orderPaidTpi">
+    {{ d.orderPaid }} 元
+</script>
+
+<%--付款状态模板--%>
+<script type="text/html" id="payStatusTpi">
+    {{#  if(d.sendStatus === 1){ }}
+    <span style="color: green">未付款</span>
+    {{#  } else if(d.sendStatus === 2) { }}
+    <span style="color: red">未付款</span>
+    {{#  } else { }}
+    未知
+    {{#  } }}
+</script>
+
+<%--发货状态模板--%>
+<script type="text/html" id="sendStatusTpi">
+    {{#  if(d.sendStatus === 1){ }}
+    <span style="color: green">已发货</span>
+    {{#  } else if(d.sendStatus === 2) { }}
+    <span style="color: red">未发货</span>
+    {{#  } else { }}
+    未知
+    {{#  } }}
 </script>
 
 <script src="../../../js/extends/jquery/jquery.min.js"></script>
@@ -97,5 +125,4 @@
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../../../js/order/order_list.js"></script>
 
-</body>
 </html>

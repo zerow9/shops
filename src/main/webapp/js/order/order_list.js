@@ -1,7 +1,7 @@
 layui.use('table', function () {
     var table = layui.table;
 
-    $('.table-responsive').loading({
+    $('body').loading({
         stoppable: false,
         message: '数据加载中。。。'
     });
@@ -18,9 +18,9 @@ layui.use('table', function () {
             , {field: 'orderId', title: '订单编号', width: 100, sort: true}
             , {field: 'takeGoodsName', title: '收货人', width: 100}
             // , {field: 'shop_name', title: '分店', width: 200}
-            , {field: 'orderPaid', title: '订单总额（元）', width: 150, sort: true}
-            , {field: 'sendStatus', title: '支付状态', width: 100}
-            , {field: 'sendStatus', title: '发货状态', width: 100}
+            , {field: 'orderPaid', title: '订单总额', width: 150, templet: '#orderPaidTpi', sort: true}
+            , {field: 'payStatus', title: '支付状态', width: 100, templet: '#payStatusTpi'}
+            , {field: 'sendStatus', title: '发货状态', width: 100, templet: '#sendStatusTpi'}
             , {field: 'orderCreateTime', title: '下单时间', width: 200, sort: true}
             , {field: 'operate', title: '操作', width: 150, fixed: 'right', align: 'center', toolbar: '#barDemo'}
         ]]
@@ -28,7 +28,7 @@ layui.use('table', function () {
             console.log('返回信息：' + res.msg);     //接口返回信息
             console.log('当前页码：' + curr);    //当前页码
             console.log('数据总量：' + count);     //数据总量
-            $('.table-responsive').loading('stop');
+            $('body').loading('stop');
         }
         , initSort: {   //初始排序
             field: 'orderId' //排序字段，对应 cols 设定的各字段名
