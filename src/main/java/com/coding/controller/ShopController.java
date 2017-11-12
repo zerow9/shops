@@ -47,7 +47,6 @@ public class ShopController {
         PagingCustomShop pagingCustomShop=new PagingCustomShop();
         pagingCustomShop.setIndexNumber((page-1)*limit);
         pagingCustomShop.setPageNumber(limit);
-
         if (counts==null)
             counts=adminService.selectShopCount();
         List<Shop> shops=adminService.selectShop(pagingCustomShop);

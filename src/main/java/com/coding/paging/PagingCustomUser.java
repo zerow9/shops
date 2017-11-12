@@ -4,6 +4,9 @@ import com.coding.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class PagingCustomUser extends Paging{
+    private String userUuid;
+    private String userSex;
+    private String userName;
 
     private Integer formerAge;//一些功能需要年龄范围内查询，这是左侧较小值
 
@@ -78,6 +81,32 @@ public class PagingCustomUser extends Paging{
     public void setLatterScore(Integer latterScore) {
         this.latterScore = latterScore;
     }
+
+    public void setUserSex(String userSex) {
+        this.userSex = userSex;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setUserUuid(String userUuid) {
+        this.userUuid = userUuid;
+    }
+
+    public String getUserSex() {
+        return userSex;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public String getUserUuid() {
+        return userUuid;
+    }
+
+
 
     @Override
     public String toString() {
