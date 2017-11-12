@@ -26,6 +26,7 @@
     <link href="../../../shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="../../../common/layui/css/layui.css" rel="stylesheet">
+    <link href="../../../css/extends/jquery/jquery.loading.css" rel="stylesheet">
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
 </head>
 
@@ -81,19 +82,47 @@
     </div>
 </div>
 
-</div>
 
+</body>
+
+<%--工具条模板--%>
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail">查看</a>
     <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
 </script>
 
+<script type="text/html" id="orderPaidTpi">
+    {{ d.orderPaid }} 元
+</script>
+
+<%--付款状态模板--%>
+<script type="text/html" id="payStatusTpi">
+    {{#  if(d.sendStatus === 1){ }}
+    <span style="color: green">未付款</span>
+    {{#  } else if(d.sendStatus === 2) { }}
+    <span style="color: red">未付款</span>
+    {{#  } else { }}
+    未知
+    {{#  } }}
+</script>
+
+<%--发货状态模板--%>
+<script type="text/html" id="sendStatusTpi">
+    {{#  if(d.sendStatus === 1){ }}
+    <span style="color: green">已发货</span>
+    {{#  } else if(d.sendStatus === 2) { }}
+    <span style="color: red">未发货</span>
+    {{#  } else { }}
+    未知
+    {{#  } }}
+</script>
+
 <script src="../../../js/extends/jquery/jquery.min.js"></script>
+<script src="../../../js/extends/jquery/jquery.loading.js"></script>
 <script src="../../../js/extends/bootstrap/bootstrap.js"></script>
 <script src="../../../shopmanagement/js/content.min.js"></script>
 <script src="../../../common/layui/layui.js"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../../../js/order/order_list.js"></script>
 
-</body>
 </html>
