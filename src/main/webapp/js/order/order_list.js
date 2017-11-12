@@ -11,7 +11,7 @@ layui.use('table', function () {
         elem: '#layui_table'    //绑定元素
         , url: '/order/selectOrder.action'   //资源地址
         , id: 'idTest'   //设定容器唯一ID
-        , height: '500'
+        // , height: '500'
         , page: true    //开启分页
         , cols: [[ //设置表头
             {checkbox: true, fixed: 'left'}
@@ -36,7 +36,7 @@ layui.use('table', function () {
         }
         // 每页数据量可选项
         , limits: [10, 20, 30, 50, 100, 200, 500]
-        , limit: 8 //每页默认显示的数量
+        , limit: 10 //每页默认显示的数量
         , skin: 'line' //行边框风格
         , even: true //开启隔行背景
         , size: 'lg'  //设定表格尺寸
@@ -202,8 +202,9 @@ layui.use('table', function () {
     });
 
 
+    // 条件检索
     $('#search_btn').click(function () {
-        var search = $('#search_order_input');
+        var search = $('#search_input');
 
         tableObj.reload({
             where: {    //设定异步数据接口的额外参数

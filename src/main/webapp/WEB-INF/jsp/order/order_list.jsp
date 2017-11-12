@@ -21,11 +21,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <link rel="stylesheet" href="../../../shopmanagement/css/bootstrap.min.css" media="all">
     <link href="../../../shopmanagement/common/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet">
     <link href="../../../shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="../../../common/layui/css/layui.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../shopmanagement/css/bootstrap.min.css" media="all">
     <link href="../../../css/extends/jquery/jquery.loading.css" rel="stylesheet">
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
 </head>
@@ -55,15 +55,27 @@
 
                 <div class="ibox-content">
 
-                    <div class="demoTable">
-                        <button id="delete_orders_btn" class="layui-btn layui-btn-danger">删除订单
-                        </button>
-
-                        搜索订单：
-                        <div class="layui-inline">
-                            <input class="layui-input" name="id" id="search_order_input" autocomplete="off">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <button class="btn btn-danger" id="delete_orders_btn" type="button">删除订单</button>
                         </div>
-                        <button class="layui-btn" id="search_btn" data-type="reload">搜索</button>
+
+                        <form class="form-inline pull-right">
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option>订单编号</option>
+                                    <option>收件人</option>
+                                    <option>订单总额</option>
+                                    <option>支付状态</option>
+                                    <option>发货状态</option>
+                                    <option>下单时间</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="search_input" placeholder="请输入搜索内容">
+                            </div>
+                            <button class="btn btn-primary" id="search_btn" data-type="reload" style="margin-right: 20px">搜索</button>
+                        </form>
                     </div>
 
                     <div class="table-responsive">
