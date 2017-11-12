@@ -1,5 +1,4 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%@ page import="org.apache.shiro.SecurityUtils" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
@@ -37,10 +36,8 @@
                         <span><img alt="image" class="img-circle" src="../../../shopmanagement/img/a0.jpg"/></span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
-                                <span class="block m-t-xs"><strong class="font-bold">欢迎<%=user%>登陆</strong></span>
-                                    <shiro:hasPermission name="root">
-                                        <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
-                                    </shiro:hasPermission>
+                               <span class="block m-t-xs"><strong class="font-bold">欢迎<%=user%>登陆</strong></span>
+                                <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
                                 </span>
                         </a>
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
@@ -113,6 +110,7 @@
                         </li>
                         <li><a class="J_menuItem" href="/repertories/forwardRepertories.action">库存管理</a></li>
                         <li><a class="J_menuItem" href="/venders/forwardVenders.action">厂商管理</a></li>
+                        <li><a class="J_menuItem" href="/shop/forwordShop.action">商店管理</a></li>
                     </ul>
                 </li>
 
@@ -187,12 +185,6 @@
             <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header"><a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i
                         class="fa fa-bars"></i> </a>
-                    <form role="search" class="navbar-form-custom" method="post" action="search_results.html">
-                        <div class="form-groups">
-                            <input type="text" placeholder="请输入您需要查找的内容 …" class="form-control" name="top-search"
-                                   id="top-search">
-                        </div>
-                    </form>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
                     <li class="dropdown">
@@ -257,16 +249,11 @@
             </nav>
         </div>
         <div class="row content-tabs">
-            <button class="roll-nav roll-left J_tabLeft"><i class="fa fa-backward"></i>
-            </button>
             <nav class="page-tabs J_menuTabs">
                 <div class="page-tabs-content">
                     <a href="javascript:;" class="active J_menuTab" data-id="../../../jsp/admin/home.jsp">首页</a>
                 </div>
             </nav>
-            <button class="roll-nav roll-right J_tabRight"><i class="fa fa-forward"></i>
-            </button>
-
             <a href="/logout.action" class="roll-nav roll-right J_tabExit"><i
                     class="fa fa fa-sign-out"></i> 退出</a>
         </div>

@@ -47,6 +47,29 @@
     </div>
 
     <div class="layui-form-item">
+        <label class="layui-form-label">权限选择</label>
+        <div class="layui-input-block">
+            <input type="checkbox" name="add" title="添加">
+            <input type="checkbox" name="select" title="查看">
+            <input type="checkbox" name="delete" title="删除">
+            <input type="checkbox" name="update" title="修改">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">角色</label>
+        <div class="layui-input-block">
+            <select name="role" lay-filter="aihao">
+                <option value=""></option>
+                <option value="user">用户组</option>
+                <option value="admin" >管理员组</option>
+                <option value="service">客观组</option>
+            </select>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item">
         <div class="layui-input-block">
             <button class="layui-btn" lay-submit="" lay-filter="demo1">添加</button>
             <button type="reset" class="layui-btn layui-btn-primary">重置</button>

@@ -3149,7 +3149,7 @@ body.body-small .footer.fixed {
 }
 
 nav.page-tabs {
-    margin-left: 40px;
+    margin-left: 0px;
     width: 900px;
     height: 40px;
     overflow: hidden
