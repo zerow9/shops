@@ -1,7 +1,7 @@
 layui.use('table', function () {
     var table = layui.table;
 
-    $('body').loading({
+    $('.ibox').loading({
         stoppable: false,
         message: '数据加载中。。。'
     });
@@ -28,7 +28,7 @@ layui.use('table', function () {
             console.log('返回信息：' + res.msg);     //接口返回信息
             console.log('当前页码：' + curr);    //当前页码
             console.log('数据总量：' + count);     //数据总量
-            $('body').loading('stop');
+            $('.ibox').loading('stop');
         }
         , initSort: {   //初始排序
             field: 'orderId' //排序字段，对应 cols 设定的各字段名
@@ -200,4 +200,16 @@ layui.use('table', function () {
             parent.layer.alert("<h2 style=\"color: red;text-align: center;margin: 30px\">请先选择你要删除的订单！</h2>");
         }
     });
+
+
+    $('#search_btn').click(function () {
+        var search = $('#search_order_input');
+
+        tableObj.reload({
+            where: {    //设定异步数据接口的额外参数
+                orderId: search.val()
+            }
+        })
+    });
+
 });

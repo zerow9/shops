@@ -55,26 +55,19 @@
 
                 <div class="ibox-content">
 
-                    <div class="layui-btn-group demoTable">
-                        <button id="delete_orders_btn" class="layui-btn">删除订单</button>
+                    <div class="demoTable">
+                        <button id="delete_orders_btn" class="layui-btn layui-btn-danger">删除订单
+                        </button>
+
+                        搜索订单：
+                        <div class="layui-inline">
+                            <input class="layui-input" name="id" id="search_order_input" autocomplete="off">
+                        </div>
+                        <button class="layui-btn" id="search_btn" data-type="reload">搜索</button>
                     </div>
 
                     <div class="table-responsive">
-                        <table id="layui_table" lay-filter="demo">
-                            <%--<thead>--%>
-                            <%--<tr>--%>
-                            <%--<th lay-data="{checkbox:true, fixed: true}"></th>--%>
-                            <%--<th lay-data="{field:'order_id', width:100, sort: true, fixed: true}">订单编号</th>--%>
-                            <%--<th lay-data="{field:'take_goods_name', width:100}">收货人</th>--%>
-                            <%--<th lay-data="{field:'shop_name', width:200}">分店</th>--%>
-                            <%--<th lay-data="{field:'order_sum_price', width:100, sort: true}">订单总额</th>--%>
-                            <%--<th lay-data="{field:'pay_status', width:100}">支付状态</th>--%>
-                            <%--<th lay-data="{field:'send_status', width:100}">发货状态</th>--%>
-                            <%--<th lay-data="{field:'order_create_time', width:200, sort: true}">下单时间</th>--%>
-                            <%--<th lay-data="{fixed: 'right', width:160, align:'center', toolbar: '#barDemo'}"></th>--%>
-                            <%--</tr>--%>
-                            <%--</thead>--%>
-                        </table>
+                        <table id="layui_table" lay-filter="demo"></table>
                     </div>
                 </div>
             </div>
@@ -82,6 +75,9 @@
     </div>
 </div>
 
+<div class="detail_info">
+
+</div>
 
 </body>
 
