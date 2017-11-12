@@ -16,13 +16,13 @@
     <div class="hang-3" class="layui-input-block" style="height: 20px;width: 300px">
         用户性别：
             <select name="userSex" >
-                <option value="男" selected="">男</option>
-                <option value="女">女</option>
-                <option value="不明">保密</option>
+                <option value="1" selected="">男</option>
+                <option value="2">女</option>
+                <option value="3">保密</option>
             </select>
         <br>
         注册时间：
-            <input type="text" readonly name="formerUserCreateTime" id="time" style="width:100px;height: 20px;">至
+            <input type="text" readonly id="formerUserCreateTime" name="time" style="width:100px;height: 20px;">至
             <input type="text" id="other" name="latterUserCreateTime" style="width:100px;height: 20px;" readonly>
 
         <br>

@@ -9,12 +9,12 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <title>孝和商城管理系统后台</title>
-    <link rel="shortcut icon" href="../shopmanagement/favicon.ico">
-    <link rel="stylesheet" href="../shopmanagement/common/layui/css/layui.css">
-    <link href="../shopmanagement/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
-    <link href="../shopmanagement/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-    <link href="../shopmanagement/css/animate.min.css" rel="stylesheet">
-    <link href="../shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
+    <link rel="shortcut icon" href="shopmanagement/favicon.ico">
+    <link rel="stylesheet" href="shopmanagement/common/layui/css/layui.css">
+    <link href="shopmanagement/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="shopmanagement/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="shopmanagement/css/animate.min.css" rel="stylesheet">
+    <link href="shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
@@ -33,7 +33,7 @@
                 <!--当前登录用户展示-->
                 <li class="nav-header">
                     <div class="dropdown profile-element">
-                        <span><img alt="image" class="img-circle" src="../shopmanagement/img/a0.jpg"/></span>
+                        <span><img alt="image" class="img-circle" src="../../../shopmanagement/img/a0.jpg"/></span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
                                <span class="block m-t-xs"><strong class="font-bold">欢迎<%=user%>登陆</strong></span>
@@ -59,7 +59,7 @@
 
                 <!--首页-->
                 <li>
-                    <a class="J_menuItem" href="../jsp/admin/home.jsp">
+                    <a class="J_menuItem" href="../../../jsp/admin/home.jsp">
                         <i class="fa fa-home"></i>
                         <span class="nav-label">首页</span>
                     </a>
@@ -196,7 +196,7 @@
                             <li>
                                 <div class="dropdown-messages-box">
                                     <a href="profile.html" class="pull-left">
-                                        <img alt="image" class="img-circle" src="../shopmanagement/img/a0.jpg">
+                                        <img alt="image" class="img-circle" src="../../../shopmanagement/img/a0.jpg">
                                     </a>
                                     <div class="media-body ">
                                         <small class="pull-right text-navy">刚刚</small>
@@ -259,7 +259,7 @@
         </div>
         <div class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%"
-                    src="../jsp/admin/home.jsp" frameborder="0"
+                    src="../../../jsp/admin/home.jsp" frameborder="0"
                     data-id="../../../jsp/admin/home.jsp" seamless></iframe>
         </div>
         <div class="footer">
@@ -365,19 +365,13 @@
     <!--右侧边栏结束-->
 
 </div>
-<script src="../shopmanagement/js/jquery.min.js?v=2.1.4"></script>
-<script src="../shopmanagement/js/bootstrap.min.js?v=3.3.5"></script>
-<script src="../shopmanagement/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="../shopmanagement/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="../shopmanagement/common/layui/layui.all.js"></script>
-<script src="../shopmanagement/js/hplus.min.js?v=4.0.0"></script>
-<script type="text/javascript" src="../shopmanagement/js/contabs.min.js"></script>
-<script src="../shopmanagement/js/plugins/pace/pace.min.js"></script>
-<script>
-    function closeWin() {
-        alert(1);
-    }
-</script>
+<script src="shopmanagement/js/jquery.min.js?v=2.1.4"></script>
+<script src="shopmanagement/js/bootstrap.min.js?v=3.3.5"></script>
+<script src="shopmanagement/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="shopmanagement/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="shopmanagement/common/layui/layui.all.js"></script>
+<script src="shopmanagement/js/hplus.min.js?v=4.0.0"></script>
+<script src="shopmanagement/js/contabs.min.js" type="text/javascript"></script>
+<script src="shopmanagement/js/plugins/pace/pace.min.js"></script>
 </body>
-
 </html>

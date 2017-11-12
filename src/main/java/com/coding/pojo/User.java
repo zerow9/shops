@@ -57,6 +57,7 @@ public class User {
     private String userHealthy;
 
     private String dateToString;
+
     public String getUserUuid() {
         return userUuid;
     }

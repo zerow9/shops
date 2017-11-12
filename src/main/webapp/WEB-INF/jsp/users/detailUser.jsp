@@ -115,7 +115,7 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">注册日期</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" name="userRegisterDateTime1" readonly autocomplete="off"
+                                    <input type="text"  readonly autocomplete="off"
                                            class="layui-input" value="${user.dateToString}">
                                 </div>
                             </div>
