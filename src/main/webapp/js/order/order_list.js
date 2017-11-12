@@ -1,7 +1,7 @@
 layui.use('table', function () {
     var table = layui.table;
 
-    $('.ibox').loading({
+    $('.table-responsive').loading({
         stoppable: false,
         message: '数据加载中。。。'
     });
@@ -11,7 +11,7 @@ layui.use('table', function () {
         elem: '#layui_table'    //绑定元素
         , url: '/order/selectOrder.action'   //资源地址
         , id: 'idTest'   //设定容器唯一ID
-        , height: '500'
+        // , height: '500'
         , page: true    //开启分页
         , cols: [[ //设置表头
             {checkbox: true, fixed: 'left'}
@@ -28,7 +28,7 @@ layui.use('table', function () {
             console.log('返回信息：' + res.msg);     //接口返回信息
             console.log('当前页码：' + curr);    //当前页码
             console.log('数据总量：' + count);     //数据总量
-            $('.ibox').loading('stop');
+            $('.table-responsive').loading('stop');
         }
         , initSort: {   //初始排序
             field: 'orderId' //排序字段，对应 cols 设定的各字段名
@@ -36,7 +36,7 @@ layui.use('table', function () {
         }
         // 每页数据量可选项
         , limits: [10, 20, 30, 50, 100, 200, 500]
-        , limit: 8 //每页默认显示的数量
+        , limit: 10 //每页默认显示的数量
         , skin: 'line' //行边框风格
         , even: true //开启隔行背景
         , size: 'lg'  //设定表格尺寸
@@ -202,14 +202,27 @@ layui.use('table', function () {
     });
 
 
+    // 条件检索
     $('#search_btn').click(function () {
-        var search = $('#search_order_input');
+        var search = $('#search_input');
 
         tableObj.reload({
             where: {    //设定异步数据接口的额外参数
                 orderId: search.val()
             }
         })
+    });
+
+    // 时间控件
+    laydate.render({
+        elem: '#lay_date1' //指定元素
+        ,type: 'datetime'
+        ,theme: 'grid'
+    });
+    laydate.render({
+        elem: '#lay_date2' //指定元素
+        ,type: 'datetime'
+        ,theme: 'grid'
     });
 
 });

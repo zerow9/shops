@@ -21,11 +21,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <link rel="stylesheet" href="../../../shopmanagement/css/bootstrap.min.css" media="all">
     <link href="../../../shopmanagement/common/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet">
     <link href="../../../shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="../../../common/layui/css/layui.css" rel="stylesheet">
+    <link rel="stylesheet" href="../../../shopmanagement/css/bootstrap.min.css" media="all">
     <link href="../../../css/extends/jquery/jquery.loading.css" rel="stylesheet">
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
 </head>
@@ -55,15 +55,61 @@
 
                 <div class="ibox-content">
 
-                    <div class="demoTable">
-                        <button id="delete_orders_btn" class="layui-btn layui-btn-danger">删除订单
-                        </button>
+                    <div class="row">
 
-                        搜索订单：
-                        <div class="layui-inline">
-                            <input class="layui-input" name="id" id="search_order_input" autocomplete="off">
+                        <div class="col-md-1">
+                            <button class="btn btn-danger" id="delete_orders_btn" type="button">删除订单</button>
                         </div>
-                        <button class="layui-btn" id="search_btn" data-type="reload">搜索</button>
+
+                        <form class="form-inline pull-right">
+
+                            <div class="form-group">
+                                <label for="exampleInputName2">支付状态</label>
+                                <select class="form-control">
+                                    <option>未付款</option>
+                                    <option>已付款</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputName2">发货状态</label>
+                                <select class="form-control">
+                                    <option>未发货</option>
+                                    <option>已发货</option>
+                                </select>
+                            </div>
+
+                            <%--<div class="form-group">--%>
+                            <%--<label for="exampleInputName2">下单时间</label>--%>
+                            <%--<input type="text" class="layui-input" id="lay_date1">--%>
+                            <%--<input type="text" class="layui-input" id="lay_date2">--%>
+                            <%--</div>--%>
+
+                            <div class="form-group">
+                                <label for="exampleInputName2">订单总额</label>
+                                <input style="width: 80px" type="text" class="form-control" id="exampleInputName1"
+                                       placeholder="最小值">
+                                ～<input style="width: 80px" type="text" class="form-control" id="exampleInputName2"
+                                        placeholder="最大值">
+                            </div>
+
+                            <div class="form-group">
+                                <select class="form-control">
+                                    <option>订单编号</option>
+                                    <option>收件人</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="search_input" placeholder="请输入搜索内容">
+                            </div>
+                            <button class="btn btn-info" id="search_btn" data-type="reload"
+                                    style="margin-right: 1px">搜索
+                            </button>
+                            <button class="btn btn-primary" id="search_btn_plus" data-type="reload"
+                                    style="margin-right: 17px">高级搜索
+                            </button>
+                        </form>
+
                     </div>
 
                     <div class="table-responsive">
@@ -75,9 +121,22 @@
     </div>
 </div>
 
-<div class="detail_info">
-
-</div>
+<%--<div class="detail_info">--%>
+<%--<table class="layui-table" lay-data="{基础参数}">--%>
+<%--<thead>--%>
+<%--<tr>--%>
+<%--<th lay-data="{field:'username', width:80}" rowspan="2">联系人</th>--%>
+<%--<th lay-data="{field:'amount', width:120}" rowspan="2">金额</th>--%>
+<%--<th lay-data="{align:'center'}" colspan="3">地址</th>--%>
+<%--</tr>--%>
+<%--<tr>--%>
+<%--<th lay-data="{field:'province', width:80}">省</th>--%>
+<%--<th lay-data="{field:'city', width:120}">市</th>--%>
+<%--<th lay-data="{field:'county', width:300}">详细</th>--%>
+<%--</tr>--%>
+<%--</thead>--%>
+<%--</table>--%>
+<%--</div>--%>
 
 </body>
 
