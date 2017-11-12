@@ -56,26 +56,60 @@
                 <div class="ibox-content">
 
                     <div class="row">
+
                         <div class="col-md-1">
                             <button class="btn btn-danger" id="delete_orders_btn" type="button">删除订单</button>
                         </div>
 
                         <form class="form-inline pull-right">
+
+                            <div class="form-group">
+                                <label for="exampleInputName2">支付状态</label>
+                                <select class="form-control">
+                                    <option>未付款</option>
+                                    <option>已付款</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="exampleInputName2">发货状态</label>
+                                <select class="form-control">
+                                    <option>未发货</option>
+                                    <option>已发货</option>
+                                </select>
+                            </div>
+
+                            <%--<div class="form-group">--%>
+                            <%--<label for="exampleInputName2">下单时间</label>--%>
+                            <%--<input type="text" class="layui-input" id="lay_date1">--%>
+                            <%--<input type="text" class="layui-input" id="lay_date2">--%>
+                            <%--</div>--%>
+
+                            <div class="form-group">
+                                <label for="exampleInputName2">订单总额</label>
+                                <input style="width: 80px" type="text" class="form-control" id="exampleInputName1"
+                                       placeholder="最小值">
+                                ～<input style="width: 80px" type="text" class="form-control" id="exampleInputName2"
+                                        placeholder="最大值">
+                            </div>
+
                             <div class="form-group">
                                 <select class="form-control">
                                     <option>订单编号</option>
                                     <option>收件人</option>
-                                    <option>订单总额</option>
-                                    <option>支付状态</option>
-                                    <option>发货状态</option>
-                                    <option>下单时间</option>
                                 </select>
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="search_input" placeholder="请输入搜索内容">
                             </div>
-                            <button class="btn btn-primary" id="search_btn" data-type="reload" style="margin-right: 20px">搜索</button>
+                            <button class="btn btn-info" id="search_btn" data-type="reload"
+                                    style="margin-right: 1px">搜索
+                            </button>
+                            <button class="btn btn-primary" id="search_btn_plus" data-type="reload"
+                                    style="margin-right: 17px">高级搜索
+                            </button>
                         </form>
+
                     </div>
 
                     <div class="table-responsive">
@@ -87,9 +121,22 @@
     </div>
 </div>
 
-<div class="detail_info">
-
-</div>
+<%--<div class="detail_info">--%>
+<%--<table class="layui-table" lay-data="{基础参数}">--%>
+<%--<thead>--%>
+<%--<tr>--%>
+<%--<th lay-data="{field:'username', width:80}" rowspan="2">联系人</th>--%>
+<%--<th lay-data="{field:'amount', width:120}" rowspan="2">金额</th>--%>
+<%--<th lay-data="{align:'center'}" colspan="3">地址</th>--%>
+<%--</tr>--%>
+<%--<tr>--%>
+<%--<th lay-data="{field:'province', width:80}">省</th>--%>
+<%--<th lay-data="{field:'city', width:120}">市</th>--%>
+<%--<th lay-data="{field:'county', width:300}">详细</th>--%>
+<%--</tr>--%>
+<%--</thead>--%>
+<%--</table>--%>
+<%--</div>--%>
 
 </body>
 

@@ -1,7 +1,7 @@
 layui.use('table', function () {
     var table = layui.table;
 
-    $('.ibox').loading({
+    $('.table-responsive').loading({
         stoppable: false,
         message: '数据加载中。。。'
     });
@@ -28,7 +28,7 @@ layui.use('table', function () {
             console.log('返回信息：' + res.msg);     //接口返回信息
             console.log('当前页码：' + curr);    //当前页码
             console.log('数据总量：' + count);     //数据总量
-            $('.ibox').loading('stop');
+            $('.table-responsive').loading('stop');
         }
         , initSort: {   //初始排序
             field: 'orderId' //排序字段，对应 cols 设定的各字段名
@@ -211,6 +211,18 @@ layui.use('table', function () {
                 orderId: search.val()
             }
         })
+    });
+
+    // 时间控件
+    laydate.render({
+        elem: '#lay_date1' //指定元素
+        ,type: 'datetime'
+        ,theme: 'grid'
+    });
+    laydate.render({
+        elem: '#lay_date2' //指定元素
+        ,type: 'datetime'
+        ,theme: 'grid'
     });
 
 });
