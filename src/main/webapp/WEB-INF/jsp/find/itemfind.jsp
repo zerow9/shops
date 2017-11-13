@@ -1,37 +1,23 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <form action="" class="layui-elem-quote layui-form" style="height: 80px">
     <div class="hang-1" class="layui-input-block" >
-        <p>商品编号：<input type="text" name="item.itemTypeId" style="height: 20px;"></p><br>
-        <p>商品名称：<input type="text" name="item.itemName" style="height: 20px;"></p>
+        <p>商品编号：<input type="text" name="item.itemTypeId"></p><br>
+        <p>商品名称：<input type="text" name="item.itemName"></p>
         <br>
     </div>
     <div class="hang-2" class="layui-input-block">
-        <p>市场价格：<input type="text" name="formerItemMarketPrice" style="width:73px;height: 20px;"/>&ensp;<em>—</em>&ensp;<input
-                type="text" name="latterItemMarketPrice" style="width:73px;height: 20px;"/></p>
+        <p>市场价格：<input type="text" name="formerItemMarketPrice"/><em>&nbsp;~&nbsp;</em><input
+                type="text" name="latterItemMarketPrice"/></p>
         <br>
-        <p>库存范围：<input type="text" name="formerRepertoryNumber" style="width:73px;height: 20px;"/>&ensp;<em>—</em>&ensp;<input
-                type="text" name="latterRepertoryNumber" style="width:73px;height: 20px;"/></p>
+        <p>库存范围：<input type="text" name="formerRepertoryNumber"/><em>&nbsp;~&nbsp;</em><input
+                type="text" name="latterRepertoryNumber"/></p>
         <br>
     </div>
-    <div class="hang-3" class="layui-input-block" style="height: 20px;width: 300px">
-        <span hidden>商品分类：
-            <select name="userSex" lay-ignore>
-                <option value="1" selected=""></option>
-                <option value="2">女</option>
-                <option value="3">保密</option>
-            </select>
-        </span>
-        <br>
-        <br>
-        <p style="margin-top: 4.5px">
-        关键字：
-            <input type="text"  id="item.keyWord" style="width:100px;height: 20px;">
-            </p>
-        <br>
+    <div class="hang-3" class="layui-input-block">
+        <p>关键字：<input type="text"  id="item.keyWord" style="width:100px;height: 20px;"></p><br>
     </div>
     <div class="hang-butt">
-        <button lay-submit lay-filter="find" class="myButton"
-                style=" width:60px;height: 35px;border: none;background-color:#1ab394;">
+        <button lay-submit lay-filter="find" class="myButton">
             <i class="fa fa-search"></i>
             查询
         </button>
