@@ -6,64 +6,65 @@ public class PagingCustomRepertory extends Paging {
 
     private Repertory repertory;
 
-    private double formerItemMarketPrice;//一些功能需要库存市场价格范围内查询，这是左侧较小值
+    private Integer formerItemMarketPrice;//一些功能需要库存市场价格范围内查询，这是左侧较小值
 
-    private double latterItemMarketPrice;//一些功能需要库存市场价格范围内查询，这是右侧较大值
+    private Integer latterItemMarketPrice;//一些功能需要库存市场价格范围内查询，这是右侧较大值
 
-    private double formerItemOriginalPrice;//一些功能需要库存原价价格范围内查询，这是左侧较小值
+    private Integer formerItemOriginalPrice;//一些功能需要库存原价价格范围内查询，这是左侧较小值
 
-    private double latterItemOriginalPrice;//一些功能需要库存原价价格范围内查询，这是右侧较大值
+    private Integer latterItemOriginalPrice;//一些功能需要库存原价价格范围内查询，这是右侧较大值
 
-    private int formerRepertoryNumber;//一些功能需要库存数量范围内查询，这是左侧较小值
+    private Integer formerRepertoryNumber;//一些功能需要库存数量范围内查询，这是左侧较小值
 
-    private int latterRepertoryNumber;//一些功能需要库存数量范围内查询，这是右侧较大值
+    private Integer latterRepertoryNumber;//一些功能需要库存数量范围内查询，这是右侧较大值
 
-    public void setFormerItemMarketPrice(double formerItemMarketPrice) {
+
+    public void setFormerItemMarketPrice(Integer formerItemMarketPrice) {
         this.formerItemMarketPrice = formerItemMarketPrice;
     }
 
-    public void setLatterItemMarketPrice(double latterItemMarketPrice) {
+    public void setLatterItemMarketPrice(Integer latterItemMarketPrice) {
         this.latterItemMarketPrice = latterItemMarketPrice;
     }
 
-    public void setFormerItemOriginalPrice(double formerItemOriginalPrice) {
+    public void setFormerItemOriginalPrice(Integer formerItemOriginalPrice) {
         this.formerItemOriginalPrice = formerItemOriginalPrice;
     }
 
-    public void setLatterItemOriginalPrice(double latterItemOriginalPrice) {
+    public void setLatterItemOriginalPrice(Integer latterItemOriginalPrice) {
         this.latterItemOriginalPrice = latterItemOriginalPrice;
     }
 
-    public void setFormerRepertoryNumber(int formerRepertoryNumber) {
+    public void setFormerRepertoryNumber(Integer formerRepertoryNumber) {
         this.formerRepertoryNumber = formerRepertoryNumber;
     }
 
-    public void setLatterRepertoryNumber(int latterRepertoryNumber) {
+    public void setLatterRepertoryNumber(Integer latterRepertoryNumber) {
         this.latterRepertoryNumber = latterRepertoryNumber;
     }
 
-    public double getFormerItemMarketPrice() {
+    public Integer getFormerItemMarketPrice() {
 
         return formerItemMarketPrice;
     }
 
-    public double getLatterItemMarketPrice() {
+    public Integer getLatterItemMarketPrice() {
         return latterItemMarketPrice;
     }
 
-    public double getFormerItemOriginalPrice() {
+    public Integer getFormerItemOriginalPrice() {
         return formerItemOriginalPrice;
     }
 
-    public double getLatterItemOriginalPrice() {
+    public Integer getLatterItemOriginalPrice() {
         return latterItemOriginalPrice;
     }
 
-    public int getFormerRepertoryNumber() {
+    public Integer getFormerRepertoryNumber() {
         return formerRepertoryNumber;
     }
 
-    public int getLatterRepertoryNumber() {
+    public Integer getLatterRepertoryNumber() {
         return latterRepertoryNumber;
     }
 
