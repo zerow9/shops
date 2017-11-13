@@ -258,6 +258,10 @@
         <where>
             <!--查询字段属于Item，需先判定 item 是否为空-->
             <if test="item != null">
+                <!--ID主键查询-->
+                <if test="item.itemId != null and item.itemId != 0">
+                    and item_id = #{item.itemId}
+                </if>
                 <if test="item.itemName != null and item.itemName != ''">
                     and item_name REGEXP #{item.itemName}
                 </if>
