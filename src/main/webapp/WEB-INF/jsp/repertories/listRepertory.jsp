@@ -18,8 +18,8 @@
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="../../../common/layui/css/layui.css" rel="stylesheet">
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
-    <link href="../../../css/useQuery.css" rel="stylesheet">
-    <link href="../../../css/find.css" rel="stylesheet">
+    <link href="../../../css/repertoryQuery.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -29,7 +29,6 @@
     <div class="row">
 
         <div class="layui-col-sm12">
-
             <div class="ibox float-e-margins">
                 <jsp:include page="../find/findRepertory.jsp" />
                 <div class="ibox-tools">

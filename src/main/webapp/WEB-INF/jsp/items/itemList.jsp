@@ -18,8 +18,8 @@
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="../../../common/layui/css/layui.css" rel="stylesheet">
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
-    <link href="../../../css/useQuery.css" rel="stylesheet">
-    <link href="../../../css/find.css" rel="stylesheet">
+    <link href="../../../css/itemQuery.css" rel="stylesheet">
+
 </head>
 
 <body>

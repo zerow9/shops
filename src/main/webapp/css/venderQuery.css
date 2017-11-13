@@ -9,45 +9,23 @@
     float: left;
     margin-left: 60px;
     width: 244px;
-    height: 65px
-}
-
-.hang-3 {
-    float: left;
-    margin-left: 60px;
-    height: 20px;
-    width: 300px
+    height: 60px
 }
 
 .hang-butt {
     float: left;
-    margin-top: 20px
+    margin-top: 12px
 }
-
-.hang-2 input {
-    width: 73px;
-    height: 20px;
-}
-
 .hang-1 input {
-    height: 20px;
+    height: 25px;
 }
-
-.hang-3 select {
-    width: 100px;
-    height: 20px;
-    margin-left: 4px;
-    margin-bottom: 15px;
-}
-
-.hang-3 input {
-    width: 100px;
-    height: 20px;
+.hang-2 input {
+    height: 25px;
 }
 
 .myButton {
     width: 60px;
-    height: 35px;
+    height: 32px;
     background-color: #1ab394;
     cursor: pointer;
     border: none;
