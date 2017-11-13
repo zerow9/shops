@@ -9,6 +9,7 @@ import com.coding.pojo.Address;
 import com.coding.pojo.Orders;
 import com.coding.paging.PagingCustomOrder;
 import com.coding.pojo.User;
+import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,8 +55,22 @@ public class OrderController {
      */
     @ResponseBody
     @RequestMapping("selectOrder")
-    public String selectOrder(Integer page, Integer limit, HttpSession session) throws Exception {
+    public String selectOrder(Integer page, Integer limit, HttpSession session, String formDate) throws Exception {
+        System.out.println("表单数据：" + formDate);
         PagingCustomOrder pagingCustomOrder = new PagingCustomOrder();
+        if (formDate != null) {
+            Orders ordersForm = new Orders();
+            JSONObject jsonObject = JSONObject.fromObject(formDate);
+            if (!jsonObject.getString("orderId").equals(""))
+                ordersForm.setOrderId(Integer.parseInt(jsonObject.getString("orderId")));
+            if (!jsonObject.getString("payStatus").equals(""))
+                ordersForm.setPayStatus(Integer.parseInt(jsonObject.getString("payStatus")));
+            if (!jsonObject.getString("sendStatus").equals(""))
+                ordersForm.setSendStatus(Integer.parseInt(jsonObject.getString("sendStatus")));
+            if (!jsonObject.getString("takeGoodsName").equals(""))
+                ordersForm.setTakeGoodsName(jsonObject.getString("takeGoodsName"));
+            pagingCustomOrder.setOrder(ordersForm);
+        }
         pagingCustomOrder.addIndex(page, limit);
         if (count == null)
             count = adminService.selectOrderCount();
@@ -63,7 +79,7 @@ public class OrderController {
             List<Orders> orders = userService.selectOrder(pagingCustomOrder);
             return myJsonConfig.start(orders, count, "true");
         } catch (Exception e) {
-            return myJsonConfig.start(null, count, session.getAttribute("message").toString());
+            return myJsonConfig.start(new ArrayList(), count, session.getAttribute("message").toString());
         }
 
     }

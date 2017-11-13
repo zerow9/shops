@@ -18,7 +18,8 @@ layui.use('table', function () {
             , {field: 'orderId', title: '订单编号', width: 100, sort: true}
             , {field: 'takeGoodsName', title: '收货人', width: 100}
             // , {field: 'shop_name', title: '分店', width: 200}
-            , {field: 'orderPaid', title: '订单总额', width: 150, templet: '#orderPaidTpi', sort: true}
+            , {field: 'orderSumPrice', title: '订单总额', width: 150, templet: '#orderPaidTpi', sort: true}
+            , {field: 'orderPaid', title: '实付金额', width: 150, templet: '#orderPaidTpi', sort: true}
             , {field: 'payStatus', title: '支付状态', width: 100, templet: '#payStatusTpi'}
             , {field: 'sendStatus', title: '发货状态', width: 100, templet: '#sendStatusTpi'}
             , {field: 'orderCreateTime', title: '下单时间', width: 200, sort: true}
@@ -65,6 +66,7 @@ layui.use('table', function () {
                             '<tr><td style="text-align: right;font-weight: bold">收件人：</td>' + '<td>' + json_data.order.takeGoodsName + '</td></tr>' +
                             // '<tr><td style="text-align: right;font-weight: bold">分店：</td>' + '<td>' + json_data.order.shopName + '</td></tr>' +
                             '<tr><td style="text-align: right;font-weight: bold">订单总额：</td>' + '<td>' + json_data.order.orderSumPrice + '</td></tr>' +
+                            '<tr><td style="text-align: right;font-weight: bold">实付金额：</td>' + '<td>' + json_data.order.orderPaid + '</td></tr>' +
                             '<tr><td style="text-align: right;font-weight: bold">支付状态：</td>' + '<td>' + json_data.order.payStatus + '</td></tr>' +
                             '<tr><td style="text-align: right;font-weight: bold">发货状态：</td>' + '<td>' + json_data.order.sendStatus + '</td></tr>' +
                             '<tr><td style="text-align: right;font-weight: bold">下单时间：</td>' + '<td>' + json_data.order.orderCreateTimeToString.toString() + '</td></tr>' +
@@ -201,28 +203,61 @@ layui.use('table', function () {
         }
     });
 
+    // 表单元素转数组
+    $.fn.serializeObject = function () {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
 
     // 条件检索
     $('#search_btn').click(function () {
-        var search = $('#search_input');
+// 将form表单数据转为json数据格式
+        var form_data = $('#search_form').serializeObject();
+        console.log("表单json格式数据=======：" + JSON.stringify(form_data));
+        var s_text_type_input = $('#s_text_type_input').val();
+        if (form_data.payStatus === '已付款') {
+            form_data.payStatus = 1;
+        } else if (form_data.payStatus === '未付款') {
+            form_data.payStatus = 2;
+        }
+        if (form_data.sendStatus === '已发货') {
+            form_data.sendStatus = 1;
+        } else if (form_data.sendStatus === '未发货') {
+            form_data.sendStatus = 2;
+        }
+        if (form_data.searchContentType === '订单编号') {
+            form_data.orderId = s_text_type_input;
+        } else {
+            form_data.orderId = '';
+        }
+        if (form_data.searchContentType === '收件人') {
+            form_data.takeGoodsName = s_text_type_input;
+        } else {
+            form_data.takeGoodsName = '';
+        }
 
+        console.log("表单json格式数据：" + JSON.stringify(form_data));
         tableObj.reload({
             where: {    //设定异步数据接口的额外参数
-                orderId: search.val()
+                formDate: JSON.stringify(form_data)
             }
         })
     });
 
-    // 时间控件
-    laydate.render({
-        elem: '#lay_date1' //指定元素
-        ,type: 'datetime'
-        ,theme: 'grid'
-    });
-    laydate.render({
-        elem: '#lay_date2' //指定元素
-        ,type: 'datetime'
-        ,theme: 'grid'
+    // 高级搜索
+    $('#search_btn_plus').click(function () {
+        parent.layer.alert('对不起，该功能欠开发中。。。请你稍后再试。')
     });
 
 });

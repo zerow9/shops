@@ -61,55 +61,48 @@
                             <button class="btn btn-danger" id="delete_orders_btn" type="button">删除订单</button>
                         </div>
 
-                        <form class="form-inline pull-right">
-
+                        <form class="form-inline pull-right" id="search_form">
                             <div class="form-group">
-                                <label for="exampleInputName2">支付状态</label>
-                                <select class="form-control">
+                                <label for="s_pay_status">支付状态</label>
+                                <select name="payStatus" class="form-control" id="s_pay_status">
+                                    <option></option>
                                     <option>未付款</option>
                                     <option>已付款</option>
                                 </select>
                             </div>
-
                             <div class="form-group">
-                                <label for="exampleInputName2">发货状态</label>
-                                <select class="form-control">
+                                <label for="s_send_status">发货状态</label>
+                                <select name="sendStatus" class="form-control" id="s_send_status">
+                                    <option></option>
                                     <option>未发货</option>
                                     <option>已发货</option>
                                 </select>
                             </div>
-
-                            <%--<div class="form-group">--%>
-                            <%--<label for="exampleInputName2">下单时间</label>--%>
-                            <%--<input type="text" class="layui-input" id="lay_date1">--%>
-                            <%--<input type="text" class="layui-input" id="lay_date2">--%>
-                            <%--</div>--%>
-
                             <div class="form-group">
-                                <label for="exampleInputName2">订单总额</label>
-                                <input style="width: 80px" type="text" class="form-control" id="exampleInputName1"
+                                <label for="s_sum_price_min">订单总额</label>
+                                <input style="width: 80px" type="number" name="orderSumPriceMin" class="form-control"
+                                       id="s_sum_price_min"
                                        placeholder="最小值">
-                                ～<input style="width: 80px" type="text" class="form-control" id="exampleInputName2"
+                                ～<input style="width: 80px" type="number" name="orderSumPriceMax" class="form-control"
+                                        id="s_sum_price_max"
                                         placeholder="最大值">
                             </div>
-
                             <div class="form-group">
-                                <select class="form-control">
+                                <select class="form-control" name="searchContentType" id="s_text_type">
                                     <option>订单编号</option>
                                     <option>收件人</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" id="search_input" placeholder="请输入搜索内容">
+                                <input name="searchContent" type="search" class="form-control" id="s_text_type_input"
+                                       placeholder="请输入搜索内容">
                             </div>
-                            <button class="btn btn-info" id="search_btn" data-type="reload"
-                                    style="margin-right: 1px">搜索
-                            </button>
-                            <button class="btn btn-primary" id="search_btn_plus" data-type="reload"
+                            <button type="button" class="btn btn-info" id="search_btn" data-type="reload">搜索</button>
+                            <button type="reset" class="btn btn-info">重置</button>
+                            <button type="button" class="btn btn-primary" id="search_btn_plus" data-type="reload"
                                     style="margin-right: 17px">高级搜索
                             </button>
                         </form>
-
                     </div>
 
                     <div class="table-responsive">
@@ -153,7 +146,7 @@
 <%--付款状态模板--%>
 <script type="text/html" id="payStatusTpi">
     {{#  if(d.sendStatus === 1){ }}
-    <span style="color: green">未付款</span>
+    <span style="color: green">已付款</span>
     {{#  } else if(d.sendStatus === 2) { }}
     <span style="color: red">未付款</span>
     {{#  } else { }}
