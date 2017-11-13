@@ -1,30 +1,31 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <form action="" class="layui-elem-quote layui-form" style="height: 80px">
-    <div class="hang-1" class="layui-input-block">
-        <p>用户编号：<input type="text" name="userUuid" style="height: 20px;"></p><br>
-        <p>用户姓名：<input type="text" name="userName" style="height: 20px;"></p>
+    <div class="hang-1" class="layui-input-block" >
+        <p>商品编号：<input type="text" name="item.itemTypeId" style="height: 20px;"></p><br>
+        <p>商品名称：<input type="text" name="item.itemName" style="height: 20px;"></p>
         <br>
     </div>
     <div class="hang-2" class="layui-input-block">
-        <p>积分范围：<input type="text" name="formerScore" style="width:73px;height: 20px;"/>&ensp;<em>—</em>&ensp;<input
-                type="text" name="latterScore" style="width:73px;height: 20px;"/></p>
+        <p>市场价格：<input type="text" name="formerItemMarketPrice" style="width:73px;height: 20px;"/>&ensp;<em>—</em>&ensp;<input
+                type="text" name="latterItemMarketPrice" style="width:73px;height: 20px;"/></p>
         <br>
-        <p>年龄范围：<input type="text" name="formerAge" style="width:73px;height: 20px;"/>&ensp;<em>—</em>&ensp;<input
-                type="text" name="latterAge" style="width:73px;height: 20px;"/></p>
+        <p>库存范围：<input type="text" name="formerRepertoryNumber" style="width:73px;height: 20px;"/>&ensp;<em>—</em>&ensp;<input
+                type="text" name="latterRepertoryNumber" style="width:73px;height: 20px;"/></p>
         <br>
     </div>
     <div class="hang-3" class="layui-input-block" style="height: 20px;width: 300px">
-        用户性别：
-            <select name="userSex" >
-                <option value="1" selected="">男</option>
+        <div hidden>
+            商品分类：
+            <select name="userSex" lay-ignore>
+                <option value="1" selected=""></option>
                 <option value="2">女</option>
                 <option value="3">保密</option>
             </select>
+        </div>
         <br>
-        注册时间：
-            <input type="text" readonly id="formerUserCreateTime" name="time" style="width:100px;height: 20px;">至
-            <input type="text" id="other" name="latterUserCreateTime" style="width:100px;height: 20px;" readonly>
-
+        <br>
+        关键字：
+            <input type="text"  id="item.keyWord" style="width:100px;height: 20px;">
         <br>
     </div>
     <div class="hang-butt">

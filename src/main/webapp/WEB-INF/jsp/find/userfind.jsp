@@ -36,7 +36,4 @@
     </div>
 </form>
 <script>
-//    $(function (){
-//        $("#hang-3 .layui-form-select").addClass("float-input");
-//    })
 </script>

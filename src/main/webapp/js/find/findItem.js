@@ -15,8 +15,8 @@ layui.use(['laydate', 'form', 'table'], function () {
     form.on('submit(find)', function (data) {
         var date = JSON.stringify(data.field);
         var str=date.toString().replace('{','').replace('}','').replace(/"/g,'').replace(/,/g,'&').replace(/:/g,'=');
-        table.reload('userUuid', {
-            url: 'findUser.action?'+str,
+        table.reload('itemId', {
+            url: 'findItem.action?'+str,
             where: {
 
             }

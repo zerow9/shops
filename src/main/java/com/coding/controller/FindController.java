@@ -3,8 +3,9 @@ package com.coding.controller;
 import com.coding.Iservice.IAdminService;
 import com.coding.comomInterface.JavaGet;
 import com.coding.json.MyJsonConfig;
-import com.coding.mapper.UserMapper;
+import com.coding.paging.PagingCustomItem;
 import com.coding.paging.PagingCustomUser;
+import com.coding.pojo.Item;
 import com.coding.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -31,12 +31,27 @@ public class FindController {
         String name = JavaGet.charsetGet(pagingCustomUser.getUser().getUserName(), request);
         pagingCustomUser.getUser().setUserSex(sex);
         pagingCustomUser.getUser().setUserName(name);
-        System.out.println(pagingCustomUser.getUser().getUserUuid() );
-        if (count == null || page == 1)
+        if (page == 1)
             count = adminService.selectUser(pagingCustomUser).size();
         pagingCustomUser.addIndex(page, limit);
         List<User> users = adminService.selectUser(pagingCustomUser);
         MyJsonConfig<User> myJsonConfig = new MyJsonConfig<>();
         return myJsonConfig.start(users, count);
+    }
+
+    @RequestMapping("item/findItem")
+    @ResponseBody
+    public String findItem(HttpServletRequest request, PagingCustomItem pagingCustomItem, Integer page, Integer limit) throws Exception {
+        String name = JavaGet.charsetGet(pagingCustomItem.getItem().getItemName(), request);
+        String word = JavaGet.charsetGet(pagingCustomItem.getItem().getKeyWord(), request);
+        pagingCustomItem.getItem().setItemName(name);
+        pagingCustomItem.getItem().setKeyWord(word);
+        System.out.println(name);
+        if (page == 1)
+            count = adminService.selectItem(pagingCustomItem).size();
+        pagingCustomItem.addIndex(page, limit);
+        List<Item> items = adminService.selectItem(pagingCustomItem);
+        MyJsonConfig<Item> myJsonConfig = new MyJsonConfig<>();
+        return myJsonConfig.start(items, count);
     }
 }
