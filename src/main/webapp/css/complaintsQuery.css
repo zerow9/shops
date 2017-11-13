@@ -8,42 +8,22 @@
 .hang-2 {
     float: left;
     margin-left: 60px;
-    width: 244px;
+    width: 330px;
     height: 65px
-}
-
-.hang-3 {
-    float: left;
-    margin-left: 60px;
-    height: 20px;
-    width: 300px
 }
 
 .hang-butt {
     float: left;
     margin-top: 20px
 }
-
-.hang-2 input {
-    width: 73px;
-    height: 20px;
-}
-
 .hang-1 input {
     height: 20px;
 }
-
-.hang-3 select {
-    width: 120px;
-    height: 20px;
-    margin-left: 4px;
-    margin-bottom: 15px;
-}
-
-.hang-3 input {
-    width: 100px;
+.hang-2 input {
+    width:100px;
     height: 20px;
 }
+
 
 .myButton {
     width: 60px;

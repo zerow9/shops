@@ -41,6 +41,7 @@
 .myButton {
     width: 60px;
     height: 35px;
+    margin-left: 20px;
     background-color: #1ab394;
     cursor: pointer;
     border: none;
