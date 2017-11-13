@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <form action="" class="layui-elem-quote layui-form" style="height: 80px">
     <div class="hang-1" class="layui-input-block">
-        <p>用户编号：<input type="text" name="userUuid" style="height: 20px;"></p><br>
-        <p>用户姓名：<input type="text" name="userName" style="height: 20px;"></p>
+        <p>用户编号：<input type="text" name="user.userUuid" style="height: 20px;"></p><br>
+        <p>用户姓名：<input type="text" name="user.userName" style="height: 20px;"></p>
         <br>
     </div>
     <div class="hang-2" class="layui-input-block">
@@ -15,10 +15,10 @@
     </div>
     <div class="hang-3" class="layui-input-block" style="height: 20px;width: 300px">
         用户性别：
-            <select name="userSex" >
-                <option value="男" selected="">男</option>
+            <select name="user.userSex" >
+                <option value="男">男</option>
                 <option value="女">女</option>
-                <option value="不明">保密</option>
+                <option value="" selected>保密</option>
             </select>
         <br>
         注册时间：
