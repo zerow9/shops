@@ -328,6 +328,10 @@
 
       <!--根据order基本信息进行查询-->
       <if test="order != null and order != ''">
+        <!--根据订单ID查询订单信息-->
+        <if test="order.orderId != null and order.orderId != 0">
+          and order_id = #{order.orderId}
+        </if>
         <!--根据用户ID查找订单信息-->
         <if test="order.userUuid != null and order.userUuid != ''">
           and user_uuid = #{order.userUuid}
@@ -486,4 +490,6 @@
       </if>
     </if>
   </select>
+
+
 </mapper>
