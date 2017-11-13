@@ -49,6 +49,8 @@ layui.use('table', function () {
                 area: ['80%', '90%'],
                 content: 'editNotice.action?noticeId=' + data.noticeId, //注意，如果str是object，那么需要字符拼接。
             });
+        }else if(obj.eve=="shelve_status"){
+
         }
     });
 

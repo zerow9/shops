@@ -83,7 +83,11 @@
 </div>
 
 <script type="text/html" id="shelve_bar">
-    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="shelve_status" id="shelve_status_bar">是</a>
+    {{# if(d.isStart==1){}}
+    <a class="layui-btn layui-btn-primary layui-btn-mini" >是</a>
+    {{# }else{}}
+    <a class="layui-btn layui-btn-primary layui-btn-mini" >否 </a>
+    {{# }}}
 </script>
 
 <script type="text/html" id="operate_bar">
