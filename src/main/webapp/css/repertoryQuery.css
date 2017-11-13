@@ -38,6 +38,11 @@
     height: 20px;
 }
 
+/*设置placeholder样式*/
+input::-webkit-input-placeholder {
+    color:#DCDCDC; /*字体颜色*/
+}
+
 .myButton {
     width: 60px;
     height: 35px;

@@ -8,24 +8,24 @@
 .hang-2 {
     float: left;
     margin-left: 60px;
-    width: 330px;
-    height: 65px
+    width: 244px;
+    height: 60px
 }
 
 .hang-butt {
     float: left;
-    margin-top: 20px
+    margin-top: 12px
 }
 .hang-1 input {
-    height: 20px;
+    height: 25px;
 }
 .hang-2 input {
-    width:100px;
-    height: 20px;
+    height: 25px;
 }
+
 .myButton {
     width: 60px;
-    height: 35px;
+    height: 32px;
     background-color: #1ab394;
     cursor: pointer;
     border: none;
