@@ -2,24 +2,45 @@
     float: left;
     margin-left: 20px;
     width: 244px;
-    height: 55px
+    height: 60px
 }
 
 .hang-2 {
     float: left;
     margin-left: 60px;
     width: 244px;
-    height: 55px
+    height: 65px
 }
 
 .hang-3 {
     float: left;
     margin-left: 60px;
-    width: 360px;
-    height: 55px;
+    height: 20px;
+    width: 300px
 }
 
 .hang-butt {
     float: left;
-    margin-top: 18px
+    margin-top: 20px
+}
+
+.hang-2 input {
+    width: 73px;
+    height: 20px;
+}
+
+.hang-1 input {
+    height: 20px;
+}
+
+.hang-3 select {
+    width: 100px;
+    height: 20px;
+    margin-left: 4px;
+    margin-bottom: 15px;
+}
+
+.hang-3 input {
+    width: 100px;
+    height: 20px;
 }
