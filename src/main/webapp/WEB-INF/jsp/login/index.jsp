@@ -33,7 +33,7 @@
                 <!--当前登录用户展示-->
                 <li class="nav-header">
                     <div class="dropdown profile-element">
-                        <span><img alt="image" class="img-circle" src="../../../shopmanagement/img/a0.jpg"/></span>
+                        <span><img alt="image" class="img-circle" src="../../../shopmanagement/img/admin.jpg"/></span>
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                                 <span class="clear">
                                <span class="block m-t-xs"><strong class="font-bold">欢迎<%=user%>登陆</strong></span>
