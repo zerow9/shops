@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <form action="" class="layui-elem-quote layui-form" style="height: 80px">
     <div class="hang-1" class="layui-input-block" >
-        <p>商品编号：<input type="text" name="item.itemTypeId" style="height: 20px;"></p><br>
+        <p>商品编号：<input type="text" name="item.itemId" style="height: 20px;"></p><br>
         <p>商品名称：<input type="text" name="item.itemName" style="height: 20px;"></p>
         <br>
     </div>
