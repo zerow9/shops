@@ -31,7 +31,7 @@
         <div class="layui-col-sm12">
 
             <div class="ibox float-e-margins">
-                <jsp:include page="../find/itemfind.jsp" />
+                <jsp:include page="../find/findItem.jsp" />
                 <div class="ibox-title">
                     <h5>商品列表</h5>
                     <div class="ibox-tools">
