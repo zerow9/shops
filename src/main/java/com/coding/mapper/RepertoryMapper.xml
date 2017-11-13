@@ -16,52 +16,102 @@
     </delete>
 
     <!--增加库存信息-->
-    <insert id="insertRepertory" parameterType="com.coding.pojo.Repertory">
-        insert into repertory (item_id, item_market_price,
-        item_original_price, shop_id, repertory_number,
-        repertory_puttime, update_time, vender_id
-        <!--,
-        repertory1, repertory2, repertory3,
-        repertory4, repertory5, repertory6,
-        repertory7, repertory8, repertory9,
-        repertory10-->)
-        values (#{itemId,jdbcType=INTEGER}, #{itemMarketPrice,jdbcType=DOUBLE},
-        #{itemOriginalPrice,jdbcType=DOUBLE}, #{shopId,jdbcType=INTEGER}, #{repertoryNumber,jdbcType=INTEGER},
-        #{repertoryPuttime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{venderId,jdbcType=INTEGER}
-        <!--,
-      #{repertory1,jdbcType=VARCHAR}, #{repertory2,jdbcType=VARCHAR}, #{repertory3,jdbcType=VARCHAR},
-      #{repertory4,jdbcType=VARCHAR}, #{repertory5,jdbcType=VARCHAR}, #{repertory6,jdbcType=VARCHAR},
-      #{repertory7,jdbcType=VARCHAR}, #{repertory8,jdbcType=VARCHAR}, #{repertory9,jdbcType=VARCHAR},
-      #{repertory10,jdbcType=VARCHAR}-->)
+    <insert id="insertRepertory" parameterType="com.coding.pojo.Repertory" >
+        insert into repertory
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="repertoryId != null" >
+                repertory_id,
+            </if>
+            <if test="itemId != null" >
+                item_id,
+            </if>
+            <if test="itemName != null" >
+                item_name,
+            </if>
+            <if test="itemMarketPrice != null" >
+                item_market_price,
+            </if>
+            <if test="itemOriginalPrice != null" >
+                item_original_price,
+            </if>
+            <if test="shopId != null" >
+                shop_id,
+            </if>
+            <if test="repertoryNumber != null" >
+                repertory_number,
+            </if>
+            <if test="repertoryPuttime != null" >
+                repertory_puttime,
+            </if>
+            <if test="updateTime != null" >
+                update_time,
+            </if>
+            <if test="venderId != null" >
+                vender_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="repertoryId != null" >
+                #{repertoryId,jdbcType=INTEGER},
+            </if>
+            <if test="itemId != null" >
+                #{itemId,jdbcType=INTEGER},
+            </if>
+            <if test="itemName != null" >
+                #{itemName,jdbcType=VARCHAR},
+            </if>
+            <if test="itemMarketPrice != null" >
+                #{itemMarketPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="itemOriginalPrice != null" >
+                #{itemOriginalPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="shopId != null" >
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="repertoryNumber != null" >
+                #{repertoryNumber,jdbcType=INTEGER},
+            </if>
+            <if test="repertoryPuttime != null" >
+                #{repertoryPuttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="venderId != null" >
+                #{venderId,jdbcType=INTEGER},
+            </if>
+        </trim>
     </insert>
 
     <!--将库存信息封装到 Repertory 类中-->
-    <resultMap id="BaseResultMap" type="com.coding.pojo.Repertory">
-        <id column="repertory_id" jdbcType="INTEGER" property="repertoryId"/>
-        <result column="item_id" jdbcType="INTEGER" property="itemId"/>
-        <result column="item_market_price" jdbcType="DOUBLE" property="itemMarketPrice"/>
-        <result column="item_original_price" jdbcType="DOUBLE" property="itemOriginalPrice"/>
-        <result column="shop_id" jdbcType="INTEGER" property="shopId"/>
-        <result column="repertory_number" jdbcType="INTEGER" property="repertoryNumber"/>
-        <result column="repertory_puttime" jdbcType="TIMESTAMP" property="repertoryPuttime"/>
-        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
-        <result column="vender_id" jdbcType="INTEGER" property="venderId"/>
-        <!--<result column="repertory1" jdbcType="VARCHAR" property="repertory1" />
-        <result column="repertory2" jdbcType="VARCHAR" property="repertory2" />
-        <result column="repertory3" jdbcType="VARCHAR" property="repertory3" />
-        <result column="repertory4" jdbcType="VARCHAR" property="repertory4" />
-        <result column="repertory5" jdbcType="VARCHAR" property="repertory5" />
-        <result column="repertory6" jdbcType="VARCHAR" property="repertory6" />
-        <result column="repertory7" jdbcType="VARCHAR" property="repertory7" />
-        <result column="repertory8" jdbcType="VARCHAR" property="repertory8" />
-        <result column="repertory9" jdbcType="VARCHAR" property="repertory9" />
-        <result column="repertory10" jdbcType="VARCHAR" property="repertory10" />-->
+    <resultMap id="BaseResultMap" type="com.coding.pojo.Repertory" >
+        <id column="repertory_id" property="repertoryId" jdbcType="INTEGER" />
+        <result column="item_id" property="itemId" jdbcType="INTEGER" />
+        <result column="item_name" property="itemName" jdbcType="VARCHAR" />
+        <result column="item_market_price" property="itemMarketPrice" jdbcType="DOUBLE" />
+        <result column="item_original_price" property="itemOriginalPrice" jdbcType="DOUBLE" />
+        <result column="shop_id" property="shopId" jdbcType="INTEGER" />
+        <result column="repertory_number" property="repertoryNumber" jdbcType="INTEGER" />
+        <result column="repertory_puttime" property="repertoryPuttime" jdbcType="TIMESTAMP" />
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+        <result column="vender_id" property="venderId" jdbcType="INTEGER" />
+     <!--   <result column="repertory1" property="repertory1" jdbcType="VARCHAR" />
+        <result column="repertory2" property="repertory2" jdbcType="VARCHAR" />
+        <result column="repertory3" property="repertory3" jdbcType="VARCHAR" />
+        <result column="repertory4" property="repertory4" jdbcType="VARCHAR" />
+        <result column="repertory5" property="repertory5" jdbcType="VARCHAR" />
+        <result column="repertory6" property="repertory6" jdbcType="VARCHAR" />
+        <result column="repertory7" property="repertory7" jdbcType="VARCHAR" />
+        <result column="repertory8" property="repertory8" jdbcType="VARCHAR" />
+        <result column="repertory9" property="repertory9" jdbcType="VARCHAR" />
+        <result column="repertory10" property="repertory10" jdbcType="VARCHAR" />-->
     </resultMap>
     <!--Repertory表的字段-->
-    <sql id="Base_Column_List">
-        repertory_id, item_id, item_market_price, item_original_price, shop_id, repertory_number,
-        repertory_puttime, update_time, vender_id
-    </sql>
+    <sql id="Base_Column_List" >
+    repertory_id, item_id, item_name, item_market_price, item_original_price, shop_id,
+    repertory_number, repertory_puttime, update_time, vender_id
+  </sql>
     <!--根据库存id查看库存信息-->
     <select id="selectRepertoryByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
        <if test="repertoryId!=null and repertoryId!=0">
@@ -76,29 +126,40 @@
     </select>
 
     <!--根据库存ID更新库存信息-->
-    <update id="updateRepertoryByPrimaryKey" parameterType="com.coding.pojo.Repertory">
-         update repertory
-      set item_id = #{itemId,jdbcType=INTEGER},
-      item_market_price = #{itemMarketPrice,jdbcType=DOUBLE},
-      item_original_price = #{itemOriginalPrice,jdbcType=DOUBLE},
-      shop_id = #{shopId,jdbcType=INTEGER},
-      repertory_number = #{repertoryNumber,jdbcType=INTEGER},
-      repertory_puttime = #{repertoryPuttime,jdbcType=TIMESTAMP},
-      update_time = #{updateTime,jdbcType=TIMESTAMP},
-      vender_id = #{venderId,jdbcType=INTEGER}
-      <!--,
-      repertory1 = #{repertory1,jdbcType=VARCHAR},
-      repertory2 = #{repertory2,jdbcType=VARCHAR},
-      repertory3 = #{repertory3,jdbcType=VARCHAR},
-      repertory4 = #{repertory4,jdbcType=VARCHAR},
-      repertory5 = #{repertory5,jdbcType=VARCHAR},
-      repertory6 = #{repertory6,jdbcType=VARCHAR},
-      repertory7 = #{repertory7,jdbcType=VARCHAR},
-      repertory8 = #{repertory8,jdbcType=VARCHAR},
-      repertory9 = #{repertory9,jdbcType=VARCHAR},
-      repertory10 = #{repertory10,jdbcType=VARCHAR}-->
-    where repertory_id = #{repertoryId,jdbcType=INTEGER}
+    <update id="updateRepertoryByPrimaryKey" parameterType="com.coding.pojo.Repertory" >
+        update repertory
+        <set >
+            <if test="itemId != null" >
+                item_id = #{itemId,jdbcType=INTEGER},
+            </if>
+            <if test="itemName != null" >
+                item_name = #{itemName,jdbcType=VARCHAR},
+            </if>
+            <if test="itemMarketPrice != null" >
+                item_market_price = #{itemMarketPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="itemOriginalPrice != null" >
+                item_original_price = #{itemOriginalPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="shopId != null" >
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="repertoryNumber != null" >
+                repertory_number = #{repertoryNumber,jdbcType=INTEGER},
+            </if>
+            <if test="repertoryPuttime != null" >
+                repertory_puttime = #{repertoryPuttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null" >
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="venderId != null" >
+                vender_id = #{venderId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where repertory_id = #{repertoryId,jdbcType=INTEGER}
     </update>
+
 
     <!--查询所有库存信息-->
     <select id="selectRepertoryAll" resultMap="BaseResultMap">
@@ -123,9 +184,95 @@
                 <if test="repertory.itemId != null and repertory.itemId != 0">
                     and item_id = #{repertory.itemId}
                 </if>
+                <!--根据商品名字查询库存信息-->
+                <if test="repertory.itemName != null and repertory.itemName != ''">
+                    and item_name REGEXP #{repertory.itemName}
+                </if>
                 <!--根据商店Id 查询库存信息-->
                 <if test="repertory.shopId != null and repertory.shopId != 0">
                     and shop_id = #{repertory.shopId}
+                </if>
+            </if>
+
+            <!--根据库存数量范围查询库存信息-->
+            <if test="formerRepertoryNumber != null and formerRepertoryNumber != 0">
+                <!--给定了最小值和最大值-->
+                <if test="latterRepertoryNumber != null and latterRepertoryNumber != 0">
+                    <!--以下三种情况分别列出-->
+                    <if test="formerRepertoryNumber == latterRepertoryNumber">
+                        and repertory_number = #{latterRepertoryNumber}
+                    </if>
+                    <if test="formerRepertoryNumber &lt; latterRepertoryNumber">
+                        and repertory_number between #{formerRepertoryNumber} and #{latterRepertoryNumber}
+                    </if>
+                    <if test="formerRepertoryNumber &gt; latterRepertoryNumber">
+                        and repertory_number between #{latterRepertoryNumber} and #{formerRepertoryNumber}
+                    </if>
+                </if>
+                <!--只给定了最小值-->
+                <if test="latterRepertoryNumber == null or latterRepertoryNumber == 0">
+                    and repertory_number &gt;= #{formerRepertoryNumber}
+                </if>
+                <!--只给定了最大值-->
+                <if test="formerRepertoryNumber == null or formerRepertoryNumber == 0">
+                    <if test="latterRepertoryNumber != null and latterRepertoryNumber != 0">
+                        and  repertory_number &lt;= #{latterRepertoryNumber}
+                    </if>
+                </if>
+            </if>
+
+            <!--根据库存原价价格范围查询库存信息-->
+            <if test="formerItemOriginalPrice != null and formerItemOriginalPrice != 0">
+                <!--给定了最小值和最大值-->
+                <if test="latterItemOriginalPrice != null and latterItemOriginalPrice != 0">
+                    <!--以下三种情况分别列出-->
+                    <if test="formerItemOriginalPrice == latterItemOriginalPrice">
+                        and item_original_price = #{latterItemOriginalPrice}
+                    </if>
+                    <if test="formerItemOriginalPrice &lt; latterItemOriginalPrice">
+                        and item_original_price between #{formerItemOriginalPrice} and #{latterItemOriginalPrice}
+                    </if>
+                    <if test="formerItemOriginalPrice &gt; latterItemOriginalPrice">
+                        and item_original_price between #{latterItemOriginalPrice} and #{formerItemOriginalPrice}
+                    </if>
+                </if>
+                <!--只给定了最小值-->
+                <if test="latterItemOriginalPrice == null or latterItemOriginalPrice == 0">
+                    and item_original_price &gt;= #{formerItemOriginalPrice}
+                </if>
+                <!--只给定了最大值-->
+                <if test="formerItemOriginalPrice == null or formerItemOriginalPrice == 0">
+                    <if test="latterItemOriginalPrice != null and latterItemOriginalPrice != 0">
+                        and  item_original_price &lt;= #{latterItemOriginalPrice}
+                    </if>
+                </if>
+            </if>
+
+
+            <!--根据库存市场价格范围查询库存信息-->
+            <if test="formerItemMarketPrice != null and formerItemMarketPrice != 0">
+                <!--给定了最小值和最大值-->
+                <if test="latterItemMarketPrice != null and latterItemMarketPrice != 0">
+                    <!--以下三种情况分别列出-->
+                    <if test="formerItemMarketPrice == latterItemMarketPrice">
+                        and item_market_price = #{latterItemMarketPrice}
+                    </if>
+                    <if test="formerItemMarketPrice &lt; latterItemMarketPrice">
+                        and item_market_price between #{formerItemMarketPrice} and #{latterItemMarketPrice}
+                    </if>
+                    <if test="formerItemMarketPrice &gt; latterItemMarketPrice">
+                        and item_market_price between #{latterItemMarketPrice} and #{formerItemMarketPrice}
+                    </if>
+                </if>
+                <!--只给定了最小值-->
+                <if test="latterItemMarketPrice == null or latterItemMarketPrice == 0">
+                    and item_market_price &gt;= #{formerItemMarketPrice}
+                </if>
+                <!--只给定了最大值-->
+                <if test="formerItemMarketPrice == null or formerItemMarketPrice == 0">
+                    <if test="latterItemMarketPrice != null and latterItemMarketPrice != 0">
+                        and  item_market_price &lt;= #{latterOrderDetailitemSumPrice}
+                    </if>
                 </if>
             </if>
 

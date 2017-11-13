@@ -4,8 +4,10 @@ import com.coding.Iservice.IAdminService;
 import com.coding.comomInterface.JavaGet;
 import com.coding.json.MyJsonConfig;
 import com.coding.paging.PagingCustomItem;
+import com.coding.paging.PagingCustomLog;
 import com.coding.paging.PagingCustomUser;
 import com.coding.pojo.Item;
+import com.coding.pojo.Log;
 import com.coding.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -52,5 +54,16 @@ public class FindController {
         List<Item> items = adminService.selectItem(pagingCustomItem);
         MyJsonConfig<Item> myJsonConfig = new MyJsonConfig<>();
         return myJsonConfig.start(items, count);
+    }
+
+    @RequestMapping("log/findLogs")
+    @ResponseBody
+    public String findLogs(PagingCustomLog pagingCustomLog, Integer page, Integer limit) throws Exception {
+        if (page == 1)
+            count = adminService.selectLog(pagingCustomLog).size();
+        pagingCustomLog.addIndex(page, limit);
+        List<Log> logs = adminService.selectLog(pagingCustomLog);
+        MyJsonConfig myJsonConfig = new MyJsonConfig<>();
+        return myJsonConfig.start(logs, count);
     }
 }

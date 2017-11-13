@@ -7,6 +7,8 @@ public class Repertory {
 
     private Integer itemId;
 
+    private String itemName;
+
     private Double itemMarketPrice;
 
     private Double itemOriginalPrice;
@@ -22,8 +24,12 @@ public class Repertory {
     private String updateToString;
 
 
-
     private Integer venderId;
+
+
+    public Integer getRepertoryId() {
+        return repertoryId;
+    }
 
     public void setPuttimeToString(String puttimeToString) {
         this.puttimeToString = puttimeToString;
@@ -34,15 +40,12 @@ public class Repertory {
     }
 
     public String getPuttimeToString() {
+
         return puttimeToString;
     }
 
     public String getUpdateToString() {
         return updateToString;
-    }
-
-    public Integer getRepertoryId() {
-        return repertoryId;
     }
 
     public void setRepertoryId(Integer repertoryId) {
@@ -55,6 +58,14 @@ public class Repertory {
 
     public void setItemId(Integer itemId) {
         this.itemId = itemId;
+    }
+
+    public String getItemName() {
+        return itemName;
+    }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName == null ? null : itemName.trim();
     }
 
     public Double getItemMarketPrice() {
@@ -113,11 +124,11 @@ public class Repertory {
         this.venderId = venderId;
     }
 
-    @Override
     public String toString() {
         return "Repertory{" +
                 "repertoryId=" + repertoryId +
                 ", itemId=" + itemId +
+                ", itemName='" + itemName + '\'' +
                 ", itemMarketPrice=" + itemMarketPrice +
                 ", itemOriginalPrice=" + itemOriginalPrice +
                 ", shopId=" + shopId +
