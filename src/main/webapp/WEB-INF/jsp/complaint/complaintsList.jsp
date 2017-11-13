@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: 63465
-  Date: 2017/11/2 0002
-  Time: 11:03
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -18,6 +11,7 @@
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="../../../shopmanagement/common/layui/css/layui.css" media="all" rel="stylesheet" >
     <link href="../../../shopmanagement/css/my_layui.css" media="all" rel="stylesheet" >
+    <link href="../../../css/useQuery.css" rel="stylesheet">
 </head>
 
 <body>
@@ -30,10 +24,7 @@
 
             <div class="ibox float-e-margins">
 
-                <blockquote class="layui-elem-quote">
-                    <h2>操作提示</h2>
-                    在这里，你可以增删改查投诉信息。
-                </blockquote>
+                <jsp:include page="../find/findComplaints.jsp" />
 
                 <div class="ibox-title">
                     <h5>投诉列表</h5>
@@ -66,9 +57,9 @@
                                     <th lay-data="{field:'complaintId', width:50, sort: true, fixed: true}">ID</th>
                                     <th lay-data="{field:'accuserId', width:100, sort: true}">投诉人</th>
                                     <th lay-data="{field:'accusedId', width:100, sort: true}">被投诉人</th>
-                                    <th lay-data="{field:'complaintTittle', width:200}">投诉标题</th>
-                                    <th lay-data="{field:'complaintContent', width:200}">投诉内容</th>
-                                    <th lay-data="{field:'complaintDate', width:100, sort: true}">投诉时间</th>
+                                    <th lay-data="{field:'complaintTittle', width:100}">投诉标题</th>
+                                    <th lay-data="{field:'complaintContent', width:100}">投诉内容</th>
+                                    <th lay-data="{field:'complaintDate', width:200, sort: true}">投诉时间</th>
                                     <th lay-data="{field:'status', width:100, align:'center', fixed: 'right', toolbar: '#status_bar'}">
                                         是否已处理
                                     </th>
@@ -100,7 +91,7 @@
 <script src="../../../shopmanagement/js/bootstrap.min.js"></script>
 <script src="../../../shopmanagement/js/content.min.js"></script>
 <script src="../../../shopmanagement/common/layui/layui.js"></script>
-
+<script src="../../../js/find/findComplaint.js"></script>
 <script>
     layui.use('table', function () {
         var table = layui.table;

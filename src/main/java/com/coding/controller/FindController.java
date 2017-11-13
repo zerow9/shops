@@ -76,12 +76,12 @@ public class FindController {
 
     @RequestMapping("venders/findVender")
     @ResponseBody
-    public String findVenders(HttpServletRequest request,Vender vender, Integer page, Integer limit) throws Exception {
+    public String findVenders(HttpServletRequest request, Vender vender, Integer page, Integer limit) throws Exception {
         String name = JavaGet.charsetGet(vender.getVenderName(), request);
         String address = JavaGet.charsetGet(vender.getVenderAddress(), request);
         vender.setVenderName(name);
         vender.setVenderAddress(address);
-        PagingCustomVender pagingCustomVender=new PagingCustomVender();
+        PagingCustomVender pagingCustomVender = new PagingCustomVender();
         pagingCustomVender.setVender(vender);
         if (page == 1)
             count = adminService.selectVender(pagingCustomVender).size();
@@ -90,4 +90,18 @@ public class FindController {
         MyJsonConfig<Vender> myJsonConfig = new MyJsonConfig<>();
         return myJsonConfig.start(venders, count);
     }
+
+    @RequestMapping("complaint/findComplaints")
+    @ResponseBody
+    public String findComplaints(HttpServletRequest request, PagingCustomComplaint complaint, Integer page, Integer limit) throws Exception {
+        String title = JavaGet.charsetGet(complaint.getComplaint().getComplaintTittle(), request);
+        complaint.getComplaint().setComplaintTittle(title);
+        if (page == 1)
+            count = adminService.selectComplaint(complaint).size();
+        complaint.addIndex(page, limit);
+        List<Complaint> complaints = adminService.selectComplaint(complaint);
+        MyJsonConfig<Complaint> myJsonConfig = new MyJsonConfig<>();
+        return myJsonConfig.start(complaints, count);
+    }
+
 }
