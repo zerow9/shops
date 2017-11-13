@@ -328,6 +328,10 @@
 
       <!--根据order基本信息进行查询-->
       <if test="order != null and order != ''">
+        <!--根据订单ID查询订单信息-->
+        <if test="order.orderId != null and order.orderId != 0">
+          and order_id = #{order.orderId}
+        </if>
         <!--根据用户ID查找订单信息-->
         <if test="order.userUuid != null and order.userUuid != ''">
           and user_uuid = #{order.userUuid}
@@ -414,6 +418,32 @@
       </if>
 
 
+      <!--根据订单总价范围查找-->
+      <if test="formerOrderSumPrice != null ">
+       <!--给定了最小值和最大值-->
+       <if test="latterOrderSumPrice != null and latterOrderSumPrice != 0">
+            <if test="formerOrderSumPrice &lt; latterOrderSumPrice">
+                and order_sum_price between #{formerOrderSumPrice} and #{latterOrderSumPrice}
+            </if>
+            <if test="formerOrderSumPrice &gt; latterOrderSumPrice">
+                and order_sum_price between #{latterOrderSumPrice} and #{formerOrderSumPrice}
+            </if>
+            <if test="formerOrderSumPrice == latterOrderSumPrice">
+                and order_sum_price = #{formerOrderSumPrice}
+            </if>
+       </if>
+       <!--只给定了最小值-->
+       <if test="latterOrderSumPrice == null or latterOrderSumPrice == 0">
+           and order_sum_price &gt; #{formerOrderSumPrice}
+       </if>
+      </if>
+      <!--只给定了最大值-->
+      <if test="formerOrderSumPrice == null">
+          <if test="latterOrderSumPrice != null and latterOrderSumPrice != 0">
+              and order_sum_price &lt; #{latterOrderSumPrice}
+          </if>
+      </if>
+
       <!--根据发货时间范围查询订单信息-->
       <if test="formerSendGoodsTime != null and formerSendGoodsTime != ''">
         <!--给定了最小值和最大值-->
@@ -486,4 +516,6 @@
       </if>
     </if>
   </select>
+
+
 </mapper>

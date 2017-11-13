@@ -201,6 +201,10 @@
         <where>
             <!--用户属性进行查询，得 user 不为null前提-->
             <if test="user != null">
+                <!--ID查询-->
+                <if test="user.userUuid != null and user.userUuid != ''">
+                    and user_uuid = #{user.userUuid}
+                </if>
                 <!--性别查询-->
                 <if test="user.userSex != null and user.userSex != ''">
                     and user_sex = #{user.userSex}
@@ -219,11 +223,11 @@
                 </if>
                 <!--电话查询-->
                 <if test="user.userPhone != null and user.userPhone != ''">
-                    and  user_phone = #{user.userPhone}
+                    and user_phone = #{user.userPhone}
                 </if>
                 <!--健康状况查询-->
                 <if test="user.userHealthy != null and user.userHealthy != ''">
-                    and  user_healthy = #{user.userHealthy}
+                    and user_healthy = #{user.userHealthy}
                 </if>
             </if>
             <!--年龄范围查询-->
@@ -232,9 +236,9 @@
                     and user_age &lt; #{latterAge}
                 </if>
             </if>
-            <if test="formerAge != null " >
+            <if test="formerAge != null ">
                 <if test="latterAge == null or latterAge == 0">
-                    and user_age  &gt; #{formerAge}
+                    and user_age &gt; #{formerAge}
                 </if>
                 <if test="latterAge != null or latterAge != 0">
                     <if test="formerAge &lt; latterAge">
@@ -298,7 +302,7 @@
             <!--只给定了最大值-->
             <if test="formerUserCreateTime == null or formerUserCreateTime == ''">
                 <if test="latterUserCreateTime != null and latterUserCreateTime != ''">
-                    and  user_current_time &lt;= #{latterUserCreateTime}
+                    and user_current_time &lt;= #{latterUserCreateTime}
                 </if>
             </if>
         </where>

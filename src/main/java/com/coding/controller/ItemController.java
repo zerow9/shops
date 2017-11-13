@@ -128,9 +128,9 @@ public class ItemController {
     public boolean updateItem(HttpServletRequest request, @RequestParam("item_images") MultipartFile item_images, Item item) throws Exception {
         String fileName = item_images.getOriginalFilename();
         if (item_images != null && fileName != null && fileName.length() > 0) {
-            String dir = request.getSession().getServletContext().getRealPath("shopmanagement");
+            String dir = request.getSession().getServletContext().getRealPath("");
             fileName = MyUUID.randomUUID() + fileName.substring(fileName.lastIndexOf("."));
-            fileName = "/shopImag/" + fileName;
+            fileName = "/image/" + fileName;
             File file = new File(dir + fileName);
             item_images.transferTo(file);
             item.setItemImages(fileName);

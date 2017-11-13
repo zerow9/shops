@@ -18,6 +18,7 @@
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="../../../common/layui/css/layui.css" rel="stylesheet">
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
+    <link href="../../../css/repertoryQuery.css" rel="stylesheet">
 
 </head>
 
@@ -28,18 +29,9 @@
     <div class="row">
 
         <div class="layui-col-sm12">
-
             <div class="ibox float-e-margins">
-
-                <blockquote class="layui-elem-quote">
-                    <h2>操作提示</h2>
-                    在这里，你可以增删改查商品。
-                </blockquote>
-
-                <div class="ibox-title">
-                    <h5>库存列表</h5>
-                    <div class="ibox-tools">
-                        <%--最大最小化按钮--%>
+                <jsp:include page="../find/findRepertory.jsp" />
+                <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
                         </a>
@@ -109,6 +101,6 @@
 <script src="../../../common/layui/layui.js"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../../../js/repertories/listRepertory.js"></script>
-
+<script src="../../../js/find/findRepertory.js"></script>
 </body>
 </html>

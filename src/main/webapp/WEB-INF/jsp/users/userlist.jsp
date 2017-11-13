@@ -24,7 +24,7 @@
     <link href="../../../common/layui/css/layui.css" rel="stylesheet">
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
     <link href="../../../css/useQuery.css" rel="stylesheet">
-    <link href="../../../css/find.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -70,7 +70,7 @@
                                 <th lay-data="{field:'userName', width:80}">用户名</th>
                                 <th lay-data="{field:'userSex', width:80, sort: true}">性别</th>
                                 <th lay-data="{field:'userAge', width:80}">年龄</th>
-                                <th lay-data="{field:'dateToString', width:177}">注册日期</th>
+                                <th lay-data="{field:'userRegisterDateTime', width:177}">注册日期</th>
                                 <th lay-data="{field:'userScore', width:80, sort: true}">积分</th>
                                 <th lay-data="{field:'userAddress', width:80}">地址</th>
                                 <th lay-data="{fixed: 'right', width:180, align:'center', toolbar: '#barDemo'}">操作</th>
@@ -98,7 +98,7 @@
 <script src="../../../common/layui/layui.js"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../../../js/users/userlist.js"></script>
-<script src="../../../js/find/find.js"></script>
+<script src="../../../js/find/findUser.js"></script>
 </body>
 
 </html>

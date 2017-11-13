@@ -1,6 +1,7 @@
-layui.use(['laydate', 'form'], function () {
+layui.use(['laydate', 'form', 'table'], function () {
     var form = layui.form;
     var laydate = layui.laydate;
+    var table = layui.table;
     var $ = layui.$;
     laydate.render({
         elem: '#time'
@@ -12,14 +13,12 @@ layui.use(['laydate', 'form'], function () {
     });
 
     form.on('submit(find)', function (data) {
-        var date = data.field;
-        $.ajax({
-            url: 'findUser.action',
-            data: date,
-            type: "POST",
-            success: function () {
-                parent.layer.closeAll();
-                window.parent.location.reload();
+        var date = JSON.stringify(data.field);
+        var str=date.toString().replace('{','').replace('}','').replace(/"/g,'').replace(/,/g,'&').replace(/:/g,'=');
+        table.reload('itemId', {
+            url: 'findItem.action?'+str,
+            where: {
+
             }
         });
         return false;

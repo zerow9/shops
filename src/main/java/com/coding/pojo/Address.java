@@ -1,9 +1,6 @@
 package com.coding.pojo;
 
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class Address {
 
 
@@ -118,7 +115,6 @@ public class Address {
         this.addressY = addressY;
     }
 
-    @Override
     public String toString() {
         return "Address{" +
                 "addressId=" + addressId +

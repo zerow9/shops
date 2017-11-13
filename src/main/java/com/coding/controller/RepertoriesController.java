@@ -18,7 +18,7 @@ import java.util.List;
 
 @Controller
 @RequestMapping("repertories")
-public class repertoriesController {
+public class RepertoriesController {
 
     private Integer counts = null;
 

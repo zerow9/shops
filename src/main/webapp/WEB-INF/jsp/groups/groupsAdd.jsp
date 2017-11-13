@@ -30,18 +30,9 @@
     </div>
 
     <div class="layui-form-item">
-        <label class="layui-form-label">用户组描述</label>
-        <div class="layui-input-block">
-            <input type="text" name="groupJurisdiction" lay-verify="group_description" autocomplete="off"
-                   placeholder="请输入用户组描述"
-                   class="layui-input">
-        </div>
-    </div>
-
-    <div class="layui-form-item">
         <label class="layui-form-label">是否启用</label>
         <div class="layui-input-block">
-            <input type="checkbox" checked="" name="group_status" lay-skin="switch"
+            <input type="checkbox" checked="" name="isStatus" lay-skin="switch"
                    lay-filter="switch" lay-text="启用|禁用">
         </div>
     </div>
@@ -50,8 +41,8 @@
         <label class="layui-form-label">权限选择</label>
         <div class="layui-input-block">
             <input type="checkbox" name="add" title="添加">
-            <input type="checkbox" name="select" title="查看">
-            <input type="checkbox" name="delete" title="删除">
+            <input type="checkbox" name="see" title="查看">
+            <input type="checkbox" name="del" title="删除">
             <input type="checkbox" name="update" title="修改">
         </div>
     </div>

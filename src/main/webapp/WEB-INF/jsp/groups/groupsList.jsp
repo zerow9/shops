@@ -82,10 +82,6 @@
     </div>
 </div>
 
-<script type="text/html" id="shelve_bar">
-    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="shelve_status" id="shelve_status_bar">是</a>
-</script>
-
 <script type="text/html" id="operate_bar">
     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail"><i class="fa fa-eye" aria-hidden="true"
                                                                                 title="查看"></i></a>
@@ -95,7 +91,13 @@
                                                                             title="删除"></i></a>
     </shiro:hasPermission>
 </script>
-
+<script type="text/html" id="shelve_bar">
+    {{# if(d.isStart==1){}}
+    <a class="layui-btn layui-btn-primary layui-btn-mini" >是</a>
+    {{# }else{}}
+    <a class="layui-btn layui-btn-primary layui-btn-mini" >否 </a>
+    {{# }}}
+</script>
 <script src="../../../js/extends/jquery/jquery.min.js"></script>
 <script src="../../../js/extends/bootstrap/bootstrap.js"></script>
 <script src="../../../shopmanagement/js/content.min.js"></script>

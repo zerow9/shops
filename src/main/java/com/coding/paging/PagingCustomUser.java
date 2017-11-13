@@ -1,12 +1,8 @@
 package com.coding.paging;
 
 import com.coding.pojo.User;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class PagingCustomUser extends Paging{
-    private String userUuid;
-    private String userSex;
-    private String userName;
 
     private Integer formerAge;//一些功能需要年龄范围内查询，这是左侧较小值
 
@@ -20,7 +16,7 @@ public class PagingCustomUser extends Paging{
 
     private String latterUserCreateTime;//一些功能需要用户注册时间范围内查询，这是右侧较大值
 
-    @Autowired
+
     private User user; //对于User对象，只用到了其中的userSex、userGroup 两个属性，其他属性不做利用
     //对于User对象，只用到了其中的userSex、
     // userGroup 两个属性，其他属性不做利用
@@ -81,32 +77,7 @@ public class PagingCustomUser extends Paging{
     public void setLatterScore(Integer latterScore) {
         this.latterScore = latterScore;
     }
-
-    public void setUserSex(String userSex) {
-        this.userSex = userSex;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public void setUserUuid(String userUuid) {
-        this.userUuid = userUuid;
-    }
-
-    public String getUserSex() {
-        return userSex;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public String getUserUuid() {
-        return userUuid;
-    }
-
-
+    
 
     @Override
     public String toString() {

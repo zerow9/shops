@@ -140,6 +140,10 @@
                 <if test="complaint.accusedId != null and complaint.accusedId != 0">
                     and accused_id = #{complaint.accusedId}
                 </if>
+                <!--根据投诉标题查询投诉信息-->
+                <if test="complaint.complaintTittle != null and complaint.complaintTittle != ''">
+                    and complaint_tittle REGEXP #{complaint.complaintTittle}
+                </if>
                 <if test="complaint.isDeal != null">
                     and is_deal = #{complaint.isDeal}
                 </if>

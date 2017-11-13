@@ -23,7 +23,70 @@
     </insert>
 
     <!--根据商品ID更新商品信息-->
-    <update id="updateItemByPrimaryKey" parameterType="com.coding.pojo.Item">
+    <update id="updateItemByPrimaryKey" parameterType="com.coding.pojo.Item" >
+        update item
+        <set >
+            <if test="itemTypeId != null" >
+                item_type_id = #{itemTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="itemName != null" >
+                item_name = #{itemName,jdbcType=VARCHAR},
+            </if>
+            <if test="itemPrice != null" >
+                item_price = #{itemPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="itemMarketPrice != null" >
+                item_market_price = #{itemMarketPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="itemScoreType != null" >
+                item_score_type = #{itemScoreType,jdbcType=INTEGER},
+            </if>
+            <if test="scorePrice != null" >
+                score_price = #{scorePrice,jdbcType=INTEGER},
+            </if>
+            <if test="itemImages != null" >
+                item_images = #{itemImages,jdbcType=VARCHAR},
+            </if>
+            <if test="itemFormat != null" >
+                item_format = #{itemFormat,jdbcType=VARCHAR},
+            </if>
+            <if test="itemTypeOne != null" >
+                item_type_one = #{itemTypeOne,jdbcType=INTEGER},
+            </if>
+            <if test="itemTypeTwo != null" >
+                item_type_two = #{itemTypeTwo,jdbcType=INTEGER},
+            </if>
+            <if test="itemTypeThree != null" >
+                item_type_three = #{itemTypeThree,jdbcType=INTEGER},
+            </if>
+            <if test="postPrice != null" >
+                post_price = #{postPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="repertoryNumber != null" >
+                repertory_number = #{repertoryNumber,jdbcType=INTEGER},
+            </if>
+            <if test="itemSaleNumber != null" >
+                item_sale_number = #{itemSaleNumber,jdbcType=INTEGER},
+            </if>
+            <if test="itemCollectNumber != null" >
+                Item_collect_number = #{itemCollectNumber,jdbcType=INTEGER},
+            </if>
+            <if test="keyWord != null" >
+                key_word = #{keyWord,jdbcType=VARCHAR},
+            </if>
+            <if test="makeVender != null" >
+                make_vender = #{makeVender,jdbcType=INTEGER},
+            </if>
+            <if test="makeDate != null" >
+                make_date = #{makeDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="itemIntroduce != null" >
+                item_introduce = #{itemIntroduce,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where item_id = #{itemId,jdbcType=INTEGER}
+    </update>
+   <!-- <update id="updateItemByPrimaryKey" parameterType="com.coding.pojo.Item">
         update item
         set item_type_id = #{itemTypeId,jdbcType=INTEGER},
         item_name = #{itemName,jdbcType=VARCHAR},
@@ -43,7 +106,7 @@
         key_word = #{keyWord,jdbcType=VARCHAR},
         make_vender = #{makeVender,jdbcType=INTEGER},
         make_date = #{makeDate,jdbcType=TIMESTAMP}
-        <!--item1 = #{item1,jdbcType=VARCHAR},
+        &lt;!&ndash;item1 = #{item1,jdbcType=VARCHAR},
         item2 = #{item2,jdbcType=VARCHAR},
         item3 = #{item3,jdbcType=VARCHAR},
         item4 = #{item4,jdbcType=VARCHAR},
@@ -52,9 +115,9 @@
         item7 = #{item7,jdbcType=VARCHAR},
         item8 = #{item8,jdbcType=VARCHAR},
         item9 = #{item9,jdbcType=VARCHAR},
-        item10 = #{item10,jdbcType=VARCHAR}-->
+        item10 = #{item10,jdbcType=VARCHAR}&ndash;&gt;
         where item_id = #{itemId,jdbcType=INTEGER}
-    </update>
+    </update>-->
 
     <!--将Item表中的字段封装到 Item 类中-->
     <resultMap id="BaseResultMap" type="com.coding.pojo.Item">
@@ -186,20 +249,26 @@
      * 需要用到什么参数就将参数封装到 Paging 中，不需要用到的参数切忌不要封装。
      * 该接口通过 Paging 中参数的封装去进行 SQL 语句拼接，参数的封装需要小心。
      -->
-    <select id="selectItem" parameterType="com.coding.paging.Paging" resultMap="ResultMapWithBLOBs">
+    <select id="selectItem" parameterType="com.coding.paging.PagingCustomItem" resultMap="ResultMapWithBLOBs">
         select
         <include refid="Base_Column_List"/>
         ,
         <include refid="Blob_Column_List"/>
         from item
         <where>
-            <!--关键字模糊查询（商品名称或商品描述）-->
-            <if test="keyWord != null and keyWord != ''">
-                and (item_name REGEXP #{keyWord}
-                or item_introduce REGEXP #{keyWord})
-            </if>
             <!--查询字段属于Item，需先判定 item 是否为空-->
             <if test="item != null">
+                <!--ID主键查询-->
+                <if test="item.itemId != null and item.itemId != 0">
+                    and item_id = #{item.itemId}
+                </if>
+                <if test="item.itemName != null and item.itemName != ''">
+                    and item_name REGEXP #{item.itemName}
+                </if>
+                <!--关键字模糊查询（商品名称或商品描述）-->
+                <if test="item.keyWord != null and item.keyWord != ''">
+                    and key_word REGEXP #{item.keyWord}
+                </if>
                 <!--厂家模糊查询-->
                 <if test="item.makeVender != null and item.makeVender != 0">
                     and make_vender = ${item.makeVender}

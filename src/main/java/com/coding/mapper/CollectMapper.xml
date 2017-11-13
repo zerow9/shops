@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coding.mapper.CollectMapper" >
+  <!--collect属性封装-->
+  <resultMap id="BaseResultMap" type="com.coding.pojo.Collect" >
+    <id column="collect_id" property="collectId" jdbcType="INTEGER" />
+    <result column="user_uuid" property="userUuid" jdbcType="VARCHAR" />
+    <result column="item_id" property="itemId" jdbcType="INTEGER" />
+    <result column="item_name" property="itemName" jdbcType="VARCHAR" />
+    <result column="item_images" property="itemImages" jdbcType="VARCHAR" />
+    <result column="collect_time" property="collectTime" jdbcType="TIMESTAMP" />
+    <result column="collect_item_vender" property="collectItemVender" jdbcType="INTEGER" />
+    <result column="collect_remark" property="collectRemark" jdbcType="VARCHAR" />
+  </resultMap>
+  <!--Collect表字段-->
+  <sql id="Base_Column_List" >
+    collect_id, user_uuid, item_id, item_name, item_images, collect_time, collect_item_vender, 
+    collect_remark
+  </sql>
+  <!--查询收藏表中总的数据量-->
+  <select id="selectCollectCount" resultType="java.lang.Integer">
+    select count(*) from collect
+  </select>
+  <!--收藏表查询功能模块-->
+  <select id="selectCollect" parameterType="com.coding.paging.PagingCustomCollect" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from collect
+    <where>
+      <!--根据收藏基本信息查询-->
+      <if test="collect != null and collect != ''">
+        <!--根据用户唯一ID查询收藏信息-->
+        <if test="collect.userUuid != null and collect.userUuid != ''">
+          and user_uuid = #{collect.userUuid}
+        </if>
+        <!--根据商品唯一ID查询收藏信息-->
+        <if test="collect.itemId != null and collect.itemId != ''">
+          and item_id = #{}
+        </if>
+      </if>
+    </where>
+  </select>
+  <!--根据收藏表唯一ID查询收藏信息-->
+  <select id="selectCollectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from collect
+    where collect_id = #{collectId,jdbcType=INTEGER}
+  </select>
+  <!--根据收藏唯一ID删除收藏信息-->
+  <delete id="deleteCollectByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from collect
+    where collect_id = #{collectId,jdbcType=INTEGER}
+  </delete>
+  <!--根据主键批量删除收藏信息-->
+  <delete id="deleteCollectByPrimaryKeyArray" parameterType="java.lang.Integer">
+    delete from collect
+    where collect_id IN 
+    <foreach collection="collectIdArray" open="(" separator="," close=")" item="collectId">
+      #{collectId}
+    </foreach>
+  </delete>
+  <!--插入收藏信息-->
+  <insert id="insertCollect" parameterType="com.coding.pojo.Collect" >
+    insert into collect (collect_id, user_uuid, item_id, 
+      item_name, item_images, collect_time, 
+      collect_item_vender, collect_remark
+      )
+    values (#{collectId,jdbcType=INTEGER}, #{userUuid,jdbcType=VARCHAR}, #{itemId,jdbcType=INTEGER}, 
+      #{itemName,jdbcType=VARCHAR}, #{itemImages,jdbcType=VARCHAR}, #{collectTime,jdbcType=TIMESTAMP}, 
+      #{collectItemVender,jdbcType=INTEGER}, #{collectRemark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <!--按需插入收藏信息-->
+  <insert id="insertCollectSelective" parameterType="com.coding.pojo.Collect" >
+    insert into collect
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="collectId != null" >
+        collect_id,
+      </if>
+      <if test="userUuid != null" >
+        user_uuid,
+      </if>
+      <if test="itemId != null" >
+        item_id,
+      </if>
+      <if test="itemName != null" >
+        item_name,
+      </if>
+      <if test="itemImages != null" >
+        item_images,
+      </if>
+      <if test="collectTime != null" >
+        collect_time,
+      </if>
+      <if test="collectItemVender != null" >
+        collect_item_vender,
+      </if>
+      <if test="collectRemark != null" >
+        collect_remark,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="collectId != null" >
+        #{collectId,jdbcType=INTEGER},
+      </if>
+      <if test="userUuid != null" >
+        #{userUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null" >
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemName != null" >
+        #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemImages != null" >
+        #{itemImages,jdbcType=VARCHAR},
+      </if>
+      <if test="collectTime != null" >
+        #{collectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="collectItemVender != null" >
+        #{collectItemVender,jdbcType=INTEGER},
+      </if>
+      <if test="collectRemark != null" >
+        #{collectRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!--根据主键按需更新收藏信息-->
+  <update id="updateCollectByPrimaryKeySelective" parameterType="com.coding.pojo.Collect" >
+    update collect
+    <set >
+      <if test="userUuid != null" >
+        user_uuid = #{userUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null" >
+        item_id = #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemName != null" >
+        item_name = #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="itemImages != null" >
+        item_images = #{itemImages,jdbcType=VARCHAR},
+      </if>
+      <if test="collectTime != null" >
+        collect_time = #{collectTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="collectItemVender != null" >
+        collect_item_vender = #{collectItemVender,jdbcType=INTEGER},
+      </if>
+      <if test="collectRemark != null" >
+        collect_remark = #{collectRemark,jdbcType=VARCHAR},
+      </if>
+      <if test="collect1 != null" >
+        collect1 = #{collect1,jdbcType=VARCHAR},
+      </if>
+      <if test="collect2 != null" >
+        collect2 = #{collect2,jdbcType=VARCHAR},
+      </if>
+      <if test="collect3 != null" >
+        collect3 = #{collect3,jdbcType=VARCHAR},
+      </if>
+      <if test="collect4 != null" >
+        collect4 = #{collect4,jdbcType=VARCHAR},
+      </if>
+      <if test="collect5 != null" >
+        collect5 = #{collect5,jdbcType=VARCHAR},
+      </if>
+      <if test="collect6 != null" >
+        collect6 = #{collect6,jdbcType=VARCHAR},
+      </if>
+      <if test="collect7 != null" >
+        collect7 = #{collect7,jdbcType=VARCHAR},
+      </if>
+      <if test="collect8 != null" >
+        collect8 = #{collect8,jdbcType=VARCHAR},
+      </if>
+      <if test="collect9 != null" >
+        collect9 = #{collect9,jdbcType=VARCHAR},
+      </if>
+      <if test="collect10 != null" >
+        collect10 = #{collect10,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where collect_id = #{collectId,jdbcType=INTEGER}
+  </update>
+  <!--根据主键更新收藏信息-->
+  <update id="updateCollectByPrimaryKey" parameterType="com.coding.pojo.Collect" >
+    update collect
+    set user_uuid = #{userUuid,jdbcType=VARCHAR},
+      item_id = #{itemId,jdbcType=INTEGER},
+      item_name = #{itemName,jdbcType=VARCHAR},
+      item_images = #{itemImages,jdbcType=VARCHAR},
+      collect_time = #{collectTime,jdbcType=TIMESTAMP},
+      collect_item_vender = #{collectItemVender,jdbcType=INTEGER},
+      collect_remark = #{collectRemark,jdbcType=VARCHAR},
+      collect1 = #{collect1,jdbcType=VARCHAR},
+      collect2 = #{collect2,jdbcType=VARCHAR},
+      collect3 = #{collect3,jdbcType=VARCHAR},
+      collect4 = #{collect4,jdbcType=VARCHAR},
+      collect5 = #{collect5,jdbcType=VARCHAR},
+      collect6 = #{collect6,jdbcType=VARCHAR},
+      collect7 = #{collect7,jdbcType=VARCHAR},
+      collect8 = #{collect8,jdbcType=VARCHAR},
+      collect9 = #{collect9,jdbcType=VARCHAR},
+      collect10 = #{collect10,jdbcType=VARCHAR}
+    where collect_id = #{collectId,jdbcType=INTEGER}
+  </update>
+
+
+</mapper>

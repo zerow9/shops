@@ -1,9 +1,8 @@
 package com.coding.pojo;
 
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
-@Component
+
 public class User {
     private String userUuid;
 
@@ -29,6 +28,7 @@ public class User {
     private Integer userGroup;
 
     private Integer userLandNumber;
+
 
     public void setUserRegisterDateTimeToString(String userRegisterDateTimeToString) {
         this.userRegisterDateTimeToString = userRegisterDateTimeToString;
@@ -57,6 +57,7 @@ public class User {
     private String userHealthy;
 
     private String dateToString;
+
     public String getUserUuid() {
         return userUuid;
     }

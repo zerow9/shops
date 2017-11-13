@@ -18,6 +18,7 @@
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="../../../common/layui/css/layui.css" rel="stylesheet">
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
+    <link href="../../../css/itemQuery.css" rel="stylesheet">
 
 </head>
 
@@ -30,12 +31,7 @@
         <div class="layui-col-sm12">
 
             <div class="ibox float-e-margins">
-
-                <blockquote class="layui-elem-quote">
-                    <h2>操作提示</h2>
-                    在这里，你可以增删改查商品。
-                </blockquote>
-
+                <jsp:include page="../find/itemfind.jsp" />
                 <div class="ibox-title">
                     <h5>商品列表</h5>
                     <div class="ibox-tools">
@@ -70,10 +66,11 @@
                                     <th lay-data="{field:'itemId', width:100, fixed: true}">商品编号</th>
                                     <th lay-data="{field:'itemName', width:200}">商品名称</th>
                                     <th lay-data="{field:'itemImages', width:200}">商品图片</th>
-                                    <th lay-data="{field:'itemTypeId', width:200}">商品类型</th>
+                                    <th lay-data="{field:'itemTypeId', width:200}">商品分类</th>
                                     <th lay-data="{field:'itemScoreType', width:200}">积分兑换类型</th>
                                     <th lay-data="{field:'scorePrice', width:200}">积分兑换价格</th>
-                                    <th lay-data="{field:'itemPrice', width:100, sort: true}">价格</th>
+                                    <th lay-data="{field:'itemPrice', width:100, sort: true}">商品成本价格</th>
+                                    <th lay-data="{field:'itemMarketPrice', width:100, sort: true}">商品市场价格</th>
                                     <th lay-data="{field:'goodsSales', width:100, sort: true}">销量</th>
                                     <th lay-data="{field:'postPrice', width:200}">运费</th>
                                     <th lay-data="{field:'keyWord', width:200}">关键字</th>
@@ -111,6 +108,6 @@
 <script src="../../../common/layui/layui.js"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../../../js/items/itemlist.js"></script>
-
+<script src="../../../js/find/findItem.js"></script>
 </body>
 </html>

@@ -18,6 +18,7 @@
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="../../../common/layui/css/layui.css" rel="stylesheet">
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
+    <link href="../../../css/logQuery.css" rel="stylesheet">
 
 </head>
 
@@ -31,10 +32,7 @@
 
             <div class="ibox float-e-margins">
 
-                <blockquote class="layui-elem-quote">
-                    <h2>操作提示</h2>
-                    在这里，你可以查看信息。
-                </blockquote>
+                <jsp:include page="../find/findLog.jsp" />
 
                 <div class="ibox-title">
                     <h5>日志信息记录</h5>
@@ -97,7 +95,7 @@
 <script src="../../../shopmanagement/js/content.min.js"></script>
 <script src="../../../common/layui/layui.js"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../../../js/logs/listlog.js"></script>
+<script src="../../../js/find/findlog.js"></script>
 
 </body>
 </html>

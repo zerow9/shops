@@ -1,9 +1,7 @@
 package com.coding.paging;
 
 import com.coding.pojo.Notice;
-import org.springframework.beans.factory.annotation.Autowired;
 public class PagingCustomNotice extends Paging {
-    @Autowired
     private Notice notice;
 
     private String formerNoiceTime;//一些功能需要公告发布时间范围内查询，这是左侧较小值

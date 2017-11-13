@@ -1,10 +1,8 @@
 package com.coding.paging;
 
 import com.coding.pojo.Complaint;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class PagingCustomComplaint extends Paging {
-    @Autowired
     private Complaint complaint;
 
     //采用字符串格式是因为可以较简单的通过 mybatis 传入数据库进行比较
