@@ -1,7 +1,6 @@
 package com.coding.paging;
 
 import com.coding.pojo.User;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class PagingCustomUser extends Paging{
 
