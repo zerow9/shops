@@ -15,10 +15,9 @@ layui.use(['laydate', 'form', 'table'], function () {
     form.on('submit(find)', function (data) {
         var date = JSON.stringify(data.field);
         var str=date.toString().replace('{','').replace('}','').replace(/"/g,'').replace(/,/g,'&').replace(/:/g,'=');
-        table.reload('itemId', {
-            url: 'findItem.action?'+str,
+        table.reload('venderId', {
+            url: 'findVender.action?'+str,
             where: {
-
             }
         });
         return false;

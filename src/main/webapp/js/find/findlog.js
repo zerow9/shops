@@ -8,6 +8,14 @@ layui.use(['laydate', 'form', 'table'], function () {
         , format: 'yyyy-MM-dd'
     });
     laydate.render({
+        elem: '#formerTime'
+        , format: 'yyyy-MM-dd'
+    });
+    laydate.render({
+        elem: '#formerOther'
+        , format: 'yyyy-MM-dd'
+    });
+    laydate.render({
         elem: '#other'
         , format: 'yyyy-MM-dd'
     });
@@ -15,8 +23,8 @@ layui.use(['laydate', 'form', 'table'], function () {
     form.on('submit(find)', function (data) {
         var date = JSON.stringify(data.field);
         var str=date.toString().replace('{','').replace('}','').replace(/"/g,'').replace(/,/g,'&').replace(/:/g,'=');
-        table.reload('itemId', {
-            url: 'findItem.action?'+str,
+        table.reload('logId', {
+            url: 'findLogs.action?'+str,
             where: {
 
             }

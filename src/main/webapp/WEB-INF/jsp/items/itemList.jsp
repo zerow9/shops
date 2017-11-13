@@ -66,10 +66,11 @@
                                     <th lay-data="{field:'itemId', width:100, fixed: true}">商品编号</th>
                                     <th lay-data="{field:'itemName', width:200}">商品名称</th>
                                     <th lay-data="{field:'itemImages', width:200}">商品图片</th>
-                                    <th lay-data="{field:'itemTypeId', width:200}">商品类型</th>
+                                    <th lay-data="{field:'itemTypeId', width:200}">商品分类</th>
                                     <th lay-data="{field:'itemScoreType', width:200}">积分兑换类型</th>
                                     <th lay-data="{field:'scorePrice', width:200}">积分兑换价格</th>
-                                    <th lay-data="{field:'itemPrice', width:100, sort: true}">价格</th>
+                                    <th lay-data="{field:'itemPrice', width:100, sort: true}">商品成本价格</th>
+                                    <th lay-data="{field:'itemMarketPrice', width:100, sort: true}">商品市场价格</th>
                                     <th lay-data="{field:'goodsSales', width:100, sort: true}">销量</th>
                                     <th lay-data="{field:'postPrice', width:200}">运费</th>
                                     <th lay-data="{field:'keyWord', width:200}">关键字</th>

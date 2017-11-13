@@ -1,32 +1,24 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <form action="" class="layui-elem-quote layui-form" style="height: 80px">
     <div class="hang-1" class="layui-input-block" >
-        <p>商品编号：<input type="text" name="item.itemTypeId" style="height: 20px;"></p><br>
-        <p>商品名称：<input type="text" name="item.itemName" style="height: 20px;"></p>
+        <p>库存编号：<input type="text" name="item.库存编号" style="height: 20px;"></p><br>
+        <p>商品编号：<input type="text" name="item.itemName" style="height: 20px;"></p>
         <br>
     </div>
     <div class="hang-2" class="layui-input-block">
         <p>市场价格：<input type="text" name="formerItemMarketPrice" style="width:73px;height: 20px;"/>&ensp;<em>—</em>&ensp;<input
                 type="text" name="latterItemMarketPrice" style="width:73px;height: 20px;"/></p>
         <br>
-        <p>库存范围：<input type="text" name="formerRepertoryNumber" style="width:73px;height: 20px;"/>&ensp;<em>—</em>&ensp;<input
+        <p>原始价格：<input type="text" name="formerRepertoryNumber" style="width:73px;height: 20px;"/>&ensp;<em>—</em>&ensp;<input
                 type="text" name="latterRepertoryNumber" style="width:73px;height: 20px;"/></p>
         <br>
     </div>
     <div class="hang-3" class="layui-input-block" style="height: 20px;width: 300px">
-        <span hidden>商品分类：
-            <select name="userSex" lay-ignore>
-                <option value="1" selected=""></option>
-                <option value="2">女</option>
-                <option value="3">保密</option>
-            </select>
-        </span>
         <br>
         <br>
-        <p style="margin-top: 4.5px">
-        关键字：
-            <input type="text"  id="item.keyWord" style="width:100px;height: 20px;">
-            </p>
+        库存量：
+        <input type="text" readonly name="formerUserCreateTime" id="time" style="width:100px;height: 20px;">至
+        <input type="text" id="other" name="latterUserCreateTime" style="width:100px;height: 20px;" readonly>
         <br>
     </div>
     <div class="hang-butt">

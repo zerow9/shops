@@ -2,11 +2,9 @@ package com.coding.pojo;
 
 import com.coding.converter.DateFormatTool;
 import com.coding.json.JsonFormat;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
-@Component
 public class Orders {
 
     private DateFormatTool dateFormatTool = new DateFormatTool();

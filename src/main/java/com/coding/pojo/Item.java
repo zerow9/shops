@@ -1,9 +1,7 @@
 package com.coding.pojo;
 
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
-@Component
 public class Item {
     private Integer itemId;
 
