@@ -8,8 +8,16 @@ public class Groups {
 
     private String groupJurisdiction;
 
-    public Integer isStart;
+    private Integer isStart;
+    private String isStatus;
 
+    public void setIsStatus(String isStatus) {
+        this.isStatus = isStatus;
+    }
+
+    public String getIsStatus() {
+        return isStatus;
+    }
 
     public Integer getGroupId() {
         return groupId;

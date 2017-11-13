@@ -74,12 +74,23 @@ public class AdminController {
      * @throws Exception 插入失败
      */
     @RequestMapping("insertGroups")
-    public boolean insertGroups(Groups groups) throws Exception {
-        try {
-            adminService.insertGroups(groups);
-        } catch (Exception e) {
-            throw new Exception("增加分组失败");
-        }
+    public boolean insertGroups(Groups groups, String role, String add, String del, String update, String see) throws Exception {
+        String admin="";
+        if(add!=null)
+            admin="add,";
+        if(del!=null)
+            admin+="del,";
+        if(update!=null)
+            admin+="update,";
+        if(see!=null)
+            admin+="see,";
+        admin+=role;
+        groups.setGroupJurisdiction(admin);
+        if(groups.getIsStatus()!=null)
+            groups.setIsStart(1);
+        else
+            groups.setIsStart(0);
+        adminService.insertGroups(groups);
         countGroups++;
         return true;
     }
@@ -255,7 +266,7 @@ public class AdminController {
     }
 
     @RequestMapping("addUser")
-    public String addUser(Model model)throws  Exception {
+    public String addUser(Model model) throws Exception {
         List<Groups> groups = adminService.selectGroupsAll();
         model.addAttribute("groups", groups);
         return "users/adduser";
