@@ -3,6 +3,7 @@ package com.coding.paging;
 import com.coding.pojo.Repertory;
 
 public class PagingCustomRepertory extends Paging {
+
     private Repertory repertory;
 
     public Repertory getRepertory() {

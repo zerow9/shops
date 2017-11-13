@@ -28,7 +28,7 @@
         <br>
     </div>
     <div class="hang-butt">
-        <button lay-submit lay-filter="find" class="myButton"
+        <button type="button" lay-submit lay-filter="find" class="myButton"
                 style=" width:60px;height: 35px;border: none;background-color:#1ab394;">
             <i class="fa fa-search"></i>
             查询
