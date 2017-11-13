@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coding.mapper.CartMapper" >
+  <!--封装了 Cart 的基本信息-->
+  <resultMap id="BaseResultMap" type="com.coding.pojo.Cart" >
+    <id column="cart_id" property="cartId" jdbcType="INTEGER" />
+    <result column="user_uuid" property="userUuid" jdbcType="VARCHAR" />
+    <result column="item_id" property="itemId" jdbcType="INTEGER" />
+    <result column="item_name" property="itemName" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DOUBLE" />
+    <result column="item_images" property="itemImages" jdbcType="VARCHAR" />
+    <result column="Item_number" property="itemNumber" jdbcType="INTEGER" />
+    <result column="make_vender" property="makeVender" jdbcType="INTEGER" />
+  </resultMap>
+  <!--Cart表的所有字段-->
+  <sql id="Base_Column_List" >
+    cart_id, user_uuid, item_id, item_name, price, item_images, Item_number, make_vender
+  </sql>
+
+  <!--根据购物车唯一ID查询购物车信息-->
+  <select id="selectCartByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from cart
+    where cart_id = #{cartId,jdbcType=INTEGER}
+  </select>
+
+  <!--查询购物车表中一共有多少条信息-->
+  <select id="selectCartCount" resultType="java.lang.Integer">
+    select count(*) from cart
+  </select>
+
+  <!--购物车查询功能模块-->
+  <select id="selectCart" parameterType="com.coding.paging.PagingCustomCart" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from cart
+    <where>
+      <!--根据购物车基本信息查询-->
+      <if test="cart != null and cart != ''">
+        <!--根据用户ID查询购物车信息-->
+        <if test="cart.userUuid != null and cart.userUuid != ''">
+          and user_uuid = #{cart.userUuid}
+        </if>
+        <!--根据商品ID查询购物车信息-->
+        <if test="cart.itemId != null and cart.itemId != 0">
+          and item_id = #{cart.itemId}
+        </if>
+        <!--根据厂家ID查询购物车信息-->
+        <if test="cart.makeVender != null and cart.makeVender != 0">
+          and make_vender = #{cart.makeVender}
+        </if>
+      </if>
+    </where>
+  </select>
+
+  <!--根据购物车唯一ID删除购物车信息-->
+  <delete id="deleteCartByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from cart
+    where cart_id = #{cartId,jdbcType=INTEGER}
+  </delete>
+
+  <!---根据购物车唯一ID批量删除购物车信息-->
+  <delete id="deleteCartByPrimaryKeyArray" parameterType="java.lang.Integer">
+    delete from cart
+    where cart_id in
+    <foreach collection="cartIdArray" item="cartId" open="(" close=")" separator=",">
+      #{cartId}
+    </foreach>
+  </delete>
+
+
+  <!--插入购物车信息-->
+  <insert id="insertCart" parameterType="com.coding.pojo.Cart" >
+    insert into cart (cart_id, user_uuid, item_id, 
+      item_name, price, item_images, 
+      Item_number, make_vender
+      )
+    values (#{cartId,jdbcType=INTEGER}, #{userUuid,jdbcType=VARCHAR}, #{itemId,jdbcType=INTEGER}, 
+      #{itemName,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, #{itemImages,jdbcType=VARCHAR}, 
+      #{itemNumber,jdbcType=INTEGER}, #{makeVender,jdbcType=INTEGER}
+      )
+  </insert>
+
+  <!--按需插入购物车信息-->
+  <insert id="insertCartSelective" parameterType="com.coding.pojo.Cart" >
+    insert into cart
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cartId != null" >
+        cart_id,
+      </if>
+      <if test="userUuid != null" >
+        user_uuid,
+      </if>
+      <if test="itemId != null" >
+        item_id,
+      </if>
+      <if test="itemName != null" >
+        item_name,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="itemImages != null" >
+        item_images,
+      </if>
+      <if test="itemNumber != null" >
+        Item_number,
+      </if>
+      <if test="makeVender != null" >
+        make_vender,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cartId != null" >
+        #{cartId,jdbcType=INTEGER},
+      </if>
+      <if test="userUuid != null" >
+        #{userUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null" >
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemName != null" >
+        #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="itemImages != null" >
+        #{itemImages,jdbcType=VARCHAR},
+      </if>
+      <if test="itemNumber != null" >
+        #{itemNumber,jdbcType=INTEGER},
+      </if>
+      <if test="makeVender != null" >
+        #{makeVender,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <!--根据购物车id按需更新购物车信息-->
+  <update id="updateCartByPrimaryKeySelective" parameterType="com.coding.pojo.Cart" >
+    update cart
+    <set >
+      <if test="userUuid != null" >
+        user_uuid = #{userUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null" >
+        item_id = #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="itemName != null" >
+        item_name = #{itemName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="itemImages != null" >
+        item_images = #{itemImages,jdbcType=VARCHAR},
+      </if>
+      <if test="itemNumber != null" >
+        Item_number = #{itemNumber,jdbcType=INTEGER},
+      </if>
+      <if test="makeVender != null" >
+        make_vender = #{makeVender,jdbcType=INTEGER},
+      </if>
+    </set>
+    where cart_id = #{cartId,jdbcType=INTEGER}
+  </update>
+
+  <!--根据购物车id更新购物车信息-->
+  <update id="updateCartByPrimaryKey" parameterType="com.coding.pojo.Cart" >
+    update cart
+    set user_uuid = #{userUuid,jdbcType=VARCHAR},
+      item_id = #{itemId,jdbcType=INTEGER},
+      item_name = #{itemName,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      item_images = #{itemImages,jdbcType=VARCHAR},
+      Item_number = #{itemNumber,jdbcType=INTEGER},
+      make_vender = #{makeVender,jdbcType=INTEGER}
+    where cart_id = #{cartId,jdbcType=INTEGER}
+  </update>
+
+
+
+</mapper>
