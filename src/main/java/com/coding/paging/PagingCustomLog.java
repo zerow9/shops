@@ -1,10 +1,8 @@
 package com.coding.paging;
 
 import com.coding.pojo.Log;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class PagingCustomLog extends Paging {
-    @Autowired
     private Log log;
 
     private String formerLogLandTime;//一些功能需要登录时间范围内查询，这是左侧较小值

@@ -1,7 +1,6 @@
 package com.coding.paging;
 
 import com.coding.pojo.Item;
-import org.springframework.beans.factory.annotation.Autowired;
 public class PagingCustomItem extends Paging {
     private Double formerItemMarketPrice;//一些功能需要价格范围内查询，这是左侧较小值
 
@@ -19,7 +18,6 @@ public class PagingCustomItem extends Paging {
 
     private Integer latterItemCollectNumber;//一些功能需要收藏量范围内查询，这是左侧较大值
 
-    @Autowired
     private Item item;//封装了商品信息，当需要利用商品的基本信息查询时调用
 
     public Double getFormerItemMarketPrice() {

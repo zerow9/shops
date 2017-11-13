@@ -1,10 +1,8 @@
 package com.coding.paging;
 
 import com.coding.pojo.Vender;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class PagingCustomVender extends Paging{
-    @Autowired
     private Vender vender;
 
     public Vender getVender() {

@@ -1,10 +1,8 @@
 package com.coding.paging;
 
 import com.coding.pojo.Shop;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class PagingCustomShop extends Paging {
-    @Autowired
     private Shop shop;
 
     public Shop getShop() {
