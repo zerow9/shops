@@ -1,18 +1,4 @@
-<%--
-Created by IntelliJ IDEA.
-User: TongZhou
-Date: 2017/11/6
-Time: 14:44
-To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-    String path = request.getContextPath();
-    String basePath = request.getScheme() + "://"
-            + request.getServerName() + ":" + request.getServerPort()
-            + path + "/";
-    String dir = request.getSession().getServletContext().getRealPath("shopmanagement");
-%>
 
 <html>
 
@@ -181,7 +167,7 @@ To change this template use File | Settings | File Templates.
                             <label class="layui-form-label">商品图片</label>
                             <div class="layui-input-block"
                                  style="height: 120px;width: 120px; border: 0.1px solid rgb(243,243,244); ">
-                                <img src="http://localhost:8080/shopmanagement${item.itemImages}" alt="" height="120px" width="120px">
+                                <img src="http://localhost:8080/${item.itemImages}" alt="" height="120px" width="120px">
                             </div>
                         </div>
 

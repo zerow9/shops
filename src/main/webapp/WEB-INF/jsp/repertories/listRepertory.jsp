@@ -31,13 +31,8 @@
         <div class="layui-col-sm12">
 
             <div class="ibox float-e-margins">
-
                 <jsp:include page="../find/findRepertory.jsp" />
-
-                <div class="ibox-title">
-                    <h5>库存列表</h5>
-                    <div class="ibox-tools">
-                        <%--最大最小化按钮--%>
+                <div class="ibox-tools">
                         <a class="collapse-link">
                             <i class="fa fa-chevron-up"></i>
                         </a>

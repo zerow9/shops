@@ -8,7 +8,7 @@
         where group_id = #{groupId,jdbcType=INTEGER}
     </delete>
 
-    <!---->
+    <!--根据用户唯一ID批量删除用户信息-->
     <delete id="deleteGroupsByPrimaryKeyArray" parameterType="java.lang.Integer">
         delete from groups where group_id IN
         <foreach collection="groups_idArray" item="groups" open="(" separator="," close=")">
