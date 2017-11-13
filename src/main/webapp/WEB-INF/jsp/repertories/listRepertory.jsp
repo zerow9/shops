@@ -18,7 +18,8 @@
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="../../../common/layui/css/layui.css" rel="stylesheet">
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
-
+    <link href="../../../css/useQuery.css" rel="stylesheet">
+    <link href="../../../css/find.css" rel="stylesheet">
 </head>
 
 <body>
@@ -31,10 +32,7 @@
 
             <div class="ibox float-e-margins">
 
-                <blockquote class="layui-elem-quote">
-                    <h2>操作提示</h2>
-                    在这里，你可以增删改查商品。
-                </blockquote>
+                <jsp:include page="../find/findRepertory.jsp" />
 
                 <div class="ibox-title">
                     <h5>库存列表</h5>
@@ -109,6 +107,6 @@
 <script src="../../../common/layui/layui.js"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../../../js/repertories/listRepertory.js"></script>
-
+<script src="../../../js/find/findRepertory.js"></script>
 </body>
 </html>
