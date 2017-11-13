@@ -13,12 +13,12 @@
                 type="text" name="latterAge" style="width:73px;height: 20px;"/></p>
         <br>
     </div>
-    <div class="hang-3" class="layui-input-block" style="height: 20px;width: 300px">
-        用户性别：
-            <select name="userSex" >
+    <div class="hang-3" id="hang-3" class="layui-input-block" style="height: 20px;width: 300px">
+        用户性别：<select name="userSex" lay-ignore style="width:73px;height: 20px;margin-left: 4px;
+    margin-bottom: 15px;">
                 <option value="男" selected="">男</option>
                 <option value="女">女</option>
-                <option value="不明">保密</option>
+                <option value="">保密</option>
             </select>
         <br>
         注册时间：
@@ -35,3 +35,8 @@
         </button>
     </div>
 </form>
+<script>
+//    $(function (){
+//        $("#hang-3 .layui-form-select").addClass("float-input");
+//    })
+</script>
