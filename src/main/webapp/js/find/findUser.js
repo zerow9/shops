@@ -18,6 +18,7 @@ layui.use(['laydate', 'form', 'table'], function () {
         table.reload('userUuid', {
             url: 'findUser.action?'+str,
             where: {
+
             }
         });
         return false;
