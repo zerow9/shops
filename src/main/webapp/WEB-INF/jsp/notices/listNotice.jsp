@@ -70,7 +70,9 @@
                                     <th lay-data="{checkbox:true, fixed: true}"></th>
                                     <th lay-data="{field:'noticeId', width:100，fixed='true'}">编号</th>
                                     <th lay-data="{field:'noiceTime', width:100}">公告发布时间</th>
-                                    <th lay-data="{field:'isUse', width:200}">是否使用</th>
+                                    <th lay-data="{field:'isUse', width:200, align:'center', fixed: 'right', toolbar: '#shelve_bar'}">
+                                        是否启用
+                                    </th>
                                     <th lay-data="{field:'noticeContent', width:200}">内容</th>
                                     <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#operate_bar'}">
                                         操作
@@ -90,7 +92,11 @@
 </div>
 
 <script type="text/html" id="shelve_bar">
-    <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="shelve_status" id="shelve_status_bar">已上架</a>
+    {{# if(d.isUse==1){}}
+    <a class="layui-btn layui-btn-primary layui-btn-mini" >是</a>
+    {{# }else{}}
+    <a class="layui-btn layui-btn-primary layui-btn-mini" >否 </a>
+    {{# }}}
 </script>
 
 <script type="text/html" id="operate_bar">
