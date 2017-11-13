@@ -14,7 +14,7 @@
          </p>
         <br>
         间隔时间：
-        <input type="text"  name=formerSpaceTime"  id="formerTime" style="width: 100px;
+        <input type="text"  name="formerSpaceTime"  id="formerTime" style="width: 100px;
                height: 20px;" readonly>至
         <input type="text"  name="latterSpaceTime" id="formerOther" style="width: 100px;
                height: 20px;" readonly >
