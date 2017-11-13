@@ -1,8 +1,6 @@
 package com.coding.pojo;
 
-import org.springframework.stereotype.Component;
 
-@Component
 public class Shop {
     private Integer shopId;
 

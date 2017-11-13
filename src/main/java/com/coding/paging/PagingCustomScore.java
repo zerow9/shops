@@ -1,10 +1,8 @@
 package com.coding.paging;
 
 import com.coding.pojo.Score;
-import org.springframework.beans.factory.annotation.Autowired;
 
 public class PagingCustomScore extends Paging{
-    @Autowired
     private Score score;
 
     private String formerScoreCreateTime;//一些功能需要积分详情创建时间范围内查询，这是左侧较小值
