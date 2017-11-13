@@ -14,18 +14,19 @@
         <br>
     </div>
     <div class="hang-3" class="layui-input-block" style="height: 20px;width: 300px">
-        <div hidden>
-            商品分类：
+        <span hidden>商品分类：
             <select name="userSex" lay-ignore>
                 <option value="1" selected=""></option>
                 <option value="2">女</option>
                 <option value="3">保密</option>
             </select>
-        </div>
+        </span>
         <br>
         <br>
+        <p style="margin-top: 4.5px">
         关键字：
             <input type="text"  id="item.keyWord" style="width:100px;height: 20px;">
+            </p>
         <br>
     </div>
     <div class="hang-butt">
