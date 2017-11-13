@@ -46,7 +46,6 @@ public class FindController {
         String word = JavaGet.charsetGet(pagingCustomItem.getItem().getKeyWord(), request);
         pagingCustomItem.getItem().setItemName(name);
         pagingCustomItem.getItem().setKeyWord(word);
-        System.out.println(name);
         if (page == 1)
             count = adminService.selectItem(pagingCustomItem).size();
         pagingCustomItem.addIndex(page, limit);
