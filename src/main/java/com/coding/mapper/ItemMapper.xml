@@ -267,7 +267,7 @@
                 </if>
                 <!--关键字模糊查询（商品名称或商品描述）-->
                 <if test="item.keyWord != null and item.keyWord != ''">
-                    and item_introduce REGEXP #{item.keyWord}
+                    and key_word REGEXP #{item.keyWord}
                 </if>
                 <!--厂家模糊查询-->
                 <if test="item.makeVender != null and item.makeVender != 0">
