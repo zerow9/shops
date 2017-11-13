@@ -32,7 +32,7 @@
 
             <div class="ibox float-e-margins">
 
-                <jsp:include page="../find/logfind.jsp" />
+                <jsp:include page="../find/findLog.jsp" />
 
                 <div class="ibox-title">
                     <h5>日志信息记录</h5>
