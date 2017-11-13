@@ -3,12 +3,8 @@ package com.coding.controller;
 import com.coding.Iservice.IAdminService;
 import com.coding.comomInterface.JavaGet;
 import com.coding.json.MyJsonConfig;
-import com.coding.paging.PagingCustomItem;
-import com.coding.paging.PagingCustomLog;
-import com.coding.paging.PagingCustomUser;
-import com.coding.pojo.Item;
-import com.coding.pojo.Log;
-import com.coding.pojo.User;
+import com.coding.paging.*;
+import com.coding.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -65,5 +61,33 @@ public class FindController {
         List<Log> logs = adminService.selectLog(pagingCustomLog);
         MyJsonConfig myJsonConfig = new MyJsonConfig<>();
         return myJsonConfig.start(logs, count);
+    }
+
+    @RequestMapping("repertories/findRepertory")
+    @ResponseBody
+    public String findRepertory(PagingCustomRepertory pagingCustomRepertory, Integer page, Integer limit) throws Exception {
+        if (page == 1)
+            count = adminService.selectRepertory(pagingCustomRepertory).size();
+        pagingCustomRepertory.addIndex(page, limit);
+        List<Repertory> repertories = adminService.selectRepertory(pagingCustomRepertory);
+        MyJsonConfig myJsonConfig = new MyJsonConfig<>();
+        return myJsonConfig.start(repertories, count);
+    }
+
+    @RequestMapping("venders/findVender")
+    @ResponseBody
+    public String findVenders(HttpServletRequest request,Vender vender, Integer page, Integer limit) throws Exception {
+        String name = JavaGet.charsetGet(vender.getVenderName(), request);
+        String address = JavaGet.charsetGet(vender.getVenderAddress(), request);
+        vender.setVenderName(name);
+        vender.setVenderAddress(address);
+        PagingCustomVender pagingCustomVender=new PagingCustomVender();
+        pagingCustomVender.setVender(vender);
+        if (page == 1)
+            count = adminService.selectVender(pagingCustomVender).size();
+        pagingCustomVender.addIndex(page, limit);
+        List<Vender> venders = adminService.selectVender(pagingCustomVender);
+        MyJsonConfig<Vender> myJsonConfig = new MyJsonConfig<>();
+        return myJsonConfig.start(venders, count);
     }
 }
