@@ -557,4 +557,13 @@ public interface IAdminService extends IUserService {
      * @throws Exception
      */
     public void updateShopByPrimaryKeySelective (Shop shop)throws Exception;
+
+     /*------------------------------------------评论表------------------------------------------------------------------*/
+    /**
+     * 根据评论唯一ID组批量删除评论信息
+     * @param discussIdArray 评论唯一ID组
+     * @return 是否删除成功 非0:成功  0:失败
+     * @throws Exception
+     */
+    public void deleteDiscussByPrimaryKeyArray(@Param("discussIdArray") Integer[] discussIdArray)throws Exception;
 }

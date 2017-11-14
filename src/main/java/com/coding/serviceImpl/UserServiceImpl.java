@@ -37,6 +37,8 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     private CartMapper cartMapper;
     @Autowired
     private CollectMapper collectMapper;
+    @Autowired
+    private DiscussMapper discussMapper;
 
     /*----------------------------------------用户表------------------------------------------------------------------*/
 
@@ -706,4 +708,69 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             throw e;
         }
     }
+
+    /*------------------------------------------收藏表------------------------------------------------------------------*/
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteDiscussByPrimaryKey(Integer discussId) throws Exception {
+        if(discussId != null && discussId != 0){
+            try {
+                except(discussMapper.deleteDiscussByPrimaryKey(discussId));
+            }catch (Exception e){
+                if (!e.getMessage().contains("操作无效"))
+                    throw new Exception("删除评论信息时出错");
+                throw e;
+            }
+        }
+    }
+
+
+    @Transactional(rollbackFor =Exception.class )
+    public void insertDiscussSelective(Discuss discuss) throws Exception {
+        try {
+            discussMapper.insertDiscussSelective(discuss);
+        }catch (Exception e){
+            throw new Exception("添加评论信息时出错");
+        }
+    }
+
+    public Discuss selectDiscussByPrimaryKey(Integer discussId) throws Exception {
+        if (discussId != null && discussId != 0){
+            Discuss discuss = discussMapper.selectDiscussByPrimaryKey(discussId);
+            except(discuss,"根据评论ID查询评论信息为空");
+            return discuss;
+        }
+        return null;
+    }
+
+    public Integer selectDiscussCount(PagingCustomDiscuss pagingCustomDiscuss)throws Exception{
+        try {
+            return  discussMapper.selectDiscussCount(pagingCustomDiscuss);
+        }catch (Exception e){
+            throw new Exception("查询评论总数时出错");
+        }
+    }
+
+    public List<Discuss> selectDiscuss(PagingCustomDiscuss pagingCustomDiscuss) throws Exception {
+        try {
+            List<Discuss>  discusses = discussMapper.selectDiscuss(pagingCustomDiscuss);
+            if(discusses.isEmpty()) throw new Exception("查询到的评论列表为空");
+            return discusses;
+        }catch (Exception e){
+            if (!e.getMessage().contains("评论列表为空"))
+                throw new Exception("参数查询评论列表出错，请检查参数");
+            throw e;
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void updateDiscussByPrimaryKeySelective(Discuss discuss) throws Exception {
+        try {
+            except(discussMapper.updateDiscussByPrimaryKeySelective(discuss));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("修改评论信息时出错");
+            throw e;
+        }
+    }
+
 }

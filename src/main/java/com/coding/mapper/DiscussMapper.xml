@@ -132,9 +132,7 @@
   <insert id="insertDiscussSelective" parameterType="com.coding.pojo.Discuss" >
     insert into discuss
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="discussId != null" >
-        discuss_id,
-      </if>
+
       <if test="shopId != null" >
         shop_id,
       </if>
@@ -155,9 +153,7 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="discussId != null" >
-        #{discussId,jdbcType=INTEGER},
-      </if>
+
       <if test="shopId != null" >
         #{shopId,jdbcType=INTEGER},
       </if>

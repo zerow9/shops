@@ -383,7 +383,7 @@ public interface IUserService {
 
     /**
      * 积分明细表综合查询
-     * 实现:主键ID，用户ID，积分详细，积分明细创建时间范围
+     * 实现:主键ID，用户ID，积分详细，积分明细创建时间范围，排序规则，分页功能
      * @param pagingCustomScore
      * @return
      * @throws Exception
@@ -439,6 +439,7 @@ public interface IUserService {
 
     /**
      * 购物车查询功能集合
+     * 实现：主键ID，用户ID，商品ID，商品名字（模糊），厂家ID，排序规则，分页功能
      * @param pagingCustomCart 基础查询类 Paging 的扩展类，封装了查询所需的所有条件
      * @return 封装了满足查询条件的购物车 Cart 类对象集合
      * @throws Exception
@@ -495,6 +496,7 @@ public interface IUserService {
 
     /**
      * 收藏表查询功能模块
+     * 实现：主键ID,用户ID，商品ID，商品名称（模糊），排序规则，分页功能
      * @param pagingCustomCollect 基础查询类 Paging 的扩展类，封装了查询所需的所有条件
      * @return 满足查询条件的封装了收藏基本信息的 Collect 类对象集合
      * @throws Exception
@@ -508,5 +510,55 @@ public interface IUserService {
      * @throws Exception
      */
     public void updateCollectByPrimaryKeySelective(Collect collect)throws Exception;
+
+     /*------------------------------------------收藏表------------------------------------------------------------------*/
+    /**
+     * 根据评论唯一ID删除评论信息
+     * @param discussId 评论唯一ID
+     * @return 是否删除成功 非0:成功  0:失败
+     * @throws Exception
+     */
+    public void deleteDiscussByPrimaryKey(Integer discussId)throws Exception;
+
+    /**
+     * 插入评论信息
+     * @param discuss 封装了评论信息的 Discuss 类对象
+     * @return 是否插入成功 非0:成功  0:失败
+     * @throws Exception
+     */
+    public void insertDiscussSelective(Discuss discuss)throws Exception;
+
+    /**
+     * 通过评论唯一ID查询评论信息
+     * @param discussId 评论唯一ID
+     * @return 返回满足查询条件的 封装了评论信息的 Discuss 类对象
+     * @throws Exception
+     */
+    public Discuss selectDiscussByPrimaryKey(Integer discussId)throws Exception;
+
+    /**
+     * 查询评论表中一共存在多少数据
+     * @param pagingCustomDiscuss 指定按照什么条件去计算总数（例如：计算某个商品一共有多少条评论信息）
+     * @return 返回评论表中数据的总数
+     * @throws Exception
+     */
+    public Integer selectDiscussCount(PagingCustomDiscuss pagingCustomDiscuss)throws Exception;
+
+    /**
+     * 评论表的查询功能集合
+     * 实现：评论ID，商店ID，商品ID，用户ID，评论时间范围，排序规则，分页功能
+     * @param pagingCustomDiscuss 封装了基本查询条件（分页 排序规则等）的 Paging 类的扩展类 PagingCustomDiscuss 类对象
+     * @return 回满足查询条件的 封装了评论信息的 Discuss 类对象集合
+     * @throws Exception
+     */
+    public List<Discuss> selectDiscuss(PagingCustomDiscuss pagingCustomDiscuss)throws Exception;
+
+    /**
+     * 根据评论表的唯一ID按需更新评论信息
+     * @param discuss 封装了待修改评论信息的 Discuss 类对象集合
+     * @return 是否更新成功  非0:成功  0:失败
+     * @throws Exception
+     */
+    public void updateDiscussByPrimaryKeySelective(Discuss discuss)throws Exception;
 
 }
