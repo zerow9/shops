@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<form action="" class="layui-elem-quote layui-form" style="height: 80px">
+<form action="" class="layui-elem-quote layui-form" style="height: 85px">
     <div class="hang-1" class="layui-input-block">
         <p>库存编号：<input type="text" name="repertory.repertoryId"></p><br>
         <p>商品编号：<input type="text" name="repertory.itemId"></p>

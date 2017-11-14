@@ -35,10 +35,32 @@
         </if>
         <!--根据商品唯一ID查询收藏信息-->
         <if test="collect.itemId != null and collect.itemId != ''">
-          and item_id = #{}
+          and item_id = #{collect.itemId}
+        </if>
+        <!--通过商品名称模糊查询-->
+        <if test="collect.itemName != null and collect.itemName != ''">
+          and item_name regexp #{collect.itemName}
         </if>
       </if>
     </where>
+      <!--排序规则-->
+      <if test="sortByColumn != null and sortByColumn !=''">
+          <if test="sortRule != null and sortRule != ''">
+              order by ${sortByColumn} ${sortRule}
+          </if>
+      </if>
+
+      <!--分页-->
+      <if test="indexNumber != null">
+          <if test="pageNumber != null and pageNumber != 0">
+              limit #{indexNumber},#{pageNumber}
+          </if>
+      </if>
+      <if test="indexNumber == null">
+          <if test="pageNumber != null and pageNumber != 0">
+              limit 0,#{pageNumber}
+          </if>
+      </if>
   </select>
   <!--根据收藏表唯一ID查询收藏信息-->
   <select id="selectCollectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -62,11 +84,11 @@
   </delete>
   <!--插入收藏信息-->
   <insert id="insertCollect" parameterType="com.coding.pojo.Collect" >
-    insert into collect (collect_id, user_uuid, item_id, 
+    insert into collect (user_uuid, item_id,
       item_name, item_images, collect_time, 
       collect_item_vender, collect_remark
       )
-    values (#{collectId,jdbcType=INTEGER}, #{userUuid,jdbcType=VARCHAR}, #{itemId,jdbcType=INTEGER}, 
+    values ( #{userUuid,jdbcType=VARCHAR}, #{itemId,jdbcType=INTEGER},
       #{itemName,jdbcType=VARCHAR}, #{itemImages,jdbcType=VARCHAR}, #{collectTime,jdbcType=TIMESTAMP}, 
       #{collectItemVender,jdbcType=INTEGER}, #{collectRemark,jdbcType=VARCHAR}
       )
@@ -75,9 +97,6 @@
   <insert id="insertCollectSelective" parameterType="com.coding.pojo.Collect" >
     insert into collect
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="collectId != null" >
-        collect_id,
-      </if>
       <if test="userUuid != null" >
         user_uuid,
       </if>
@@ -101,9 +120,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="collectId != null" >
-        #{collectId,jdbcType=INTEGER},
-      </if>
       <if test="userUuid != null" >
         #{userUuid,jdbcType=VARCHAR},
       </if>
@@ -152,36 +168,6 @@
       <if test="collectRemark != null" >
         collect_remark = #{collectRemark,jdbcType=VARCHAR},
       </if>
-      <if test="collect1 != null" >
-        collect1 = #{collect1,jdbcType=VARCHAR},
-      </if>
-      <if test="collect2 != null" >
-        collect2 = #{collect2,jdbcType=VARCHAR},
-      </if>
-      <if test="collect3 != null" >
-        collect3 = #{collect3,jdbcType=VARCHAR},
-      </if>
-      <if test="collect4 != null" >
-        collect4 = #{collect4,jdbcType=VARCHAR},
-      </if>
-      <if test="collect5 != null" >
-        collect5 = #{collect5,jdbcType=VARCHAR},
-      </if>
-      <if test="collect6 != null" >
-        collect6 = #{collect6,jdbcType=VARCHAR},
-      </if>
-      <if test="collect7 != null" >
-        collect7 = #{collect7,jdbcType=VARCHAR},
-      </if>
-      <if test="collect8 != null" >
-        collect8 = #{collect8,jdbcType=VARCHAR},
-      </if>
-      <if test="collect9 != null" >
-        collect9 = #{collect9,jdbcType=VARCHAR},
-      </if>
-      <if test="collect10 != null" >
-        collect10 = #{collect10,jdbcType=VARCHAR},
-      </if>
     </set>
     where collect_id = #{collectId,jdbcType=INTEGER}
   </update>
@@ -194,17 +180,7 @@
       item_images = #{itemImages,jdbcType=VARCHAR},
       collect_time = #{collectTime,jdbcType=TIMESTAMP},
       collect_item_vender = #{collectItemVender,jdbcType=INTEGER},
-      collect_remark = #{collectRemark,jdbcType=VARCHAR},
-      collect1 = #{collect1,jdbcType=VARCHAR},
-      collect2 = #{collect2,jdbcType=VARCHAR},
-      collect3 = #{collect3,jdbcType=VARCHAR},
-      collect4 = #{collect4,jdbcType=VARCHAR},
-      collect5 = #{collect5,jdbcType=VARCHAR},
-      collect6 = #{collect6,jdbcType=VARCHAR},
-      collect7 = #{collect7,jdbcType=VARCHAR},
-      collect8 = #{collect8,jdbcType=VARCHAR},
-      collect9 = #{collect9,jdbcType=VARCHAR},
-      collect10 = #{collect10,jdbcType=VARCHAR}
+      collect_remark = #{collectRemark,jdbcType=VARCHAR}
     where collect_id = #{collectId,jdbcType=INTEGER}
   </update>
 

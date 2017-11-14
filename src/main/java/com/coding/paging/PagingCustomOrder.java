@@ -1,7 +1,9 @@
 package com.coding.paging;
 
 import com.coding.pojo.Orders;
+import org.springframework.stereotype.Component;
 
+@Component
 public class PagingCustomOrder extends Paging {
     private Orders order;//订单基本信息
 

@@ -20,36 +20,48 @@
 }
 
 .hang-butt {
-    float: left;
-    margin-left: 5px;
-    margin-top: 20px
+    float: right;
+    margin-right: 100px;
+    margin-top:50px;
 }
+
 .hang-1 input {
-    height: 20px;
+    height: 22px;
 }
+
 .hang-2 input {
     width: 100px;
-    height: 20px;
+    height: 22px;
 }
+
 .hang-3 input {
-    height: 20px;
+    width: 120px;
+    height: 22px;
+}
+
+/*设置placeholder样式*/
+input::-webkit-input-placeholder {
+    color: #DCDCDC; /*字体颜色*/
 }
 
 .myButton {
-    width:60px;height: 35px;
-    background-color:#1ab394;
-    cursor:pointer;
+    width: 60px;
+    height: 35px;
+    background-color: #1ab394;
+    cursor: pointer;
     border: none;
     border-radius: 4px;
-    color:#ffffff;
-    font-family:Arial;
-    text-decoration:none;
-    text-shadow:0px 1px 0px #2f6627;
+    color: #ffffff;
+    font-family: Arial;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #2f6627;
 }
+
 .myButton:hover {
-    background-color:#009688;
+    background-color: #009688;
 }
+
 .myButton:active {
-    position:relative;
-    top:1px;
+    position: relative;
+    top: 1px;
 }

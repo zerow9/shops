@@ -33,7 +33,7 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="ibox float-e-margins">
-                <jsp:include page="../find/userfind.jsp"/>
+                <jsp:include page="../find/findUser.jsp"/>
                 <div class="ibox-title">
                     <h5>用户列表</h5>
                     <div class="ibox-tools">
@@ -61,7 +61,7 @@
                     </div>
                     <div class="table-responsive">
                         <table class="layui-table"
-                               lay-data="{url:'<%=basePath%>admin/getUserJson.action', page:true, id:'userUuid'}"
+                               lay-data="{url:'getUserJson.action', page:true, id:'userUuid'}"
                                lay-filter="demo">
                             <thead>
                             <tr>
