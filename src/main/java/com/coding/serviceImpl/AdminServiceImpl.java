@@ -42,6 +42,8 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     private ShopMapper shopMapper;
     @Autowired
     private DiscussMapper discussMapper;
+    @Autowired
+    private PayTypeMapper payTypeMapper;
 
 
     /*------------------------------------------用户表------------------------------------------------------------------*/
@@ -796,6 +798,82 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         }catch (Exception e){
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("批量删除评论信息时出错");
+            throw e;
+        }
+    }
+
+    /*------------------------------------------支付类型表------------------------------------------------------------------*/
+    @Transactional(rollbackFor =Exception.class )
+    public void deletePayTypeByPrimaryKey(Integer payTypeId) throws Exception {
+        if(payTypeId != null && payTypeId != 0){
+            try {
+                except(payTypeMapper.deletePayTypeByPrimaryKey(payTypeId));
+            }catch (Exception e){
+                if (!e.getMessage().contains("操作无效"))
+                    throw new Exception("删除支付类型时出错");
+                throw e;
+            }
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void deletePayTypeByPrimaryKeyArray(Integer[] payTypeIdArray) throws Exception {
+        if(payTypeIdArray==null||"".equals(payTypeIdArray))throw new Exception("没有payTypeIdArray数组信息，批量支付类型删除出错");
+        try {
+            except(payTypeMapper.deletePayTypeByPrimaryKeyArray(payTypeIdArray));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("批量删除支付类型时出错");
+            throw e;
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void insertPayTypeSelective(PayType payType) throws Exception {
+        try {
+            payTypeMapper.insertPayTypeSelective(payType);
+        }catch (Exception e){
+            throw new Exception("添加支付类型时出错");
+        }
+    }
+
+    @Override
+    public PayType selectPayTypeByPrimaryKey(Integer payTypeId) throws Exception {
+        if (payTypeId != null && payTypeId != 0){
+            PayType payType = payTypeMapper.selectPayTypeByPrimaryKey(payTypeId);
+            except(payType,"根据支付类型ID查询支付类型为空");
+            return payType;
+        }
+        return null;
+    }
+
+    public Integer selectPayTypeCount() throws Exception {
+        try {
+            return  payTypeMapper.selectPayTypeCount();
+        }catch (Exception e){
+            throw new Exception("查询支付类型总数时出错");
+        }
+    }
+
+    public List<PayType> selectPayType(PagingCustomPayType pagingCustomPayType) throws Exception {
+        try {
+            List<PayType>  payTypes = payTypeMapper.selectPayType(pagingCustomPayType);
+            if(payTypes.isEmpty()) throw new Exception("查询到的支付类型列表为空");
+            return payTypes;
+        }catch (Exception e){
+            if (!e.getMessage().contains("支付类型列表为空"))
+                throw new Exception("参数查询支付类型列表出错，请检查参数");
+            throw e;
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void updatePayTypeByPrimaryKeySelective(PayType payType) throws Exception {
+        try {
+            except(payTypeMapper.updatePayTypeByPrimaryKeySelective(payType));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("修改支付类型时出错");
             throw e;
         }
     }
