@@ -25,9 +25,21 @@
   </select>
 
   <!--查询评论表中一共存在多少数据-->
-  <select id="selectDiscussCount" resultType="java.lang.Integer">
+  <select id="selectDiscussCount" parameterType="com.coding.paging.PagingCustomDiscuss" resultType="java.lang.Integer">
     select count(*)
     from discuss
+    <where>
+      <if test="discuss != null and discuss != ''">
+        <!--根据商品ID计算总数-->
+        <if test="discuss.itemId != null and discuss.itemId != 0">
+          and item_id = #{discuss.itemId}
+        </if>
+        <!--根据用户唯一标识计算总数-->
+        <if test="discuss.userUuid != null and discuss.userUuid != ''">
+          and user_uuid = #{discuss.userUuid}
+        </if>
+      </if>
+    </where>
   </select>
 
   <!--评论表查询功能模块-->
