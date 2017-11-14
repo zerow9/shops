@@ -35,6 +35,8 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     private ScoreMapper scoreMapper;
     @Autowired
     private CartMapper cartMapper;
+    @Autowired
+    private CollectMapper collectMapper;
 
     /*----------------------------------------用户表------------------------------------------------------------------*/
 
@@ -630,4 +632,78 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         }
     }
 
+    /*------------------------------------------收藏表------------------------------------------------------------------*/
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteCollectByPrimaryKey(Integer collectId) throws Exception {
+        if(collectId != null && collectId != 0){
+            try {
+                except(collectMapper.deleteCollectByPrimaryKey(collectId));
+            }catch (Exception e){
+                if (!e.getMessage().contains("操作无效"))
+                    throw new Exception("删除收藏商品时出错");
+                throw e;
+            }
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteCollectByPrimaryKeyArray(Integer[] collectIdArray) throws Exception {
+        if(collectIdArray==null||"".equals(collectIdArray))throw new Exception("没有collectIdArray数组信息，批量收藏商品删除出错");
+        try {
+            except(collectMapper.deleteCollectByPrimaryKeyArray(collectIdArray));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("批量删除收藏商品时出错");
+            throw e;
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void insertCollectSelective(Collect collect) throws Exception {
+        try {
+            collectMapper.insertCollectSelective(collect);
+        }catch (Exception e){
+            throw new Exception("添加收藏商品时出错");
+        }
+    }
+
+    public Collect selectCollectByPrimaryKey(Integer collectId) throws Exception {
+        if (collectId != null && collectId != 0){
+            Collect collect = collectMapper.selectCollectByPrimaryKey(collectId);
+            except(collect,"根据收藏ID查询收藏商品为空");
+            return collect;
+        }
+        return null;
+    }
+
+    public Integer selectCollectCount() throws Exception {
+        try {
+            return  collectMapper.selectCollectCount();
+        }catch (Exception e){
+            throw new Exception("查询收藏商品总数时出错");
+        }
+    }
+
+    public List<Collect> selectCollect(PagingCustomCollect pagingCustomCollect) throws Exception {
+        try {
+            List<Collect>  collects = collectMapper.selectCollect(pagingCustomCollect);
+            if(collects.isEmpty()) throw new Exception("查询到的收藏列表为空");
+            return collects;
+        }catch (Exception e){
+            if (!e.getMessage().contains("收藏列表为空"))
+                throw new Exception("参数查询收藏列表出错，请检查参数");
+            throw e;
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void updateCollectByPrimaryKeySelective(Collect collect) throws Exception {
+        try {
+            except(collectMapper.updateCollectByPrimaryKeySelective(collect));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("修改收藏信息时出错");
+            throw e;
+        }
+    }
 }
