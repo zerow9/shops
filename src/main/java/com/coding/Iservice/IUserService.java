@@ -352,7 +352,6 @@ public interface IUserService {
     /**
      * 根据主键删除积分明细
      * @param scoreId
-     * @return
      * @throws Exception
      */
     public void deleteScoreByPrimaryKey(Integer scoreId)throws Exception;
@@ -360,7 +359,6 @@ public interface IUserService {
     /**
      * 根据主键ID数组批量删除积分明细
      * @param scoreIdArrary
-     * @return
      * @throws Exception
      */
     public void deleteScoreByPrimaryKeyArray(@Param("scoreIdArrary") Integer [] scoreIdArrary)throws Exception;
@@ -368,7 +366,6 @@ public interface IUserService {
     /**
      * 按需插入积分明细,只需给定用户ID,和积分情况(如，100，或者-50),当前积分和累积积分和自动计算.
      * @param score
-     * @return
      * @throws Exception
      */
     public void insertScoreSelective(Score score)throws Exception;
@@ -376,7 +373,6 @@ public interface IUserService {
     /**
      * 按需修改积分明细
      * @param score
-     * @return
      * @throws Exception
      */
     public void updateScoreByPrimaryKeySelective(Score score)throws Exception;
@@ -384,9 +380,9 @@ public interface IUserService {
     /**
      * 积分明细表综合查询
      * 实现:主键ID，用户ID，积分详细，积分明细创建时间范围，排序规则，分页功能
-     * @param pagingCustomScore
-     * @return
-     * @throws Exception
+     * @param pagingCustomScore 自定义pojo
+     * @return List<Score>
+     * @throws Exception e
      */
     public List<Score> selectScore (PagingCustomScore pagingCustomScore)throws Exception;
 
@@ -523,7 +519,6 @@ public interface IUserService {
     /**
      * 插入评论信息
      * @param discuss 封装了评论信息的 Discuss 类对象
-     * @return 是否插入成功 非0:成功  0:失败
      * @throws Exception
      */
     public void insertDiscussSelective(Discuss discuss)throws Exception;
@@ -556,7 +551,6 @@ public interface IUserService {
     /**
      * 根据评论表的唯一ID按需更新评论信息
      * @param discuss 封装了待修改评论信息的 Discuss 类对象集合
-     * @return 是否更新成功  非0:成功  0:失败
      * @throws Exception
      */
     public void updateDiscussByPrimaryKeySelective(Discuss discuss)throws Exception;

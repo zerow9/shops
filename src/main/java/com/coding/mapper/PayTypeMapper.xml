@@ -75,18 +75,14 @@
   <insert id="insertPayTypeSelective" parameterType="com.coding.pojo.PayType" >
     insert into pay_type
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="payTypeId != null" >
-        pay_type_id,
-      </if>
+
       <if test="payTypeName != null" >
         pay_type_name,
       </if>
 
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="payTypeId != null" >
-        #{payTypeId,jdbcType=INTEGER},
-      </if>
+
       <if test="payTypeName != null" >
         #{payTypeName,jdbcType=VARCHAR},
       </if>
