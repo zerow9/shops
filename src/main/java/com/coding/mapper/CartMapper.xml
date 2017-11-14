@@ -39,6 +39,10 @@
       <!--根据购物车基本信息查询-->
       <if test="cart != null and cart != ''">
         <!--根据用户ID查询购物车信息-->
+        <if test="cart.cartId != null and cart.cartId != ''">
+          and cart_id = #{cart.cartId}
+        </if>
+        <!--根据用户ID查询购物车信息-->
         <if test="cart.userUuid != null and cart.userUuid != ''">
           and user_uuid = #{cart.userUuid}
         </if>
@@ -46,6 +50,10 @@
         <if test="cart.itemId != null and cart.itemId != 0">
           and item_id = #{cart.itemId}
         </if>
+          <!--根据商品名字查询购物车信息-->
+          <if test="cart.itemName != null and cart.itemName != ''">
+              and item_name REGEXP #{cart.itemName}
+          </if>
         <!--根据厂家ID查询购物车信息-->
         <if test="cart.makeVender != null and cart.makeVender != 0">
           and make_vender = #{cart.makeVender}

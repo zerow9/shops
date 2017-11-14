@@ -33,6 +33,8 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     private ShopMapper shopMapper;
     @Autowired
     private ScoreMapper scoreMapper;
+    @Autowired
+    private CartMapper cartMapper;
 
     /*----------------------------------------用户表------------------------------------------------------------------*/
 
@@ -553,50 +555,79 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         }
     }
 
-    /*------------------------------------------积分明细表------------------------------------------------------------------*/
-    @Override
-    public int deleteCartByPrimaryKey(Integer cartId) throws Exception {
-        return 0;
+    /*------------------------------------------购物车表------------------------------------------------------------------*/
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteCartByPrimaryKey(Integer cartId) throws Exception {
+        if(cartId != null && cartId != 0){
+            try {
+                except(cartMapper.deleteCartByPrimaryKey(cartId));
+            }catch (Exception e){
+                if (!e.getMessage().contains("操作无效"))
+                    throw new Exception("删除购物车商品时出错");
+                throw e;
+            }
+        }
     }
 
-    @Override
-    public int deleteCartByPrimaryKeyArray(Integer[] cartIdArray) throws Exception {
-        return 0;
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteCartByPrimaryKeyArray(Integer[] cartIdArray) throws Exception {
+        if(cartIdArray==null||"".equals(cartIdArray))throw new Exception("没有cartIdArray数组信息，批量购物车商品删除出错");
+        try {
+            except(cartMapper.deleteCartByPrimaryKeyArray(cartIdArray));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("批量删除购物车商品时出错");
+            throw e;
+        }
     }
 
-    @Override
-    public int insertCart(Cart cart) throws Exception {
-        return 0;
+    @Transactional(rollbackFor =Exception.class )
+    public void insertCartSelective(Cart cart) throws Exception {
+        try {
+            cartMapper.insertCartSelective(cart);
+        }catch (Exception e){
+            throw new Exception("添加购物车时出错");
+        }
     }
 
-    @Override
-    public int insertCartSelective(Cart cart) throws Exception {
-        return 0;
-    }
-
-    @Override
     public Cart selectCartByPrimaryKey(Integer cartId) throws Exception {
+        if (cartId != null && cartId != 0){
+            Cart cart = cartMapper.selectCartByPrimaryKey(cartId);
+            except(cart,"根据购物车ID查询购物车为空");
+            return cart;
+        }
         return null;
     }
 
-    @Override
     public Integer selectCartCount() throws Exception {
-        return null;
+        try {
+            return  cartMapper.selectCartCount();
+        }catch (Exception e){
+            throw new Exception("查询购物车总数时出错");
+        }
     }
 
-    @Override
     public List<Cart> selectCart(PagingCustomCart pagingCustomCart) throws Exception {
-        return null;
+        try {
+            List<Cart>  carts = cartMapper.selectCart(pagingCustomCart);
+            if(carts.isEmpty()) throw new Exception("查询到的购物车列表为空");
+            return carts;
+        }catch (Exception e){
+            if (!e.getMessage().contains("购物车列表为空"))
+                throw new Exception("参数查询购物车列表出错，请检查参数");
+            throw e;
+        }
     }
 
-    @Override
-    public int updateCartByPrimaryKeySelective(Cart cart) throws Exception {
-        return 0;
-    }
-
-    @Override
-    public int updateCartByPrimaryKey(Cart cart) throws Exception {
-        return 0;
+    @Transactional(rollbackFor =Exception.class )
+    public void updateCartByPrimaryKeySelective(Cart cart) throws Exception {
+        try {
+            except(cartMapper.updateCartByPrimaryKeySelective(cart));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("修改购物车信息时出错");
+            throw e;
+        }
     }
 
 }

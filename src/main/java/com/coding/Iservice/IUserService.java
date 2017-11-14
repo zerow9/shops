@@ -404,7 +404,7 @@ public interface IUserService {
      * @return 是否删除成功 0:失败 非0:成功
      * @throws Exception
      */
-    public int deleteCartByPrimaryKey(Integer cartId)throws Exception;
+    public void deleteCartByPrimaryKey(Integer cartId)throws Exception;
 
     /**
      * 根据购物车ID组批量删除购物车信息
@@ -412,15 +412,7 @@ public interface IUserService {
      * @return 是否删除成功 0:失败 非0:成功
      * @throws Exception
      */
-    public int deleteCartByPrimaryKeyArray(@Param("cartIdArray") Integer[] cartIdArray) throws Exception;
-
-    /**
-     * 插入完整购物车信息（包含所有购物车基本信息）
-     * @param cart 封装了购物车信息的 Cart 类对象
-     * @return 是否插入成功 0:失败 非0:成功
-     * @throws Exception
-     */
-    public int insertCart(Cart cart)throws Exception;
+    public void deleteCartByPrimaryKeyArray(@Param("cartIdArray") Integer[] cartIdArray) throws Exception;
 
     /**
      * 按需插入购物车信息（不必包含所有购物车基本信息，按需求添加）
@@ -428,7 +420,7 @@ public interface IUserService {
      * @return 是否插入成功 0:失败 非0:成功
      * @throws Exception
      */
-    public int insertCartSelective(Cart cart)throws Exception;
+    public void insertCartSelective(Cart cart)throws Exception;
 
     /**
      * 根据购物车唯一ID查询购物车信息
@@ -459,13 +451,6 @@ public interface IUserService {
      * @return 是否更新成功 0:失败 非0:成功
      * @throws Exception
      */
-    public int updateCartByPrimaryKeySelective(Cart cart)throws Exception;
+    public void updateCartByPrimaryKeySelective(Cart cart)throws Exception;
 
-    /**
-     * 根据购物车主键更新购物车信息（传入 Cart 对象封装了需更新数据，不需要更新的数据也需要进行封装）
-     * @param cart 封装了购物车基本信息的 Cart 类对象
-     * @return 是否更新成功 0:失败 非0:成功
-     * @throws Exception
-     */
-    public int updateCartByPrimaryKey(Cart cart)throws Exception;
 }
