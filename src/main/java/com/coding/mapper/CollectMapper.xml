@@ -37,6 +37,10 @@
         <if test="collect.itemId != null and collect.itemId != ''">
           and item_id = #{collect.itemId}
         </if>
+        <!--通过商品名称模糊查询-->
+        <if test="collect.itemName != null and collect.itemName != ''">
+          and item_name regexp #{collect.itemName}
+        </if>
       </if>
     </where>
       <!--排序规则-->
