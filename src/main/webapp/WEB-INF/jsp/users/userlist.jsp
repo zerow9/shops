@@ -61,7 +61,7 @@
                     </div>
                     <div class="table-responsive">
                         <table class="layui-table"
-                               lay-data="{url:'<%=basePath%>admin/getUserJson.action', page:true, id:'userUuid'}"
+                               lay-data="{url:'getUserJson.action', page:true, id:'userUuid'}"
                                lay-filter="demo">
                             <thead>
                             <tr>
