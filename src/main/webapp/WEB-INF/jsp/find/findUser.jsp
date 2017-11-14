@@ -1,5 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<form action="" class="layui-elem-quote layui-form" style="height: 100px">
+<form action="" class="layui-elem-quote layui-form" style="height: 85px">
     <div class="hang-1" class="layui-input-block">
         <p>用户编号：<input type="text" name="user.userUuid"></p><br>
         <p>用户姓名：<input type="text" name="user.userName"></p>

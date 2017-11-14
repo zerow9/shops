@@ -2,36 +2,31 @@
     float: left;
     margin-left: 20px;
     width: 244px;
-    height: 60px
+    height: 50px
 }
 
 .hang-3 {
     float: left;
     margin-left: 60px;
-    height: 20px;
-    width: 300px
+    height: 50px;
+    width: 320px
 }
 
 .hang-butt {
-    float: left;
-    margin-top: 20px
+
+    float: right;
+    margin-right: 100px;
+    margin-top: 50px;
 }
 
 .hang-1 input {
-    height: 20px;
+    height: 22px;
 }
-
-.hang-3 select {
-    width: 100px;
-    height: 20px;
-    margin-left: 4px;
-    margin-bottom: 15px;
-}
-
 .hang-3 input {
     width: 100px;
-    height: 20px;
+    height: 22px;
 }
+
 .myButton {
     width:60px;height: 35px;
     background-color:#1ab394;

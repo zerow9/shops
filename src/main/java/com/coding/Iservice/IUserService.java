@@ -396,4 +396,117 @@ public interface IUserService {
      * @throws Exception
      */
     public int selectScoreCount ()throws Exception;
+
+    /*------------------------------------------购物车表------------------------------------------------------------------*/
+    /**
+     * 根据购物车ID删除购物车信息
+     * @param cartId 购物车唯一ID
+     * @return 是否删除成功 0:失败 非0:成功
+     * @throws Exception
+     */
+    public void deleteCartByPrimaryKey(Integer cartId)throws Exception;
+
+    /**
+     * 根据购物车ID组批量删除购物车信息
+     * @param cartIdArray 需要删除购物车ID组
+     * @return 是否删除成功 0:失败 非0:成功
+     * @throws Exception
+     */
+    public void deleteCartByPrimaryKeyArray(@Param("cartIdArray") Integer[] cartIdArray) throws Exception;
+
+    /**
+     * 按需插入购物车信息（不必包含所有购物车基本信息，按需求添加）
+     * @param cart 封装了购物车信息的 Cart 类对象
+     * @return 是否插入成功 0:失败 非0:成功
+     * @throws Exception
+     */
+    public void insertCartSelective(Cart cart)throws Exception;
+
+    /**
+     * 根据购物车唯一ID查询购物车信息
+     * @param cartId 购物车唯一ID
+     * @return 封装了满足查询条件的购物车 Cart 类对象
+     * @throws Exception
+     */
+    public  Cart selectCartByPrimaryKey(Integer cartId)throws Exception;
+
+    /**
+     * 查询购物车表中一共有多少条信息
+     * @return 购物车中一共有多少条数据
+     * @throws Exception
+     */
+    public Integer selectCartCount()throws Exception;
+
+    /**
+     * 购物车查询功能集合
+     * @param pagingCustomCart 基础查询类 Paging 的扩展类，封装了查询所需的所有条件
+     * @return 封装了满足查询条件的购物车 Cart 类对象集合
+     * @throws Exception
+     */
+    public List<Cart> selectCart(PagingCustomCart pagingCustomCart) throws Exception;
+
+    /**
+     * 根据购物车主键按需更新购物车信息（传入 Cart 对象只封装需更新数据）
+     * @param cart 封装了购物车基本信息的 Cart 类对象
+     * @return 是否更新成功 0:失败 非0:成功
+     * @throws Exception
+     */
+    public void updateCartByPrimaryKeySelective(Cart cart)throws Exception;
+
+    /*------------------------------------------收藏表------------------------------------------------------------------*/
+    /**
+     * 根据收藏唯一ID删除收藏信息
+     * @param collectId 收藏唯一ID
+     * @return 是否删除成功 0:失败 非0:成功
+     * @throws Exception
+     */
+    public void deleteCollectByPrimaryKey(Integer collectId)throws Exception;
+
+    /**
+     * 根据收藏唯一ID组批量删除收藏信息
+     * @param collectIdArray 收藏唯一ID组
+     * @return 是否删除成功 0:失败 非0:成功
+     * @throws Exception
+     */
+    public void deleteCollectByPrimaryKeyArray(@Param("collectIdArray") Integer[] collectIdArray) throws Exception;
+
+    /**
+     * 按需插入收藏信息
+     * @param collect 封装了收藏信息的 Collect 类对象
+     * @return 是否插入成功 0:失败 非0:成功
+     * @throws Exception
+     */
+    public void insertCollectSelective(Collect collect)throws Exception;
+
+    /**
+     * 根据收藏表唯一ID查询收藏信息
+     * @param collectId 收藏表唯一ID
+     * @return 满足查询条件的封装了收藏表信息的 Collect 类对象
+     * @throws Exception
+     */
+    public Collect selectCollectByPrimaryKey(Integer collectId)throws Exception;
+
+    /**
+     * 查询收藏表中总的数据量
+     * @return 收藏表中一共有多少条数据
+     * @throws Exception
+     */
+    public Integer selectCollectCount()throws Exception;
+
+    /**
+     * 收藏表查询功能模块
+     * @param pagingCustomCollect 基础查询类 Paging 的扩展类，封装了查询所需的所有条件
+     * @return 满足查询条件的封装了收藏基本信息的 Collect 类对象集合
+     * @throws Exception
+     */
+    public List<Collect> selectCollect(PagingCustomCollect pagingCustomCollect)throws Exception;
+
+    /**
+     * 根据收藏表唯一ID按需更新收藏表信息
+     * @param collect 封装了需更新的收藏表基本信息 Collect 类对象
+     * @return 是否更新成功 0:失败 非0:成功
+     * @throws Exception
+     */
+    public void updateCollectByPrimaryKeySelective(Collect collect)throws Exception;
+
 }

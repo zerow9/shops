@@ -17,7 +17,7 @@
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="../../../common/layui/css/layui.css" rel="stylesheet">
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
-    <link href="../../../css/useQuery.css" rel="stylesheet">
+    <link href="../../../css/venderQuery.css" rel="stylesheet">
 </head>
 
 <body>
@@ -30,7 +30,7 @@
 
             <div class="ibox float-e-margins">
 
-                <jsp:include page="../find/findVender.jsp" />
+                <jsp:include page="../find/findVender.jsp"/>
 
                 <div class="ibox-title">
                     <h5>厂商列表</h5>

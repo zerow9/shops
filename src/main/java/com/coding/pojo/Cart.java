@@ -2,7 +2,7 @@ package com.coding.pojo;
 
 import org.springframework.stereotype.Component;
 
-@Component
+
 public class Cart {
     private Integer cartId;
 
