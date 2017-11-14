@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coding.mapper.DiscussMapper" >
+  <!--封装了 Discuss 属性-->
+  <resultMap id="BaseResultMap" type="com.coding.pojo.Discuss" >
+    <id column="discuss_id" property="discussId" jdbcType="INTEGER" />
+    <result column="shop_id" property="shopId" jdbcType="INTEGER" />
+    <result column="item_id" property="itemId" jdbcType="INTEGER" />
+    <result column="discuss_detail" property="discussDetail" jdbcType="VARCHAR" />
+    <result column="user_uuid" property="userUuid" jdbcType="VARCHAR" />
+    <result column="reply_content" property="replyContent" jdbcType="VARCHAR" />
+    <result column="discuss_time" property="discussTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <!--Discuss表的所有字段（不包含冗余字段）-->
+  <sql id="Base_Column_List" >
+    discuss_id, shop_id, item_id, discuss_detail, user_uuid, reply_content, discuss_time
+  </sql>
+
+  <!--根据评论表主键查询评论信息-->
+  <select id="selectDiscussByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from discuss
+    where discuss_id = #{discussId,jdbcType=INTEGER}
+  </select>
+
+  <!--查询评论表中一共存在多少数据-->
+  <select id="selectDiscussCount" parameterType="com.coding.paging.PagingCustomDiscuss" resultType="java.lang.Integer">
+    select count(*)
+    from discuss
+    <where>
+      <if test="discuss != null and discuss != ''">
+        <!--根据商品ID计算总数-->
+        <if test="discuss.itemId != null and discuss.itemId != 0">
+          and item_id = #{discuss.itemId}
+        </if>
+        <!--根据用户唯一标识计算总数-->
+        <if test="discuss.userUuid != null and discuss.userUuid != ''">
+          and user_uuid = #{discuss.userUuid}
+        </if>
+      </if>
+    </where>
+  </select>
+
+  <!--评论表查询功能模块-->
+  <select id="selectDiscuss" parameterType="com.coding.paging.PagingCustomDiscuss" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    from discuss
+    <where>
+      <!--根据 Discuss 基本信息查询-->
+      <if test="discuss != null and discuss != ''">
+        <!--根据评论唯一ID查询（如果需要调用此查询条件，那么其余所有查询条件都必须为空，不能传入其他值，不然查询结果会出错）-->
+        <if test="discuss.discussId != null and discuss.discussId != 0">
+          and discuss_id = #{discuss.discussId}
+        </if>
+        <!--根据分店ID查询评论信息-->
+        <if test="discuss.shopId != null and discuss.shopId != 0">
+          and shop_id = #{discuss.shopId}
+        </if>
+        <!--根据商品唯一ID查询评论信息-->
+        <if test="discuss.itemId != null and discuss.itemId != 0">
+          and item_id = #{discuss.itemId}
+        </if>
+        <!--根据用户唯一ID查询评论信息-->
+        <if test="discuss.userUuid != null and discuss.userUuid != ''">
+          and user_uuid = #{discuss.userUuid}
+        </if>
+        <!--根据评论时间查询评论信息-->
+        <if test="formerDiscussTime != null and formerDiscussTime != ''">
+          <!--给定了最大值和最小值-->
+          <if test="latterDiscussTime != null and latterDiscussTime != ''">
+            <if test="formerDiscussTime &lt; latterDiscussTime">
+              and discuss_time between #{formerDiscussTime} and  #{latterDiscussTime}
+            </if>
+            <if test="formerDiscussTime &gt; latterDiscussTime">
+            and discuss_time between #{latterDiscussTime} and  #{formerDiscussTime}
+            </if>
+            <if test="formerDiscussTime == latterDiscussTime">
+              and discuss_time = #{formerDiscussTime}
+            </if>
+          </if>
+          <!--只给定了最小值-->
+          <if test="latterDiscussTime == null or latterDiscussTime == ''">
+            and discuss_time &gt; #{formerDiscussTime}
+          </if>
+        </if>
+        <!--只给定了最大值-->
+        <if test="formerDiscussTime == null or formerDiscussTime == ''">
+          <if test="latterDiscussTime != null and latterDiscussTime != ''">
+            and discuss_time &lt; #{latterDiscussTime}
+          </if>
+        </if>
+      </if>
+    </where>
+    <!--排序规则-->
+    <if test="sortByColumn != null and sortByColumn !=''">
+      <if test="sortRule != null and sortRule != ''">
+        order by ${sortByColumn} ${sortRule}
+      </if>
+    </if>
+    <!--分页-->
+    <if test="indexNumber != null">
+      <if test="pageNumber != null and pageNumber != 0">
+        limit #{indexNumber},#{pageNumber}
+      </if>
+    </if>
+    <if test="indexNumber == null">
+      <if test="pageNumber != null and pageNumber != 0">
+        limit 0,#{pageNumber}
+      </if>
+    </if>
+  </select>
+
+  <!--根据评论唯一ID删除评论信息-->
+  <delete id="deleteDiscussByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from discuss
+    where discuss_id = #{discussId,jdbcType=INTEGER}
+  </delete>
+
+  <!--根据评论唯一ID组批量删除评论信息-->
+  <delete id="deleteDiscussByPrimaryKeyArray" parameterType="java.lang.Integer">
+    delete
+    from discuss
+    where discuss_id IN 
+    <foreach collection="discussIdArray" item="discussId" open="(" separator="," close=")">
+      #{discussId}
+    </foreach>
+  </delete>
+
+  <!--按需插入评论信息-->
+  <insert id="insertDiscussSelective" parameterType="com.coding.pojo.Discuss" >
+    insert into discuss
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+
+      <if test="shopId != null" >
+        shop_id,
+      </if>
+      <if test="itemId != null" >
+        item_id,
+      </if>
+      <if test="discussDetail != null" >
+        discuss_detail,
+      </if>
+      <if test="userUuid != null" >
+        user_uuid,
+      </if>
+      <if test="replyContent != null" >
+        reply_content,
+      </if>
+      <if test="discussTime != null" >
+        discuss_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+
+      <if test="shopId != null" >
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null" >
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="discussDetail != null" >
+        #{discussDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="userUuid != null" >
+        #{userUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="replyContent != null" >
+        #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="discussTime != null" >
+        #{discussTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+  <!--按需更新评论信息-->
+  <update id="updateDiscussByPrimaryKeySelective" parameterType="com.coding.pojo.Discuss" >
+    update discuss
+    <set >
+      <if test="shopId != null" >
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null" >
+        item_id = #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="discussDetail != null" >
+        discuss_detail = #{discussDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="userUuid != null" >
+        user_uuid = #{userUuid,jdbcType=VARCHAR},
+      </if>
+      <if test="replyContent != null" >
+        reply_content = #{replyContent,jdbcType=VARCHAR},
+      </if>
+      <if test="discussTime != null" >
+        discuss_time = #{discussTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where discuss_id = #{discussId,jdbcType=INTEGER}
+  </update>
+
+</mapper>

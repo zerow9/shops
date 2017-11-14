@@ -1,10 +1,10 @@
 package com.coding.pojo;
-
 import org.springframework.stereotype.Component;
 
-
-public class Cart {
-    private Integer cartId;
+import java.util.Date;
+@Component
+public class Collect {
+    private Integer collectId;
 
     private String userUuid;
 
@@ -12,21 +12,21 @@ public class Cart {
 
     private String itemName;
 
-    private Double price;
-
     private String itemImages;
 
-    private Integer itemNumber;
+    private Date collectTime;
 
-    private Integer makeVender;
+    private Integer collectItemVender;
+
+    private String collectRemark;
 
 
-    public Integer getCartId() {
-        return cartId;
+    public Integer getCollectId() {
+        return collectId;
     }
 
-    public void setCartId(Integer cartId) {
-        this.cartId = cartId;
+    public void setCollectId(Integer collectId) {
+        this.collectId = collectId;
     }
 
     public String getUserUuid() {
@@ -53,14 +53,6 @@ public class Cart {
         this.itemName = itemName == null ? null : itemName.trim();
     }
 
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
-
     public String getItemImages() {
         return itemImages;
     }
@@ -69,33 +61,41 @@ public class Cart {
         this.itemImages = itemImages == null ? null : itemImages.trim();
     }
 
-    public Integer getItemNumber() {
-        return itemNumber;
+    public Date getCollectTime() {
+        return collectTime;
     }
 
-    public void setItemNumber(Integer itemNumber) {
-        this.itemNumber = itemNumber;
+    public void setCollectTime(Date collectTime) {
+        this.collectTime = collectTime;
     }
 
-    public Integer getMakeVender() {
-        return makeVender;
+    public Integer getCollectItemVender() {
+        return collectItemVender;
     }
 
-    public void setMakeVender(Integer makeVender) {
-        this.makeVender = makeVender;
+    public void setCollectItemVender(Integer collectItemVender) {
+        this.collectItemVender = collectItemVender;
+    }
+
+    public String getCollectRemark() {
+        return collectRemark;
+    }
+
+    public void setCollectRemark(String collectRemark) {
+        this.collectRemark = collectRemark == null ? null : collectRemark.trim();
     }
 
     @Override
     public String toString() {
-        return "Cart{" +
-                "cartId=" + cartId +
+        return "Collect{" +
+                "collectId=" + collectId +
                 ", userUuid='" + userUuid + '\'' +
                 ", itemId=" + itemId +
                 ", itemName='" + itemName + '\'' +
-                ", price=" + price +
                 ", itemImages='" + itemImages + '\'' +
-                ", itemNumber=" + itemNumber +
-                ", makeVender=" + makeVender +
+                ", collectTime=" + collectTime +
+                ", collectItemVender=" + collectItemVender +
+                ", collectRemark='" + collectRemark + '\'' +
                 '}';
     }
 }

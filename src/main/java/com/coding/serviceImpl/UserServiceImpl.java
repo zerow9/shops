@@ -33,6 +33,12 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
     private ShopMapper shopMapper;
     @Autowired
     private ScoreMapper scoreMapper;
+    @Autowired
+    private CartMapper cartMapper;
+    @Autowired
+    private CollectMapper collectMapper;
+    @Autowired
+    private DiscussMapper discussMapper;
 
     /*----------------------------------------用户表------------------------------------------------------------------*/
 
@@ -550,6 +556,220 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             return  scoreMapper.selectScoreCount();
         }catch (Exception e){
             throw new Exception("查询积分明细总数时出错");
+        }
+    }
+
+    /*------------------------------------------购物车表------------------------------------------------------------------*/
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteCartByPrimaryKey(Integer cartId) throws Exception {
+        if(cartId != null && cartId != 0){
+            try {
+                except(cartMapper.deleteCartByPrimaryKey(cartId));
+            }catch (Exception e){
+                if (!e.getMessage().contains("操作无效"))
+                    throw new Exception("删除购物车商品时出错");
+                throw e;
+            }
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteCartByPrimaryKeyArray(Integer[] cartIdArray) throws Exception {
+        if(cartIdArray==null||"".equals(cartIdArray))throw new Exception("没有cartIdArray数组信息，批量购物车商品删除出错");
+        try {
+            except(cartMapper.deleteCartByPrimaryKeyArray(cartIdArray));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("批量删除购物车商品时出错");
+            throw e;
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void insertCartSelective(Cart cart) throws Exception {
+        try {
+            cartMapper.insertCartSelective(cart);
+        }catch (Exception e){
+            throw new Exception("添加购物车时出错");
+        }
+    }
+
+    public Cart selectCartByPrimaryKey(Integer cartId) throws Exception {
+        if (cartId != null && cartId != 0){
+            Cart cart = cartMapper.selectCartByPrimaryKey(cartId);
+            except(cart,"根据购物车ID查询购物车为空");
+            return cart;
+        }
+        return null;
+    }
+
+    public Integer selectCartCount() throws Exception {
+        try {
+            return  cartMapper.selectCartCount();
+        }catch (Exception e){
+            throw new Exception("查询购物车总数时出错");
+        }
+    }
+
+    public List<Cart> selectCart(PagingCustomCart pagingCustomCart) throws Exception {
+        try {
+            List<Cart>  carts = cartMapper.selectCart(pagingCustomCart);
+            if(carts.isEmpty()) throw new Exception("查询到的购物车列表为空");
+            return carts;
+        }catch (Exception e){
+            if (!e.getMessage().contains("购物车列表为空"))
+                throw new Exception("参数查询购物车列表出错，请检查参数");
+            throw e;
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void updateCartByPrimaryKeySelective(Cart cart) throws Exception {
+        try {
+            except(cartMapper.updateCartByPrimaryKeySelective(cart));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("修改购物车信息时出错");
+            throw e;
+        }
+    }
+
+    /*------------------------------------------收藏表------------------------------------------------------------------*/
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteCollectByPrimaryKey(Integer collectId) throws Exception {
+        if(collectId != null && collectId != 0){
+            try {
+                except(collectMapper.deleteCollectByPrimaryKey(collectId));
+            }catch (Exception e){
+                if (!e.getMessage().contains("操作无效"))
+                    throw new Exception("删除收藏商品时出错");
+                throw e;
+            }
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteCollectByPrimaryKeyArray(Integer[] collectIdArray) throws Exception {
+        if(collectIdArray==null||"".equals(collectIdArray))throw new Exception("没有collectIdArray数组信息，批量收藏商品删除出错");
+        try {
+            except(collectMapper.deleteCollectByPrimaryKeyArray(collectIdArray));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("批量删除收藏商品时出错");
+            throw e;
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void insertCollectSelective(Collect collect) throws Exception {
+        try {
+            collectMapper.insertCollectSelective(collect);
+        }catch (Exception e){
+            throw new Exception("添加收藏商品时出错");
+        }
+    }
+
+    public Collect selectCollectByPrimaryKey(Integer collectId) throws Exception {
+        if (collectId != null && collectId != 0){
+            Collect collect = collectMapper.selectCollectByPrimaryKey(collectId);
+            except(collect,"根据收藏ID查询收藏商品为空");
+            return collect;
+        }
+        return null;
+    }
+
+    public Integer selectCollectCount() throws Exception {
+        try {
+            return  collectMapper.selectCollectCount();
+        }catch (Exception e){
+            throw new Exception("查询收藏商品总数时出错");
+        }
+    }
+
+    public List<Collect> selectCollect(PagingCustomCollect pagingCustomCollect) throws Exception {
+        try {
+            List<Collect>  collects = collectMapper.selectCollect(pagingCustomCollect);
+            if(collects.isEmpty()) throw new Exception("查询到的收藏列表为空");
+            return collects;
+        }catch (Exception e){
+            if (!e.getMessage().contains("收藏列表为空"))
+                throw new Exception("参数查询收藏列表出错，请检查参数");
+            throw e;
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void updateCollectByPrimaryKeySelective(Collect collect) throws Exception {
+        try {
+            except(collectMapper.updateCollectByPrimaryKeySelective(collect));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("修改收藏信息时出错");
+            throw e;
+        }
+    }
+
+    /*------------------------------------------收藏表------------------------------------------------------------------*/
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteDiscussByPrimaryKey(Integer discussId) throws Exception {
+        if(discussId != null && discussId != 0){
+            try {
+                except(discussMapper.deleteDiscussByPrimaryKey(discussId));
+            }catch (Exception e){
+                if (!e.getMessage().contains("操作无效"))
+                    throw new Exception("删除评论信息时出错");
+                throw e;
+            }
+        }
+    }
+
+
+    @Transactional(rollbackFor =Exception.class )
+    public void insertDiscussSelective(Discuss discuss) throws Exception {
+        try {
+            discussMapper.insertDiscussSelective(discuss);
+        }catch (Exception e){
+            throw new Exception("添加评论信息时出错");
+        }
+    }
+
+    public Discuss selectDiscussByPrimaryKey(Integer discussId) throws Exception {
+        if (discussId != null && discussId != 0){
+            Discuss discuss = discussMapper.selectDiscussByPrimaryKey(discussId);
+            except(discuss,"根据评论ID查询评论信息为空");
+            return discuss;
+        }
+        return null;
+    }
+
+    public Integer selectDiscussCount(PagingCustomDiscuss pagingCustomDiscuss)throws Exception{
+        try {
+            return  discussMapper.selectDiscussCount(pagingCustomDiscuss);
+        }catch (Exception e){
+            throw new Exception("查询评论总数时出错");
+        }
+    }
+
+    public List<Discuss> selectDiscuss(PagingCustomDiscuss pagingCustomDiscuss) throws Exception {
+        try {
+            List<Discuss>  discusses = discussMapper.selectDiscuss(pagingCustomDiscuss);
+            if(discusses.isEmpty()) throw new Exception("查询到的评论列表为空");
+            return discusses;
+        }catch (Exception e){
+            if (!e.getMessage().contains("评论列表为空"))
+                throw new Exception("参数查询评论列表出错，请检查参数");
+            throw e;
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void updateDiscussByPrimaryKeySelective(Discuss discuss) throws Exception {
+        try {
+            except(discussMapper.updateDiscussByPrimaryKeySelective(discuss));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("修改评论信息时出错");
+            throw e;
         }
     }
 

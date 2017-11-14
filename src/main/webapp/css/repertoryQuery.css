@@ -15,14 +15,14 @@
 .hang-3 {
     float: left;
     margin-left: 60px;
-    height: 60px;
+    height:60px;
     width: 300px
 }
 
 .hang-butt {
     float: right;
-    margin-right: 56px;
-    margin-top:60px;
+    margin-right: 50px;
+    margin-top: 60px
 }
 
 .hang-1 input {
@@ -34,21 +34,20 @@
     height: 22px;
 }
 
-.hang-3 select {
-    width: 100px;
-    height: 22px;
-    margin-left: 4px;
-    margin-bottom: 15px;
-}
-
 .hang-3 input {
     width: 100px;
     height: 22px;
 }
 
+/*设置placeholder样式*/
+input::-webkit-input-placeholder {
+    color:#DCDCDC; /*字体颜色*/
+}
+
 .myButton {
     width: 60px;
     height: 35px;
+    margin-left: 20px;
     background-color: #1ab394;
     cursor: pointer;
     border: none;

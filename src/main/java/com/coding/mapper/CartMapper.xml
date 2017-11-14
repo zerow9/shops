@@ -38,6 +38,10 @@
     <where>
       <!--根据购物车基本信息查询-->
       <if test="cart != null and cart != ''">
+        <!--根据主键ID查询购物车信息-->
+        <if test="cart.cartId != null and cart.cartId != ''">
+          and cart_id = #{cart.cartId}
+        </if>
         <!--根据用户ID查询购物车信息-->
         <if test="cart.userUuid != null and cart.userUuid != ''">
           and user_uuid = #{cart.userUuid}
@@ -46,12 +50,34 @@
         <if test="cart.itemId != null and cart.itemId != 0">
           and item_id = #{cart.itemId}
         </if>
+          <!--根据商品名字查询购物车信息-->
+          <if test="cart.itemName != null and cart.itemName != ''">
+              and item_name REGEXP #{cart.itemName}
+          </if>
         <!--根据厂家ID查询购物车信息-->
         <if test="cart.makeVender != null and cart.makeVender != 0">
           and make_vender = #{cart.makeVender}
         </if>
       </if>
     </where>
+    <!--排序规则-->
+    <if test="sortByColumn != null and sortByColumn !=''">
+      <if test="sortRule != null and sortRule != ''">
+        order by ${sortByColumn} ${sortRule}
+      </if>
+    </if>
+
+    <!--分页-->
+    <if test="indexNumber != null">
+      <if test="pageNumber != null and pageNumber != 0">
+        limit #{indexNumber},#{pageNumber}
+      </if>
+    </if>
+    <if test="indexNumber == null">
+      <if test="pageNumber != null and pageNumber != 0">
+        limit 0,#{pageNumber}
+      </if>
+    </if>
   </select>
 
   <!--根据购物车唯一ID删除购物车信息-->
@@ -72,11 +98,11 @@
 
   <!--插入购物车信息-->
   <insert id="insertCart" parameterType="com.coding.pojo.Cart" >
-    insert into cart (cart_id, user_uuid, item_id, 
+    insert into cart ( user_uuid, item_id,
       item_name, price, item_images, 
       Item_number, make_vender
       )
-    values (#{cartId,jdbcType=INTEGER}, #{userUuid,jdbcType=VARCHAR}, #{itemId,jdbcType=INTEGER}, 
+    values ( #{userUuid,jdbcType=VARCHAR}, #{itemId,jdbcType=INTEGER},
       #{itemName,jdbcType=VARCHAR}, #{price,jdbcType=DOUBLE}, #{itemImages,jdbcType=VARCHAR}, 
       #{itemNumber,jdbcType=INTEGER}, #{makeVender,jdbcType=INTEGER}
       )
@@ -86,9 +112,6 @@
   <insert id="insertCartSelective" parameterType="com.coding.pojo.Cart" >
     insert into cart
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="cartId != null" >
-        cart_id,
-      </if>
       <if test="userUuid != null" >
         user_uuid,
       </if>
@@ -112,9 +135,6 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="cartId != null" >
-        #{cartId,jdbcType=INTEGER},
-      </if>
       <if test="userUuid != null" >
         #{userUuid,jdbcType=VARCHAR},
       </if>

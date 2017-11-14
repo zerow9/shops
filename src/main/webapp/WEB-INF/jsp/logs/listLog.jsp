@@ -32,7 +32,7 @@
 
             <div class="ibox float-e-margins">
 
-                <jsp:include page="../find/logfind.jsp" />
+                <jsp:include page="../find/findLog.jsp" />
 
                 <div class="ibox-title">
                     <h5>日志信息记录</h5>
@@ -96,6 +96,6 @@
 <script src="../../../common/layui/layui.js"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../../../js/find/findlog.js"></script>
-
+<script src="../../../js/logs/listlog.js"></script>
 </body>
 </html>

@@ -18,8 +18,8 @@
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="../../../common/layui/css/layui.css" rel="stylesheet">
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
-    <link href="../../../css/useQuery.css" rel="stylesheet">
-    <link href="../../../css/find.css" rel="stylesheet">
+    <link href="../../../css/itemQuery.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -31,7 +31,7 @@
         <div class="layui-col-sm12">
 
             <div class="ibox float-e-margins">
-                <jsp:include page="../find/itemfind.jsp" />
+                <jsp:include page="../find/findItem.jsp" />
                 <div class="ibox-title">
                     <h5>商品列表</h5>
                     <div class="ibox-tools">
@@ -58,7 +58,7 @@
 
                         <div class="table-responsive">
 
-                            <table class="layui-table" lay-data="{url:'<%=basePath%>item/getItemsAll.action', page:true, id:'itemId'}"
+                            <table class="layui-table" lay-data="{url:'getItemsAll.action', page:true, id:'itemId'}"
                                    lay-filter="demo">
                                 <thead>
                                 <tr>
