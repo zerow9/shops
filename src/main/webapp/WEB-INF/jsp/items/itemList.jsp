@@ -58,7 +58,7 @@
 
                         <div class="table-responsive">
 
-                            <table class="layui-table" lay-data="{url:'<%=basePath%>item/getItemsAll.action', page:true, id:'itemId'}"
+                            <table class="layui-table" lay-data="{url:'getItemsAll.action', page:true, id:'itemId'}"
                                    lay-filter="demo">
                                 <thead>
                                 <tr>

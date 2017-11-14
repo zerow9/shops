@@ -60,7 +60,7 @@
                     </div>
                     <div class="table-responsive">
                         <table class="layui-table"
-                               lay-data="{ url:'<%=basePath%>admin/getAdminAll.action', page:true, id:'adminId'}"
+                               lay-data="{ url:'getAdminAll.action', page:true, id:'adminId'}"
                                lay-filter="demo">
                             <thead>
                             <tr>
