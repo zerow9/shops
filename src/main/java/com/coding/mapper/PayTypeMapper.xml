@@ -65,7 +65,11 @@
   </delete>
   <!--根据支付类型ID组批量删除信息-->
   <delete id="deletePayTypeByPrimaryKeyArray" parameterType="java.lang.Integer">
-
+    delete  from pay_type
+    where pay_type_id IN
+    <foreach collection="payTypeIdArray" open="(" separator="," close=")" item="payTypeId" >
+      #{payTypeId}
+    </foreach>
   </delete>
   <!--插入支付类型信息-->
   <insert id="insertPayTypeSelective" parameterType="com.coding.pojo.PayType" >

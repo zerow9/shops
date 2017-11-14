@@ -1,5 +1,8 @@
 package com.coding.pojo;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class PayType {
     private Integer payTypeId;
 

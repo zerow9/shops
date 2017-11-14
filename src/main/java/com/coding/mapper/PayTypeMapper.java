@@ -3,9 +3,10 @@ package com.coding.mapper;
 import com.coding.paging.PagingCustomPayType;
 import com.coding.pojo.PayType;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 public interface PayTypeMapper {
     /**
      * 根据支付类型ID删除信息
