@@ -553,4 +553,50 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         }
     }
 
+    /*------------------------------------------积分明细表------------------------------------------------------------------*/
+    @Override
+    public int deleteCartByPrimaryKey(Integer cartId) throws Exception {
+        return 0;
+    }
+
+    @Override
+    public int deleteCartByPrimaryKeyArray(Integer[] cartIdArray) throws Exception {
+        return 0;
+    }
+
+    @Override
+    public int insertCart(Cart cart) throws Exception {
+        return 0;
+    }
+
+    @Override
+    public int insertCartSelective(Cart cart) throws Exception {
+        return 0;
+    }
+
+    @Override
+    public Cart selectCartByPrimaryKey(Integer cartId) throws Exception {
+        return null;
+    }
+
+    @Override
+    public Integer selectCartCount() throws Exception {
+        return null;
+    }
+
+    @Override
+    public List<Cart> selectCart(PagingCustomCart pagingCustomCart) throws Exception {
+        return null;
+    }
+
+    @Override
+    public int updateCartByPrimaryKeySelective(Cart cart) throws Exception {
+        return 0;
+    }
+
+    @Override
+    public int updateCartByPrimaryKey(Cart cart) throws Exception {
+        return 0;
+    }
+
 }

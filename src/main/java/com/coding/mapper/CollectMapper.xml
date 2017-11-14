@@ -62,11 +62,11 @@
   </delete>
   <!--插入收藏信息-->
   <insert id="insertCollect" parameterType="com.coding.pojo.Collect" >
-    insert into collect (collect_id, user_uuid, item_id, 
+    insert into collect (user_uuid, item_id,
       item_name, item_images, collect_time, 
       collect_item_vender, collect_remark
       )
-    values (#{collectId,jdbcType=INTEGER}, #{userUuid,jdbcType=VARCHAR}, #{itemId,jdbcType=INTEGER}, 
+    values (#{userUuid,jdbcType=VARCHAR}, #{itemId,jdbcType=INTEGER},
       #{itemName,jdbcType=VARCHAR}, #{itemImages,jdbcType=VARCHAR}, #{collectTime,jdbcType=TIMESTAMP}, 
       #{collectItemVender,jdbcType=INTEGER}, #{collectRemark,jdbcType=VARCHAR}
       )
@@ -75,9 +75,7 @@
   <insert id="insertCollectSelective" parameterType="com.coding.pojo.Collect" >
     insert into collect
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="collectId != null" >
-        collect_id,
-      </if>
+
       <if test="userUuid != null" >
         user_uuid,
       </if>
@@ -101,9 +99,7 @@
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="collectId != null" >
-        #{collectId,jdbcType=INTEGER},
-      </if>
+
       <if test="userUuid != null" >
         #{userUuid,jdbcType=VARCHAR},
       </if>
