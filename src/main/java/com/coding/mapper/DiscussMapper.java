@@ -42,10 +42,11 @@ public interface DiscussMapper {
 
     /**
      * 查询评论表中一共存在多少数据
+     * @param pagingCustomDiscuss 指定按照什么条件去计算总数（例如：计算某个商品一共有多少条评论信息）
      * @return 返回评论表中数据的总数
      * @throws Exception
      */
-    public Integer selectDiscussCount()throws Exception;
+    public Integer selectDiscussCount(PagingCustomDiscuss pagingCustomDiscuss)throws Exception;
 
     /**
      * 评论表的查询功能集合

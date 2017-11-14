@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coding.mapper.PayTypeMapper" >
+  <!--封装了 PayType 的属性-->
+  <resultMap id="BaseResultMap" type="com.coding.pojo.PayType" >
+    <id column="pay_type_id" property="payTypeId" jdbcType="INTEGER" />
+    <result column="pay_type_name" property="payTypeName" jdbcType="VARCHAR" />
+  </resultMap>
+  <!--PayType 所有字段（不包含冗余字段）-->
+  <sql id="Base_Column_List" >
+    pay_type_id, pay_type_name
+  </sql>
+  <!--根据支付类型唯一ID查询支付类型信息-->
+  <select id="selectPayTypeByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from pay_type
+    where pay_type_id = #{payTypeId,jdbcType=INTEGER}
+  </select>
+  <!--查询支付类型表中一共有多少数据-->
+  <select id="selectPayTypeCount" resultType="java.lang.Integer">
+    select count(*) from pay_type
+  </select>
+  <!--支付类型查询功能模块-->
+  <select id="selectPayType" parameterType="com.coding.paging.PagingCustomPayType" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    from pay_type
+    <where>
+      <!--根据支付类型基本信息查询-->
+      <if test="payType != null and payType != ''">
+        <!--根据支付类型唯一ID进行查询-->
+        <if test="payType.payTypeId != null and payType.payTypeId != 0">
+          and pay_type_id = #{payType.payTypeId}
+        </if>
+        <!--根据支付类型名称进行模糊查询-->
+        <if test="payType.payTypeName != null and payType.payTypeName != ''">
+          and pay_type_name regexp #{payType.payTypeName}
+        </if>
+      </if>
+    </where>
+    <!--排序规则-->
+    <if test="sortByColumn != null and sortByColumn !=''">
+      <if test="sortRule != null and sortRule != ''">
+        order by ${sortByColumn} ${sortRule}
+      </if>
+    </if>
+
+    <!--分页-->
+    <if test="indexNumber != null">
+      <if test="pageNumber != null and pageNumber != 0">
+        limit #{indexNumber},#{pageNumber}
+      </if>
+    </if>
+    <if test="indexNumber == null">
+      <if test="pageNumber != null and pageNumber != 0">
+        limit 0,#{pageNumber}
+      </if>
+    </if>
+  </select>
+  <!--根据支付类型ID删除信息-->
+  <delete id="deletePayTypeByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from pay_type
+    where pay_type_id = #{payTypeId,jdbcType=INTEGER}
+  </delete>
+  <!--根据支付类型ID组批量删除信息-->
+  <delete id="deletePayTypeByPrimaryKeyArray" parameterType="java.lang.Integer">
+    delete  from pay_type
+    where pay_type_id IN
+    <foreach collection="payTypeIdArray" open="(" separator="," close=")" item="payTypeId" >
+      #{payTypeId}
+    </foreach>
+  </delete>
+  <!--插入支付类型信息-->
+  <insert id="insertPayTypeSelective" parameterType="com.coding.pojo.PayType" >
+    insert into pay_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="payTypeId != null" >
+        pay_type_id,
+      </if>
+      <if test="payTypeName != null" >
+        pay_type_name,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="payTypeId != null" >
+        #{payTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="payTypeName != null" >
+        #{payTypeName,jdbcType=VARCHAR},
+      </if>
+
+    </trim>
+  </insert>
+  <!--根据支付类型唯一ID按需更新支付类型信息-->
+  <update id="updatePayTypeByPrimaryKeySelective" parameterType="com.coding.pojo.PayType" >
+    update pay_type
+    <set >
+      <if test="payTypeName != null" >
+        pay_type_name = #{payTypeName,jdbcType=VARCHAR},
+      </if>
+
+    </set>
+    where pay_type_id = #{payTypeId,jdbcType=INTEGER}
+  </update>
+
+</mapper>

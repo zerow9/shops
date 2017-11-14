@@ -40,6 +40,8 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     private LogMapper logMapper;
     @Autowired
     private ShopMapper shopMapper;
+    @Autowired
+    private DiscussMapper discussMapper;
 
 
     /*------------------------------------------用户表------------------------------------------------------------------*/
@@ -781,6 +783,19 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         }catch (Exception e){
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("修改商店信息时出错");
+            throw e;
+        }
+    }
+
+    /*------------------------------------------评论表------------------------------------------------------------------*/
+    @Transactional(rollbackFor =Exception.class )
+    public void deleteDiscussByPrimaryKeyArray(Integer[] discussIdArray) throws Exception {
+        if(discussIdArray==null||"".equals(discussIdArray))throw new Exception("没有discussIdArray数组信息，批量评论信息删除出错");
+        try {
+            except(discussMapper.deleteDiscussByPrimaryKeyArray(discussIdArray));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("批量删除评论信息时出错");
             throw e;
         }
     }

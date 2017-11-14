@@ -29,6 +29,10 @@
     <where>
       <!--根据收藏基本信息查询-->
       <if test="collect != null and collect != ''">
+        <!--根据主键唯一ID查询收藏信息-->
+        <if test="collect.collectId != null and collect.collectId != ''">
+          and collect_id = #{collect.collectId}
+        </if>
         <!--根据用户唯一ID查询收藏信息-->
         <if test="collect.userUuid != null and collect.userUuid != ''">
           and user_uuid = #{collect.userUuid}
