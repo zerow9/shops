@@ -129,6 +129,7 @@ public class ItemController {
         String fileName = item_images.getOriginalFilename();
         if (item_images != null && fileName != null && fileName.length() > 0) {
             String dir = request.getSession().getServletContext().getRealPath("/");
+            System.out.println(dir);
             fileName = MyUUID.randomUUID() + fileName.substring(fileName.lastIndexOf("."));
             fileName = "/image/" + fileName;
             File file = new File(dir + fileName);
