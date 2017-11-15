@@ -1,5 +1,6 @@
 package com.coding.mapper;
 
+import com.coding.paging.PagingCustomAddress;
 import com.coding.pojo.Address;
 import org.apache.ibatis.annotations.Param;
 
@@ -31,6 +32,14 @@ public interface AddressMapper {
      * @param address  封装了地址信息的 Address 对象
      */
     public int updateAddressByPrimaryKey(Address address) throws Exception;
+
+    /**
+     * 修改用户默认地址（将需修改用户Uuid、待修改为默认地址的AddressID封装）
+     * @param address 封装了地址信息 Address 类对象
+     * @return 是否更新成功  非0: 成功  0:失败
+     * @throws Exception
+     */
+    public int updateAddressUserDefaultAddress(Address address)throws Exception;
 
     /**
      * 返回所有地址信息
