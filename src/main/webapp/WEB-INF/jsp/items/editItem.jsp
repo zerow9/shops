@@ -182,7 +182,7 @@ String basePath = request.getScheme() + "://"
                             <label class="layui-form-label">图片</label>
                             <div class="layui-input-block"
                                  style="height: 120px;width: 120px; border: 0.1px solid rgb(243,243,244); ">
-                                <img src="http://localhost:8080/${item.itemImages}" alt="" height="120px" width="120px">
+                                <img src="${item.itemImages}" alt="" height="120px" width="120px">
                             </div>
                         </div>
 

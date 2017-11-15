@@ -38,7 +38,7 @@
     <where>
       <!--根据购物车基本信息查询-->
       <if test="cart != null and cart != ''">
-        <!--根据用户ID查询购物车信息-->
+        <!--根据主键ID查询购物车信息-->
         <if test="cart.cartId != null and cart.cartId != ''">
           and cart_id = #{cart.cartId}
         </if>
