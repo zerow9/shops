@@ -57,7 +57,7 @@
 
             var input = document.getElementById("btn");
             input.setAttribute("type", "submit");
-            document.getElementById("usernameErr1").innerHTML = "";
+            document.getElementById("errorMassage").innerHTML = "";
         }
     };
 })(jQuery);
