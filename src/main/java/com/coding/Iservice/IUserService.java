@@ -82,6 +82,13 @@ public interface IUserService {
      * @throws Exception 无效sql、sql异常
      */
     public List<Address> selectAddressByUserID(String userUuid) throws  Exception;
+
+    /**
+     * 修改用户默认地址（将需修改用户Uuid、待修改为默认地址的AddressID封装）
+     * @param address 封装了地址信息 Address 类对象
+     * @throws Exception 无效sql、sql异常
+     */
+    public void updateAddressUserDefaultAddress(Address address)throws Exception;
      /*------------------------------------------用户投诉表------------------------------------------------------------------*/
     /**
      * 根据投诉ID删除投诉信息

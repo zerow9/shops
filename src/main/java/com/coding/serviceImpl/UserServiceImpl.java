@@ -144,6 +144,18 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         }
         return null;
     }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void updateAddressUserDefaultAddress(Address address) throws Exception {
+        try {
+            except(addressMapper.updateAddressUserDefaultAddress(address));
+        }catch (Exception e){
+            if (!e.getMessage().contains("操作无效"))
+                throw new Exception("修改默认收获地址时出错");
+            throw e;
+        }
+    }
+
     /*------------------------------------------用户投诉表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
     public void deleteComplaintByPrimaryKey(Integer complaintId) throws Exception {
