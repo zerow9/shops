@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8" %>
+         pageEncoding="UTF-8" %>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -18,9 +18,8 @@ pageEncoding="UTF-8" %>
     <![endif]-->
     <script>
         if (window.top !== window.self) {
-            window.top.location = window.location
+            window.top.location = window.location;
         }
-        ;
     </script>
     <!--验证码修改2-->
     <script src="../../../shopmanagement/js/jquery-1.7.2.min.js" type="text/javascript"></script>
@@ -34,17 +33,17 @@ pageEncoding="UTF-8" %>
             <form method="post" name="form" action="/login.action" onsubmit="return ">
                 <h4 class="no-margins">登录</h4>
                 <p class="m-t-md">欢迎访问孝和管理后台</p>
-                <div id="usernameErr1"></div>
-                <input type="text" class="form-control uname" id="usernameErr" placeholder="用户名" name="username"
+                <div id="errorMassage"></div>
+                <input type="text" class="form-control uname" id="username" placeholder="用户名" name="username"
                        onblur="checkUserName(this.value)"/>
-                <input type="password" class="form-control pword m-b" placeholder="密码" name="password"
+                <input type="password" class="form-control pword m-b" id="password" placeholder="密码" name="password"
                        onblur="checkPassword(this.value)"/>
                 <div id="drag"></div>
                 <div class="h-h-y">
                     <div class="h-h-y-1"><input type="checkbox" name="rememberMe">记住密码</div>
                     <div class="h-h-y-2"><input type="checkbox" name="rememberMe">自动登录</div>
                 </div>
-                <input type="button" class="btn btn-success btn-block" value="登  录" id="btn">
+                <input type="button" class="btn btn-success btn-block" value="登  录" id="btn" onclick="clickButton()">
             </form>
         </div>
     </div>
@@ -57,10 +56,65 @@ pageEncoding="UTF-8" %>
 
 <!--验证码js-->
 <script type="text/javascript">
-        $('#drag').drag();
+    $('#drag').drag();
 </script>
 <!--输入帐号密码后才能登录-->
-<script src="../../../js/login.js" type="text/javascript"></script>
+<script type="text/javascript">
+    function checkUserName(username) {
+        //判断空
+        if (username.length == 0) {
+            // alert(username);
+            document.getElementById("errorMassage").innerHTML = "<font color='red'>请输入帐号！</font>";
+            document.form.username.focus();
+            return false;
+        }
+        //判断长度
+        if (username.length < 3 || username.length > 8) {
+            document.getElementById("errorMassage").innerHTML = "<font color='red'>帐号长度为3-8位</font>";
+            document.form.username.focus();
+            return false;
+        }
+        document.getElementById("errorMassage").innerHTML = "";
+        return true;
+    }
+
+    function checkPassword(pwd) {
+        if (pwd.length == 0) {
+            document.getElementById("errorMassage").innerHTML = "<font color='red'>请输入密码！</font>";
+            document.form.password.focus();
+            return false;
+        }
+        if (pwd.length < 3 || pwd.length > 8) {
+            document.getElementById("errorMassage").innerHTML = "<font color='red'>密码长度为3-8位</font>";
+            document.form.password.focus();
+            return false;
+        }
+        document.getElementById("errorMassage").innerHTML = "";
+        return true;
+    }
+
+    function clickButton() {
+        var input = document.getElementById("btn");
+        var username = document.getElementById("username").value;
+        var password = document.getElementById("password").value;
+        var button = input.attributes["type"].value;
+        if (username.length == 0) {
+            document.getElementById("errorMassage").innerHTML = "<font color='red'>请输入帐号！</font>";
+            document.form.username.focus();
+            return false;
+        }
+
+        if (password.length == 0) {
+            document.getElementById("errorMassage").innerHTML = "<font color='red'>请输入密码！</font>";
+            document.form.password.focus();
+            return false;
+        }
+        if (button == 'button')
+            document.getElementById("errorMassage").innerHTML = "<font color='red'>请拖动滑块验证！</font>";
+
+    }
+</script>
+
 </body>
 
 </html>

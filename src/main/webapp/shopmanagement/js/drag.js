@@ -54,8 +54,10 @@
             handler.unbind('mousedown');
             $(document).unbind('mousemove');
             $(document).unbind('mouseup');
+
             var input = document.getElementById("btn");
             input.setAttribute("type", "submit");
+            document.getElementById("usernameErr1").innerHTML = "";
         }
     };
 })(jQuery);
