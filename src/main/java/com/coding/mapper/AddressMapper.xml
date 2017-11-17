@@ -48,18 +48,37 @@
         take_goods_Name = #{takeGoodsName},
         address_x = #{addressX},
         address_y = #{addressY}
-        <!--add1 = #{add1,jdbcType=VARCHAR},
-        add2 = #{add2,jdbcType=VARCHAR},
-        add3 = #{add3,jdbcType=VARCHAR},
-        add4 = #{add4,jdbcType=VARCHAR},
-        add5 = #{add5,jdbcType=VARCHAR},
-        add6 = #{add6,jdbcType=VARCHAR},
-        add7 = #{add7,jdbcType=VARCHAR},
-        add8 = #{add8,jdbcType=VARCHAR},
-        add9 = #{add9,jdbcType=VARCHAR},
-        add10 = #{add10,jdbcType=VARCHAR} -->
         where address_id = #{addressId,jdbcType=INTEGER}
     </update>
+
+    <!--修改用户默认地址（将需修改用户Uuid、待修改为默认地址的AddressID封装）-->
+    <update id="updateAddressUserDefaultAddress" parameterType="com.coding.pojo.Address">
+        UPDATE address AS adrs3,
+            address AS adrs4
+        SET adrs3.is_default_Address= 1,
+            adrs4.is_default_Address = 0
+        WHERE
+            adrs3.address_id = #{addressId}
+            AND adrs4.address_id = (
+                SELECT
+                    adrs2.address_id
+                FROM
+                    (
+                        SELECT
+                            adrs1.address_id,
+                            adrs1.is_default_Address
+                        FROM
+                            (
+                                select
+                                    *
+                                from address where user_uuid=#{userUuid}
+                            ) adrs1
+                    ) adrs2
+                WHERE
+                    adrs2.is_default_Address = 1
+            )
+    </update>
+
     <!-- 查询所有地址信息 （需要将数据库字段名修改为 pojo 指定的属性名） -->
     <select id="selectAddressAll" resultType="com.coding.pojo.Address">
         SELECT

@@ -54,6 +54,10 @@
             handler.unbind('mousedown');
             $(document).unbind('mousemove');
             $(document).unbind('mouseup');
+
+            var input = document.getElementById("btn");
+            input.setAttribute("type", "submit");
+            document.getElementById("errorMassage").innerHTML = "";
         }
     };
 })(jQuery);
