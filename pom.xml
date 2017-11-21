@@ -39,9 +39,72 @@
         <shiro-web.version>1.2.3</shiro-web.version>
         <shiro-spring.version>1.2.3</shiro-spring.version>
         <hibernate-validator.version>5.0.2.Final</hibernate-validator.version>
+        <lucene.version>3.5.0</lucene.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId> org.apache.lucene</groupId>
+            <artifactId>lucene-analyzers</artifactId>
+            <version> ${lucene.version}</version>
+        </dependency>
+        <dependency>
+            <groupId> org.apache.lucene</groupId>
+            <artifactId>lucene-benchmark</artifactId>
+            <version> ${lucene.version}</version>
+        </dependency>
+        <dependency>
+            <groupId> org.apache.lucene</groupId>
+            <artifactId>lucene-core</artifactId>
+            <version> ${lucene.version}</version>
+        </dependency>
+        <dependency>
+            <groupId> org.apache.lucene</groupId>
+            <artifactId>lucene-highlighter</artifactId>
+            <version> ${lucene.version}</version>
+        </dependency>
+        <dependency>
+            <groupId> org.apache.lucene</groupId>
+            <artifactId>lucene-instantiated</artifactId>
+            <version> ${lucene.version}</version>
+        </dependency>
+        <dependency>
+            <groupId> org.apache.lucene</groupId>
+            <artifactId>lucene-memory</artifactId>
+            <version> ${lucene.version}</version>
+        </dependency>
+        <dependency>
+            <groupId> org.apache.lucene</groupId>
+            <artifactId>lucene-misc</artifactId>
+            <version> ${lucene.version}</version>
+        </dependency>
+        <dependency>
+            <groupId> org.apache.lucene</groupId>
+            <artifactId>lucene-queries</artifactId>
+            <version> ${lucene.version}</version>
+        </dependency>
+        <dependency>
+            <groupId> org.apache.lucene</groupId>
+            <artifactId>lucene-queryparser</artifactId>
+            <version> ${lucene.version}</version>
+        </dependency>
+        <!-- <dependency>
+             <groupId>com.chenlb.mmseg4j</groupId>
+             <artifactId>mmseg4j-analysis</artifactId>
+             <version>1.9.1</version>
+         </dependency>-->
+        <!--      <dependency>
+                  <groupId>com.chenlb.mmseg4j</groupId>
+                  <artifactId>mmseg4j-all</artifactId>
+                  <version>1.8.5</version>
+              </dependency>-->
+        <!--
+                <dependency>
+                    <groupId>com.janeluo</groupId>
+                    <artifactId>ikanalyzer</artifactId>
+                    <version>2012_u6</version>
+                </dependency>
+        -->
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
