@@ -283,6 +283,14 @@ public interface IAdminService extends IUserService {
     public void insertItem(Item item) throws Exception;
 
     /**
+     * 按需插入商品信息，并返回其唯一ID
+     * @param item 封装了商品信息的 Item 类对象
+     * @return 商品唯一ID
+     * @throws Exception
+     */
+    public void insertItemSelectiveAndReturnItemId(Item item)throws Exception;
+
+    /**
      * 根据商品唯一ID更新商品信息
      * @param item 商品ID
      * @throws Exception 无效sql、sql异常

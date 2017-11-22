@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.coding.mapper.ItemIndexMapper" >
+  <resultMap id="BaseResultMap" type="com.coding.pojo.ItemIndex" >
+    <id column="index_Id" property="indexId" jdbcType="INTEGER" />
+    <result column="item_Id" property="itemId" jdbcType="INTEGER" />
+    <result column="index_type" property="indexType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    index_Id, item_Id, index_type
+  </sql>
+  <!--根据主键查询-->
+  <select id="selectItemIndexByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from item_index
+    where index_Id = #{indexId,jdbcType=INTEGER}
+  </select>
+  <!--查询所有信息-->
+  <select id="selectItemIndexAll" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from item_index
+  </select>
+  <!--根据主键删除-->
+  <delete id="deleteItemIndexByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from item_index
+    where index_Id = #{indexId,jdbcType=INTEGER}
+  </delete>
+
+  <!--删除所有-->
+  <delete id="deleteItemIndexAll">
+    truncate TABLE item_index
+  </delete>
+
+  <!--根据主键按需插入-->
+  <insert id="insertItemIndexSelective" parameterType="com.coding.pojo.ItemIndex" >
+    insert into item_index
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="indexId != null" >
+        index_Id,
+      </if>
+      <if test="itemId != null" >
+        item_Id,
+      </if>
+      <if test="indexType != null" >
+        index_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="indexId != null" >
+        #{indexId,jdbcType=INTEGER},
+      </if>
+      <if test="itemId != null" >
+        #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="indexType != null" >
+        #{indexType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <!--根据主键按需更新-->
+  <update id="updateItemIndexByPrimaryKeySelective" parameterType="com.coding.pojo.ItemIndex" >
+    update item_index
+    <set >
+      <if test="itemId != null" >
+        item_Id = #{itemId,jdbcType=INTEGER},
+      </if>
+      <if test="indexType != null" >
+        index_type = #{indexType,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where index_Id = #{indexId,jdbcType=INTEGER}
+  </update>
+</mapper>
