@@ -1,6 +1,7 @@
 package com.coding.serviceImpl;
 
 import com.coding.Iservice.IAdminService;
+import com.coding.Iservice.IindexItemService;
 import com.coding.mapper.*;
 import com.coding.paging.*;
 import com.coding.pojo.*;
@@ -45,6 +46,9 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     @Autowired
     private PayTypeMapper payTypeMapper;
 
+    //初始化索引接口
+    @Autowired
+    private IindexItemService iindexItemService;
 
     /*------------------------------------------用户表------------------------------------------------------------------*/
     @Transactional(rollbackFor =Exception.class )
@@ -375,6 +379,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         if (itemId != null && itemId !=0){
         try {
             except(itemMapper.deleteItemByPrimaryKey(itemId));
+            iindexItemService.deleteIndex(itemId,false);
         }catch (Exception e){
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("删除商品时出错");
@@ -388,6 +393,9 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         if(itemIdArray==null||"".equals(itemIdArray))throw new Exception("没有itemIdArray数组信息，批量商品删除出错");
         try {
             except(itemMapper.deleteItemByItemIdArray(itemIdArray));
+            for(Integer itemId:itemIdArray){
+            iindexItemService.deleteIndex(itemId,false);
+            }
         }catch (Exception e){
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("批量删除商品时出错");
@@ -399,6 +407,17 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     public void insertItem(Item item) throws Exception {
         try {
             itemMapper.insertItem(item);
+            iindexItemService.addIndex(item,false);
+        }catch (Exception e){
+            throw new Exception("添加商品时出错");
+        }
+    }
+
+    @Transactional(rollbackFor =Exception.class )
+    public void insertItemSelectiveAndReturnItemId(Item item) throws Exception {
+        try {
+            System.out.println(itemMapper.insertItemSelectiveAndReturnItemId(item));
+            iindexItemService.addIndex(item,false);
         }catch (Exception e){
             throw new Exception("添加商品时出错");
         }
@@ -408,6 +427,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
     public void updateItemByPrimaryKey(Item item) throws Exception {
         try {
             except(itemMapper.updateItemByPrimaryKey(item));
+            iindexItemService.updateIndex(item,false);
         }catch (Exception e){
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("修改商品信息时出错");

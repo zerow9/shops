@@ -45,13 +45,15 @@ public class IndexService implements IindexItemService {
             NRTManager nrtManager = LuceneContext.getInstance().getNrtManager();
             Document doc = filedDoc(fields);
             nrtManager.addDocument(doc);
+            updateCommitIndex(); //提交索引，待优化
         } catch (Exception e) {
             throw e;
         }
     }
     private Document filedDoc(Item fields)throws Exception{
         Document doc = new Document();
-        doc.add(new NumericField("id",Field.Store.YES,true).setIntValue(fields.getItemId()));
+//        doc.add(new NumericField("id",Field.Store.YES,true).setIntValue(fields.getItemId()));
+        doc.add(new Field("id",fields.getItemId().toString(),Field.Store.YES,Field.Index.NOT_ANALYZED_NO_NORMS));
         doc.add(new Field("name",fields.getItemName(),Field.Store.YES,Field.Index.ANALYZED));
         doc.add(new Field("keyword",fields.getKeyWord(),Field.Store.YES,Field.Index.ANALYZED));
         doc.add(new Field("images",fields.getItemImages(),Field.Store.YES,Field.Index.NOT_ANALYZED_NO_NORMS));
@@ -70,6 +72,7 @@ public class IndexService implements IindexItemService {
             indexMapper.insertItemIndexSelective(index);
             }
             LuceneContext.getInstance().getNrtManager().deleteDocuments(new Term("id",id.toString()));
+            updateCommitIndex(); //提交索引，待优化
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -87,6 +90,7 @@ public class IndexService implements IindexItemService {
         Document doc = filedDoc(fields);
         try {
             nrtManager.updateDocument(new Term("id",fields.getItemId().toString()),doc);
+            updateCommitIndex(); //提交索引，待优化
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -160,12 +164,15 @@ public class IndexService implements IindexItemService {
     }
 
     public void updateReconstructorIndex() throws Exception {
+        LuceneContext.getInstance();
+        LuceneContext.getWriter().deleteAll();
         List<Item> items = itemMapper.selectItemAll();
         for(Item item:items){
             addIndex(item,false);
         }
         LuceneContext.getInstance().commitIndex();
         indexMapper.deleteItemIndexAll();
+//        LuceneContext.getWriter().close();
     }
 
 

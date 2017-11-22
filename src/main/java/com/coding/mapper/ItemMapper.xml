@@ -3,7 +3,7 @@
 <mapper namespace="com.coding.mapper.ItemMapper">
 
     <!--增加商品信息-->
-    <insert id="insertItem" parameterType="com.coding.pojo.Item">
+    <insert id="insertItem" parameterType="com.coding.pojo.Item" keyProperty="itemId" useGeneratedKeys="true">
       insert into item (item_type_id, item_name,
       item_price, item_market_price, item_score_type,
       score_price, item_images, item_format,
@@ -86,6 +86,133 @@
         </set>
         where item_id = #{itemId,jdbcType=INTEGER}
     </update>
+
+    <!--按需插入商品信息，并返回其主键-->
+    <insert id="insertItemSelectiveAndReturnItemId" parameterType="com.coding.pojo.Item" keyProperty="itemId" useGeneratedKeys="true">
+        <!--<selectKey keyProperty="itemId" order="AFTER"  resultType="java.lang.Integer">-->
+        <!--SELECT LAST_INSERT_ID() AS itemId-->
+        <!--</selectKey>-->
+        insert into item
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="itemTypeId != null" >
+                item_type_id,
+            </if>
+            <if test="itemName != null" >
+                item_name,
+            </if>
+            <if test="itemPrice != null" >
+                item_price,
+            </if>
+            <if test="itemMarketPrice != null" >
+                item_market_price,
+            </if>
+            <if test="itemScoreType != null" >
+                item_score_type,
+            </if>
+            <if test="scorePrice != null" >
+                score_price,
+            </if>
+            <if test="itemImages != null" >
+                item_images,
+            </if>
+            <if test="itemFormat != null" >
+                item_format,
+            </if>
+            <if test="itemTypeOne != null" >
+                item_type_one,
+            </if>
+            <if test="itemTypeTwo != null" >
+                item_type_two,
+            </if>
+            <if test="itemTypeThree != null" >
+                item_type_three,
+            </if>
+            <if test="postPrice != null" >
+                post_price,
+            </if>
+            <if test="repertoryNumber != null" >
+                repertory_number,
+            </if>
+            <if test="itemSaleNumber != null" >
+                item_sale_number,
+            </if>
+            <if test="itemCollectNumber != null" >
+                Item_collect_number,
+            </if>
+            <if test="keyWord != null" >
+                key_word,
+            </if>
+            <if test="makeVender != null" >
+                make_vender,
+            </if>
+            <if test="makeDate != null" >
+                make_date,
+            </if>
+            <if test="itemIntroduce != null" >
+                item_introduce,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="itemTypeId != null" >
+                #{itemTypeId,jdbcType=INTEGER},
+            </if>
+            <if test="itemName != null" >
+                #{itemName,jdbcType=VARCHAR},
+            </if>
+            <if test="itemPrice != null" >
+                #{itemPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="itemMarketPrice != null" >
+                #{itemMarketPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="itemScoreType != null" >
+                #{itemScoreType,jdbcType=INTEGER},
+            </if>
+            <if test="scorePrice != null" >
+                #{scorePrice,jdbcType=INTEGER},
+            </if>
+            <if test="itemImages != null" >
+                #{itemImages,jdbcType=VARCHAR},
+            </if>
+            <if test="itemFormat != null" >
+                #{itemFormat,jdbcType=VARCHAR},
+            </if>
+            <if test="itemTypeOne != null" >
+                #{itemTypeOne,jdbcType=INTEGER},
+            </if>
+            <if test="itemTypeTwo != null" >
+                #{itemTypeTwo,jdbcType=INTEGER},
+            </if>
+            <if test="itemTypeThree != null" >
+                #{itemTypeThree,jdbcType=INTEGER},
+            </if>
+            <if test="postPrice != null" >
+                #{postPrice,jdbcType=DOUBLE},
+            </if>
+            <if test="repertoryNumber != null" >
+                #{repertoryNumber,jdbcType=INTEGER},
+            </if>
+            <if test="itemSaleNumber != null" >
+                #{itemSaleNumber,jdbcType=INTEGER},
+            </if>
+            <if test="itemCollectNumber != null" >
+                #{itemCollectNumber,jdbcType=INTEGER},
+            </if>
+            <if test="keyWord != null" >
+                #{keyWord,jdbcType=VARCHAR},
+            </if>
+            <if test="makeVender != null" >
+                #{makeVender,jdbcType=INTEGER},
+            </if>
+            <if test="makeDate != null" >
+                #{makeDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="itemIntroduce != null" >
+                #{itemIntroduce,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+
+    </insert>
    <!-- <update id="updateItemByPrimaryKey" parameterType="com.coding.pojo.Item">
         update item
         set item_type_id = #{itemTypeId,jdbcType=INTEGER},
