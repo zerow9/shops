@@ -176,7 +176,7 @@ String basePath = request.getScheme() + "://"
                             <label class="layui-form-label">图片</label>
                             <div class="layui-input-block"
                                  style="height: 290px;width: 320px; border: 0.1px solid rgb(243,243,244); ">
-                                <img name="item_images" src="${item.itemImages}" alt="" height="240px" width="320px" id="itemImg">
+                                <img src="${item.itemImages}" alt="" height="240px" width="320px" id="itemImg">
                             </div>
                         </div>
 

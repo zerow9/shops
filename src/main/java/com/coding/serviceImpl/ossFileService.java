@@ -39,7 +39,7 @@ public class ossFileService implements FileService {
      * 初始化配置信息
      */
     public ossFileService() {
-        bucketName = "xcstudio";
+        bucketName = "xcstudio-shop";
         endpoint = "http://oss-cn-shenzhen.aliyuncs.com";
         accessKeyId = "LTAItV2D26rhST1y";
         accessKeySecret = "A7RIc9aGRI1YIScwra1B2yQt67ZvAS";

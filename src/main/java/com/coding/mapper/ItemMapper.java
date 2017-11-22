@@ -3,9 +3,11 @@ package com.coding.mapper;
 import com.coding.pojo.Item;
 import com.coding.paging.PagingCustomItem;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+@Repository
 public interface ItemMapper {
 
     /**

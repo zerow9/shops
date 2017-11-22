@@ -161,13 +161,23 @@ String basePath = request.getScheme() + "://"
                                 </div>
                             </div>
                         </div>
+
                         <div class="layui-form-item">
-                            <label class="layui-form-label">上传商品图片</label>
-                            <div class="layui-input-block">
-                                <input type="file" name="item_images" autocomplete="off"
-                                       placeholder="请上传图片" class="layui-input">
+                            <label class="layui-form-label">商品图片</label>
+                            <div class="layui-input-block"
+                                 style="height: 290px;width: 320px; border: 0.1px solid rgb(243,243,244); ">
+                                <img src="http://xcstudio-shop.oss-cn-shenzhen.aliyuncs.com/img/default.jpg" alt="商品图片" height="240px" width="320px" id="itemImg">
                             </div>
                         </div>
+
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button type="button" class="layui-btn" id="file-upload-btn">
+                                    <i class="layui-icon">&#xe67c;</i>上传图片
+                                </button>
+                            </div>
+                        </div>
+
                         <div class="layui-form-item">
                             <label class="layui-form-label">规格</label>
                             <div class="layui-input-block">
@@ -200,5 +210,6 @@ String basePath = request.getScheme() + "://"
 
 <script src="../../../shopmanagement/common/layui/layui.js" charset="utf-8" type="text/javascript"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="../../../shopmanagement/js/jquery-1.7.2.min.js"></script>
 <script src="../../../js/items/addItem.js"></script>
 </body>

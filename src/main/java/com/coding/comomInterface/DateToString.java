@@ -2,13 +2,16 @@ package com.coding.comomInterface;
 
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
+
 import java.util.Date;
 
 public class DateToString {
 
-    private static String pattern="yyyy-MM-dd HH:mm:ss";
+    private static String pattern = "yyyy-MM-dd HH:mm:ss";
 
     public static String date(Date date) {
+        if (date == null)
+            return "";
         return new DateTime(date.getTime()).toString(pattern);
     }
 

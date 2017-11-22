@@ -1,4 +1,4 @@
-var formData = $('#uploadForm').serialise();
+var formData = $('#uploadForm').serialize().toString();
 
 layui.use(['form', 'layedit', 'laydate'], function () {
     var form = layui.form,
@@ -50,18 +50,15 @@ layui.use(['form', 'layedit', 'laydate'], function () {
 
     });
 
-
     //监听提交
     form.on('submit(demo1)', function (data) {
-        var formData = new FormData($("#uploadForm")[0]);
+        // var formData = new FormData($("#uploadForm")[0]);
+        formData = $('#uploadForm').serialize().toString();
+        console.log(formData);
         $.ajax({
             url: 'updateItem.action',
             data: formData,
             type: "POST",
-            async: false,
-            cache: false,
-            contentType: false,
-            processData: false,
             success: function () {
                 parent.layer.closeAll();
                 swal({
@@ -96,20 +93,23 @@ layui.use('upload', function () {
 
         }
         , done: function (res) {    //执行上传请求后的回调。返回三个参数，分别为：res（服务端响应信息）、index（当前文件的索引）、upload（重新上传的方法，一般在文件上传失败后使用）
-            // 文件长城成功后，更新数据库文件访问地址
+            // 文件上传成功后，更新数据库文件访问地址
             console.log(res.msg);
+            formData = $('#uploadForm').serialize().toString();
+            formData += '&itemImages=' + res.data.src;
             if (res.code === 0) {
-                layer.msg("图片修改成功！");
                 $.ajax({
                     url: 'updateItem.action',
-                    // data: 'item_images=' + res.data.src + "&itemId=" + $('#itemId').val(),
                     data: formData,
                     type: "POST",
                     success: function () {
+                        layer.msg("图片修改成功！");
                         console.log("更新数据库文件地址成功！");
                         $('#itemImg').attr('src', res.data.src)
                     }
                 });
+            } else {
+                layer.msg("图片修改失败！");
             }
         }
         , error: function () {      //执行上传请求出现异常的回调（一般为网络异常、URL 404等）。返回两个参数，分别为：index（当前文件的索引）、upload（重新上传的方法）

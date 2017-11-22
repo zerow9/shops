@@ -47,6 +47,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try{
         userMapper.insertUser(user);
         } catch (Exception e){
+            e.printStackTrace();
             throw  new Exception("插入用戶信息时出錯");
         }
     }
@@ -66,6 +67,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             except(userMapper.updateUserByPrimaryKey(user));
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
             throw new Exception("修改用户信息时出错");
                 throw e;
@@ -78,6 +80,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             return  userMapper.selectUserCount();
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("查询用户总数时出错");
         }
     }
@@ -99,6 +102,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
                except(addressMapper.deleteAddressByPrimaryKey(addressId));
 //                addressMapper.deleteAddressByPrimaryKey(addressId);
             }catch (Exception e){
+                e.printStackTrace();
                 if (!e.getMessage().contains("操作无效"))
                   throw new Exception("删除收获地址时出错");
                 throw e;
@@ -111,6 +115,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             addressMapper.insertAddress(address);
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("插入收获地址时出错");
         }
     }
@@ -129,6 +134,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             except(addressMapper.updateAddressByPrimaryKey(address));
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
                  throw new Exception("修改收获地址时出错");
             throw e;
@@ -150,6 +156,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             except(addressMapper.updateAddressUserDefaultAddress(address));
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("修改默认收获地址时出错");
             throw e;
@@ -164,6 +171,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
                 except(complaintMapper.deleteComplaintByPrimaryKey(complaintId));
 //                addressMapper.deleteAddressByPrimaryKey(addressId);
             }catch (Exception e){
+                e.printStackTrace();
                 if (!e.getMessage().contains("操作无效"))
                     throw new Exception("删除投诉信息时出错");
                 throw e;
@@ -175,6 +183,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             complaintMapper.insertComplaintSelective(complaint);
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("添加投诉信息时出错");
         }
     }
@@ -183,6 +192,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             except(complaintMapper.updateComplaintByPrimaryKeySelective(record));
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("修改投诉信息时出错");
             throw e;
@@ -204,6 +214,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             if(complaints.isEmpty()) throw new Exception("用户投诉信息查询为空");
             return complaints;
        }catch (Exception e){
+           e.printStackTrace();
             if (!e.getMessage().contains("投诉信息查询为空"))
                 throw new Exception("参数查询用户投诉列表出错，请检查参数");
             throw e;
@@ -232,6 +243,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             if(itemTypes.isEmpty()) throw new Exception("查询到的商品类别列表为空");
             return itemTypes;
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("商品类别列表为空"))
                 throw new Exception("参数查询商品类别列表出错，请检查参数");
             throw e;
@@ -242,6 +254,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             return  itemTypeMapper.selectItemTypeCount();
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("查询商品总数时出错");
         }
     }
@@ -285,7 +298,9 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             List<Item> items;
             try {
                items =  itemMapper.selectItemFuzzyByItemNameSort(fuzzyItemName,sortRule,sortColumn);
-            }catch (Exception e){throw new Exception("商品参数错误，请检查重试");}
+            }catch (Exception e){
+                e.printStackTrace();
+                throw new Exception("商品参数错误，请检查重试");}
              if(items.isEmpty()) throw new Exception("该参数查询的商品列表为空");
              return items;
         }
@@ -298,6 +313,8 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             if(items.isEmpty()) throw new Exception("查询到的商品列表为空");
             return items;
         }catch (Exception e){
+            e.printStackTrace();
+            e.printStackTrace();
             if (!e.getMessage().contains("商品列表为空"))
                 throw new Exception("参数查询商品列表出错，请检查参数");
             throw e;
@@ -307,6 +324,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             return  itemMapper.selectItemCount();
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("查询商品总数时出错");
         }
     }
@@ -318,6 +336,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             try {
                 except(ordersMapper.deleteOrderByPrimaryKey(orderId));
             }catch (Exception e){
+                e.printStackTrace();
                 if (!e.getMessage().contains("操作无效"))
                     throw new Exception("删除订单信息时出错");
                 throw e;
@@ -331,6 +350,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             except(ordersMapper.deleteOrderByPrimaryKeyArray(orderIdArray));
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("批量删除订单时出错");
             throw e;
@@ -342,6 +362,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             ordersMapper.insertOrderSelective(order);
         }catch (Exception e){
+            e.printStackTrace();
             e.printStackTrace();
             throw new Exception("添加订单时出错");
         }
@@ -362,6 +383,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             if(orders.isEmpty()) throw new Exception("查询到的订单列表为空");
             return orders;
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("订单列表为空"))
                 throw new Exception("参数查询订单列表出错，请检查参数");
             throw e;
@@ -384,6 +406,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             try {
                 except(orderDetailMapper.deleteOrderDetailByPrimaryKey(orderDetailId));
             }catch (Exception e){
+                e.printStackTrace();
                 if (!e.getMessage().contains("操作无效"))
                     throw new Exception("删除订单详情信息时出错");
                 throw e;
@@ -397,6 +420,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             except(orderDetailMapper.deleteOrderDetailByPrimaryKeyArray(oderDetailIdArray));
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("批量删除订单详情时出错");
             throw e;
@@ -408,6 +432,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             orderDetailMapper.insertOrderDetailSelective(orderDetail);
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("添加订单详情时出错");
         }
     }
@@ -418,6 +443,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             if(orderDetails.isEmpty()) throw new Exception("查询到的商品详情列表为空");
             return orderDetails;
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("商品详情列表为空"))
                 throw new Exception("参数查询商品详情列表出错，请检查参数");
             throw e;
@@ -441,6 +467,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             if(notices.isEmpty()) throw new Exception("查询到的公告列表为空");
             return notices;
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("公告列表为空"))
                 throw new Exception("参数公告列表出错，请检查参数");
             throw e;
@@ -451,6 +478,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             return  noticeMapper.selectNoticeCount();
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("查询公告信息总数时出错");
         }
     }
@@ -471,6 +499,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             if(shops.isEmpty()) throw new Exception("查询到的商店列表为空");
             return shops;
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("商店列表为空"))
                 throw new Exception("参数商店列表出错，请检查参数");
             throw e;
@@ -481,6 +510,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             return  shopMapper.selectShopCount();
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("查询商店信息总数时出错");
         }
     }
@@ -501,6 +531,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             try {
                 except(scoreMapper.deleteScoreByPrimaryKey(scoreId));
             }catch (Exception e){
+                e.printStackTrace();
                 if (!e.getMessage().contains("操作无效"))
                     throw new Exception("删除积分明细时出错");
                 throw e;
@@ -514,6 +545,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             except(scoreMapper.deleteScoreByPrimaryKeyArray(scoreIdArrary));
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("批量删除积分明细时出错");
             throw e;
@@ -536,6 +568,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
                 scoreMapper.insertScoreSelective(score);
             }
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("添加积分明细时出错");
         }
     }
@@ -545,6 +578,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             except(scoreMapper.updateScoreByPrimaryKeySelective(score));
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("修改积分明细时出错");
             throw e;
@@ -557,6 +591,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             if(scores.isEmpty()) throw new Exception("查询到的积分明细列表为空");
             return scores;
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("积分明细列表为空"))
                 throw new Exception("参数查询积分明细列表出错，请检查参数");
             throw e;
@@ -567,6 +602,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             return  scoreMapper.selectScoreCount();
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("查询积分明细总数时出错");
         }
     }
@@ -578,6 +614,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             try {
                 except(cartMapper.deleteCartByPrimaryKey(cartId));
             }catch (Exception e){
+                e.printStackTrace();
                 if (!e.getMessage().contains("操作无效"))
                     throw new Exception("删除购物车商品时出错");
                 throw e;
@@ -591,6 +628,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             except(cartMapper.deleteCartByPrimaryKeyArray(cartIdArray));
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("批量删除购物车商品时出错");
             throw e;
@@ -602,6 +640,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             cartMapper.insertCartSelective(cart);
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("添加购物车时出错");
         }
     }
@@ -619,6 +658,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             return  cartMapper.selectCartCount();
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("查询购物车总数时出错");
         }
     }
@@ -629,6 +669,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             if(carts.isEmpty()) throw new Exception("查询到的购物车列表为空");
             return carts;
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("购物车列表为空"))
                 throw new Exception("参数查询购物车列表出错，请检查参数");
             throw e;
@@ -640,6 +681,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             except(cartMapper.updateCartByPrimaryKeySelective(cart));
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("修改购物车信息时出错");
             throw e;
@@ -653,6 +695,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             try {
                 except(collectMapper.deleteCollectByPrimaryKey(collectId));
             }catch (Exception e){
+                e.printStackTrace();
                 if (!e.getMessage().contains("操作无效"))
                     throw new Exception("删除收藏商品时出错");
                 throw e;
@@ -666,6 +709,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             except(collectMapper.deleteCollectByPrimaryKeyArray(collectIdArray));
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("批量删除收藏商品时出错");
             throw e;
@@ -677,6 +721,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             collectMapper.insertCollectSelective(collect);
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("添加收藏商品时出错");
         }
     }
@@ -694,6 +739,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             return  collectMapper.selectCollectCount();
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("查询收藏商品总数时出错");
         }
     }
@@ -704,6 +750,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             if(collects.isEmpty()) throw new Exception("查询到的收藏列表为空");
             return collects;
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("收藏列表为空"))
                 throw new Exception("参数查询收藏列表出错，请检查参数");
             throw e;
@@ -715,6 +762,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             except(collectMapper.updateCollectByPrimaryKeySelective(collect));
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("修改收藏信息时出错");
             throw e;
@@ -728,6 +776,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             try {
                 except(discussMapper.deleteDiscussByPrimaryKey(discussId));
             }catch (Exception e){
+                e.printStackTrace();
                 if (!e.getMessage().contains("操作无效"))
                     throw new Exception("删除评论信息时出错");
                 throw e;
@@ -741,6 +790,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             discussMapper.insertDiscussSelective(discuss);
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("添加评论信息时出错");
         }
     }
@@ -758,6 +808,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             return  discussMapper.selectDiscussCount(pagingCustomDiscuss);
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("查询评论总数时出错");
         }
     }
@@ -768,6 +819,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
             if(discusses.isEmpty()) throw new Exception("查询到的评论列表为空");
             return discusses;
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("评论列表为空"))
                 throw new Exception("参数查询评论列表出错，请检查参数");
             throw e;
@@ -779,6 +831,7 @@ public class UserServiceImpl extends ErrorExc implements IUserService {
         try {
             except(discussMapper.updateDiscussByPrimaryKeySelective(discuss));
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("修改评论信息时出错");
             throw e;

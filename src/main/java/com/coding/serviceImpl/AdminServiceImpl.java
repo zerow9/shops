@@ -57,6 +57,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
             try {
                 except(userMapper.deleteUserByPrimaryKey(userUuid));
             }catch (Exception e){
+                e.printStackTrace();
                 if (!e.getMessage().contains("操作无效"))
                  throw new Exception("删除用户信息时出错");
                 throw e;
@@ -107,6 +108,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         try {
             except(userMapper.deleteUsersByUuidArray(user_uuidArray));
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("批量删除用户时出错");
             throw e;
@@ -128,6 +130,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
            if(users.isEmpty()) throw new Exception("查询到的用户列表为空");
            return users;
        }catch (Exception e){
+           e.printStackTrace();
            if (!e.getMessage().contains("用户列表为空"))
             throw new Exception("参数查询用户列表出错，请检查参数");
            throw e;
@@ -145,6 +148,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         try {
             return addressMapper.selectAddressCount();
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("查询收货地址总数时出错");
         }
     }
@@ -156,6 +160,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
             try {
                 except(groupsMapper.deleteGroupsByPrimaryKey(groupId));
             }catch (Exception e){
+                e.printStackTrace();
                 if (!e.getMessage().contains("操作无效"))
                     throw new Exception("删除分组信息时出错");
                 throw e;
@@ -168,6 +173,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         try {
             except(groupsMapper.deleteGroupsByPrimaryKeyArray(groups_idArray));
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("批量删除分组时出错");
             throw e;
@@ -180,6 +186,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         try {
             groupsMapper.insertGroups(groups);
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("插入分组信息时出错");
         }
     }
@@ -198,6 +205,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         try {
             except(groupsMapper.updateGroupsByPrimaryKey(groups));
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("修改分组信息时出错");
             throw e;
@@ -217,6 +225,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
             if(groups.isEmpty()) throw new Exception("查询到的用户列表为空");
             return groups;
         }catch (Exception e){
+            e.printStackTrace();
             if(!e.getMessage().contains("用户列表为空"))
                 throw new Exception("查询参数不正确");
             throw e;
@@ -238,6 +247,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         try {
             return groupsMapper.selectGroupsCount();
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("查询收货地址总数时出错");
         }
     }
@@ -249,6 +259,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
             try {
                 except(adminMapper.deleteAdminByPrimaryKey(adminId));
             }catch (Exception e){
+                e.printStackTrace();
                 if (!e.getMessage().contains("操作无效"))
                     throw new Exception("删除管理员时出错");
                 throw e;
@@ -261,6 +272,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         try {
             adminMapper.insertAdmin(admin);
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("插入管理员时出错");
         }
     }
@@ -279,6 +291,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         try {
             except(adminMapper.updateAdminByPrimaryKey(admin));
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("修改管理员信息时出错");
             throw e;
@@ -297,6 +310,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         try {
             except(adminMapper.deleteAdminByAdminIdArray(adminIdArray));
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("批量删除管理员时出错");
             throw e;
@@ -335,6 +349,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         try {
             return  complaintMapper.selectComplaintCount();
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("查询投诉表总数时出错");
         }
     }
@@ -346,6 +361,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         try {
             except(itemTypeMapper.deleteItemTypeByPrimaryKey(itemTypeId));
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("删除商品类别时出错");
             throw e;
@@ -358,6 +374,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         try {
             itemTypeMapper.insertItemType(itemType);
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("插入商品类别时出错");
         }
     }
@@ -367,6 +384,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         try {
             except(itemTypeMapper.updateItemTypeByPrimaryKey(itemType));
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("修改商品类别信息时出错");
             throw e;
@@ -381,6 +399,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
             except(itemMapper.deleteItemByPrimaryKey(itemId));
             iindexItemService.deleteIndex(itemId,false);
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("删除商品时出错");
             throw e;
@@ -397,6 +416,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
             iindexItemService.deleteIndex(itemId,false);
             }
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("批量删除商品时出错");
             throw e;
@@ -409,6 +429,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
             itemMapper.insertItem(item);
             iindexItemService.addIndex(item,false);
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("添加商品时出错");
         }
     }
@@ -419,6 +440,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
             System.out.println(itemMapper.insertItemSelectiveAndReturnItemId(item));
             iindexItemService.addIndex(item,false);
         }catch (Exception e){
+            e.printStackTrace();
             throw new Exception("添加商品时出错");
         }
     }
@@ -429,6 +451,7 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
             except(itemMapper.updateItemByPrimaryKey(item));
             iindexItemService.updateIndex(item,false);
         }catch (Exception e){
+            e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
                 throw new Exception("修改商品信息时出错");
             throw e;

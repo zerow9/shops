@@ -40,8 +40,9 @@ public class ItemController {
      * @param limit 每页显示几个
      * @return 商品劣列表数据
      */
-    @RequestMapping("getItemsAll")
+
     @ResponseBody
+    @RequestMapping("getItemsAll")
     public String getItemsAll(Integer page, Integer limit) throws Exception {
         PagingCustomItem pagingCustomItem = new PagingCustomItem();
         pagingCustomItem.setIndexNumber((page - 1) * limit);
@@ -124,7 +125,7 @@ public class ItemController {
     }
 
     @RequestMapping("/updateItem")
-    public boolean updateItem(HttpServletRequest request, @RequestParam("item_images") String item_images, String itemId, Item item) throws Exception {
+    public boolean updateItem(Item item) throws Exception {
 //        String fileName = item_images.getOriginalFilename();
 //        if (fileName != null && fileName.length() > 0) {
 //            String dir = request.getSession().getServletContext().getRealPath("/");
@@ -139,29 +140,28 @@ public class ItemController {
 //            item.setItemImages(it.getItemImages());
 //        }
 //        item.setMakeDate(DateToString.date(item.getDateToString()));
-        item.setItemId(Integer.parseInt(itemId));
-        item.setItemImages(item_images);
-        item.setItemScoreType(1);
+//        item.setItemImages(item_images);
+//        item.setItemScoreType(1);
         adminService.updateItemByPrimaryKey(item);
         return true;
     }
 
-
     @RequestMapping("/insertItem")
-    public boolean insertItem(HttpServletRequest request, @RequestParam("item_images") MultipartFile item_images, Item item) throws Exception {
-        String fileName = item_images.getOriginalFilename();
-        if (fileName != null && fileName.length() > 0) {
-            String dir = request.getSession().getServletContext().getRealPath("/");
-            fileName = MyUUID.randomUUID() + fileName.substring(fileName.lastIndexOf("."));
-            fileName = "/image/" + fileName;
-            File file = new File(dir + fileName);
-            item_images.transferTo(file);
-            item.setMakeDate(new Date());
-            item.setItemScoreType(1);
-            item.setItemImages(fileName);
-            adminService.insertItem(item);
-            return true;
-        }
+    public boolean insertItem(Item item) throws Exception {
+//        String fileName = item_images.getOriginalFilename();
+//        if (fileName != null && fileName.length() > 0) {
+//            String dir = request.getSession().getServletContext().getRealPath("/");
+//            fileName = MyUUID.randomUUID() + fileName.substring(fileName.lastIndexOf("."));
+//            fileName = "/image/" + fileName;
+//            File file = new File(dir + fileName);
+//            item_images.transferTo(file);
+//            item.setMakeDate(new Date());
+//            item.setItemScoreType(1);
+//            item.setItemImages(fileName);
+//            adminService.insertItem(item);
+//            return true;
+//        }
+        adminService.insertItem(item);
         return false;
     }
 }
