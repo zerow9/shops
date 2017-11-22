@@ -11,10 +11,10 @@ layui.use('table', function () {
         if (obj.event === 'detail') {
             layer.open({
                 type: 2,
-                title:"查看商品",
+                title: "查看商品",
                 shadeClose: true,
                 shade: 0.3,
-                content: 'detailItemsIdByKey.action?itemId='+data.itemId, //注意，如果str是object，那么需要字符拼接。
+                content: 'detailItemsIdByKey.action?itemId=' + data.itemId, //注意，如果str是object，那么需要字符拼接。
                 maxmin: true,
                 area: ['80%', '90%']
             });
@@ -44,7 +44,10 @@ layui.use('table', function () {
                 shade: 0.3,
                 maxmin: true,
                 area: ['80%', '90%'],
-                content: 'editItem.action?itemId=' + data.itemId //注意，如果str是object，那么需要字符拼接。
+                content: 'editItem.action?itemId=' + data.itemId, //注意，如果str是object，那么需要字符拼接。
+                end: function () {
+                    table.reload('itemId');
+                }
             });
         }
     });
@@ -65,7 +68,7 @@ layui.use('table', function () {
                 }
 
                 //判断数据是否选中
-                if(data.length===0){
+                if (data.length === 0) {
                     layer.msg("数据没有选中！");
                     return;
                 }
@@ -87,7 +90,7 @@ layui.use('table', function () {
                 })
             },
             isAll: function () { //验证是否全选
-                table.checkStatus.isAll=true;
+                table.checkStatus.isAll = true;
                 var checkStatus = table.checkStatus('itemId');
 
                 layer.msg(checkStatus.isAll ? '全选' : '未全选')

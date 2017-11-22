@@ -4,10 +4,9 @@ import com.coding.Iservice.IAdminService;
 import com.coding.comomInterface.DateToString;
 import com.coding.comomInterface.MyUUID;
 import com.coding.json.MyJsonConfig;
-import com.coding.pojo.Item;
 import com.coding.paging.PagingCustomItem;
-import com.coding.json.JsonFormat;
-import net.sf.json.JSONObject;
+import com.coding.pojo.Item;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -28,6 +27,7 @@ import java.util.List;
 public class ItemController {
 
     private Integer counts = null;
+    private Logger logger = Logger.getLogger(ItemController.class);
 
     @Autowired
     @Qualifier("adminService")
@@ -118,28 +118,29 @@ public class ItemController {
     @RequestMapping("editItem")
     public String editItem(Integer itemId, HttpServletRequest request) throws Exception {
         Item item = adminService.selectItemByPrimaryKey(itemId);
-        System.out.println(item);
         item.setDateToString(DateToString.date(item.getMakeDate()));
         request.getSession().setAttribute("item", item);
         return "items/editItem";
     }
 
     @RequestMapping("/updateItem")
-    public boolean updateItem(HttpServletRequest request, @RequestParam("item_images") MultipartFile item_images, Item item) throws Exception {
-        String fileName = item_images.getOriginalFilename();
-        if (item_images != null && fileName != null && fileName.length() > 0) {
-            String dir = request.getSession().getServletContext().getRealPath("/");
-            System.out.println(dir);
-            fileName = MyUUID.randomUUID() + fileName.substring(fileName.lastIndexOf("."));
-            fileName = "/image/" + fileName;
-            File file = new File(dir + fileName);
-            item_images.transferTo(file);
-            item.setItemImages(fileName);
-        }else {
-            Item it=(Item) request.getSession().getAttribute("item");
-            item.setItemImages(it.getItemImages());
-        }
-        item.setMakeDate(DateToString.date(item.getDateToString()));
+    public boolean updateItem(HttpServletRequest request, @RequestParam("item_images") String item_images, String itemId, Item item) throws Exception {
+//        String fileName = item_images.getOriginalFilename();
+//        if (fileName != null && fileName.length() > 0) {
+//            String dir = request.getSession().getServletContext().getRealPath("/");
+//            logger.error("图片地址：" + dir);
+//            fileName = MyUUID.randomUUID() + fileName.substring(fileName.lastIndexOf("."));
+//            fileName = "/image/" + fileName;
+//            File file = new File(dir + fileName);
+//            item_images.transferTo(file);
+//            item.setItemImages(fileName);
+//        } else {
+//            Item it = (Item) request.getSession().getAttribute("item");
+//            item.setItemImages(it.getItemImages());
+//        }
+//        item.setMakeDate(DateToString.date(item.getDateToString()));
+        item.setItemId(Integer.parseInt(itemId));
+        item.setItemImages(item_images);
         item.setItemScoreType(1);
         adminService.updateItemByPrimaryKey(item);
         return true;
@@ -149,7 +150,7 @@ public class ItemController {
     @RequestMapping("/insertItem")
     public boolean insertItem(HttpServletRequest request, @RequestParam("item_images") MultipartFile item_images, Item item) throws Exception {
         String fileName = item_images.getOriginalFilename();
-        if (item_images != null && fileName != null && fileName.length() > 0) {
+        if (fileName != null && fileName.length() > 0) {
             String dir = request.getSession().getServletContext().getRealPath("/");
             fileName = MyUUID.randomUUID() + fileName.substring(fileName.lastIndexOf("."));
             fileName = "/image/" + fileName;

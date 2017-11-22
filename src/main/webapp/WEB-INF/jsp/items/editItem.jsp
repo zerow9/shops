@@ -44,7 +44,7 @@ String basePath = request.getScheme() + "://"
                             <label class="layui-form-label">商品ID</label>
                             <div class="layui-input-block">
                                 <input type="text" name="itemId" lay-verify="itemId" autocomplete="off"
-                                       value="${item.itemId}" class="layui-input" >
+                                       value="${item.itemId}" class="layui-input" id="itemId" >
                             </div>
                         </div>
 
@@ -171,18 +171,23 @@ String basePath = request.getScheme() + "://"
                             </div>
 
                         </div>
-                        <div class="layui-form-item">
-                            <label class="layui-form-label">点击修改</label>
-                            <div class="layui-input-block">
-                                <input type="file" name="item_images" autocomplete="off"
-                                       placeholder="请上传图片" class="layui-input">
-                            </div>
-                        </div>
+
                         <div class="layui-form-item">
                             <label class="layui-form-label">图片</label>
                             <div class="layui-input-block"
-                                 style="height: 120px;width: 120px; border: 0.1px solid rgb(243,243,244); ">
-                                <img src="${item.itemImages}" alt="" height="120px" width="120px">
+                                 style="height: 290px;width: 320px; border: 0.1px solid rgb(243,243,244); ">
+                                <img src="${item.itemImages}" alt="" height="240px" width="320px" id="itemImg">
+                            </div>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <%--<label class="layui-form-label">点击修改</label>--%>
+                            <div class="layui-input-block">
+                                <%--<input type="file" name="item_images" autocomplete="off"--%>
+                                <%--placeholder="请上传图片" class="layui-input">--%>
+                                <button type="button" class="layui-btn" id="file-upload-btn">
+                                    <i class="layui-icon">&#xe67c;</i>修改图片
+                                </button>
                             </div>
                         </div>
 
@@ -225,8 +230,8 @@ String basePath = request.getScheme() + "://"
 
 <script src="../../../shopmanagement/common/layui/layui.js" charset="utf-8" type="text/javascript"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../../../js/items/Item.js"></script>
 <script src="../../../shopmanagement/js/jquery-1.7.2.min.js"></script>
+<script src="../../../js/items/Item.js"></script>
 <script>
     $(function(){
         $("#selectId").find("option[value = '${item.itemTypeId}']").attr("selected","selected");
