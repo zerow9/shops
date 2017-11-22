@@ -112,5 +112,6 @@
     <orderEntry type="library" name="Maven: com.aliyun.oss:aliyun-sdk-oss:2.8.1" level="project" />
     <orderEntry type="library" name="Maven: org.jdom:jdom:1.1" level="project" />
     <orderEntry type="library" name="Maven: net.sf.json-lib:json-lib:jdk15:2.4" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.lucene:lucene-core:3.5.0" level="project" />
   </component>
 </module>

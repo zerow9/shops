@@ -1,3 +1,5 @@
+var formData = $('#uploadForm').serialise();
+
 layui.use(['form', 'layedit', 'laydate'], function () {
     var form = layui.form,
         layer = layui.layer,
@@ -100,7 +102,8 @@ layui.use('upload', function () {
                 layer.msg("图片修改成功！");
                 $.ajax({
                     url: 'updateItem.action',
-                    data: 'item_images=' + res.data.src + "&itemId=" + $('#itemId').val(),
+                    // data: 'item_images=' + res.data.src + "&itemId=" + $('#itemId').val(),
+                    data: formData,
                     type: "POST",
                     success: function () {
                         console.log("更新数据库文件地址成功！");
