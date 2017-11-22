@@ -16,6 +16,8 @@ public interface IindexItemService {
 
 
         public List<Item> findByIndex(SearchField field)throws Exception;
+
+        public Integer getDocCount(SearchField field)throws Exception;
         /**
          * 提交索引,仅仅是从内存中提交
          */

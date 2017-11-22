@@ -103,7 +103,7 @@ public class IndexService implements IindexItemService {
             MultiFieldQueryParser parser = new MultiFieldQueryParser(LuceneContext.getInstance().getVersion(),
                     new String[]{"name","keyword","introduce"}, LuceneContext.getInstance().getAnalyzer());
             Query query = parser.parse(field.getCondition());
-            TopDocs tds = searcher.searchAfter(getLastDoc(field.getIndexNumber(),searcher,query),query,field.getPageNumber());
+            TopDocs tds = searcher.searchAfter(getLastDoc(field.getIndexNumber(),field.getPageNumber(),searcher,query),query,field.getPageNumber());
             for(ScoreDoc sd:tds.scoreDocs){
                 Document doc = searcher.doc(sd.doc);
                 Item item =new Item();
@@ -122,11 +122,25 @@ public class IndexService implements IindexItemService {
         }
         return null;
     }
-    private ScoreDoc getLastDoc(int indexNum,IndexSearcher searcher,Query query){
+    private ScoreDoc getLastDoc(int indexNum,int pageNum,IndexSearcher searcher,Query query){
         if (indexNum==0) return null;
         try {
-            TopDocs tds =searcher.search(query,indexNum-1);
-            return tds.scoreDocs[indexNum-1];
+            TopDocs tds =searcher.search(query,indexNum*pageNum);
+            return tds.scoreDocs[(indexNum*pageNum)-1];
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return  null;
+    }
+
+    public Integer getDocCount(SearchField field)throws Exception{
+        IndexSearcher searcher = LuceneContext.getInstance().getSearcher();
+        try {
+            MultiFieldQueryParser parser = new MultiFieldQueryParser(LuceneContext.getInstance().getVersion(),
+                    new String[]{"name","keyword","introduce"}, LuceneContext.getInstance().getAnalyzer());
+            Query query = parser.parse(field.getCondition());
+            TopDocs tds =searcher.search(query,1);
+            return tds.totalHits;
         } catch (IOException e) {
             e.printStackTrace();
         }
