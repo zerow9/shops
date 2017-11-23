@@ -68,7 +68,7 @@ public class LuceneContext {
     private static String getPathname() throws IOException {
         Element element = null;
         File f = new File(LuceneContext.class.getClassLoader().getResource("").getPath()+File.separator+"lucene.xml");  //部署tomcat路径
-//        File f = new File("lucene.xml");   //测试路径
+//       File f = new File("lucene.xml");   //测试路径,如果索引库为空,那么注释掉上面的代码,取消这一行代码注释即可
         DocumentBuilder db = null;
         DocumentBuilderFactory dbf = null;
         try {
