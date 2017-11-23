@@ -7,10 +7,10 @@ To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme() + "://"
-+ request.getServerName() + ":" + request.getServerPort()
-+ path + "/";
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://"
+            + request.getServerName() + ":" + request.getServerPort()
+            + path + "/";
 %>
 
 <html>
@@ -166,15 +166,36 @@ String basePath = request.getScheme() + "://"
                             <label class="layui-form-label">商品图片</label>
                             <div class="layui-input-block"
                                  style="height: 290px;width: 320px; border: 0.1px solid rgb(243,243,244); ">
-                                <img src="http://xcstudio-shop.oss-cn-shenzhen.aliyuncs.com/img/default.jpg" alt="商品图片" height="240px" width="320px" id="itemImg">
+                                <img src="http://xcstudio-shop.oss-cn-shenzhen.aliyuncs.com/img/default.jpg" alt="商品图片"
+                                     height="240px" width="320px" id="itemImg">
                             </div>
                         </div>
 
                         <div class="layui-form-item">
                             <div class="layui-input-block">
-                                <button type="button" class="layui-btn" id="file-upload-btn">
-                                    <i class="layui-icon">&#xe67c;</i>上传图片
-                                </button>
+                                <div class="layui-tab layui-tab-brief">
+                                    <ul class="layui-tab-title">
+                                        <li class="layui-this">上传本地图片</li>
+                                        <li>上传网络图片</li>
+                                    </ul>
+                                    <div class="layui-tab-content">
+                                        <div class="layui-tab-item layui-show">
+                                            <button type="button" class="layui-btn" id="upload-file-btn">
+                                                <i class="layui-icon">&#xe67c;</i>上传图片
+                                            </button>
+                                        </div>
+                                        <div class="layui-tab-item">
+                                            <div>
+                                                <input type="text" id="netUrlInput" name="netUrl" autocomplete="off"
+                                                       placeholder="请输入网络图片地址" class="layui-input"
+                                                       style="margin-bottom: 10px">
+                                                <button type="button" class="layui-btn" id="upload-net-file-btn">
+                                                    <i class="layui-icon">&#xe67c;</i>上传图片
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -200,7 +221,6 @@ String basePath = request.getScheme() + "://"
                                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                             </div>
                         </div>
-
                     </form>
                 </div>
             </div>

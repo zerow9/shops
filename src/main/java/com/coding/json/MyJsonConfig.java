@@ -14,8 +14,7 @@ public class MyJsonConfig<E> {
         JsonConfig config = new JsonConfig();
         JsonFormat json = new JsonFormat();
         config.registerJsonValueProcessor(Date.class, json);
-        JSONArray array = new JSONArray();
-        array = array.fromObject(list, config);
+        JSONArray array = JSONArray.fromObject(list, config);
         return "{\"code\":\"\",\"count\":" + count + ",\"data\":" + array.toString() + ",\"msg\":"+msg+"}";
     }
 

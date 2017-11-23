@@ -204,8 +204,8 @@
 
 <script src="../../../shopmanagement/common/layui/layui.js" charset="utf-8" type="text/javascript"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../../../js/items/addItem.js"></script>
 <script src="../../../shopmanagement/js/jquery-1.7.2.min.js"></script>
+<script src="../../../js/items/addItem.js"></script>
 <script>
     $(function(){
         $("#selectId1").find("option[value = '${item.itemTypeId}']").attr("selected","selected");

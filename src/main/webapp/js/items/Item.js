@@ -1,10 +1,11 @@
-var formData = $('#uploadForm').serialize().toString();
+var formData = null;
 
-layui.use(['form', 'layedit', 'laydate'], function () {
+layui.use(['form', 'layedit', 'laydate', 'element'], function () {
     var form = layui.form,
         layer = layui.layer,
         layedit = layui.layedit,
-        laydate = layui.laydate;
+        laydate = layui.laydate,
+        element = layui.element;
 
     //定义JQuery
     var $ = layui.$;
@@ -53,7 +54,8 @@ layui.use(['form', 'layedit', 'laydate'], function () {
     //监听提交
     form.on('submit(demo1)', function (data) {
         // var formData = new FormData($("#uploadForm")[0]);
-        formData = $('#uploadForm').serialize().toString();
+        if (formData === null)
+            formData = $('#uploadForm').serialize().toString();
         console.log(formData);
         $.ajax({
             url: 'updateItem.action',
@@ -79,7 +81,7 @@ layui.use('upload', function () {
 
     //执行实例
     var uploadInst = upload.render({
-        elem: '#file-upload-btn' //绑定元素
+        elem: '#upload-file-btn' //绑定元素
         , url: '/file/uploadFile.action' //上传接口
         , accept: 'images'    //指定允许上传的文件类型，可选值有：images（图片）、file（所有文件）、video（视频）、audio（音频）
         , auto: true      //是否选完文件后自动上传
@@ -116,4 +118,32 @@ layui.use('upload', function () {
 
         }
     });
+});
+
+// 上传网络图片
+$('#upload-net-file-btn').click(function () {
+    var netUrl = $('#netUrlInput');
+    if (netUrl.val() !== '') {
+        $.ajax({
+            url: '/file/uploadNetFile.action',
+            data: netUrl.attr('name') + '=' + netUrl.val(),
+            type: "POST",
+            success: function (res) {
+                // 文件上传成功后，更新数据库文件访问地址
+                console.log(res.msg);
+                fileUrl = res.data.src;
+                if (res.code === 0) {
+                    $('#itemImg').attr('src', res.data.src);
+                    parent.layer.msg("网络图片上传成功");
+                    // 添加图片地址到form表单
+                    formData = $('#uploadForm').serialize().toString();
+                    formData += '&itemImages=' + res.data.src;
+                } else {
+                    layer.msg("图片修改失败！");
+                }
+            }
+        });
+    } else {
+        parent.layer.msg("请先输入图片URL地址")
+    }
 });

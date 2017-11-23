@@ -3,6 +3,7 @@ package com.coding.Iservice;
 import org.apache.log4j.Logger;
 
 import java.io.InputStream;
+import java.io.PrintStream;
 
 /**
  * 文件服务接口
@@ -29,7 +30,7 @@ public interface FileService {
      *
      * @return String url 文件访问地址
      */
-    String putObject(InputStream inputStream, String fileName);
+    String uploadFile(InputStream inputStream, String fileName);
 
     /**
      * 下载文件

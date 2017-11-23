@@ -1,5 +1,9 @@
-var formData = $('#uploadForm').serialize().toString();
 var fileUrl = $('#itemImg').attr('src');
+
+// 加载layUI选型卡插件
+layui.use('element', function () {
+    var element = layui.element;
+});
 
 layui.use(['form', 'layedit', 'laydate'], function () {
     var form = layui.form,
@@ -55,24 +59,15 @@ layui.use(['form', 'layedit', 'laydate'], function () {
     //监听提交
     form.on('submit(demo1)', function (data) {
         // var formData = new FormData($("#uploadForm")[0]);
-        formData = $('#uploadForm').serialize().toString();
+        var formData = $('#uploadForm').serialize().toString();
         formData += '&itemImages=' + fileUrl;
         $.ajax({
             url: '/item/insertItem.action',
             data: formData,
             type: "POST",
-            // async: false,
-            // cache: false,
-            // contentType: false,
-            // processData: false,
             success: function () {
                 parent.layer.closeAll();
-                swal({
-                    title: "太帅了",
-                    text: "添加数据成功！",
-                    type: "success"
-                });
-                window.parent.location.reload();
+                parent.layer.msg("更新成功！")
             }
         });
         return false;
@@ -80,13 +75,13 @@ layui.use(['form', 'layedit', 'laydate'], function () {
 
 });
 
-// 上传图片
+// 上传本地图片
 layui.use('upload', function () {
     var upload = layui.upload;
 
     //执行实例
     var uploadInst = upload.render({
-        elem: '#file-upload-btn' //绑定元素
+        elem: '#upload-file-btn' //绑定元素
         , url: '/file/uploadFile.action' //上传接口
         , accept: 'images'    //指定允许上传的文件类型，可选值有：images（图片）、file（所有文件）、video（视频）、audio（音频）
         , auto: true      //是否选完文件后自动上传
@@ -94,7 +89,9 @@ layui.use('upload', function () {
         , size: 20480     //设置文件最大可允许上传的大小，单位 KB。不支持ie8/9
         , multiple: false     //	是否允许多文件上传。设置 true即可开启。不支持ie8/9
         , choose: function (res) {  //选择文件后的回调函数。返回一个object参数
-
+            res.preview(function (index, file, result) {
+                $('#select-file-label').text('你已选择文件：' + file.name);
+            })
         }
         , before: function (res) {  //文件提交上传前的回调。返回一个object参数
 
@@ -114,3 +111,30 @@ layui.use('upload', function () {
         }
     });
 });
+
+// 上传网络图片
+$('#upload-net-file-btn').click(function () {
+    var netUrl = $('#netUrlInput');
+    if (netUrl.val() !== '') {
+        $.ajax({
+            url: '/file/uploadNetFile.action',
+            data: netUrl.attr('name') + '=' + netUrl.val(),
+            type: "POST",
+            success: function (res) {
+                // 文件上传成功后，更新数据库文件访问地址
+                console.log(res.msg);
+                fileUrl = res.data.src;
+                if (res.code === 0) {
+                    $('#itemImg').attr('src', res.data.src)
+                    parent.layer.msg("网络图片上传成功")
+                } else {
+                    layer.msg("图片修改失败！");
+                }
+            }
+        });
+    } else {
+        parent.layer.msg("请先输入图片URL地址")
+    }
+});
+
+

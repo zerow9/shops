@@ -79,6 +79,7 @@ public class OrderController {
             List<Orders> orders = userService.selectOrder(pagingCustomOrder);
             return myJsonConfig.start(orders, count, "true");
         } catch (Exception e) {
+            e.printStackTrace();
             return myJsonConfig.start(new ArrayList(), count, session.getAttribute("message").toString());
         }
 

@@ -1,7 +1,9 @@
 package com.coding.serviceImpl;
 
 import com.aliyun.oss.ClientConfiguration;
+import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSSClient;
+import com.aliyun.oss.OSSException;
 import com.aliyun.oss.model.*;
 import com.coding.Iservice.FileService;
 import org.apache.commons.lang.text.StrBuilder;
@@ -11,6 +13,8 @@ import java.io.*;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * 阿里云对象存储（OSS）接口实现
@@ -50,7 +54,7 @@ public class ossFileService implements FileService {
      *
      * @return OSSClient
      */
-    public OSSClient getOSSClient() {
+    private OSSClient getOSSClient() {
         logger.info("创建OSSClient");
         // 创建ClientConfiguration实例，用于对OSSClient进行配置
         ClientConfiguration conf = new ClientConfiguration();
@@ -120,53 +124,67 @@ public class ossFileService implements FileService {
      */
     public boolean hasFile(String fileName) {
         OSSClient ossClient = getOSSClient();
-        boolean exists = ossClient.doesObjectExist(bucketName, fileName);
-        StrBuilder msg = new StrBuilder("文件：“" + fileName + "”");
-        if (exists) {
-            msg.append("存在");
-        } else {
-            msg.append("不存在");
+        boolean exists = false;
+        try {
+            exists = ossClient.doesObjectExist(bucketName, fileName);
+        } catch (OSSException e) {
+            e.printStackTrace();
+        } finally {
+            ossClient.shutdown();
         }
-        System.out.println(msg);
-
-        if (exists) {
-            // 设置文件访问权限
-            // ossClient.setObjectAcl(bucketName, key, CannedAccessControlList.privateRead);
-            // ossClient.setObjectAcl(bucketName, key, CannedAccessControlList.Default);
-
-            // 获取文件访问权限
-            ObjectAcl objectAcl = ossClient.getObjectAcl(bucketName, fileName);
-            System.out.println("文件" + fileName + "的访问权限为:" + objectAcl.getPermission().toString());
-        }
-        ossClient.shutdown();
         return exists;
     }
 
     /**
      * 上传文件，如果发现同名文件，则服务器上的同名文件会被覆盖
      *
-     * @return String url 文件访问地址
+     * @param inputStream 文件流
+     * @param fileName    文件名
+     * @return String Url 文件访问地址
      */
-    public String putObject(InputStream inputStream, String fileName) {
+    public String uploadFile(InputStream inputStream, String fileName) {
         OSSClient ossClient = getOSSClient();
-//        String fileName = "test.txt";
-        System.out.println("开始上传文件：" + fileName);
-//        try {
-        // 上传文件流
-        // inputStream inputStream = new FileInputStream("D:\\MyZone\\Pictures\\background-img\\bg1121.jpg");
-        ossClient.putObject(bucketName, fileName, inputStream);
-        // 上传网络流
-        // InputStream inputStreamNet = new URL("https://www.baidu.com/img/bd_logo1.png").openStream();
-        // ossClient.putObject(bucketName, "bd_logo1.png", inputStreamNet);
-        // 上传本地文件
-        // ossClient.putObject(bucketName, "bg1121.jpg", new File("D:\\MyZone\\Pictures\\background-img\\bg1121.jpg"));
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        // 设置文件访问权限，默认继承痛的权限
-        ossClient.setObjectAcl(bucketName, fileName, CannedAccessControlList.PublicRead);
-        System.out.println("文件" + fileName + "上传成功。");
-        ossClient.shutdown();
+        try {
+            ossClient.putObject(bucketName, fileName, inputStream);
+            // 设置文件访问权限，默认继承痛的权限
+            ossClient.setObjectAcl(bucketName, fileName, CannedAccessControlList.PublicRead);
+            System.out.println("文件" + fileName + "上传成功。");
+        } catch (OSSException e) {
+            e.printStackTrace();
+        } finally {
+            closeResources(inputStream, ossClient);
+        }
+        return getUrl(fileName);
+    }
+
+    /**
+     * * 上传网络文件，如果发现同名文件，则服务器上的同名文件会被覆盖
+     *
+     * @param netUrl   网络文件地址
+     * @param filePath 文件存储路径
+     * @return String netUrl 文件访问地址
+     * @throws Exception 当网络地址无效时会抛出议程
+     */
+    public String uploadNetFile(String netUrl, String filePath) throws Exception {
+        OSSClient ossClient = getOSSClient();
+        String fileName = getFileName(netUrl);
+        if (fileName != null) {
+            try {
+                fileName = filePath + getFileName(netUrl);
+                // 上传网络流
+                InputStream inputStreamNet = new URL(netUrl).openStream();
+                ossClient.putObject(bucketName, fileName, inputStreamNet);
+                // 设置文件访问权限，默认继承痛的权限
+                ossClient.setObjectAcl(bucketName, fileName, CannedAccessControlList.PublicRead);
+                System.out.println("文件" + fileName + "上传成功。");
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                ossClient.shutdown();
+            }
+        } else {
+            throw new Exception("上传失败，请检查你的网络文件地址是否有效！");
+        }
         return getUrl(fileName);
     }
 
@@ -175,12 +193,16 @@ public class ossFileService implements FileService {
      */
     public void getFile(String fileName) {
         OSSClient ossClient = getOSSClient();
-        System.out.println("开始下载文件：" + fileName);
-        OSSObject object = ossClient.getObject(bucketName, fileName);
-        System.out.println("文件" + fileName + "下载成功。");
-        System.out.println("文件类型: " + object.getObjectMetadata().getContentType());
-        displayTextInputStream(object.getObjectContent());
-        ossClient.shutdown();
+        try {
+            System.out.println("开始下载文件：" + fileName);
+            OSSObject object = ossClient.getObject(bucketName, fileName);
+            System.out.println("文件" + fileName + "下载成功。");
+            System.out.println("文件类型: " + object.getObjectMetadata().getContentType());
+        } catch (OSSException e) {
+            e.printStackTrace();
+        } finally {
+            ossClient.shutdown();
+        }
     }
 
     /**
@@ -215,7 +237,7 @@ public class ossFileService implements FileService {
      * 获取文件防盗链地址
      *
      * @param fileName 文件名
-     * @return url
+     * @return netUrl
      */
     public URL generatePresignedUrl(String fileName) {
         OSSClient ossClient = getOSSClient();
@@ -231,7 +253,7 @@ public class ossFileService implements FileService {
      * 获取文件访问地址
      *
      * @param fileName 文件名
-     * @return url
+     * @return netUrl
      */
     public String getUrl(String fileName) {
         return endpoint.replace("http://", "http://" + bucketName + ".") + "/" + fileName;
@@ -239,23 +261,11 @@ public class ossFileService implements FileService {
 
     // ==================================begin：辅助方法====================================
 
-    //  创建示例文件
-    private File createSampleFile() {
-        File file = null;
-        try {
-            file = File.createTempFile("oss-java-sdk-", ".txt");
-            file.deleteOnExit();
-            Writer writer = new OutputStreamWriter(new FileOutputStream(file));
-            writer.write("hello\n");
-            writer.write("world\n");
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return file;
-    }
-
-    // 读文件内容
+    /**
+     * 读取文件内容
+     *
+     * @param input 文件流
+     */
     private void displayTextInputStream(InputStream input) {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(input));
@@ -269,5 +279,65 @@ public class ossFileService implements FileService {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 根据文件路径获取文件名
+     *
+     * @param str 文件路径
+     * @return fileName
+     */
+    private String getFileName(String str) {
+        //支持的文件格式结合
+        String fileExtension = "bmp|dib|pcp|dif|wmf|gif|jpg|tif|eps|psd|cdr|iff|tga|pcd|mpt|png|3g2|3gp|3gp2|3gpp|amv|asf|avi|bik|bin|divx|drc|dv|f4v|flv|gvi|gxf|iso|m1v|m2v|m2t|m2ts|m4v|mkv|mov|mp4|mp4v|mpe|mpeg|mpeg1|mpeg2|mpeg4|mpg|mpv2|mts|mxf|mxg|nsv|nuv|ogg|ogm|ogv|ps|rec|rm|rmvb|rpl|thp|tod|ts|tts|txd|vob|vro|webm|wm|wmv|wtv|xesc|3ga|669|a52|acc|ac3|adt|adts|aif|aiff|amr|aob|ape|awb|caf|dts|flac|it|kar|m4a|m4b|m4p|m5p|mid|mka|mlp|mod|mpa|mp1|mp2|mp3|mpc|mpga|mus|oga|ogg|oma|opus|qcp|ra|rmi|s3m|sid|spx|thd|tta|voc|vqf|w64|wav|wma|wv|xa|xm";
+        fileExtension += "|" + fileExtension.toUpperCase();
+        // 按指定模式在字符串查找
+        String pattern = ".+/(.*\\.(" + fileExtension + "))";
+        // 创建 Pattern 对象
+        Pattern r = Pattern.compile(pattern);
+        // 现在创建 matcher 对象
+        Matcher m = r.matcher(str);
+        if (m.find()) {
+            return m.group(1);
+        } else {
+            System.out.println("该地址：”" + str + "“无法获取文件名");
+        }
+        return null;
+    }
+
+    /**
+     * 释放资源
+     *
+     * @param inputStream 文件流
+     * @return 关闭状态
+     */
+    private boolean closeResources(InputStream inputStream) {
+        if (inputStream != null) {
+            try {
+                inputStream.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 释放资源
+     *
+     * @param inputStream 文件流
+     * @return 关闭状态
+     */
+    private boolean closeResources(InputStream inputStream, OSSClient ossClient) {
+        if (inputStream != null) {
+            if (!closeResources(inputStream)) {
+                return false;
+            }
+        }
+        if (ossClient != null) {
+            ossClient.shutdown();
+        }
+        return true;
     }
 }

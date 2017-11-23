@@ -103,7 +103,10 @@ layui.use('table', function () {
                     shade: 0.3,
                     maxmin: true,
                     area: ['80%', '90%'],
-                    content: 'addItem.action' //注意，如果str是object，那么需要字符拼接。
+                    content: 'addItem.action', //注意，如果str是object，那么需要字符拼接。
+                    end: function () {
+                        table.reload('itemId');
+                    }
                 });
             }
         };

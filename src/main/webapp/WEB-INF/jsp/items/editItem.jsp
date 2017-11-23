@@ -173,7 +173,7 @@ String basePath = request.getScheme() + "://"
                         </div>
 
                         <div class="layui-form-item">
-                            <label class="layui-form-label">图片</label>
+                            <label class="layui-form-label">商品图片</label>
                             <div class="layui-input-block"
                                  style="height: 290px;width: 320px; border: 0.1px solid rgb(243,243,244); ">
                                 <img src="${item.itemImages}" alt="" height="240px" width="320px" id="itemImg">
@@ -181,13 +181,30 @@ String basePath = request.getScheme() + "://"
                         </div>
 
                         <div class="layui-form-item">
-                            <%--<label class="layui-form-label">点击修改</label>--%>
                             <div class="layui-input-block">
-                                <%--<input type="file" name="item_images" autocomplete="off"--%>
-                                <%--placeholder="请上传图片" class="layui-input">--%>
-                                <button type="button" class="layui-btn" id="file-upload-btn">
-                                    <i class="layui-icon">&#xe67c;</i>修改图片
-                                </button>
+                                <div class="layui-tab layui-tab-brief">
+                                    <ul class="layui-tab-title">
+                                        <li class="layui-this">上传本地图片</li>
+                                        <li>上传网络图片</li>
+                                    </ul>
+                                    <div class="layui-tab-content">
+                                        <div class="layui-tab-item layui-show">
+                                            <button type="button" class="layui-btn" id="upload-file-btn">
+                                                <i class="layui-icon">&#xe67c;</i>上传图片
+                                            </button>
+                                        </div>
+                                        <div class="layui-tab-item">
+                                            <div>
+                                                <input type="text" id="netUrlInput" name="netUrl" autocomplete="off"
+                                                       placeholder="请输入网络图片地址" class="layui-input"
+                                                       style="margin-bottom: 10px">
+                                                <button type="button" class="layui-btn" id="upload-net-file-btn">
+                                                    <i class="layui-icon">&#xe67c;</i>上传图片
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
