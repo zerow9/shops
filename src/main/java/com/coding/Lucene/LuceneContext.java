@@ -46,17 +46,20 @@ public class LuceneContext {
 
     //单列初始化操作
     private static void init() throws Exception {
+//        String dicUrl = getPathname();
+//        if (dicUrl == null || dicUrl.equals("")) throw new Exception("索引库路径为空.");
+//        directory = FSDirectory.open(new File(dicUrl));
+//        directory = FSDirectory.open(new File("C:\\Users\\ASUS\\Desktop\\Java Web\\apache-tomcat-7.0.42\\bin\\index"));
 //        String dicUrl = new File(".").getCanonicalPath();
-        String dicUrl = getPathname();
-        if (dicUrl == null || dicUrl.equals("")) throw new Exception("索引库路径为空.");
-        directory = FSDirectory.open(new File(dicUrl));
+//        directory = FSDirectory.open(new File(dicUrl+File.separator + "index"));
+        directory = FSDirectory.open(new File("D:\\index"));//开发环节路径
         version = Version.LUCENE_35;
         analyzer = new StandardAnalyzer(version);
         if(writer == null)
             writer = new IndexWriter(directory,new IndexWriterConfig(version,analyzer));
         nrtManager = new NRTManager(writer, new SearcherWarmer() {
             public void warm(IndexSearcher indexSearcher) throws IOException {
-                System.out.println("reopen index");
+//                System.out.println("reopen index");
             }
         });
         mgr = nrtManager.getSearcherManager(true);
@@ -70,8 +73,8 @@ public class LuceneContext {
         File directory = new File("");// 参数为空
         String courseFile = directory.getCanonicalPath();
 
-//        File f = new File(courseFile+"\\src\\main\\resources\\lucene.xml");   //测试路径,本地跑test如果索引库为空,那么注释掉下面的代码,取消这一行代码注释即可
-        File f = new File(LuceneContext.class.getClassLoader().getResource("").getPath()+File.separator+"lucene.xml");  //部署tomcat路径
+        File f = new File(courseFile+"\\src\\main\\resources\\lucene.xml");   //测试路径,如果索引库为空,那么注释掉下面的代码,取消这一行代码注释即可
+//        File f = new File(LuceneContext.class.getClassLoader().getResource("").getPath()+File.separator+"lucene.xml");  //部署tomcat路径
 
         DocumentBuilder db = null;
         DocumentBuilderFactory dbf = null;
