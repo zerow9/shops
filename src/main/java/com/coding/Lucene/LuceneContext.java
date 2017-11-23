@@ -24,8 +24,10 @@ public class LuceneContext {
     private LuceneContext(){ }
     //单列设计模式
     public static LuceneContext getInstance() throws IOException {
-        if(instance==null) instance = new LuceneContext();
-        init();
+        if(instance==null) {
+            instance = new LuceneContext();
+            init();
+        }
         return instance;
     }
 
@@ -33,6 +35,7 @@ public class LuceneContext {
     private static void init() throws IOException {
         String dicUrl = new File(".").getCanonicalPath();
         String pathString  = dicUrl.substring(0,dicUrl.lastIndexOf(File.separator));
+        System.out.println(pathString+File.separator+"index");
         directory = FSDirectory.open(new File(pathString+File.separator+"index"));
         version = Version.LUCENE_35;
         analyzer = new StandardAnalyzer(version);
