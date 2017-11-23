@@ -23,7 +23,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-@RequestMapping("/item")
+@RequestMapping("item")
 public class ItemController {
 
     private Integer counts = null;
@@ -126,43 +126,13 @@ public class ItemController {
 
     @RequestMapping("/updateItem")
     public boolean updateItem(Item item) throws Exception {
-//        String fileName = item_images.getOriginalFilename();
-//        if (fileName != null && fileName.length() > 0) {
-//            String dir = request.getSession().getServletContext().getRealPath("/");
-//            logger.error("图片地址：" + dir);
-//            fileName = MyUUID.randomUUID() + fileName.substring(fileName.lastIndexOf("."));
-//            fileName = "/image/" + fileName;
-//            File file = new File(dir + fileName);
-//            item_images.transferTo(file);
-//            item.setItemImages(fileName);
-//        } else {
-//            Item it = (Item) request.getSession().getAttribute("item");
-//            item.setItemImages(it.getItemImages());
-//        }
-//        item.setMakeDate(DateToString.date(item.getDateToString()));
-//        item.setItemImages(item_images);
-//        item.setItemScoreType(1);
         adminService.updateItemByPrimaryKey(item);
         return true;
     }
 
-    @RequestMapping("/insertItem")
+    @RequestMapping("insertItem")
     public boolean insertItem(Item item) throws Exception {
-//        String fileName = item_images.getOriginalFilename();
-//        if (fileName != null && fileName.length() > 0) {
-//            String dir = request.getSession().getServletContext().getRealPath("/");
-//            fileName = MyUUID.randomUUID() + fileName.substring(fileName.lastIndexOf("."));
-//            fileName = "/image/" + fileName;
-//            File file = new File(dir + fileName);
-//            item_images.transferTo(file);
-//            item.setMakeDate(new Date());
-//            item.setItemScoreType(1);
-//            item.setItemImages(fileName);
-//            adminService.insertItem(item);
-//            return true;
-//        }
-        System.out.println(item.getItemImages());
         adminService.insertItem(item);
-        return false;
+        return true;
     }
 }
