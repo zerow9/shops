@@ -51,6 +51,8 @@ public class IndexService implements IindexItemService {
         }
     }
 
+
+
     private Document filedDoc(Item fields) throws Exception {
         Document doc = new Document();
 //        doc.add(new NumericField("id",Field.Store.YES,true).setIntValue(fields.getItemId()));
@@ -79,6 +81,7 @@ public class IndexService implements IindexItemService {
                 indexMapper.insertItemIndexSelective(index);
             }
             LuceneContext.getInstance().getNrtManager().deleteDocuments(new Term("id", id.toString()));
+            LuceneContext.getWriter().forceMergeDeletes();
             updateCommitIndex(); //提交索引，待优化
         } catch (IOException e) {
             e.printStackTrace();
@@ -186,12 +189,29 @@ public class IndexService implements IindexItemService {
         }
     }
 
+    private void addIndexSource(Item fields, boolean inDatabase) throws Exception {
+        try {
+            if (inDatabase) {
+                ItemIndex index = new ItemIndex();
+                index.setItemId(fields.getItemId());
+                index.setIndexType(ADD);
+                indexMapper.insertItemIndexSelective(index);
+            }
+            NRTManager nrtManager = LuceneContext.getInstance().getNrtManager();
+            Document doc = filedDoc(fields);
+            nrtManager.addDocument(doc);
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
     public void updateReconstructorIndex() throws Exception {
         LuceneContext.getInstance();
-        LuceneContext.getWriter().deleteAll();
+        LuceneContext.getInstance().getNrtManager().deleteAll();
+        LuceneContext.getInstance().commitIndex();
         List<Item> items = itemMapper.selectItemAll();
         for (Item item : items) {
-            addIndex(item, false);
+            addIndexSource(item, false);
         }
         LuceneContext.getInstance().commitIndex();
         indexMapper.deleteItemIndexAll();
