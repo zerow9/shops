@@ -161,6 +161,7 @@ public class ItemController {
 //            adminService.insertItem(item);
 //            return true;
 //        }
+        System.out.println(item.getItemImages());
         adminService.insertItem(item);
         return false;
     }
