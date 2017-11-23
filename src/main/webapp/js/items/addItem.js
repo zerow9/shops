@@ -58,7 +58,7 @@ layui.use(['form', 'layedit', 'laydate'], function () {
         formData = $('#uploadForm').serialize().toString();
         formData += '&itemImages=' + fileUrl;
         $.ajax({
-            url: 'insertItem.action',
+            url: '/item/insertItem.action',
             data: formData,
             type: "POST",
             // async: false,
