@@ -2,6 +2,7 @@ package com.coding.serviceImpl;
 
 import com.coding.Iservice.IAdminService;
 import com.coding.Iservice.IindexItemService;
+import com.coding.Lucene.LuceneContext;
 import com.coding.mapper.*;
 import com.coding.paging.*;
 import com.coding.pojo.*;
@@ -397,11 +398,12 @@ public class AdminServiceImpl extends UserServiceImpl implements IAdminService {
         if (itemId != null && itemId !=0){
         try {
             except(itemMapper.deleteItemByPrimaryKey(itemId));
-            iindexItemService.deleteIndex(itemId,false);
+            iindexItemService.deleteIndex(17,false);
         }catch (Exception e){
             e.printStackTrace();
             if (!e.getMessage().contains("操作无效"))
-                throw new Exception("删除商品时出错");
+                throw e;
+//                throw new Exception("删除商品时出错");
             throw e;
         }
         }
