@@ -8,17 +8,7 @@ layui.use('table', function () {
     //监听工具条
     table.on('tool(demo)', function (obj) {
         var data = obj.data;
-        if (obj.event === 'detail') {
-            layer.open({
-                type: 2,
-                title: "查看索引",
-                shadeClose: true,
-                shade: 0.3,
-                content: 'detailIndexItemsByKey.action?itemId=' + data.itemId, //注意，如果str是object，那么需要字符拼接。
-                maxmin: true,
-                area: ['80%', '90%']
-            });
-        } else if (obj.event === 'del') {
+        if (obj.event === 'del') {
             //强势弹窗效果
             swal({
                 title: "您确定要删除" + data.itemId + "信息吗",
@@ -30,25 +20,12 @@ layui.use('table', function () {
                 closeOnConfirm: false
             }, function () {
                 //通 ajax 加载方法
-                $.post('deleteIndexItemsByKey.action', {'itemId': data.itemId}, function (index) {
+                $.post('deleteIndex.action', {'itemId': data.itemId}, function (index) {
                     swal("删除成功！", "您已经永久删除了这条信息。", "success");
                     window.location.reload();
                 });
             })
 
-        } else if (obj.event === 'edit') {
-            layer.open({
-                type: 2,
-                title: "修改商品",
-                shadeClose: true,
-                shade: 0.3,
-                maxmin: true,
-                area: ['80%', '90%'],
-                content: 'editIndex.action?itemId=' + data.itemId, //注意，如果str是object，那么需要字符拼接。
-                end: function () {
-                    table.reload('itemId');
-                }
-            });
         }
     });
 
@@ -66,7 +43,6 @@ layui.use('table', function () {
                 for (var i = 0; i < data.length; i++) {//遍历数组
                     array[i] = data[i].itemId;
                 }
-
                 //判断数据是否选中
                 if (data.length === 0) {
                     layer.msg("数据没有选中！");
@@ -74,7 +50,7 @@ layui.use('table', function () {
                 }
                 //强势弹窗效果
                 swal({
-                    title: "您确定要删除这" + array.length + "信息吗",
+                    title: "您确定要删除这" + array.length + "条信息吗",
                     text: "删除后将无法恢复，请谨慎操作！",
                     type: "warning",
                     showCancelButton: true,
@@ -83,7 +59,7 @@ layui.use('table', function () {
                     closeOnConfirm: false
                 }, function () {
                     //通 ajax 加载方法
-                    $.post('deleteItemByIdArray.action', {'arrayString': array.toString()}, function (index) {
+                    $.post('deleteIndexByIdArray.action', {'arrayString': array.toString()}, function (index) {
                         swal("删除成功！", "您已经永久删除了这条信息。", "success");
                         window.location.reload();
                     });
