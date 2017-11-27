@@ -5,6 +5,7 @@ import com.coding.json.JsonFormat;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+
 @Component
 public class Orders {
 
@@ -293,7 +294,7 @@ public class Orders {
     }
 
     public String getOrderCreateTimeToString() {
-        return dateFormatTool.dateToString(orderCreateTime, "FULL_TIME");
+        return orderCreateTimeToString;
     }
 
     public Date getOrderPayTime() {
@@ -301,7 +302,7 @@ public class Orders {
     }
 
     public String getOrderPayTimeToString() {
-        return dateFormatTool.dateToString(orderPayTime, "FULL_TIME");
+        return orderPayTimeToString;
     }
 
     public Date getSendGoodsTime() {
@@ -309,7 +310,7 @@ public class Orders {
     }
 
     public String getSendGoodsTimeToString() {
-        return dateFormatTool.dateToString(sendGoodsTime, "FULL_TIME");
+        return sendGoodsTimeToString;
     }
 
     public Date getOrderCompletionTime() {
@@ -317,7 +318,7 @@ public class Orders {
     }
 
     public String getOrderCompletionTimeToString() {
-        return dateFormatTool.dateToString(orderCompletionTime, "FULL_TIME");
+        return orderCompletionTimeToString;
     }
 
     @Override
