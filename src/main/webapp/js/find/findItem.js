@@ -12,6 +12,7 @@ layui.use(['laydate', 'form', 'table'], function () {
         , format: 'yyyy-MM-dd'
     });
 
+
     form.on('submit(find)', function (data) {
         var date = JSON.stringify(data.field);
         var str=date.toString().replace('{','').replace('}','').replace(/"/g,'').replace(/,/g,'&').replace(/:/g,'=');

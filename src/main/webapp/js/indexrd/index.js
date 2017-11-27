@@ -1,15 +1,11 @@
-var fileUrl = $('#itemImg').attr('src');
+var formData = null;
 
-// 加载layUI选型卡插件
-layui.use('element', function () {
-    var element = layui.element;
-});
-
-layui.use(['form', 'layedit', 'laydate'], function () {
+layui.use(['form', 'layedit', 'laydate', 'element'], function () {
     var form = layui.form,
         layer = layui.layer,
         layedit = layui.layedit,
-        laydate = layui.laydate;
+        laydate = layui.laydate,
+        element = layui.element;
 
     //定义JQuery
     var $ = layui.$;
@@ -42,31 +38,26 @@ layui.use(['form', 'layedit', 'laydate'], function () {
                 return '请输入商品名称'
             }
         },
-        itemFormat: function (value) {
-            if (value.length == 0) {
-                return '请输入商品规格'
-            }
-        },
-        itemTypeOne: function (value) {
-            if (value.length == 0) {
-                return '请选择商品分类'
-            }
-        }
 
     });
 
     //监听提交
     form.on('submit(demo1)', function (data) {
-        // var formData = new FormData($("#uploadForm")[0]);
-        var formData = $('#uploadForm').serialize().toString();
-        formData += '&itemImages=' + fileUrl;
+        if (formData === null)
+            formData = $('#uploadForm').serialize().toString();
+        console.log(formData);
         $.ajax({
-            url: '/item/insertItem.action',
+            url: 'updateIndex.action',
             data: formData,
             type: "POST",
             success: function () {
                 parent.layer.closeAll();
-                parent.layer.msg("更新成功！")
+                swal({
+                    title: "太帅了",
+                    text: "添加数据成功！",
+                    type: "success"
+                });
+                window.parent.location.reload();
             }
         });
         return false;
@@ -74,7 +65,6 @@ layui.use(['form', 'layedit', 'laydate'], function () {
 
 });
 
-// 上传本地图片
 layui.use('upload', function () {
     var upload = layui.upload;
 
@@ -88,9 +78,7 @@ layui.use('upload', function () {
         , size: 20480     //设置文件最大可允许上传的大小，单位 KB。不支持ie8/9
         , multiple: false     //	是否允许多文件上传。设置 true即可开启。不支持ie8/9
         , choose: function (res) {  //选择文件后的回调函数。返回一个object参数
-            res.preview(function (index, file, result) {
-                $('#select-file-label').text('你已选择文件：' + file.name);
-            })
+
         }
         , before: function (res) {  //文件提交上传前的回调。返回一个object参数
 
@@ -98,9 +86,19 @@ layui.use('upload', function () {
         , done: function (res) {    //执行上传请求后的回调。返回三个参数，分别为：res（服务端响应信息）、index（当前文件的索引）、upload（重新上传的方法，一般在文件上传失败后使用）
             // 文件上传成功后，更新数据库文件访问地址
             console.log(res.msg);
-            fileUrl = res.data.src;
+            formData = $('#uploadForm').serialize().toString();
+            formData += '&itemImages=' + res.data.src;
             if (res.code === 0) {
-                $('#itemImg').attr('src', res.data.src)
+                $.ajax({
+                    url: 'updateItem.action',
+                    data: formData,
+                    type: "POST",
+                    success: function () {
+                        layer.msg("图片修改成功！");
+                        console.log("更新数据库文件地址成功！");
+                        $('#itemImg').attr('src', res.data.src)
+                    }
+                });
             } else {
                 layer.msg("图片修改失败！");
             }
@@ -124,8 +122,11 @@ $('#upload-net-file-btn').click(function () {
                 console.log(res.msg);
                 fileUrl = res.data.src;
                 if (res.code === 0) {
-                    $('#itemImg').attr('src', res.data.src)
-                    parent.layer.msg("网络图片上传成功")
+                    $('#itemImg').attr('src', res.data.src);
+                    parent.layer.msg("网络图片上传成功");
+                    // 添加图片地址到form表单
+                    formData = $('#uploadForm').serialize().toString();
+                    formData += '&itemImages=' + res.data.src;
                 } else {
                     layer.msg("图片修改失败！");
                 }
@@ -135,5 +136,3 @@ $('#upload-net-file-btn').click(function () {
         parent.layer.msg("请先输入图片URL地址")
     }
 });
-
-

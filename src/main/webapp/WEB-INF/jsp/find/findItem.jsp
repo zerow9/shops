@@ -16,6 +16,7 @@
     <div class="hang-3" class="layui-input-block">
         <p>关键字：<input type="text"  id="item.keyWord" ></p><br>
     </div>
+    <%--索引重构，索引删除，查询--%>
     <div class="hang-butt">
         <button lay-submit lay-filter="find" class="myButton">
             <i class="fa fa-search"></i>

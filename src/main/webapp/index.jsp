@@ -9,12 +9,12 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="Cache-Control" content="no-siteapp"/>
     <title>孝和商城管理系统后台</title>
-    <link rel="shortcut icon" href="shopmanagement/favicon.ico">
-    <link rel="stylesheet" href="shopmanagement/common/layui/css/layui.css">
-    <link href="shopmanagement/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
-    <link href="shopmanagement/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-    <link href="shopmanagement/css/animate.min.css" rel="stylesheet">
-    <link href="shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
+    <link rel="shortcut icon" href="../../../shopmanagement/favicon.ico">
+    <link rel="stylesheet" href="../../../shopmanagement/common/layui/css/layui.css">
+    <link href="../../../shopmanagement/css/bootstrap.min.css?v=3.3.5" rel="stylesheet">
+    <link href="../../../shopmanagement/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
+    <link href="../../../shopmanagement/css/animate.min.css" rel="stylesheet">
+    <link href="../../../shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
 </head>
 
 <body class="fixed-sidebar full-height-layout gray-bg" style="overflow:hidden">
@@ -27,7 +27,7 @@
             String user = SecurityUtils.getSubject().getPrincipal().toString();
             boolean b = user.equalsIgnoreCase("root");
         %>
-        <div class="sidebar-collapse">
+        <div class="sidebar-collapse" style="background-color:#0C0C0C ">
             <ul class="nav" id="side-menu">
 
                 <!--当前登录用户展示-->
@@ -73,7 +73,7 @@
                             <span class="fa arrow"></span>
                         </a>
                         <ul class="nav nav-second-level">
-                            <li><a class="J_menuItem" href="admin/selectAdminAll.action">管理员列表</a>
+                            <li><a class="J_menuItem" href="/admin/selectAdminAll.action">管理员列表</a>
                             </li>
                         </ul>
                     </li>
@@ -87,7 +87,7 @@
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
-                        <li><a class="J_menuItem" href="admin/selectUserAll.action">用户列表</a>
+                        <li><a class="J_menuItem" href="/admin/selectUserAll.action">用户列表</a>
                         </li>
                         <li><a class="J_menuItem" href="admin/selectGroupsAll.action">用户组列表</a>
                         </li>
@@ -164,11 +164,7 @@
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="log/forwordLog.action">日志管理</a>
                         </li>
-                        <li><a class="J_menuItem" href="#">系统设置</a>
-                        </li>
-                        <li><a class="J_menuItem" href="#">权限管理</a>
-                        </li>
-                        <li><a class="J_menuItem" href="#">数据管理</a>
+                        <li><a class="J_menuItem" href="/index/index.action">索引管理</a>
                         </li>
                         </li>
                     </ul>
@@ -365,13 +361,19 @@
     <!--右侧边栏结束-->
 
 </div>
-<script src="shopmanagement/js/jquery.min.js?v=2.1.4"></script>
-<script src="shopmanagement/js/bootstrap.min.js?v=3.3.5"></script>
-<script src="shopmanagement/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="shopmanagement/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="shopmanagement/common/layui/layui.all.js"></script>
-<script src="shopmanagement/js/hplus.min.js?v=4.0.0"></script>
-<script src="shopmanagement/js/contabs.min.js" type="text/javascript"></script>
-<script src="shopmanagement/js/plugins/pace/pace.min.js"></script>
+<script src="../../../shopmanagement/js/jquery.min.js?v=2.1.4"></script>
+<script src="../../../shopmanagement/js/bootstrap.min.js?v=3.3.5"></script>
+<script src="../../../shopmanagement/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+<script src="../../../shopmanagement/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="../../../shopmanagement/common/layui/layui.all.js"></script>
+<script src="../../../shopmanagement/js/hplus.min.js?v=4.0.0"></script>
+<script type="text/javascript" src="../../../shopmanagement/js/contabs.min.js"></script>
+<script src="../../../shopmanagement/js/plugins/pace/pace.min.js"></script>
+<script>
+    function closeWin() {
+        alert(1);
+    }
+</script>
 </body>
+
 </html>

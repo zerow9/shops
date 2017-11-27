@@ -27,7 +27,7 @@
             String user = SecurityUtils.getSubject().getPrincipal().toString();
             boolean b = user.equalsIgnoreCase("root");
         %>
-        <div class="sidebar-collapse">
+        <div class="sidebar-collapse" style="background-color:#0C0C0C ">
             <ul class="nav" id="side-menu">
 
                 <!--当前登录用户展示-->
@@ -164,11 +164,7 @@
                     <ul class="nav nav-second-level">
                         <li><a class="J_menuItem" href="log/forwordLog.action">日志管理</a>
                         </li>
-                        <li><a class="J_menuItem" href="#">系统设置</a>
-                        </li>
-                        <li><a class="J_menuItem" href="#">权限管理</a>
-                        </li>
-                        <li><a class="J_menuItem" href="#">数据管理</a>
+                        <li><a class="J_menuItem" href="/index/index.action">索引管理</a>
                         </li>
                         </li>
                     </ul>

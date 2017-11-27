@@ -173,7 +173,7 @@ public class IndexService implements IindexItemService {
     }
 
     private ScoreDoc getLastDoc(int indexNum, int pageNum, IndexSearcher searcher, Query query) {
-        if (indexNum == 0) return null;
+        if (indexNum <= 0 || pageNum <= 0) return null;
         try {
             TopDocs tds = searcher.search(query, indexNum * pageNum);
             return tds.scoreDocs[(indexNum * pageNum) - 1];
