@@ -26,6 +26,12 @@ public interface IindexItemService {
          * 重构索引
          */
         public void updateReconstructorIndex()throws Exception;
+
+        /**
+         *删除全部索引
+         */
+        public void deleteIndexAll()throws Exception;
+
         /**
          * 设置索引，将数据库中没有添加为索引的对象完全添加
          */

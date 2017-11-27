@@ -218,6 +218,12 @@ public class IndexService implements IindexItemService {
 //        LuceneContext.getWriter().close();
     }
 
+    public void deleteIndexAll() throws Exception {
+        LuceneContext.getInstance();
+        LuceneContext.getInstance().getNrtManager().deleteAll();
+        LuceneContext.getInstance().commitIndex();
+    }
+
 
 }
 
