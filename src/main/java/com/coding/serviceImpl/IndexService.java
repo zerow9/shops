@@ -13,6 +13,7 @@ import org.apache.lucene.document.NumericField;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.MultiFieldQueryParser;
 import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -107,30 +108,68 @@ public class IndexService implements IindexItemService {
     }
 
     public List<Item> findByIndex(SearchField field) throws Exception {
-        List<Item> items = new ArrayList<>();
         IndexSearcher searcher = LuceneContext.getInstance().getSearcher();
         try {
             MultiFieldQueryParser parser = new MultiFieldQueryParser(LuceneContext.getInstance().getVersion(),
                     new String[]{"name", "keyword", "introduce"}, LuceneContext.getInstance().getAnalyzer());
             Query query = parser.parse(field.getCondition());
-            TopDocs tds = searcher.searchAfter(getLastDoc(field.getIndexNumber(), field.getPageNumber(), searcher, query), query, field.getPageNumber());
-            for (ScoreDoc sd : tds.scoreDocs) {
-                Document doc = searcher.doc(sd.doc);
-                Item item = new Item();
-                item.setItemId(Integer.valueOf(doc.get("id")));
-                item.setItemName(doc.get("name"));
-                item.setItemImages(doc.get("images"));
-                item.setItemPrice(Double.valueOf(doc.get("price")));
-                item.setKeyWord(doc.get("keyword"));
-                items.add(item);
+            TopDocs tds = null;
+            if(field.getIndexNumber()==null && field.getPageNumber() == null){
+                tds = searcher.search(query,20);
             }
-            return items;
+            else if(field.getIndexNumber()==null && field.getPageNumber() > 0){
+                tds = searcher.search(query,field.getPageNumber());
+            }else {
+                tds = searcher.searchAfter(getLastDoc(field.getIndexNumber(), field.getPageNumber(), searcher, query), query, field.getPageNumber());
+            }
+            return getItemList(tds,searcher);
         } catch (ParseException | IOException e) {
             e.printStackTrace();
         } finally {
             LuceneContext.getInstance().releaseSearcher(searcher);
         }
         return null;
+    }
+
+    private List<Item> getItemList(TopDocs tds,IndexSearcher searcher) throws Exception {
+        List<Item> items = new ArrayList<>();
+        for (ScoreDoc sd : tds.scoreDocs) {
+            Document doc = searcher.doc(sd.doc);
+            Item item = new Item();
+            item.setItemId(Integer.valueOf(doc.get("id")));
+            item.setItemName(doc.get("name"));
+            item.setItemImages(doc.get("images"));
+            item.setItemPrice(Double.valueOf(doc.get("price")));
+            item.setKeyWord(doc.get("keyword"));
+            items.add(item);
+        }
+        return items;
+    }
+
+    public Item findIndexById(Integer itemId) throws Exception {
+        QueryParser parser = new QueryParser(LuceneContext.getInstance().getVersion(),"id",LuceneContext.getInstance().getAnalyzer());
+        Query query = parser.parse(itemId.toString());
+        IndexSearcher searcher = LuceneContext.getInstance().getSearcher();
+        TopDocs tds = searcher.search(query, 1);
+        tds = searcher.search(query,tds.totalHits);
+        return getItemList(tds,searcher).get(0);
+    }
+
+    public List<Item> findIndexAll(SearchField field) throws Exception {
+        QueryParser parser = new QueryParser(LuceneContext.getInstance().getVersion(),"id",LuceneContext.getInstance().getAnalyzer());
+        parser.setAllowLeadingWildcard(true);
+        Query query = parser.parse("*");
+        IndexSearcher searcher = LuceneContext.getInstance().getSearcher();
+        TopDocs tds = null;
+        if(field.getIndexNumber()==null && field.getPageNumber() == null){
+            tds = searcher.search(query,20);
+        }
+        else if(field.getIndexNumber()==null && field.getPageNumber() > 0){
+            tds = searcher.search(query,field.getPageNumber());
+        }else {
+            tds = searcher.searchAfter(getLastDoc(field.getIndexNumber(), field.getPageNumber(), searcher, query), query, field.getPageNumber());
+        }
+        return getItemList(tds,searcher);
     }
 
     private ScoreDoc getLastDoc(int indexNum, int pageNum, IndexSearcher searcher, Query query) {
