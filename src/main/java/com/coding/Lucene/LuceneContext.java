@@ -37,7 +37,7 @@ public class LuceneContext {
     private LuceneContext(){ }
     //单列设计模式
     public static LuceneContext getInstance() throws Exception {
-        if(instance==null) {
+        if(instance == null) {
             instance = new LuceneContext();
             init();
         }
