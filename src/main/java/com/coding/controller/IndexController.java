@@ -33,9 +33,22 @@ public class IndexController {
      * @throws Exception index异常
      */
     @RequestMapping("updateReconstructorIndex")
-    public String updateReconstructorIndex() throws Exception {
+    @ResponseBody
+    public String updateReconstructorIndex(Integer page, Integer limit, Model model,HttpServletRequest request) throws Exception {
         indexItemService.updateReconstructorIndex();
-        return "redirect:/index/getIndexData.action";
+        SearchField searchField = new SearchField();
+        searchField.setPageNumber(limit);
+        searchField.setIndexNumber((page - 1) * limit);
+        if (page!=null&&(page == 1 && counts == null) || counts == null)
+            counts = indexItemService.getDocCount(searchField);
+        List<Item> items = indexItemService.findIndexAll(searchField);
+        for (Item item : items)
+            item.setDateToString(DateToString.date(item.getMakeDate()));
+        model.addAttribute("page",page);
+        model.addAttribute("limit",limit);
+        MyJsonConfig myJsonConfig = new MyJsonConfig();
+        return myJsonConfig.start(items, counts);
+
     }
 
     /**
@@ -44,9 +57,11 @@ public class IndexController {
      * @throws Exception index异常
      */
     @RequestMapping("deleteIndexAll")
+    @ResponseBody
     public String deleteIndexAll() throws Exception {
         indexItemService.deleteIndexAll();
-        return "redirect:/index/getIndexData.action";
+        MyJsonConfig myJsonConfig = new MyJsonConfig();
+        return myJsonConfig.start(null, 0);
     }
 
     /**
@@ -66,13 +81,15 @@ public class IndexController {
      */
     @RequestMapping("/getIndexData")
     @ResponseBody
-    public String getIndexData(Integer page, Integer limit, Model model) throws Exception {
+    public String getIndexData(String searchKey,Integer page, Integer limit, Model model) throws Exception {
         SearchField searchField = new SearchField();
         searchField.setPageNumber(limit);
         searchField.setIndexNumber((page - 1) * limit);
+//        searchField.setCondition(searchKey);
         if (page!=null&&(page == 1 && counts == null) || counts == null)
-            counts = indexItemService.getDocCount(null);
+            counts = indexItemService.getDocCount(searchField);
         List<Item> items = indexItemService.findIndexAll(searchField);
+        System.out.println(items);
         for (Item item : items)
             item.setDateToString(DateToString.date(item.getMakeDate()));
         model.addAttribute("page",page);
@@ -92,6 +109,10 @@ public class IndexController {
         return "redirect:/index/getIndexData.action";
     }
 
+    /**]
+     * 批量删除索引
+     * @param arrayString 索引数组
+     */
     @RequestMapping("deleteIndexByIdArray")
     public String deleteIndexByIdArray(String arrayString) throws Exception{
         for (String itemId:arrayString.split(",")) {
@@ -100,26 +121,4 @@ public class IndexController {
         return "redirect:/index/getIndexData.action";
     }
 
-    /**
-     * 查询获取数据
-     * @param searchKey 条件
-     * @param request
-     * @return
-     * @throws Exception
-     */
-    @RequestMapping("findIndex")
-    @ResponseBody
-    public String findIndex(String searchKey, HttpServletRequest request)throws Exception{
-        Integer page=1;
-        Integer limit=30;
-        SearchField searchField = new SearchField();
-        searchField.setCondition(searchKey);
-        searchField.setPageNumber(limit);
-        searchField.setIndexNumber((page - 1) * limit);
-        if (page == 1)
-            counts = indexItemService.getDocCount(searchField);
-        List<Item> items = indexItemService.findIndexAll(searchField);
-        MyJsonConfig<Item> myJsonConfig = new MyJsonConfig<>();
-        return myJsonConfig.start(items, counts);
-    }
 }

@@ -174,8 +174,6 @@ public class IndexService implements IindexItemService {
                 return getItemList(tds,searcher);
             } catch (ParseException | IOException e) {
                 e.printStackTrace();
-            } finally {
-                LuceneContext.getInstance().releaseSearcher(searcher);
             }
             return null;
         }

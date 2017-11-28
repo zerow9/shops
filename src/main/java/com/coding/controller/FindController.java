@@ -3,12 +3,14 @@ package com.coding.controller;
 import com.coding.Iservice.IAdminService;
 import com.coding.Iservice.IindexItemService;
 import com.coding.Lucene.SearchField;
+import com.coding.comomInterface.DateToString;
 import com.coding.comomInterface.JavaGet;
 import com.coding.json.MyJsonConfig;
 import com.coding.paging.*;
 import com.coding.pojo.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -107,6 +109,25 @@ public class FindController {
         List<Complaint> complaints = adminService.selectComplaint(complaint);
         MyJsonConfig<Complaint> myJsonConfig = new MyJsonConfig<>();
         return myJsonConfig.start(complaints, count);
+    }
+
+    @RequestMapping("index/findIndex")
+    @ResponseBody
+    public String getIndexData(String searchKey,Integer page, Integer limit, Model model,HttpServletRequest request) throws Exception {
+        SearchField searchField = new SearchField();
+        searchField.setPageNumber(limit);
+        searchField.setIndexNumber((page - 1) * limit);
+        searchField.setCondition(JavaGet.charsetGet(searchKey,request));
+        System.out.println(searchField);
+        if (page!=null&&(page == 1 && counts == null) || counts == null)
+            counts = indexItemService.getDocCount(searchField);
+        List<Item> items = indexItemService.findIndexAll(searchField);
+        for (Item item : items)
+            item.setDateToString(DateToString.date(item.getMakeDate()));
+        model.addAttribute("page",page);
+        model.addAttribute("limit",limit);
+        MyJsonConfig myJsonConfig = new MyJsonConfig();
+        return myJsonConfig.start(items, counts);
     }
 
 }

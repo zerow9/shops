@@ -94,25 +94,6 @@
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../../../js/indexrd/indexlist.js"></script>
 <script src="../../../js/indexrd/index.js"></script>
-<script type="text/javascript">
-    //查询的方法
-    $(function(){
-        $(".myButton").on("click",function(){
-           var string=$("#searchKey").val();
-           if(!string==""){
-                $.ajax({
-                    type:"post",
-                    url:"/index/findIndex.action?searchKey="+string,
-                    success:function(data){
-                        $("table").reload({
-                            data:data,
-                        });
-                    }
-                });
-           }
-           return null;
-        });
-    });
-</script>
+<script src="../../../js/find/findIndex.js"></script>
 </body>
 </html>

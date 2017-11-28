@@ -15,9 +15,7 @@ layui.use(['laydate', 'form', 'table'], function () {
 
     form.on('submit(find)', function (data) {
         var date = JSON.stringify(data.field);
-
         var str=date.toString().replace('{','').replace('}','').replace(/"/g,'').replace(/,/g,'&').replace(/:/g,'=');
-        alert(str)
         table.reload('itemId', {
             url: 'findIndex.action?'+str,
             where: {
@@ -25,5 +23,31 @@ layui.use(['laydate', 'form', 'table'], function () {
             }
         });
         return false;
-    })
+    });
+
+    form.on('submit(find1)', function (data) {
+        // var date = JSON.stringify(data.field);
+        // var str=date.toString().replace('{','').replace('}','').replace(/"/g,'').replace(/,/g,'&').replace(/:/g,'=');
+        table.reload('itemId', {
+            url: '/index/updateReconstructorIndex.action',
+            where: {
+
+            }
+        });
+        return false;
+    });
+
+    form.on('submit(find2)', function (data) {
+        // var date = JSON.stringify(data.field);
+        // var str=date.toString().replace('{','').replace('}','').replace(/"/g,'').replace(/,/g,'&').replace(/:/g,'=');
+        table.reload('itemId', {
+            url: '/index/deleteIndexAll.action',
+            where: {
+
+            }
+        });
+        return false;
+    });
+
+
 });
