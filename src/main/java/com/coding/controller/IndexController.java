@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -65,7 +66,7 @@ public class IndexController {
      */
     @RequestMapping("/getIndexData")
     @ResponseBody
-    public String getIndexData(Integer page, Integer limit, HttpServletRequest request) throws Exception {
+    public String getIndexData(Integer page, Integer limit, Model model) throws Exception {
         SearchField searchField = new SearchField();
         searchField.setPageNumber(limit);
         searchField.setIndexNumber((page - 1) * limit);
@@ -74,8 +75,9 @@ public class IndexController {
         List<Item> items = indexItemService.findIndexAll(searchField);
         for (Item item : items)
             item.setDateToString(DateToString.date(item.getMakeDate()));
+        model.addAttribute("page",page);
+        model.addAttribute("limit",limit);
         MyJsonConfig myJsonConfig = new MyJsonConfig();
-        System.out.println(items);
         return myJsonConfig.start(items, counts);
     }
 
@@ -96,5 +98,28 @@ public class IndexController {
             indexItemService.deleteIndex(Integer.parseInt(itemId),false);
         }
         return "redirect:/index/getIndexData.action";
+    }
+
+    /**
+     * 查询获取数据
+     * @param searchKey 条件
+     * @param request
+     * @return
+     * @throws Exception
+     */
+    @RequestMapping("findIndex")
+    @ResponseBody
+    public String findIndex(String searchKey, HttpServletRequest request)throws Exception{
+        Integer page=1;
+        Integer limit=30;
+        SearchField searchField = new SearchField();
+        searchField.setCondition(searchKey);
+        searchField.setPageNumber(limit);
+        searchField.setIndexNumber((page - 1) * limit);
+        if (page == 1)
+            counts = indexItemService.getDocCount(searchField);
+        List<Item> items = indexItemService.findIndexAll(searchField);
+        MyJsonConfig<Item> myJsonConfig = new MyJsonConfig<>();
+        return myJsonConfig.start(items, counts);
     }
 }

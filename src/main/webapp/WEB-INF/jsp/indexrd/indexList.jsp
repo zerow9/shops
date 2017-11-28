@@ -25,7 +25,10 @@
     <div class="row">
         <div class="layui-col-sm12">
             <div class="ibox float-e-margins">
+                <%--搜索页面开始--%>
                 <jsp:include page="../find/findIndex.jsp" />
+                    <%--搜索页面结束--%>
+
                 <div class="ibox-title">
                     <h5>索引列表</h5>
                     <div class="ibox-tools">
@@ -80,9 +83,6 @@
 </script>
 
 <script type="text/html" id="operate_bar">
-    <%--<a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail"><i class="fa fa-eye" aria-hidden="true"--%>
-                                                                                <%--title="查看"></i></a>--%>
-    <%--<a class="layui-btn layui-btn-mini" lay-event="edit"><i class="fa fa-edit" aria-hidden="true" title="编辑"></i></a>--%>
     <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del"><i class="fa fa-trash" aria-hidden="true"
                                                                             title="删除"></i></a>
 </script>
@@ -94,5 +94,25 @@
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../../../js/indexrd/indexlist.js"></script>
 <script src="../../../js/indexrd/index.js"></script>
+<script type="text/javascript">
+    //查询的方法
+    $(function(){
+        $(".myButton").on("click",function(){
+           var string=$("#searchKey").val();
+           if(!string==""){
+                $.ajax({
+                    type:"post",
+                    url:"/index/findIndex.action?searchKey="+string,
+                    success:function(data){
+                        $("table").reload({
+                            data:data,
+                        });
+                    }
+                });
+           }
+           return null;
+        });
+    });
+</script>
 </body>
 </html>

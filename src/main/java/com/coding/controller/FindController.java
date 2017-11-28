@@ -108,17 +108,5 @@ public class FindController {
         MyJsonConfig<Complaint> myJsonConfig = new MyJsonConfig<>();
         return myJsonConfig.start(complaints, count);
     }
-    @RequestMapping("index/findIndex")
-    public String findIndex(String searchKey,Integer page, Integer limit,HttpServletRequest request)throws Exception{
-        SearchField searchField = new SearchField();
-        searchField.setCondition(searchKey);
-        searchField.setPageNumber(limit);
-        searchField.setIndexNumber((page - 1) * limit);
-        if (page == 1)
-            counts = indexItemService.getDocCount(searchField);
-        List<Item> items = indexItemService.findIndexAll(searchField);
-        MyJsonConfig<Item> myJsonConfig = new MyJsonConfig<>();
-        return myJsonConfig.start(items, counts);
-    }
 
 }
