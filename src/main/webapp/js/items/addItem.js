@@ -66,7 +66,7 @@ layui.use(['form', 'layedit', 'laydate'], function () {
             type: "POST",
             success: function () {
                 parent.layer.closeAll();
-                parent.layer.msg("更新成功！")
+                parent.layer.msg("添加商品成功！")
             }
         });
         return false;

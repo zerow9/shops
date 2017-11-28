@@ -106,13 +106,16 @@
                     </div>
 
                     <div class="table-responsive">
-                        <table id="layui_table" lay-filter="demo"></table>
+                        <table id="layui_table" lay-filter="demo">
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<i class="fa fa-spinner fa-pulse fa-5x " id="custom-overlay" style="margin-top:100px;margin-left: 40%"></i>
 
 <%--<div class="detail_info">--%>
 <%--<table class="layui-table" lay-data="{基础参数}">--%>

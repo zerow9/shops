@@ -1,9 +1,11 @@
 layui.use('table', function () {
     var table = layui.table;
 
-    $('.table-responsive').loading({
+    var loading = $('.table-responsive');
+    loading.loading({
         stoppable: false,
-        message: '数据加载中。。。'
+        // message: '数据加载中。。。'
+        overlay: $("#custom-overlay")
     });
 
     // 方法级渲染表格
@@ -29,7 +31,7 @@ layui.use('table', function () {
             console.log('返回信息：' + res.msg);     //接口返回信息
             console.log('当前页码：' + curr);    //当前页码
             console.log('数据总量：' + count);     //数据总量
-            $('.table-responsive').loading('stop');
+            loading.loading('stop');
         }
         , initSort: {   //初始排序
             field: 'orderId' //排序字段，对应 cols 设定的各字段名

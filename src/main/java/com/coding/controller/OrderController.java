@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
@@ -55,7 +56,7 @@ public class OrderController {
      */
     @ResponseBody
     @RequestMapping("selectOrder")
-    public String selectOrder(Integer page, Integer limit, HttpSession session, String formDate) throws Exception {
+    public String selectOrder(@RequestParam(value = "formDate", required = false) String formDate, Integer page, Integer limit, HttpSession session) throws Exception {
         System.out.println("表单数据：" + formDate);
         PagingCustomOrder pagingCustomOrder = new PagingCustomOrder();
         if (formDate != null) {
