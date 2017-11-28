@@ -70,7 +70,7 @@ public class IndexService implements IindexItemService {
         if (fields.getItemMarketPrice() != null)
             doc.add(new NumericField("price", Field.Store.YES, true).setDoubleValue(fields.getItemMarketPrice()));
         if (fields.getItemSaleNumber()!= null)
-            doc.add(new NumericField("saleNumber", Field.Store.YES, true).setDoubleValue(fields.getItemSaleNumber()));
+            doc.add(new NumericField("saleNumber", Field.Store.YES, true).setIntValue(fields.getItemSaleNumber()));
         return doc;
     }
 
