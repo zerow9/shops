@@ -100,8 +100,11 @@ public class IndexService implements IindexItemService {
             indexMapper.insertItemIndexSelective(index);
         }
         NRTManager nrtManager = LuceneContext.getInstance().getNrtManager();
-        Document doc = filedDoc(fields);
         try {
+            if(fields.getItemImages()==null || fields.getItemImages().equals("")){
+                fields = itemMapper.selectItemByPrimaryKey(fields.getItemId());
+            }
+            Document doc = filedDoc(fields);
             nrtManager.updateDocument(new Term("id", fields.getItemId().toString()), doc);
             updateCommitIndex(); //提交索引，待优化
         } catch (IOException e) {
@@ -230,7 +233,7 @@ public class IndexService implements IindexItemService {
 
     @Transactional(rollbackFor = Exception.class)
     public void updateCommitIndex() throws Exception {
-        indexMapper.deleteItemIndexAll();
+//        indexMapper.deleteItemIndexAll();
         LuceneContext.getInstance().commitIndex();
     }
 
