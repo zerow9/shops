@@ -59,7 +59,7 @@
 
                 <!--首页-->
                 <li>
-                    <a class="J_menuItem" href="../../../jsp/admin/home.jsp">
+                    <a class="J_menuItem" href="../../../shopmanagement/home.html">
                         <i class="fa fa-home"></i>
                         <span class="nav-label">首页</span>
                     </a>
@@ -255,7 +255,7 @@
         </div>
         <div class="row J_mainContent" id="content-main">
             <iframe class="J_iframe" name="iframe0" width="100%" height="100%"
-                    src="../../../jsp/admin/home.jsp" frameborder="0"
+                    src="../../../shopmanagement/home.html" frameborder="0"
                     data-id="../../../jsp/admin/home.jsp" seamless></iframe>
         </div>
         <div class="footer">
