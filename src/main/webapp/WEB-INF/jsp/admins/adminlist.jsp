@@ -17,6 +17,7 @@
     <link href="../../../shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="../../../common/layui/css/layui.css" rel="stylesheet">
+    <link href="../../../css/extends/jquery/jquery.loading.css" rel="stylesheet">
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
 
 </head>
@@ -55,24 +56,11 @@
                     </div>
                     <div class="layui-btn-group demoTable">
                         <button class="layui-btn" data-type="getCheckLength">批量删除</button>
-                        <button class="layui-btn" data-type="isAll">全选</button>
+                        <%--<button class="layui-btn" data-type="isAll">全选</button>--%>
                         <button class="layui-btn" data-type="addUser">添加管理员</button>
                     </div>
                     <div class="table-responsive">
-                        <table class="layui-table"
-                               lay-data="{ url:'getAdminAll.action', page:true, id:'adminId'}"
-                               lay-filter="demo">
-                            <thead>
-                            <tr>
-                                <th lay-data="{checkbox:true, fixed: true}"></th>
-                                <th lay-data="{field:'adminId', width:100, sort: true, fixed: true}">管理员编号</th>
-                                <th lay-data="{field:'adminAccount', width:100}">账号</th>
-                                <th lay-data="{field:'adminPhone', width:150}">电话号码</th>
-                                <th lay-data="{field:'adminEmail', width:200}">邮箱</th>
-                                <th lay-data="{field:'adminRegisterTime', width:300, sort: true}">注册时间</th>
-                                <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#barDemo'}">操作</th>
-                            </tr>
-                            </thead>
+                        <table id="layui_table" lay-filter="demo">
                         </table>
                     </div>
                 </div>
@@ -80,6 +68,12 @@
         </div>
     </div>
 </div>
+
+<div id="custom-overlay" style="margin-top:70px;margin-left: 40%">
+    <i class="fa fa-spinner fa-pulse fa-5x " ></i>
+</div>
+
+
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail"><i class="fa fa-eye" aria-hidden="true"
                                                                                 title="查看"></i></a>
@@ -89,6 +83,7 @@
 </script>
 
 <script src="../../../js/extends/jquery/jquery.min.js"></script>
+<script src="../../../js/extends/jquery/jquery.loading.js"></script>
 <script src="../../../js/extends/bootstrap/bootstrap.js"></script>
 <script src="../../../shopmanagement/js/content.min.js"></script>
 <script src="../../../shopmanagement/common/layui/layui.js"></script>

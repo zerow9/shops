@@ -25,7 +25,7 @@
     <link href="../../../shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="../../../common/layui/css/layui.css" rel="stylesheet">
-    <link rel="stylesheet" href="../../../shopmanagement/css/bootstrap.min.css" media="all">
+    <link href="../../../shopmanagement/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../../css/extends/jquery/jquery.loading.css" rel="stylesheet">
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
 </head>
@@ -103,11 +103,11 @@
                                     style="margin-right: 17px">高级搜索
                             </button>
                         </form>
+
                     </div>
 
                     <div class="table-responsive">
-                        <table id="layui_table" lay-filter="demo">
-                        </table>
+                        <table id="layui_table" lay-filter="demo"></table>
                     </div>
                 </div>
             </div>
@@ -115,24 +115,9 @@
     </div>
 </div>
 
-<i class="fa fa-spinner fa-pulse fa-5x " id="custom-overlay" style="margin-top:100px;margin-left: 40%"></i>
-
-<%--<div class="detail_info">--%>
-<%--<table class="layui-table" lay-data="{基础参数}">--%>
-<%--<thead>--%>
-<%--<tr>--%>
-<%--<th lay-data="{field:'username', width:80}" rowspan="2">联系人</th>--%>
-<%--<th lay-data="{field:'amount', width:120}" rowspan="2">金额</th>--%>
-<%--<th lay-data="{align:'center'}" colspan="3">地址</th>--%>
-<%--</tr>--%>
-<%--<tr>--%>
-<%--<th lay-data="{field:'province', width:80}">省</th>--%>
-<%--<th lay-data="{field:'city', width:120}">市</th>--%>
-<%--<th lay-data="{field:'county', width:300}">详细</th>--%>
-<%--</tr>--%>
-<%--</thead>--%>
-<%--</table>--%>
-<%--</div>--%>
+<div id="custom-overlay" style="margin-top:70px;margin-left: 40%">
+    <i class="fa fa-spinner fa-pulse fa-5x "></i>
+</div>
 
 </body>
 
@@ -150,7 +135,7 @@
 <script type="text/html" id="payStatusTpi">
     {{#  if(d.sendStatus === 1){ }}
     <span style="color: green">已付款</span>
-    {{#  } else if(d.sendStatus === 2) { }}
+    {{#  } else if(d.sendStatus === 0) { }}
     <span style="color: red">未付款</span>
     {{#  } else { }}
     未知
@@ -161,7 +146,7 @@
 <script type="text/html" id="sendStatusTpi">
     {{#  if(d.sendStatus === 1){ }}
     <span style="color: green">已发货</span>
-    {{#  } else if(d.sendStatus === 2) { }}
+    {{#  } else if(d.sendStatus === 0) { }}
     <span style="color: red">未发货</span>
     {{#  } else { }}
     未知

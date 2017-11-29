@@ -22,6 +22,8 @@
     <link href="../../../shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="../../../common/layui/css/layui.css" rel="stylesheet">
+    <link href="../../../shopmanagement/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../css/extends/jquery/jquery.loading.css" rel="stylesheet">
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
     <link href="../../../css/useQuery.css" rel="stylesheet">
 
@@ -55,33 +57,21 @@
                 <div class="ibox-content">
                     <div class="layui-btn-group demoTable">
                         <button class="layui-btn" data-type="getCheckLength">批量删除</button>
-                        <button class="layui-btn" data-type="isAll">验证是否全选</button>
                         <button class="layui-btn" data-type="addUser">添加用户</button>
                         <button class="layui-btn" data-type="askQuery">条件筛选</button>
                     </div>
                     <div class="table-responsive">
-                        <table class="layui-table"
-                               lay-data="{url:'getUserJson.action', page:true, id:'userUuid'}"
-                               lay-filter="demo">
-                            <thead>
-                            <tr>
-                                <th lay-data="{checkbox:true, fixed: true}"></th>
-                                <th lay-data="{field:'userUuid', width:80, sort: true, fixed: true}">ID</th>
-                                <th lay-data="{field:'userName', width:80}">用户名</th>
-                                <th lay-data="{field:'userSex', width:80, sort: true}">性别</th>
-                                <th lay-data="{field:'userAge', width:80}">年龄</th>
-                                <th lay-data="{field:'userRegisterDateTime', width:177}">注册日期</th>
-                                <th lay-data="{field:'userScore', width:80, sort: true}">积分</th>
-                                <th lay-data="{field:'userAddress', width:80}">地址</th>
-                                <th lay-data="{fixed: 'right', width:180, align:'center', toolbar: '#barDemo'}">操作</th>
-                            </tr>
-                            </thead>
+                        <table lay-filter="demo" id="layui_table">
                         </table>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<div id="custom-overlay" style="margin-top:70px;margin-left: 40%">
+    <i class="fa fa-spinner fa-pulse fa-5x "></i>
 </div>
 
 <script type="text/html" id="barDemo">
@@ -93,12 +83,14 @@
 </script>
 
 <script src="../../../js/extends/jquery/jquery.min.js"></script>
+<script src="../../../js/extends/jquery/jquery.loading.js"></script>
 <script src="../../../js/extends/bootstrap/bootstrap.js"></script>
 <script src="../../../shopmanagement/js/content.min.js"></script>
 <script src="../../../common/layui/layui.js"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../../../js/users/userlist.js"></script>
 <script src="../../../js/find/findUser.js"></script>
+
 </body>
 
 </html>
