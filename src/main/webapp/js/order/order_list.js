@@ -19,7 +19,6 @@ layui.use('table', function () {
             {checkbox: true, fixed: 'left'}
             , {field: 'orderId', title: '订单编号', width: 100, sort: true}
             , {field: 'takeGoodsName', title: '收货人', width: 100}
-            // , {field: 'shop_name', title: '分店', width: 200}
             , {field: 'orderSumPrice', title: '订单总额', width: 150, templet: '#orderPaidTpi', sort: true}
             , {field: 'orderPaid', title: '实付金额', width: 150, templet: '#orderPaidTpi', sort: true}
             , {field: 'payStatus', title: '支付状态', width: 100, templet: '#payStatusTpi'}

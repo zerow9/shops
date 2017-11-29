@@ -9,8 +9,9 @@
     <link href="../../../shopmanagement/common/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet">
     <link href="../../../shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-    <link href="../../../shopmanagement/common/layui/css/layui.css" media="all" rel="stylesheet">
-    <link href="../../../shopmanagement/css/my_layui.css" media="all" rel="stylesheet">
+    <link href="../../../common/layui/css/layui.css" rel="stylesheet">
+    <link href="../../../css/extends/jquery/jquery.loading.css" rel="stylesheet">
+    <link href="../../../css/module/my_layui.css" rel="stylesheet">
     <link href="../../../css/complaintsQuery.css" rel="stylesheet">
 </head>
 
@@ -40,40 +41,19 @@
                     </div>
 
                     <div class="ibox-content">
-
-
                         <div class="table-responsive">
-
-                            <table class="layui-table"
-                                   lay-data="{url:'getComplaintJson.action', page:true, id:'idTest'}"
-                                   lay-filter="complaints_lists_table">
-                                <thead>
-                                <tr>
-                                    <th lay-data="{checkbox:true, fixed: true}"></th>
-                                    <th lay-data="{field:'complaintId', width:50, sort: true, fixed: true}">ID</th>
-                                    <th lay-data="{field:'accuserId', width:100, sort: true}">投诉人</th>
-                                    <th lay-data="{field:'accusedId', width:100, sort: true}">被投诉人</th>
-                                    <th lay-data="{field:'complaintTittle', width:100}">投诉标题</th>
-                                    <th lay-data="{field:'complaintContent', width:100}">投诉内容</th>
-                                    <th lay-data="{field:'complaintDate', width:200, sort: true}">投诉时间</th>
-                                    <th lay-data="{field:'status', width:100, align:'center', fixed: 'right', toolbar: '#status_bar'}">
-                                        是否已处理
-                                    </th>
-                                    <th lay-data="{fixed: 'right', width:150, align:'center', toolbar: '#operate_bar'}">
-                                        操作
-                                    </th>
-                                </tr>
-                                </thead>
+                            <table id="layui_table" lay-filter="complaints_lists_table">
                             </table>
-
                         </div>
-
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
+</div>
+
+<div id="custom-overlay" style="margin-top:70px;margin-left: 40%">
+    <i class="fa fa-spinner fa-pulse fa-5x "></i>
 </div>
 
 <script type="text/html" id="status_bar">
@@ -87,10 +67,12 @@
                                                                             title="删除"></i></a>
 </script>
 
-<script src="../../../shopmanagement/js/jquery.min.js"></script>
-<script src="../../../shopmanagement/js/bootstrap.min.js"></script>
+<script src="../../../js/extends/jquery/jquery.min.js"></script>
+<script src="../../../js/extends/jquery/jquery.loading.js"></script>
+<script src="../../../js/extends/bootstrap/bootstrap.js"></script>
 <script src="../../../shopmanagement/js/content.min.js"></script>
-<script src="../../../shopmanagement/common/layui/layui.js"></script>
+<script src="../../../common/layui/layui.js"></script>
+<script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
 <script src="../../../js/complaints/complaintsList.js"></script>
 <script src="../../../js/find/findComplaint.js"></script>
 </body>

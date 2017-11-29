@@ -12,6 +12,8 @@
     <link href="../../../shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="../../../common/layui/css/layui.css" rel="stylesheet">
+    <link href="../../../shopmanagement/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../../../css/extends/jquery/jquery.loading.css" rel="stylesheet">
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
 
 </head>
@@ -55,31 +57,17 @@
                         </div>
 
                         <div class="table-responsive">
-                            <table class="layui-table"
-                                   lay-data="{url:'getGroupsJson.action', page:true, id:'group_container_id'}"
-                                   lay-filter="group_lists_table">
-                                <thead>
-                                <tr>
-                                    <th lay-data="{checkbox:true, fixed: true}"></th>
-                                    <th lay-data="{field:'groupId', width:100, sort: true, fixed: true}">ID</th>
-                                    <th lay-data="{field:'groupName', width:200}">用户组名称</th>
-                                    <th lay-data="{field:'groupJurisdiction', width:300}">用户组描述</th>
-                                    <th lay-data="{field:'isStart', width:200, align:'center', fixed: 'right', toolbar: '#shelve_bar'}">
-                                        是否启用
-                                    </th>
-                                    <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#operate_bar'}">
-                                        操作
-                                    </th>
-                                </tr>
-                                </thead>
-                            </table>
+                            <table id="layui_table" lay-filter="demo"></table>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
+<div id="custom-overlay" style="margin-top:70px;margin-left: 40%">
+    <i class="fa fa-spinner fa-pulse fa-5x "></i>
 </div>
 
 <script type="text/html" id="operate_bar">
@@ -99,6 +87,7 @@
     {{# }}}
 </script>
 <script src="../../../js/extends/jquery/jquery.min.js"></script>
+<script src="../../../js/extends/jquery/jquery.loading.js"></script>
 <script src="../../../js/extends/bootstrap/bootstrap.js"></script>
 <script src="../../../shopmanagement/js/content.min.js"></script>
 <script src="../../../common/layui/layui.js"></script>

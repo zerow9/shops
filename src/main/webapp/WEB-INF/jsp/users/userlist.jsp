@@ -22,7 +22,6 @@
     <link href="../../../shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="../../../common/layui/css/layui.css" rel="stylesheet">
-    <link href="../../../shopmanagement/css/bootstrap.min.css" rel="stylesheet">
     <link href="../../../css/extends/jquery/jquery.loading.css" rel="stylesheet">
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
     <link href="../../../css/useQuery.css" rel="stylesheet">

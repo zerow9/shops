@@ -1,14 +1,56 @@
+
+var loading = $('.table-responsive');
+loading.loading({
+    stoppable: false,
+    // message: '数据加载中。。。'
+    overlay: $("#custom-overlay")
+});
+
 layui.use('table', function () {
     var table = layui.table;
     var check_objs;
+
+    // 方法级渲染表格
+    var tableObj = table.render({
+        elem: '#layui_table'    //绑定元素
+        , url: '/admin/getGroupsJson.action'   //资源地址
+        , id: 'idTest'   //设定容器唯一ID
+        // , height: '500'
+        , page: true    //开启分页
+        , cols: [[ //设置表头
+            {checkbox: true, fixed: 'left'}
+            , {field: 'groupId', title: '用户组编号', width: 200, sort: true}
+            , {field: 'groupName', title: '用户组名称', width: 200}
+            , {field: 'groupJurisdiction', title: '用户组描述', width: 450, templet: '#orderPaidTpi', sort: true}
+            , {field: 'isStart', title: '是否启用', width: 150, templet: '#shelve_bar', sort: true}
+            , {field: 'operate', title: '操作', width: 150, fixed: 'right', align: 'center', toolbar: '#operate_bar'}
+        ]]
+        , done: function (res, curr, count) {   //数据渲染完的回调
+            console.log('返回信息：' + res.msg);     //接口返回信息
+            console.log('当前页码：' + curr);    //当前页码
+            console.log('数据总量：' + count);     //数据总量
+            loading.loading('stop');
+        }
+        , initSort: {   //初始排序
+            field: 'orderId' //排序字段，对应 cols 设定的各字段名
+            , type: 'asc' //排序方式  asc: 升序、desc: 降序、null: 默认排序
+        }
+        // 每页数据量可选项
+        , limits: [10, 20, 30, 50, 100, 200, 500]
+        , limit: 10 //每页默认显示的数量
+        , skin: 'line' //行边框风格
+        , even: true //开启隔行背景
+        , size: 'lg'  //设定表格尺寸
+    });
+
     //监听表格复选框选择，输出到控制台
-    table.on('checkbox(group_lists_table)', function (obj) {
+    table.on('checkbox(demo)', function (obj) {
         check_objs = obj;
         console.log(obj)
     });
 
     //监听工具条
-    table.on('tool(group_lists_table)', function (table_tool) {
+    table.on('tool(demo)', function (table_tool) {
         var data = table_tool.data;
         if (table_tool.event === 'detail') {
             layer.open({
@@ -57,7 +99,7 @@ layui.use('table', function () {
 //        复选框操作
     var $ = layui.$, active = {
         getCheckData: function () { //获取选中数据
-            var checkStatus = table.checkStatus('group_container_id')
+            var checkStatus = table.checkStatus('idTest')
                 , data = checkStatus.data;
             layer.alert(JSON.stringify(data));
         }
@@ -90,7 +132,7 @@ layui.use('table', function () {
 
     //        删除用户组
     $("#del_group_btn").on('click', function () {
-        var checkStatus = table.checkStatus('group_container_id')
+        var checkStatus = table.checkStatus('idTest')
             , data = checkStatus.data;
         var groupids = '';
         var groupNames = '';

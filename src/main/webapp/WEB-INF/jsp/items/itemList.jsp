@@ -17,6 +17,7 @@
     <link href="../../../shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
     <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
     <link href="../../../common/layui/css/layui.css" rel="stylesheet">
+    <link href="../../../css/extends/jquery/jquery.loading.css" rel="stylesheet">
     <link href="../../../css/module/my_layui.css" rel="stylesheet">
     <link href="../../../css/itemQuery.css" rel="stylesheet">
 
@@ -31,7 +32,7 @@
         <div class="layui-col-sm12">
 
             <div class="ibox float-e-margins">
-                <jsp:include page="../find/findItem.jsp" />
+                <jsp:include page="../find/findItem.jsp"/>
                 <div class="ibox-title">
                     <h5>商品列表</h5>
                     <div class="ibox-tools">
@@ -52,35 +53,13 @@
                     <div class="ibox-content">
                         <div class="layui-btn-group demoTable">
                             <button class="layui-btn" data-type="getCheckLength">批量删除</button>
-                            <button class="layui-btn" data-type="isAll">全选</button>
                             <button class="layui-btn" data-type="addItem">添加商品</button>
                         </div>
 
                         <div class="table-responsive">
 
-                            <table class="layui-table" lay-data="{url:'getItemsAll.action', page:true, id:'itemId'}"
-                                   lay-filter="demo">
-                                <thead>
-                                <tr>
-                                    <th lay-data="{checkbox:true, fixed: true}"></th>
-                                    <th lay-data="{field:'itemId', width:100, fixed: true}">商品编号</th>
-                                    <th lay-data="{field:'itemName', width:200}">商品名称</th>
-                                    <th lay-data="{field:'itemImages', width:200}">商品图片</th>
-                                    <th lay-data="{field:'itemTypeId', width:200}">商品分类</th>
-                                    <th lay-data="{field:'itemScoreType', width:200}">积分兑换类型</th>
-                                    <th lay-data="{field:'scorePrice', width:200}">积分兑换价格</th>
-                                    <th lay-data="{field:'itemPrice', width:100, sort: true}">商品成本价格</th>
-                                    <th lay-data="{field:'itemMarketPrice', width:100, sort: true}">商品市场价格</th>
-                                    <th lay-data="{field:'goodsSales', width:100, sort: true}">销量</th>
-                                    <th lay-data="{field:'postPrice', width:200}">运费</th>
-                                    <th lay-data="{field:'keyWord', width:200}">关键字</th>
-                                    <th lay-data="{field:'makeVender', width:200}">生产厂商</th>
-                                    <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#operate_bar'}">
-                                        操作
-                                    </th>
-                                </tr>
-                                </thead>
-                            </table>
+                            <table id="layui_table" lay-filter="demo"></table>
+
                         </div>
                     </div>
                 </div>
@@ -88,6 +67,11 @@
             </div>
         </div>
     </div>
+</div>
+
+
+<div id="custom-overlay" style="margin-top:70px;margin-left: 40%">
+    <i class="fa fa-spinner fa-pulse fa-5x "></i>
 </div>
 
 <script type="text/html" id="shelve_bar">
@@ -103,6 +87,7 @@
 </script>
 
 <script src="../../../js/extends/jquery/jquery.min.js"></script>
+<script src="../../../js/extends/jquery/jquery.loading.js"></script>
 <script src="../../../js/extends/bootstrap/bootstrap.js"></script>
 <script src="../../../shopmanagement/js/content.min.js"></script>
 <script src="../../../common/layui/layui.js"></script>
