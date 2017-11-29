@@ -68,9 +68,11 @@ public class IndexService implements IindexItemService {
         if (fields.getItemIntroduce() != null)
             doc.add(new Field("introduce", fields.getItemIntroduce(), Field.Store.NO, Field.Index.ANALYZED_NO_NORMS));
         if (fields.getItemMarketPrice() != null)
-            doc.add(new NumericField("price", Field.Store.YES, true).setDoubleValue(fields.getItemMarketPrice()));
+            doc.add(new NumericField("marketPrice", Field.Store.YES, false).setDoubleValue(fields.getItemMarketPrice()));
+        if (fields.getItemPrice() != null)
+            doc.add(new NumericField("price", Field.Store.YES, false).setDoubleValue(fields.getItemPrice()));
         if (fields.getItemSaleNumber()!= null)
-            doc.add(new NumericField("saleNumber", Field.Store.YES, true).setIntValue(fields.getItemSaleNumber()));
+            doc.add(new NumericField("saleNumber", Field.Store.YES, false).setIntValue(fields.getItemSaleNumber()));
         return doc;
     }
 
@@ -144,7 +146,8 @@ public class IndexService implements IindexItemService {
             item.setItemId(Integer.valueOf(doc.get("id")));
             item.setItemName(doc.get("name"));
             item.setItemImages(doc.get("images"));
-            item.setItemMarketPrice(Double.valueOf(doc.get("price")));
+            item.setItemMarketPrice(Double.valueOf(doc.get("marketPrice")));
+            item.setItemPrice(Double.valueOf(doc.get("price")));
             item.setKeyWord(doc.get("keyword"));
             item.setItemSaleNumber(Integer.valueOf(doc.get("saleNumber")));
             items.add(item);
