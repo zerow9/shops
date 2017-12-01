@@ -27,7 +27,6 @@ import java.util.List;
 public class ItemController {
 
     private Integer counts = null;
-    private Logger logger = Logger.getLogger(ItemController.class);
 
     @Autowired
     @Qualifier("adminService")
@@ -47,7 +46,7 @@ public class ItemController {
         PagingCustomItem pagingCustomItem = new PagingCustomItem();
         pagingCustomItem.setIndexNumber((page - 1) * limit);
         pagingCustomItem.setPageNumber(limit);
-        if ((page == 1 && counts == null) || counts == null)
+        if (page == 1 )
             counts = adminService.selectItemCount();
         List<Item> items = adminService.selectItem(pagingCustomItem);
         for (Item item : items)
