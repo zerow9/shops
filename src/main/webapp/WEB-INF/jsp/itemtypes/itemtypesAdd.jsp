@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -39,14 +40,10 @@
                             <label class="layui-form-label">父类别</label>
                             <div class="layui-input-block" >
                                 <select name="fatherTypeId" lay-filter="fatherTypeId" >
-                                    <option value="" selected=""></option>
-                                    <option value="1" >药品</option>
-                                    <option value="2">日用品</option>
-                                    <option value="3">营养品</option>
-                                    <option value="4">保健类</option>
-                                    <option value="5">健身器材</option>
-                                    <option value="6">食品</option>
-                                    <option value="7">衣物</option>
+                                    <option value="0" selected=""></option>
+                                    <c:forEach items="${itemTypes}" var="itemType">
+                                        <option value="${itemType.typeId}" >${itemType.typeName}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </div>
@@ -55,7 +52,7 @@
                             <label class="layui-form-label">分类等级</label>
                             <div class="layui-input-block" >
                                 <select name="typeLevel" lay-filter="typeLevel" id="a_level" lay-verify="required" >
-                                    <option value="" selected=""></option>
+                                    <option value="0" selected=""></option>
                                     <option value="1" >一级分类</option>
                                     <option value="2">二级分类</option>
                                     <option value="3">三级分类</option>

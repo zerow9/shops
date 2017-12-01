@@ -17,7 +17,7 @@ layui.use('table', function () {
             });
         } else if (obj.event === 'del') {
             swal({
-                title: "您确定要删除" + data.typeId + "信息吗",
+                title: "您确定要删除" + data.typeName + "信息吗",
                 text: "删除后将无法恢复，请谨慎操作！",
                 type: "warning",
                 showCancelButton: true,

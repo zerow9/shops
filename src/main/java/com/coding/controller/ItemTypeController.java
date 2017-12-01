@@ -8,10 +8,12 @@ import com.coding.json.JsonFormat;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -59,6 +61,10 @@ public class ItemTypeController {
     public String editItemType(HttpSession session, Integer typeId) throws Exception {
         ItemType itemType = adminService.selectItemTypeByPrimaryKey(typeId);
         session.setAttribute("itemtypes", itemType);
+
+        PagingCustomItemType pagingCustomItemType=new PagingCustomItemType();
+        List<ItemType> itemTypes=adminService.selectItemType(pagingCustomItemType);
+        session.setAttribute("itemTypeLists",itemTypes);
         return "itemtypes/updateitemTypes";
     }
 
@@ -69,7 +75,14 @@ public class ItemTypeController {
     }
 
     @RequestMapping("addItemType")
-    public String addItemType() {
+    public String addItemType(Model model) {
+        PagingCustomItemType pagingCustomItemType=new PagingCustomItemType();
+        try {
+            List<ItemType> itemTypes=adminService.selectItemType(pagingCustomItemType);
+            model.addAttribute("itemTypes",itemTypes);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "itemtypes/itemtypesAdd";
     }
 
