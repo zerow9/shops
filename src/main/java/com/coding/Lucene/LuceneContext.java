@@ -53,6 +53,7 @@ public class LuceneContext {
 //        String dicUrl = new File(".").getCanonicalPath();
 //        directory = FSDirectory.open(new File(dicUrl+File.separator + "index"));
         directory = FSDirectory.open(new File("D:\\index"));//开发环节路径
+//        directory = FSDirectory.open(new File("/var/www/shop/index"));//开发环节路径
         version = Version.LUCENE_35;
         analyzer = new StandardAnalyzer(version);
         if(writer == null)
