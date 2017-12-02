@@ -69,10 +69,10 @@
                                 <tr>
                                     <th lay-data="{checkbox:true, fixed: true}"></th>
                                     <th lay-data="{field:'shopId', width:100, fixed:true}">编号</th>
-                                    <th lay-data="{field:'shopAddress', width:100}">商店地址</th>
                                     <th lay-data="{field:'shopName', width:200}">商店名称</th>
-                                    <th lay-data="{field:'shopX', width:200}">经度</th>
-                                    <th lay-data="{field:'shopY', width:200}">纬度</th>
+                                    <th lay-data="{field:'shopAddress', width:200}">商店地址</th>
+                                    <th lay-data="{field:'shopX', width:100}">经度</th>
+                                    <th lay-data="{field:'shopY', width:100}">纬度</th>
                                     <th lay-data="{fixed: 'right', width:100, align:'center', toolbar: '#operate_bar'}">
                                         操作
                                     </th>
