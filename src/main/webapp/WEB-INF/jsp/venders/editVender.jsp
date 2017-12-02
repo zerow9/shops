@@ -39,14 +39,7 @@ To change this template use File | Settings | File Templates.
 
                 <div class="ibox-content">
                     <form class="layui-form" action="">
-
-                        <div class="layui-inline">
-                            <label class="layui-form-label">厂商编号</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="venderId" autocomplete="off"
-                                       class="layui-input" value="${vender.venderId}" readonly>
-                            </div>
-                        </div>
+                        <input type="hidden" name="venderId" value="${vender.venderId}" >
 
                         <div class="layui-form-item">
                             <label class="layui-form-label">厂商名称</label>

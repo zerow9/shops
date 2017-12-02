@@ -21,7 +21,7 @@ layui.use('table', function () {
         } else if (obj.event === 'del') {
             //强势弹窗效果
             swal({
-                title: "您确定要删除" + data.venderId + "信息吗",
+                title: "您确定要删除该条信息吗",
                 text: "删除后将无法恢复，请谨慎操作！",
                 type: "warning",
                 showCancelButton: true,
@@ -96,7 +96,7 @@ layui.use('table', function () {
             addInfo: function () {
                 layer.open({
                     type: 2,
-                    title: "添加管理员",
+                    title: "添加厂商",
                     shadeClose: true,
                     shade: 0.3,
                     maxmin: true,

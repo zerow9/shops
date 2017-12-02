@@ -63,12 +63,14 @@ public class VendersController {
     }
 
     @RequestMapping("updateVenderaction")
+    @ResponseBody
     public boolean updateVenderaction(Vender vender) throws Exception {
         adminService.updateVenderByPrimaryKey(vender);
         return true;
     }
 
     @RequestMapping("insertyVenderaction")
+    @ResponseBody
     public boolean insertyVenderaction(Vender vender) throws Exception {
         adminService.insertVender(vender);
         counts++;

@@ -48,6 +48,8 @@ layui.use(['form', 'layedit', 'laydate'], function () {
             url: 'updateVenderaction.action',
             data: parm,
             type: "POST",
+            async:false,
+            cache:false,
             success: function () {
                 parent.layer.closeAll();
             }

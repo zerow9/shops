@@ -64,11 +64,11 @@
                                 <thead>
                                 <tr>
                                     <th lay-data="{checkbox:true, fixed: true}"></th>
-                                    <th lay-data="{field:'venderId', width:100, fixed:true}">编号</th>
-                                    <th lay-data="{field:'venderName', width:100}">名称</th>
-                                    <th lay-data="{field:'venderAddress', width:200}">地址</th>
-                                    <th lay-data="{field:'venderPhone', width:200}">电话</th>
-                                    <th lay-data="{field:'icId', width:200}">工商编号</th>
+                                    <th lay-data="{field:'venderId', width:50, fixed:true}">编号</th>
+                                    <th lay-data="{field:'venderName', width:300}">名称</th>
+                                    <th lay-data="{field:'venderAddress', width:300}">地址</th>
+                                    <th lay-data="{field:'venderPhone', width:150}">电话</th>
+                                    <th lay-data="{field:'icId', width:150}">工商编号</th>
                                     <th lay-data="{field:'businessRange', width:200}">经营范围</th>
                                     <th lay-data="{field:'venderEmail', width:200}">邮箱</th>
                                     <th lay-data="{field:'venderPost', width:100,}">邮编</th>
