@@ -39,6 +39,7 @@ To change this template use File | Settings | File Templates.
 
                 <div class="ibox-content">
                     <form class="layui-form" action="">
+                        <input type="hidden" value="${shop.shopId}" name="shopId">
                         <div class="layui-form-item">
                             <label class="layui-form-label">商店名称</label>
                             <div class="layui-input-block">
@@ -87,5 +88,5 @@ To change this template use File | Settings | File Templates.
 
 <script src="../../../shopmanagement/common/layui/layui.js" charset="utf-8" type="text/javascript"></script>
 <script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../../../js/shops/addShop.js"></script>
+<script src="../../../js/shops/editShop.js"></script>
 </body>

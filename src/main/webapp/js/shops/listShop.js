@@ -99,7 +99,6 @@ layui.use('table', function () {
                     title: "添加商店",
                     shadeClose: true,
                     shade: 0.3,
-                    maxmin: true,
                     area: ['80%', '90%'],
                     content: 'addShops.action', //注意，如果str是object，那么需要字符拼接。
                 });

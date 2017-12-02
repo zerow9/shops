@@ -22,11 +22,11 @@ To change this template use File | Settings | File Templates.
 
     <title>添加商店</title>
 
-    <link rel="shortcut icon" href="../../../shopmanagement/favicon.ico">
-    <link href="../../../shopmanagement/common/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet">
-    <link href="../../../shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
-    <link href="../../../shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
-    <link href="../../../shopmanagement/common/layui/css/layui.css" rel="stylesheet"/>
+    <link rel="shortcut icon" href="/shopmanagement/favicon.ico">
+    <link href="/shopmanagement/common/font-awesome-4.7.0/css/font-awesome.css" rel="stylesheet">
+    <link href="/shopmanagement/css/style.min.css?v=4.0.0" rel="stylesheet">
+    <link href="/shopmanagement/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="/shopmanagement/common/layui/css/layui.css" rel="stylesheet"/>
     <base target="_blank">
 
 </head>
@@ -38,7 +38,7 @@ To change this template use File | Settings | File Templates.
             <div class="ibox float-e-margins">
 
                 <div class="ibox-content">
-                    <form class="layui-form" action="">
+                    <form class="layui-form" action="" method="post">
                         <div class="layui-form-item">
                             <label class="layui-form-label">商店名称</label>
                             <div class="layui-input-block">
@@ -84,8 +84,8 @@ To change this template use File | Settings | File Templates.
         </div>
     </div>
 </div>
-
-<script src="../../../shopmanagement/common/layui/layui.js" charset="utf-8" type="text/javascript"></script>
-<script src="../../../shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
-<script src="../../../js/shops/addShop.js"></script>
+<script type="text/javascript" src="/shopmanagement/js/jquery-1.7.2.min.js"></script>
+<script src="/shopmanagement/common/layui/layui.js" charset="utf-8" type="text/javascript"></script>
+<script src="/shopmanagement/js/plugins/sweetalert/sweetalert.min.js"></script>
+<script src="/js/shops/addShop.js"></script>
 </body>

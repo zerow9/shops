@@ -90,7 +90,8 @@ public class ShopController {
      * @throws Exception
      */
     @RequestMapping("insertShop")
-    public boolean insertStop(Shop shop) throws Exception {
+    @ResponseBody
+    public Boolean insertStop(Shop shop) throws Exception {
         adminService.insertShopSelective(shop);
         counts++;
         return true;
@@ -126,8 +127,9 @@ public class ShopController {
      * @throws Exception
      */
     @RequestMapping("updateShopById")
+    @ResponseBody
     public boolean updateShopById(Shop shop) throws Exception {
-        adminService.insertShopSelective(shop);
+        adminService.updateShopByPrimaryKeySelective(shop);
         return true;
     }
 

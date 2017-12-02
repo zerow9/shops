@@ -26,7 +26,7 @@
             <div class="ibox float-e-margins">
 
                 <div class="ibox-content">
-                    <form class="layui-form" action="">
+                    <form class="layui-form" action="" method="post">
 
                         <div class="layui-form-item">
                             <label class="layui-form-label">分类名称</label>

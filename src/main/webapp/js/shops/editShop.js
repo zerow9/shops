@@ -13,14 +13,11 @@ layui.use(['form', 'layedit', 'laydate'], function () {
         $.ajax({
             url: 'updateShopById.action',
             data: parm,
+            async:false,
+            cache:false,
             type: "POST",
             success: function () {
                 parent.layer.closeAll();
-                swal({
-                    title: "太帅了",
-                    text: "添加数据成功！",
-                    type: "success"
-                })
             }
         });
         window.parent.location.reload();

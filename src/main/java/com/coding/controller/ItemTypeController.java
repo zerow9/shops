@@ -55,7 +55,7 @@ public class ItemTypeController {
             itemTypeDetail.setTypeIntroduce(itemType.getTypeIntroduce());
 
             if (!(itemType.getFatherTypeId()==0)) {
-                ItemType itemType1=adminService.selectItemTypeByPrimaryKey(itemType.getTypeId());
+                ItemType itemType1=adminService.selectItemTypeByPrimaryKey(itemType.getFatherTypeId());
                 itemTypeDetail.setParentItemTypeName(itemType1.getTypeName());
             }else itemTypeDetail.setParentItemTypeName("无父类别");
 

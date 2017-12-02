@@ -31,6 +31,8 @@ layui.use(['form'], function () {
             url: 'insertItemtypesAdd.action',
             data: parm,
             type: 'POST',
+            cache: false,
+            async: false,
             success: function () {
                 parent.layer.closeAll();
             }
