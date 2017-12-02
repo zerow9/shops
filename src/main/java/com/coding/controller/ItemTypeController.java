@@ -1,10 +1,12 @@
 package com.coding.controller;
 
 import com.coding.Iservice.IAdminService;
+import com.coding.comomInterface.JavaGet;
 import com.coding.json.MyJsonConfig;
 import com.coding.pojo.ItemType;
 import com.coding.paging.PagingCustomItemType;
 import com.coding.json.JsonFormat;
+import com.coding.pojo.ItemTypeDetail;
 import net.sf.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,9 +41,30 @@ public class ItemTypeController {
         pagingCustomItemType.setPageNumber(limit);
         if (counts == null)
             counts = adminService.selectItemTypeCount();
-        List<ItemType> items = adminService.selectItemType(pagingCustomItemType);
+        List<ItemType> iteTmypes = adminService.selectItemType(pagingCustomItemType);
+
+        List<ItemTypeDetail> itemTypeDetails=new ArrayList<ItemTypeDetail>();
+
+        for (ItemType itemType:iteTmypes){
+            ItemTypeDetail itemTypeDetail=new ItemTypeDetail();
+            itemTypeDetail.setTypeKeyWord(itemType.getTypeKeyWord());
+            itemTypeDetail.setTypeId(itemType.getTypeId());
+            itemTypeDetail.setTypeName(itemType.getTypeName());
+            itemTypeDetail.setFatherTypeId(itemType.getFatherTypeId());
+            itemTypeDetail.setTypeLevel(itemType.getTypeLevel());
+            itemTypeDetail.setTypeIntroduce(itemType.getTypeIntroduce());
+
+            if (!(itemType.getFatherTypeId()==0)) {
+                ItemType itemType1=adminService.selectItemTypeByPrimaryKey(itemType.getTypeId());
+                itemTypeDetail.setParentItemTypeName(itemType1.getTypeName());
+            }else itemTypeDetail.setParentItemTypeName("无父类别");
+
+            itemTypeDetails.add(itemTypeDetail);
+        }
+
+
         MyJsonConfig myJsonConfig = new MyJsonConfig();
-        return myJsonConfig.start(items, counts);
+        return myJsonConfig.start(itemTypeDetails, counts);
     }
 
     @RequestMapping("deleteGroupsByPrimaryKey")
@@ -51,9 +75,15 @@ public class ItemTypeController {
     }
 
     @RequestMapping("detailItemsTypeIdByKey")
-    public String detailItemsTypeIdByKey(HttpSession session, Integer typeId) throws Exception {
+    public String detailItemsTypeIdByKey(Model model, Integer typeId) throws Exception {
         ItemType itemType = adminService.selectItemTypeByPrimaryKey(typeId);
-        session.setAttribute("itemtypes", itemType);
+        model.addAttribute("itemtypes", itemType);
+
+        //获取下拉列表
+        PagingCustomItemType pagingCustomItemType=new PagingCustomItemType();
+        List<ItemType> itemTypes=adminService.selectItemType(pagingCustomItemType);
+        model.addAttribute("itemTypeLists",itemTypes);
+
         return "itemtypes/detailTypes";
     }
 
@@ -69,7 +99,12 @@ public class ItemTypeController {
     }
 
     @RequestMapping("updateItemTypeById")
-    public boolean updateItemTypeById(ItemType itemType) throws Exception {
+    public boolean updateItemTypeById(ItemType itemType, HttpServletRequest request) throws Exception {
+
+        //解决编码问题
+        itemType.setTypeName(JavaGet.charsetGet(itemType.getTypeName(),request));
+        itemType.setTypeKeyWord(JavaGet.charsetGet(itemType.getTypeKeyWord(),request));
+
         adminService.updateItemTypeByPrimaryKey(itemType);
         return true;
     }

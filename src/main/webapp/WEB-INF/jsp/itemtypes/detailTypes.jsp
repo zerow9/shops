@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
@@ -38,13 +39,10 @@
                             <label class="layui-form-label">父类</label>
                             <div class="layui-input-block">
                                 <select  lay-filter="${itemtypes.fatherTypeId}" id="selectId" readonly>
-                                    <option value="1" >药品</option>
-                                    <option value="2">日用品</option>
-                                    <option value="3">营养品</option>
-                                    <option value="4">保健类</option>
-                                    <option value="5">健身器材</option>
-                                    <option value="6">食品</option>
-                                    <option value="7">衣物</option>
+                                    <option value="0" ></option>
+                                    <c:forEach items="${itemTypeLists}" var="itemTypeList">
+                                        <option value="${itemTypeList.typeId}">${itemTypeList.typeName}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </div>

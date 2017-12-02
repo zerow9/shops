@@ -61,8 +61,8 @@
                                 <th lay-data="{checkbox:true, fixed: true}"></th>
                                 <th lay-data="{field:'typeId', width:100, sort: true, fixed: true}">ID</th>
                                 <th lay-data="{field:'typeName', width:200}">分类名称</th>
-                                <th lay-data="{field:'fatherTypeId', width:100}">父类别</th>
-                                <th lay-data="{field:'typeLevel', width:100}">分类等级</th>
+                                <th lay-data="{field:'parentItemTypeName', width:100}">父类别</th>
+                                <th lay-data="{field:'typeLevel', width:100 ,templet: '#shelve_bar'}">分类等级</th>
                                 <th lay-data="{field:'typeKeyWord', width:100}">关键字</th>
                                 <th lay-data="{field:'typeIntroduce', width:100}">分类描述</th>
                                 <th lay-data="{fixed: 'right', width:200, align:'center', toolbar: '#operate_bar'}">操作
@@ -81,6 +81,18 @@
     <a class="layui-btn layui-btn-primary layui-btn-mini" lay-event="detail"><i class="fa fa-eye" aria-hidden="true" title="查看"></i></a>
     <a class="layui-btn layui-btn-mini" lay-event="edit"><i class="fa fa-edit" aria-hidden="true" title="编辑"></i></a>
     <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del"><i class="fa fa-trash" aria-hidden="true" title="删除"></i></a>
+</script>
+
+<script type="text/html" id="shelve_bar">
+    {{# if(d.typeLevel==0){}}
+        <span>顶级分类</span>
+    {{# }else if(d.typeLevel==1){}}
+        <span>一级分类</span>
+    {{# }else if(d.typeLevel==2){}}
+        <span>二级分类</span>
+    {{# }else{}}
+        <span>三级分类</span>
+    {{# }}}
 </script>
 
 <script src="../../../js/extends/jquery/jquery.min.js"></script>
