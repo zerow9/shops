@@ -76,6 +76,11 @@ public interface IindexItemService {
         public void updateReconstructorIndex()throws Exception;
 
         /**
+         * 重构索引 测试千万数据时使用
+         */
+        public void updateReconstructorIndex1()throws Exception;
+
+        /**
          *删除全部索引
          */
         public void deleteIndexAll()throws Exception;

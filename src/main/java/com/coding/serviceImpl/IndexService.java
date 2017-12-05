@@ -5,6 +5,8 @@ import com.coding.Lucene.LuceneContext;
 import com.coding.Lucene.SearchField;
 import com.coding.mapper.ItemIndexMapper;
 import com.coding.mapper.ItemMapper;
+import com.coding.paging.Paging;
+import com.coding.paging.PagingCustomItem;
 import com.coding.pojo.Item;
 import com.coding.pojo.ItemIndex;
 import org.apache.lucene.document.Document;
@@ -290,7 +292,25 @@ public class IndexService implements IindexItemService {
             addIndexSource(item, false);
         }
         LuceneContext.getInstance().commitIndex();
-        indexMapper.deleteItemIndexAll();
+//        LuceneContext.getWriter().close();
+    }
+
+    public void updateReconstructorIndex1() throws Exception {
+        LuceneContext.getInstance();
+        LuceneContext.getInstance().getNrtManager().deleteAll();
+        LuceneContext.getInstance().commitIndex();
+        PagingCustomItem pagingCustomItem = new PagingCustomItem();
+        pagingCustomItem.setPageNumber(100000);
+        for(int i=0;i<100;i++){
+            pagingCustomItem.setIndexNumber(i*100000);
+            List<Item> items = itemMapper.selectItem(pagingCustomItem);
+            for (Item item : items) {
+                addIndexSource(item, false);
+            }
+            LuceneContext.getInstance().commitIndex();
+            System.out.println(i+1+"00000 commit");
+        }
+        LuceneContext.getInstance().commitIndex();
 //        LuceneContext.getWriter().close();
     }
 
